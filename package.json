@@ -1,0 +1,39 @@
+{
+  "name": "devknowledge.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:prod": "webpack --prod",
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enjoytyping/enjoytyping.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enjoytyping/enjoytyping.github.io/issues"
+  },
+  "devDependencies": {
+    "@types/node": "14.14.7",
+    "autoprefixer": "9.6.1",
+    "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "^6.3.1",
+    "css-loader": "3.0.0",
+    "extract-text-webpack-plugin": "3.0.2",
+    "html-webpack-plugin": "4.5.0",
+    "mini-css-extract-plugin": "1.2.0",
+    "node-sass": "4.12.0",
+    "postcss-loader": "3.0.0",
+    "sass-loader": "7.1.0",
+    "ts-loader": "8.0.7",
+    "typescript": "3.8.3",
+    "webpack": "5.2.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "3.7.1"
+  }
+}
