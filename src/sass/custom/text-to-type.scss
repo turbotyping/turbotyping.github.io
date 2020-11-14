@@ -1,0 +1,23 @@
+.text-to-type {
+  width: 70rem;
+  margin: 4rem auto 0;
+  white-space: pre-wrap;
+
+  & span {
+    font-family: 'Roboto Mono';
+    font-size: 1.8rem;
+  }
+
+  & span.NOK {
+    color: var(--nok-typed-char-color);
+  }
+
+  & span.OK {
+    color: var(--ok-typed-char-color);
+  }
+
+  &.blink span.cursor {
+    color: var(--current-char-to-type-color);
+    background-color: var(--current-char-to-type-background-color);
+  }
+}

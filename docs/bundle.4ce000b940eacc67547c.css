@@ -836,12 +836,13 @@ body.light {
   --primary-color: #078eed;
   --secondary-color: #f57173;
   --white-color: #fff;
+  --black-color: #222;
   --text-color-01: #1e1e1e;
   --text-color-02: #3b3b3b;
   --text-color-03: #555555;
   --text-color-04: #767676;
-  --text-color-05: #939393;
-  --text-color-06: #ffffff;
+  --text-color-05: #d8d8d8;
+  --text-color-06: #eeeeee;
   --background-color-01: #ffffff;
   --background-color-02: #fffffc;
   --background-color-03: #fafafa;
@@ -859,18 +860,23 @@ body.light {
   --navbar-logo-text-color: var(--text-color-03);
   --navbar-logo-text-color-on-hover: var(--primary-color);
   --footer-color: var(--text-color-03);
-  --footer-background-color: var(--background-color-03); }
+  --footer-background-color: var(--background-color-03);
+  --current-char-to-type-color: var(--white-color);
+  --current-char-to-type-background-color: var(--black-color);
+  --ok-typed-char-color: var(--text-color-05);
+  --nok-typed-char-color: #e06c75; }
 
 body.dark {
   --primary-color: #078eed;
   --secondary-color: #f57173;
   --white-color: #fff;
+  --black-color: #222;
   --text-color-01: #fafafa;
   --text-color-02: #eeeeee;
   --text-color-03: #cecece;
   --text-color-04: #b1b1b1;
   --text-color-05: #a0a0a0;
-  --text-color-06: #9b9a9a;
+  --text-color-06: #747070;
   --background-color-01: #181a1f;
   --background-color-02: #21252b;
   --background-color-03: #282c34;
@@ -888,7 +894,11 @@ body.dark {
   --navbar-logo-text-color: var(--text-color-03);
   --navbar-logo-text-color-on-hover: var(--primary-color);
   --footer-color: var(--text-color-03);
-  --footer-background-color: var(--background-color-03); }
+  --footer-background-color: var(--background-color-03);
+  --current-char-to-type-color: var(--black-color);
+  --current-char-to-type-background-color: var(--white-color);
+  --ok-typed-char-color: var(--text-color-06);
+  --nok-typed-char-color: #e06c75; }
 
 :root {
   --transition: all 0.15s ease-in-out;
@@ -1017,22 +1027,6 @@ p {
   100% {
     background-position: 100% 50%; } }
 
-footer {
-  color: var(--footer-color);
-  background-color: var(--footer-background-color);
-  transition: var(--transition);
-  transition-property: color, background-color;
-  margin-top: var(--footer-margin-top);
-  padding: var(--footer-padding);
-  display: flex;
-  align-items: center;
-  justify-content: space-between; }
-  footer p {
-    font-size: 1.4rem;
-    margin-bottom: 0; }
-  footer a {
-    font-size: var(--footer-icon-font-size); }
-
 nav {
   background-color: var(--navbar-background-color);
   z-index: 999;
@@ -1076,4 +1070,35 @@ nav .right {
     margin-left: 1rem; }
   nav .right .change-theme-icon {
     display: none; }
+
+footer {
+  color: var(--footer-color);
+  background-color: var(--footer-background-color);
+  transition: var(--transition);
+  transition-property: color, background-color;
+  margin-top: var(--footer-margin-top);
+  padding: var(--footer-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  footer p {
+    font-size: 1.4rem;
+    margin-bottom: 0; }
+  footer a {
+    font-size: var(--footer-icon-font-size); }
+
+.text-to-type {
+  width: 70rem;
+  margin: 4rem auto 0;
+  white-space: pre-wrap; }
+  .text-to-type span {
+    font-family: 'Roboto Mono';
+    font-size: 1.8rem; }
+  .text-to-type span.NOK {
+    color: var(--nok-typed-char-color); }
+  .text-to-type span.OK {
+    color: var(--ok-typed-char-color); }
+  .text-to-type.blink span.cursor {
+    color: var(--current-char-to-type-color);
+    background-color: var(--current-char-to-type-background-color); }
 

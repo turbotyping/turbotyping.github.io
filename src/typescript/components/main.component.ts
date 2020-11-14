@@ -1,12 +1,18 @@
-import { BaseStaticHtmlComponent } from "./component";
+import { BaseHtmlContainer, HtmlComponent } from "./component";
+import { TextToTypeHtmlComponent } from "./text-to-type.component";
 
-export class MainHtmlComponent extends BaseStaticHtmlComponent {
-  _toHtml() {
-    return /* html */ `
-      <main>
-        <p>main</p>
-      </main>
-    `;
+export class MainHtmlComponent extends BaseHtmlContainer {
+
+  protected getComponents(): HtmlComponent[] {
+    const res: HtmlComponent[] = [];
+    res.push(new TextToTypeHtmlComponent());
+    return res;
+  }
+  protected getContainerBeginTag(): string {
+    return '<main>';
+  }
+  protected getContainerEndTag(): string {
+    return '</main>'
   }
 }
 

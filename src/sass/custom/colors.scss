@@ -2,12 +2,13 @@ body.light {
   --primary-color: #078eed;
   --secondary-color: #f57173;
   --white-color: #fff;
+  --black-color: #222;
   --text-color-01: #1e1e1e;
   --text-color-02: #3b3b3b;
   --text-color-03: #555555;
   --text-color-04: #767676;
-  --text-color-05: #939393;
-  --text-color-06: #ffffff;
+  --text-color-05: #d8d8d8;
+  --text-color-06: #eeeeee;
   --background-color-01: #ffffff;
   --background-color-02: #fffffc;
   --background-color-03: #fafafa;
@@ -27,18 +28,23 @@ body.light {
   --navbar-logo-text-color-on-hover: var(--primary-color);
   --footer-color: var(--text-color-03);
   --footer-background-color: var(--background-color-03);
+  --current-char-to-type-color: var(--white-color);
+  --current-char-to-type-background-color: var(--black-color);
+  --ok-typed-char-color: var(--text-color-05);
+  --nok-typed-char-color: #e06c75;
 }
 
 body.dark {
   --primary-color: #078eed;
   --secondary-color: #f57173;
   --white-color: #fff;
+  --black-color: #222;
   --text-color-01: #fafafa;
   --text-color-02: #eeeeee;
   --text-color-03: #cecece;
   --text-color-04: #b1b1b1;
   --text-color-05: #a0a0a0;
-  --text-color-06: #9b9a9a;
+  --text-color-06: #747070;
   --background-color-01: #181a1f;
   --background-color-02: #21252b;
   --background-color-03: #282c34;
@@ -58,4 +64,8 @@ body.dark {
   --navbar-logo-text-color-on-hover: var(--primary-color);
   --footer-color: var(--text-color-03);
   --footer-background-color: var(--background-color-03);
+  --current-char-to-type-color: var(--black-color);
+  --current-char-to-type-background-color: var(--white-color);
+  --ok-typed-char-color: var(--text-color-06);
+  --nok-typed-char-color: #e06c75;
 }

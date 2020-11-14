@@ -102,6 +102,35 @@ export abstract class BaseHtmlComponent implements HtmlComponent {
 export abstract class BaseStaticHtmlComponent extends BaseHtmlComponent {
   
   _postInsertHtml(): void {
-    // nothing to do!
+    // nothing to do by default!
   }
+}
+
+export abstract class BaseHtmlContainer extends BaseHtmlComponent {
+  protected _toHtml(): string {
+    return `
+      ${this.getContainerBeginTag()}
+      ${this.getComponents().map(component => component.toHtml()).join("")}
+      ${this.getContainerEndTag()}
+    `
+  }
+
+  postInsertHtml(): void {
+    this.getComponents().forEach(component => component.postInsertHtml());
+  }
+
+  preInsertHtml(): void {
+    this.getComponents().forEach(component => component.preInsertHtml());
+  }
+
+  protected _postInsertHtml(): void {
+    // nothing to do by default!
+  }
+
+  protected abstract getComponents(): HtmlComponent[];
+
+  protected abstract getContainerBeginTag(): string;
+
+  protected abstract getContainerEndTag(): string;
+
 }
