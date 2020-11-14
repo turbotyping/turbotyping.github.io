@@ -978,6 +978,9 @@ a {
   a:hover {
     text-decoration: underline; }
 
+p {
+  font-size: 1.6rem; }
+
 .bold {
   font-weight: bold; }
 
