@@ -33,6 +33,8 @@ body.light {
   --ok-typed-char-color: var(--text-color-05);
   --nok-typed-char-color: #e06c75;
   --whitespace-color: #ccc;
+  --typed-text-stat-value-color: var(--text-color-03);
+  --typed-text-stat-container-border-color: var(--secondary-color);
 }
 
 body.dark {
@@ -70,4 +72,6 @@ body.dark {
   --ok-typed-char-color: var(--text-color-06);
   --nok-typed-char-color: #e06c75;
   --whitespace-color: #676767;
+  --typed-text-stat-value-color: var(--text-color-03);
+  --typed-text-stat-container-border-color: var(--secondary-color);
 }

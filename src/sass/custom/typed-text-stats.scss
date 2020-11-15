@@ -1,0 +1,28 @@
+.typed-text-stats-container {
+  margin: 8rem auto 5rem;
+  display: flex;
+  justify-content: center;
+
+  & .typed-text-stat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid var(--typed-text-stat-container-border-color);
+    width: 12rem;
+    height: 12rem;
+    border-radius: 100rem;
+    margin: 1rem;
+  }
+
+  & .typed-text-stat-value {
+    font-size: 4rem;
+    line-height: 4.2rem;
+    font-weight: bold;
+    color: var(--typed-text-stat-value-color);
+  }
+
+  & .typed-text-stat-label {
+    font-size: 1.5rem;
+  }
+}

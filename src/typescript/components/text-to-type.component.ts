@@ -59,7 +59,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private updateAppStorage() {
     this.appStorage.textToTypeIndex = this.textToTypeIndex;
-    this.appStorage.textToTypeStats.push(this.stats);
+    this.appStorage.textToTypeStats.unshift(this.stats);
     this.saveAppStorage(this.appStorage);
   }
 
