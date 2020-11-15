@@ -76,7 +76,6 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   }
 
   private setTextToType(): void {
-    this.textToTypeIndex = (this.textToTypeIndex + 1) % englishQuotes.length;
     const textToTypeCharArray = englishQuotes[this.textToTypeIndex].split('');
     this.textToTypeDomElement.innerHTML = `${textToTypeCharArray.map(this.charToSpan).join('')}`;
     this.currentCharToTypeDomElement = this.textToTypeDomElement.querySelector('span');
