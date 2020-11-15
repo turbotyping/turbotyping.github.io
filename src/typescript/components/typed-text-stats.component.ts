@@ -16,15 +16,15 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
     return /* html */`
       <div class="typed-text-stats-container">
         <div class="typed-text-stat-container">
-          <span id="${TYPED_TEXT_SECONDS_DOM_ELEMENT_ID}" class="typed-text-stat-value">NA</span>
+          <span id="${TYPED_TEXT_SECONDS_DOM_ELEMENT_ID}" class="typed-text-stat-value">0</span>
           <span class="typed-text-stat-label">seconds</span>
         </div>
         <div class="typed-text-stat-container">
-          <span id="${TYPED_TEXT_WPM_DOM_ELEMENT_ID}" class="typed-text-stat-value">NA</span>
+          <span id="${TYPED_TEXT_WPM_DOM_ELEMENT_ID}" class="typed-text-stat-value">0</span>
           <span class="typed-text-stat-label">word/min</span>
         </div>
         <div class="typed-text-stat-container">
-          <span id="${TYPED_TEXT_ERRORS_DOM_ELEMENT_ID}" class="typed-text-stat-value">NA</span>
+          <span id="${TYPED_TEXT_ERRORS_DOM_ELEMENT_ID}" class="typed-text-stat-value">0</span>
           <span class="typed-text-stat-label">errors</span>
         </div>
       </div>
@@ -48,11 +48,24 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
 
   private updateStats(stat: TextToTypeStats) {
     if(stat) {
-      this.typedTextSecondsDomElement.innerHTML = '' + stat.seconds;
-      this.typedTextWpmDomElement.innerHTML = '' + stat.wpm;
-      this.typedTextErrorsDomElement.innerHTML = '' + stat.errors;
+      this.animateValue(this.typedTextSecondsDomElement, stat.seconds);
+      this.animateValue(this.typedTextWpmDomElement, stat.wpm);
+      this.animateValue(this.typedTextErrorsDomElement, stat.errors);
     }
   }
+
+  private animateValue(domElement: HTMLElement, value: number, duration: number = 1000) {
+    if (value == 0) return;
+    let current = 0;
+    const stepTime = Math.abs(Math.floor(duration / value));
+    const timer = setInterval(function() {
+        current += 1;
+        domElement.innerHTML = '' + current;
+        if (current == value) {
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
 
 }
 
