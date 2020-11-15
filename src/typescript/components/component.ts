@@ -1,3 +1,6 @@
+import { APP_STORAGE_LOCAL_STORAGE_KEY } from "../constants/constant";
+import { AppStorage } from "../models/settings.model";
+
 export interface HtmlComponent {
 
   toHtml(): string;
@@ -95,6 +98,14 @@ export abstract class BaseHtmlComponent implements HtmlComponent {
 
   getClassName(): string {
     return this.constructor["name"];
+  }
+
+  getAppStorage(): AppStorage {
+    return JSON.parse(localStorage.getItem(APP_STORAGE_LOCAL_STORAGE_KEY)) || new AppStorage();
+  }
+
+  saveAppStorage(newAppStorage: AppStorage): void {
+    return localStorage.setItem(APP_STORAGE_LOCAL_STORAGE_KEY, JSON.stringify(newAppStorage));
   }
 
 }

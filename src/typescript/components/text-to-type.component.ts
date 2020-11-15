@@ -1,5 +1,8 @@
 import { BaseHtmlComponent } from "./component";
 import englishQuotes from '../data/english-quotes';
+import { TextToTypeStats } from "../models/text-to-type-stats.model";
+import { END_TYPING_EVENT } from "../constants/constant";
+import { AppStorage } from "../models/settings.model";
 
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = "TextToType"
 const CHARS_To_TYPE: RegExp = /^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$/;
@@ -11,6 +14,8 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   private textToTypeIndex: number = -1;
   private blinkInterval: any;
   private nextCurrentCharToTypeCssClass = 'OK';
+  private stats: TextToTypeStats;
+  private appStorage: AppStorage;
 
   _toHtml() {
     return `<div id="${TEXT_TO_TYPE_DOM_ELEMENT_ID}" class="text-to-type"></div>`;
@@ -18,16 +23,20 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   protected _postInsertHtml(): void {
     this.textToTypeDomElement = document.getElementById(TEXT_TO_TYPE_DOM_ELEMENT_ID);
-    this.setNextTextToType();
+    this.appStorage = this.getAppStorage();
+    this.textToTypeIndex = this.appStorage.textToTypeIndex;
+    this.setTextToType();
     document.body.addEventListener('keydown', this.handleKeyDownEvent.bind(this));
   }
 
   private handleKeyDownEvent(event) {
+    this.stats.handleKeyDownEvent();
     const char = event.key;
     const expectedChar = this.currentCharToTypeDomElement.dataset.key;
     if (!CHARS_To_TYPE.test(char)) return;
     if (expectedChar !== char) {
       this.nextCurrentCharToTypeCssClass = 'NOK';
+      this.stats.increaseErrors();
       return;
     }
     clearInterval(this.blinkInterval);
@@ -40,8 +49,18 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
       this.textToTypeDomElement.classList.add('blink');
       this.blinkInterval = setInterval(this.toggleBlinkCssClass.bind(this), 350);
     } else {
-      this.setNextTextToType();
+      this.stats.endType();
+      this.dispatchCustomEvent(END_TYPING_EVENT, this.stats);
+      this.textToTypeIndex = (this.textToTypeIndex + 1) % englishQuotes.length;
+      this.updateAppStorage();
+      this.setTextToType();
     }
+  }
+
+  private updateAppStorage() {
+    this.appStorage.textToTypeIndex = this.textToTypeIndex;
+    this.appStorage.textToTypeStats.push(this.stats);
+    this.saveAppStorage(this.appStorage);
   }
 
   private getNextCharToType(): HTMLElement {
@@ -56,7 +75,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     this.textToTypeDomElement.classList.toggle('blink');
   }
 
-  private setNextTextToType(): void {
+  private setTextToType(): void {
     this.textToTypeIndex = (this.textToTypeIndex + 1) % englishQuotes.length;
     const textToTypeCharArray = englishQuotes[this.textToTypeIndex].split('');
     this.textToTypeDomElement.innerHTML = `${textToTypeCharArray.map(this.charToSpan).join('')}`;
@@ -64,6 +83,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     this.currentCharToTypeDomElement.classList.add('cursor');
     this.textToTypeDomElement.classList.add('blink');
     this.blinkInterval = setInterval(this.toggleBlinkCssClass.bind(this), 350);
+    this.stats = new TextToTypeStats(textToTypeCharArray.length);
   }
 
   private charToSpan(c: string) {
