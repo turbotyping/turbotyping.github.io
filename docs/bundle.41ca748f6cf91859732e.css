@@ -1112,7 +1112,7 @@ footer {
     background-color: var(--current-char-to-type-background-color); }
 
 .typed-text-stats-container {
-  margin: 8rem auto 5rem;
+  margin: 10rem auto 0;
   display: flex;
   justify-content: center; }
   .typed-text-stats-container .typed-text-stat-container {
@@ -1132,4 +1132,12 @@ footer {
     color: var(--typed-text-stat-value-color); }
   .typed-text-stats-container .typed-text-stat-label {
     font-size: 1.5rem; }
+
+.progress-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10rem; }
+
+.first-page {
+  height: calc(100vh - var(--navbar-height)); }
 

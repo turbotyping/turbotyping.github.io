@@ -1,6 +1,6 @@
 import { BaseHtmlComponent } from "./component";
 import englishQuotes from '../data/english-quotes';
-import { TextToTypeStats } from "../models/text-to-type-stats.model";
+import { TypedTextStats } from "../models/typed-text-stats.model";
 import { END_TYPING_EVENT } from "../constants/constant";
 import { AppStorage } from "../models/app-storage.model";
 
@@ -14,7 +14,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   private textToTypeIndex: number = -1;
   private blinkInterval: any;
   private nextCurrentCharToTypeCssClass = 'OK';
-  private stats: TextToTypeStats;
+  private stats: TypedTextStats;
   private appStorage: AppStorage;
 
   _toHtml() {
@@ -33,6 +33,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     this.stats.handleKeyDownEvent();
     const char = event.key;
     const expectedChar = this.currentCharToTypeDomElement.dataset.key;
+    if (char === ' ') event.preventDefault();
     if (!CHARS_To_TYPE.test(char)) return;
     if (expectedChar !== char) {
       this.nextCurrentCharToTypeCssClass = 'NOK';
@@ -59,7 +60,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private updateAppStorage() {
     this.appStorage.textToTypeIndex = this.textToTypeIndex;
-    this.appStorage.textToTypeStats.push(this.stats);
+    this.appStorage.typedTextStats.push(this.stats);
     this.saveAppStorage(this.appStorage);
   }
 
@@ -82,7 +83,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     this.currentCharToTypeDomElement.classList.add('cursor');
     this.textToTypeDomElement.classList.add('blink');
     this.blinkInterval = setInterval(this.toggleBlinkCssClass.bind(this), 350);
-    this.stats = new TextToTypeStats(textToTypeCharArray.length);
+    this.stats = new TypedTextStats(textToTypeCharArray.length);
   }
 
   private charToSpan(c: string) {

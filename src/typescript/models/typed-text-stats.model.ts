@@ -1,4 +1,4 @@
-export class TextToTypeStats {
+export class TypedTextStats {
   charsToType: number;
   startTime: Date;
   endTime: Date;

@@ -1,5 +1,5 @@
 import { END_TYPING_EVENT } from "../constants/constant";
-import { TextToTypeStats } from "../models/text-to-type-stats.model";
+import { TypedTextStats } from "../models/typed-text-stats.model";
 import { BaseHtmlComponent } from "./component";
 
 const TYPED_TEXT_SECONDS_DOM_ELEMENT_ID = "TypedTextSeconds";
@@ -37,8 +37,8 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
     this.typedTextErrorsDomElement = document.getElementById(TYPED_TEXT_ERRORS_DOM_ELEMENT_ID);
     this.addCustomEventListener(END_TYPING_EVENT, this.handleEndTypingEvent.bind(this));
     const appStorage = this.getAppStorage();
-    if (appStorage.textToTypeStats.length > 0) {
-      this.updateStats(appStorage.textToTypeStats[appStorage.textToTypeStats.length - 1]);
+    if (appStorage.typedTextStats.length > 0) {
+      this.updateStats(appStorage.typedTextStats[appStorage.typedTextStats.length - 1]);
     };
   }
 
@@ -46,7 +46,7 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
     this.updateStats(event.detail);
   }
 
-  private updateStats(stat: TextToTypeStats) {
+  private updateStats(stat: TypedTextStats) {
     if(stat) {
       this.animateValue(this.typedTextSecondsDomElement, stat.seconds);
       this.animateValue(this.typedTextWpmDomElement, stat.wpm);
