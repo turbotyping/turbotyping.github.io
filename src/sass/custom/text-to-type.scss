@@ -8,6 +8,11 @@
     font-size: 1.8rem;
   }
 
+  & span.whitespace {
+    padding: 0 0.2rem;
+    color: var(--whitespace-color);
+  }
+
   & span.NOK {
     color: var(--nok-typed-char-color);
   }

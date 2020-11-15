@@ -864,7 +864,8 @@ body.light {
   --current-char-to-type-color: var(--white-color);
   --current-char-to-type-background-color: var(--black-color);
   --ok-typed-char-color: var(--text-color-05);
-  --nok-typed-char-color: #e06c75; }
+  --nok-typed-char-color: #e06c75;
+  --whitespace-color: #ccc; }
 
 body.dark {
   --primary-color: #078eed;
@@ -898,7 +899,8 @@ body.dark {
   --current-char-to-type-color: var(--black-color);
   --current-char-to-type-background-color: var(--white-color);
   --ok-typed-char-color: var(--text-color-06);
-  --nok-typed-char-color: #e06c75; }
+  --nok-typed-char-color: #e06c75;
+  --whitespace-color: #676767; }
 
 :root {
   --transition: all 0.15s ease-in-out;
@@ -1094,6 +1096,9 @@ footer {
   .text-to-type span {
     font-family: 'Roboto Mono';
     font-size: 1.8rem; }
+  .text-to-type span.whitespace {
+    padding: 0 0.2rem;
+    color: var(--whitespace-color); }
   .text-to-type span.NOK {
     color: var(--nok-typed-char-color); }
   .text-to-type span.OK {

@@ -32,6 +32,7 @@ body.light {
   --current-char-to-type-background-color: var(--black-color);
   --ok-typed-char-color: var(--text-color-05);
   --nok-typed-char-color: #e06c75;
+  --whitespace-color: #ccc;
 }
 
 body.dark {
@@ -68,4 +69,5 @@ body.dark {
   --current-char-to-type-background-color: var(--white-color);
   --ok-typed-char-color: var(--text-color-06);
   --nok-typed-char-color: #e06c75;
+  --whitespace-color: #676767;
 }
