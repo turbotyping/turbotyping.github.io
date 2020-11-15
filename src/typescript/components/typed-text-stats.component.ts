@@ -38,7 +38,7 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
     this.addCustomEventListener(END_TYPING_EVENT, this.handleEndTypingEvent.bind(this));
     const appStorage = this.getAppStorage();
     if (appStorage.textToTypeStats.length > 0) {
-      this.updateStats(appStorage.textToTypeStats[0]);
+      this.updateStats(appStorage.textToTypeStats[appStorage.textToTypeStats.length - 1]);
     };
   }
 
