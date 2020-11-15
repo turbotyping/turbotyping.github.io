@@ -1,5 +1,5 @@
 import { APP_STORAGE_LOCAL_STORAGE_KEY } from "../constants/constant";
-import { AppStorage } from "../models/settings.model";
+import { AppStorage } from "../models/app-storage.model";
 
 export interface HtmlComponent {
 
