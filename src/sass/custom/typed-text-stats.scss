@@ -8,11 +8,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 4px solid var(--typed-text-stat-container-border-color);
+    border: 3px solid var(--typed-text-stat-container-border-color);
     width: 12rem;
     height: 12rem;
     border-radius: 100rem;
-    margin: 1rem;
+    margin: 1rem 2.5rem;
   }
 
   & .typed-text-stat-value {

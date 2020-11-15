@@ -1,14 +1,13 @@
-import { BaseHtmlComponent } from "./component";
+import { BaseHtmlComponent } from './component';
 import englishQuotes from '../data/english-quotes';
-import { TypedTextStats } from "../models/typed-text-stats.model";
-import { END_TYPING_EVENT } from "../constants/constant";
-import { AppStorage } from "../models/app-storage.model";
+import { TypedTextStats } from '../models/typed-text-stats.model';
+import { END_TYPING_EVENT } from '../constants/constant';
+import { AppStorage } from '../models/app-storage.model';
 
-const TEXT_TO_TYPE_DOM_ELEMENT_ID = "TextToType"
+const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
 const CHARS_To_TYPE: RegExp = /^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$/;
 
 export class TextToTypeHtmlComponent extends BaseHtmlComponent {
-
   private textToTypeDomElement: HTMLElement;
   private currentCharToTypeDomElement: HTMLElement;
   private textToTypeIndex: number = -1;
@@ -51,9 +50,9 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
       this.blinkInterval = setInterval(this.toggleBlinkCssClass.bind(this), 350);
     } else {
       this.stats.endType();
+      this.updateAppStorage();
       this.dispatchCustomEvent(END_TYPING_EVENT, this.stats);
       this.textToTypeIndex = (this.textToTypeIndex + 1) % englishQuotes.length;
-      this.updateAppStorage();
       this.setTextToType();
     }
   }
@@ -91,4 +90,3 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     return `<span data-key="${c}">${c}</span>`;
   }
 }
-
