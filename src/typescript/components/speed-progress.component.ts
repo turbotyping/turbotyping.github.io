@@ -1,4 +1,5 @@
-import { CURRENT_THEME_KEY, DARK_THEME_VALUE, END_TYPING_EVENT, MIN_STATS_TO_DISPLAY } from '../constants/constant';
+import { CURRENT_THEME_LOCAL_STORAGE_KEY, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY } from '../constants/constant';
+import { END_TYPING_EVENT } from '../constants/event.constant';
 import { BaseHtmlComponent } from './component';
 const Chart = require('chart.js');
 
@@ -30,7 +31,7 @@ export class SpeedProgressHtmlComponent extends BaseHtmlComponent {
   }
 
   private setGridLinesColor() {
-    const currentTheme = localStorage.getItem(CURRENT_THEME_KEY);
+    const currentTheme = localStorage.getItem(CURRENT_THEME_LOCAL_STORAGE_KEY);
     if (currentTheme === DARK_THEME_VALUE) {
       this.gridLinesColor = GRID_LINES_COLOR_IN_DARK_THEME;
     } else {

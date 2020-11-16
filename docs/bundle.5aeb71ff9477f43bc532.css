@@ -1082,8 +1082,6 @@ nav .right {
   nav .right .iconify {
     font-size: 2.75rem;
     margin-left: 1rem; }
-  nav .right .change-theme-icon {
-    display: none; }
 
 footer {
   color: var(--footer-color);
@@ -1171,4 +1169,11 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: space-between; }
+
+.change-theme-icon-container .iconify {
+  font-size: 2.75rem;
+  margin-left: 1rem; }
+
+.change-theme-icon-container .change-theme-icon {
+  display: none; }
 

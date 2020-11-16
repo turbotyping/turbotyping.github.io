@@ -1,8 +1,8 @@
 import { BaseHtmlComponent } from './component';
 import englishQuotes from '../data/english-quotes';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { END_TYPING_EVENT } from '../constants/constant';
 import { AppStorage } from '../models/app-storage.model';
+import { END_TYPING_EVENT } from '../constants/event.constant';
 
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
 const CHARS_To_TYPE: RegExp = /^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$/;
