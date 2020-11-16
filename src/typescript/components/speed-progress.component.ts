@@ -1,13 +1,16 @@
-import { END_TYPING_EVENT, MIN_STATS_TO_DISPLAY } from '../constants/constant';
+import { CURRENT_THEME_KEY, DARK_THEME_VALUE, END_TYPING_EVENT, MIN_STATS_TO_DISPLAY } from '../constants/constant';
 import { BaseHtmlComponent } from './component';
 const Chart = require('chart.js');
 
 const PROGRESS_CANVAS_ID = 'speed-progress-canvas-id';
 const NOT_ENOUGH_SAMPLES_ID = 'not-enough-speed-samples-id';
+const GRID_LINES_COLOR_IN_DARK_THEME = '#333';
+const GRID_LINES_COLOR_IN_LIGHT_THEME = '#eeeeee';
 
 export class SpeedProgressHtmlComponent extends BaseHtmlComponent {
   private canvas: HTMLCanvasElement;
   private notEnoughSampleMessage: HTMLElement;
+  private gridLinesColor: string;
 
   _toHtml() {
     return /* html */ `
@@ -19,10 +22,20 @@ export class SpeedProgressHtmlComponent extends BaseHtmlComponent {
   }
 
   protected _postInsertHtml(): void {
+    this.setGridLinesColor();
     this.canvas = <HTMLCanvasElement>document.getElementById(PROGRESS_CANVAS_ID);
     this.notEnoughSampleMessage = document.getElementById(NOT_ENOUGH_SAMPLES_ID);
     this.update();
     this.addCustomEventListener(END_TYPING_EVENT, this.update.bind(this));
+  }
+
+  private setGridLinesColor() {
+    const currentTheme = localStorage.getItem(CURRENT_THEME_KEY);
+    if (currentTheme === DARK_THEME_VALUE) {
+      this.gridLinesColor = GRID_LINES_COLOR_IN_DARK_THEME;
+    } else {
+      this.gridLinesColor = GRID_LINES_COLOR_IN_LIGHT_THEME;
+    }
   }
 
   private update() {
@@ -47,10 +60,23 @@ export class SpeedProgressHtmlComponent extends BaseHtmlComponent {
         },
         options: {
           scales: {
+            yAxes: [
+              {
+                gridLines: {
+                  color: `${this.gridLinesColor}`,
+                },
+                ticks: {
+                  autoSkipPadding: 100,
+                },
+              },
+            ],
             xAxes: [
               {
+                gridLines: {
+                  display: false,
+                },
                 ticks: {
-                  display: false, //this will remove only the label
+                  autoSkipPadding: 100,
                 },
               },
             ],

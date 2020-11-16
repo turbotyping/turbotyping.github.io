@@ -1,13 +1,10 @@
-import { BaseHtmlComponent } from "./component";
+import { CURRENT_THEME_KEY, DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../constants/constant';
+import { BaseHtmlComponent } from './component';
 
-const LIGHT_THEME_VALUE = 'light';
-const DARK_THEME_VALUE = 'dark';
-const CURRENT_THEME_KEY = 'CURRENT_THEME';
 const CHANGE_TO_DARK_THEME_ICON_ID = 'CHANGE_TO_DARK_THEME_ICON_ID';
-const CHANGE_TO_LIGHT_THEME_ICON_ID = 'CHANGE_TO_LIGHT_THEME_ICON_ID'
+const CHANGE_TO_LIGHT_THEME_ICON_ID = 'CHANGE_TO_LIGHT_THEME_ICON_ID';
 
 export class NavbarHtmlComponent extends BaseHtmlComponent {
-  
   private changeToDarkThemeButtonDomElement: HTMLElement;
   private changeToLightThemeButtonDomElement: HTMLElement;
   private navbarDomElement: HTMLElement;
@@ -63,7 +60,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     } catch (error) {
       console.error('error while executing Navbar.showHideToggleThemeIcons() method. error: ' + error);
     }
-  } 
+  }
 
   private setThemeFromLocalStorage() {
     this.bodyDomElement = document.querySelector('body');
@@ -71,7 +68,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     this.bodyDomElement.classList.remove(DARK_THEME_VALUE, LIGHT_THEME_VALUE);
     this.bodyDomElement.classList.add(currentTheme);
     localStorage.setItem(CURRENT_THEME_KEY, currentTheme);
-  } 
+  }
 
   private onChangeThemeEvent(event: any) {
     event.stopPropagation();
@@ -99,4 +96,3 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     }
   }
 }
-
