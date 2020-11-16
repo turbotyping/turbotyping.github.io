@@ -3,7 +3,7 @@ import { BaseHtmlContainer, HtmlComponent } from './component';
 import { ErrorProgressHtmlComponent } from './error-progress.component';
 import { SpeedProgressHtmlComponent } from './speed-progress.component';
 
-export class ProgressHtmlComponent extends BaseHtmlContainer {
+export class ProgressContainerHtmlComponent extends BaseHtmlContainer {
   protected getComponents(): HtmlComponent[] {
     const res: HtmlComponent[] = [];
     res.push(new SpeedProgressHtmlComponent());
