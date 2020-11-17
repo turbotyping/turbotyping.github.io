@@ -871,7 +871,8 @@ body.light {
   --check-progress-link-color: var(--secondary-color);
   --check-progress-link-border-color: var(--secondary-color);
   --check-progress-link-color-on-hover: var(--white-color);
-  --check-progress-link-background-color-on-hover: var(--secondary-color); }
+  --check-progress-link-background-color-on-hover: var(--secondary-color);
+  --switch-on-color: #065fd4; }
 
 body.dark {
   --primary-color: #078eed;
@@ -912,7 +913,8 @@ body.dark {
   --check-progress-link-color: var(--secondary-color);
   --check-progress-link-border-color: var(--secondary-color);
   --check-progress-link-color-on-hover: var(--white-color);
-  --check-progress-link-background-color-on-hover: var(--secondary-color); }
+  --check-progress-link-background-color-on-hover: var(--secondary-color);
+  --switch-on-color: #1378fd; }
 
 :root {
   --transition: all 0.15s ease-in-out;
@@ -1178,4 +1180,11 @@ footer {
 
 .change-theme-icon-container .change-theme-icon {
   display: none; }
+
+.switch-off,
+.switch-on {
+  font-size: 4.5rem; }
+
+.switch-on {
+  color: var(--switch-on-color); }
 

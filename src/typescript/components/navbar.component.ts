@@ -1,10 +1,10 @@
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
 import { BaseHtmlComponent } from './component';
+import { SwitchHtmlComponent, SwitchState } from './switch.component';
 
 export class NavbarHtmlComponent extends BaseHtmlComponent {
   private navbarDomElement: HTMLElement;
   private changeThemeIcon = new ChangeThemeIconHtmlComponent();
-
   _preInsertHtml() {
     this.changeThemeIcon.preInsertHtml();
   }

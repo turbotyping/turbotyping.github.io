@@ -39,6 +39,7 @@ body.light {
   --check-progress-link-border-color: var(--secondary-color);
   --check-progress-link-color-on-hover: var(--white-color);
   --check-progress-link-background-color-on-hover: var(--secondary-color);
+  --switch-on-color: #065fd4;
 }
 
 body.dark {
@@ -82,4 +83,5 @@ body.dark {
   --check-progress-link-border-color: var(--secondary-color);
   --check-progress-link-color-on-hover: var(--white-color);
   --check-progress-link-background-color-on-hover: var(--secondary-color);
+  --switch-on-color: #1378fd;
 }
