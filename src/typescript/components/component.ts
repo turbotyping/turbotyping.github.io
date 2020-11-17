@@ -1,27 +1,19 @@
-import { APP_STORAGE_LOCAL_STORAGE_KEY } from "../constants/constant";
-import { AppStorage } from "../models/app-storage.model";
+import { APP_STORAGE_LOCAL_STORAGE_KEY } from '../constants/constant';
+import { AppStorage } from '../models/app-storage.model';
 
 export interface HtmlComponent {
-
   toHtml(): string;
-  
+
   preInsertHtml(): void;
 
   insertHtml(parentElement: HTMLElement, insertPosition: InsertPosition): void;
 
   postInsertHtml(): void;
 
+  getClassName(): string;
 }
 
 export abstract class BaseHtmlComponent implements HtmlComponent {
-
-  constructor() {
-    this.preInsertHtml = this.preInsertHtml.bind(this);
-    this.toHtml = this.toHtml.bind(this);
-    this.insertHtml = this.insertHtml.bind(this);
-    this.postInsertHtml = this.postInsertHtml.bind(this);
-  }
-
   toHtml(): string {
     try {
       return this._toHtml();
@@ -41,7 +33,7 @@ export abstract class BaseHtmlComponent implements HtmlComponent {
     }
   }
 
-  protected abstract _postInsertHtml(): void 
+  protected abstract _postInsertHtml(): void;
 
   preInsertHtml(): void {
     try {
@@ -96,8 +88,15 @@ export abstract class BaseHtmlComponent implements HtmlComponent {
     }
   }
 
+  getRandomId(): string {
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return '_' + Math.random().toString(36).substr(2, 9);
+  }
+
   getClassName(): string {
-    return this.constructor["name"];
+    return this.constructor['name'];
   }
 
   getAppStorage(): AppStorage {
@@ -107,11 +106,9 @@ export abstract class BaseHtmlComponent implements HtmlComponent {
   saveAppStorage(newAppStorage: AppStorage): void {
     return localStorage.setItem(APP_STORAGE_LOCAL_STORAGE_KEY, JSON.stringify(newAppStorage));
   }
-
 }
 
 export abstract class BaseStaticHtmlComponent extends BaseHtmlComponent {
-  
   _postInsertHtml(): void {
     // nothing to do by default!
   }
@@ -121,20 +118,22 @@ export abstract class BaseHtmlContainer extends BaseHtmlComponent {
   protected _toHtml(): string {
     return `
       ${this.getContainerBeginTag()}
-      ${this.getComponents().map(component => component.toHtml()).join("")}
+      ${this.getComponents()
+        .map((component) => component.toHtml())
+        .join('')}
       ${this.getContainerEndTag()}
-    `
+    `;
   }
 
   postInsertHtml(): void {
-    this.getComponents().forEach(component => component.postInsertHtml());
+    this.getComponents().forEach((component) => component.postInsertHtml());
   }
 
   preInsertHtml(): void {
-    this.getComponents().forEach(component => component.preInsertHtml());
+    this.getComponents().forEach((component) => component.preInsertHtml());
   }
 
-  protected _postInsertHtml(): void {
+  _postInsertHtml(): void {
     // nothing to do by default!
   }
 
@@ -143,5 +142,4 @@ export abstract class BaseHtmlContainer extends BaseHtmlComponent {
   protected abstract getContainerBeginTag(): string;
 
   protected abstract getContainerEndTag(): string;
-
 }

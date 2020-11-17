@@ -5,8 +5,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
   private navbarDomElement: HTMLElement;
   private changeThemeIcon: ChangeThemeIconHtmlComponent;
 
-  constructor() {
-    super();
+  _preInsertHtml() {
     this.changeThemeIcon = new ChangeThemeIconHtmlComponent();
   }
 
@@ -28,6 +27,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
 
   _postInsertHtml() {
     this.changeThemeIcon.postInsertHtml();
+    this.navbarDomElement = document.querySelector('nav');
     window.addEventListener('scroll', this.onWindowScrollEvent.bind(this));
   }
 
