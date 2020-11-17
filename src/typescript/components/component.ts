@@ -14,6 +14,8 @@ export interface HtmlComponent {
 }
 
 export abstract class BaseHtmlComponent implements HtmlComponent {
+  private static appStorage: AppStorage;
+
   toHtml(): string {
     try {
       return this._toHtml();
@@ -100,10 +102,14 @@ export abstract class BaseHtmlComponent implements HtmlComponent {
   }
 
   getAppStorage(): AppStorage {
-    return JSON.parse(localStorage.getItem(APP_STORAGE_LOCAL_STORAGE_KEY)) || new AppStorage();
+    if (!BaseHtmlComponent.appStorage) {
+      BaseHtmlComponent.appStorage = JSON.parse(localStorage.getItem(APP_STORAGE_LOCAL_STORAGE_KEY)) || new AppStorage();
+    }
+    return BaseHtmlComponent.appStorage;
   }
 
   saveAppStorage(newAppStorage: AppStorage): void {
+    BaseHtmlComponent.appStorage = newAppStorage;
     return localStorage.setItem(APP_STORAGE_LOCAL_STORAGE_KEY, JSON.stringify(newAppStorage));
   }
 }

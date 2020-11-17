@@ -1,4 +1,4 @@
-import { CURRENT_THEME_LOCAL_STORAGE_KEY, DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../constants/constant';
+import { DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../constants/constant';
 import { CHANGE_THEME_EVENT } from '../constants/event.constant';
 import { BaseHtmlComponent } from './component';
 
@@ -36,14 +36,15 @@ export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
   }
 
   private setThemeFromLocalStorage() {
-    const currentTheme = localStorage.getItem(CURRENT_THEME_LOCAL_STORAGE_KEY) || LIGHT_THEME_VALUE;
+    const appStorage = this.getAppStorage();
+    appStorage.currentTheme = appStorage.currentTheme || LIGHT_THEME_VALUE;
     document.body.classList.remove(DARK_THEME_VALUE, LIGHT_THEME_VALUE);
-    document.body.classList.add(currentTheme);
-    localStorage.setItem(CURRENT_THEME_LOCAL_STORAGE_KEY, currentTheme);
+    document.body.classList.add(appStorage.currentTheme);
+    this.saveAppStorage(appStorage);
   }
 
   private showHideToggleThemeIcons() {
-    if (localStorage.getItem(CURRENT_THEME_LOCAL_STORAGE_KEY) === LIGHT_THEME_VALUE) {
+    if (this.getAppStorage().currentTheme === LIGHT_THEME_VALUE) {
       this.changeToDarkThemeButtonDomElement.style.display = 'flex';
     } else {
       this.changeToLightThemeButtonDomElement.style.display = 'flex';
@@ -52,18 +53,20 @@ export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
 
   private handleToggleThemeClickEvent(event: any) {
     event.stopPropagation();
-    const currentTheme = localStorage.getItem(CURRENT_THEME_LOCAL_STORAGE_KEY);
-    if (currentTheme === LIGHT_THEME_VALUE) {
+    const appStorage = this.getAppStorage();
+    if (appStorage.currentTheme === LIGHT_THEME_VALUE) {
       document.body.classList.remove(DARK_THEME_VALUE, LIGHT_THEME_VALUE);
       document.body.classList.add(DARK_THEME_VALUE);
-      localStorage.setItem(CURRENT_THEME_LOCAL_STORAGE_KEY, DARK_THEME_VALUE);
+      appStorage.currentTheme = DARK_THEME_VALUE;
+      this.saveAppStorage(appStorage);
       this.changeToDarkThemeButtonDomElement.style.display = 'none';
       this.changeToLightThemeButtonDomElement.style.display = 'flex';
       this.dispatchChangeThemeEvent(DARK_THEME_VALUE);
     } else {
       document.body.classList.remove(DARK_THEME_VALUE, LIGHT_THEME_VALUE);
       document.body.classList.add(LIGHT_THEME_VALUE);
-      localStorage.setItem(CURRENT_THEME_LOCAL_STORAGE_KEY, LIGHT_THEME_VALUE);
+      appStorage.currentTheme = LIGHT_THEME_VALUE;
+      this.saveAppStorage(appStorage);
       this.changeToDarkThemeButtonDomElement.style.display = 'flex';
       this.changeToLightThemeButtonDomElement.style.display = 'none';
       this.dispatchChangeThemeEvent(LIGHT_THEME_VALUE);

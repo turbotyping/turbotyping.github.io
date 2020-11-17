@@ -1,4 +1,4 @@
-import { CURRENT_THEME_LOCAL_STORAGE_KEY, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY, PROGRESS_DIV_ID } from '../constants/constant';
+import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY, PROGRESS_DIV_ID } from '../constants/constant';
 import { CHANGE_THEME_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseHtmlComponent, BaseHtmlContainer, HtmlComponent } from './component';
@@ -52,8 +52,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseHtmlComponent {
   }
 
   private setGridLinesColor() {
-    const currentTheme = localStorage.getItem(CURRENT_THEME_LOCAL_STORAGE_KEY);
-    if (currentTheme === DARK_THEME_VALUE) {
+    if (this.getAppStorage().currentTheme === DARK_THEME_VALUE) {
       this.gridLinesColor = GRID_LINES_COLOR_IN_DARK_THEME;
     } else {
       this.gridLinesColor = GRID_LINES_COLOR_IN_LIGHT_THEME;
