@@ -1,5 +1,5 @@
 import { CURRENT_THEME_LOCAL_STORAGE_KEY, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY, PROGRESS_DIV_ID } from '../constants/constant';
-import { END_TYPING_EVENT } from '../constants/event.constant';
+import { CHANGE_THEME_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseHtmlComponent, BaseHtmlContainer, HtmlComponent } from './component';
 const Chart = require('chart.js');
@@ -38,6 +38,12 @@ export abstract class AbstractProgressHtmlComponent extends BaseHtmlComponent {
     this.setGridLinesColor();
     this.update();
     this.addCustomEventListener(END_TYPING_EVENT, this.update.bind(this));
+    this.addCustomEventListener(CHANGE_THEME_EVENT, this.handleChangeThemeEvent.bind(this));
+  }
+
+  private handleChangeThemeEvent(): void {
+    this.setGridLinesColor();
+    this.update();
   }
 
   private initDomElements(): void {
