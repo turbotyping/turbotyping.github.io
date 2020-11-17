@@ -38,6 +38,7 @@ a {
   font-size: 1.6rem;
   color: var(--primary-color);
   text-decoration: none;
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
@@ -59,6 +60,7 @@ p {
   color: var(--icon-color);
   transition: var(--transition);
   transition-property: color;
+  cursor: pointer;
 }
 
 .primary-color {
