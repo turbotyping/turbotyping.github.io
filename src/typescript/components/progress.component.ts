@@ -21,11 +21,9 @@ export abstract class AbstractProgressHtmlComponent extends BaseHtmlComponent {
   _preInsertHtml(): void {
     this.notEnoughSamplesId = this.getRandomId();
     this.progressCanvasId = this.getRandomId();
-    console.log(this.notEnoughSamplesId);
   }
 
   _toHtml() {
-    console.log(this.notEnoughSamplesId);
     // prettier-ignore
     return /* html */ `
       <div>
