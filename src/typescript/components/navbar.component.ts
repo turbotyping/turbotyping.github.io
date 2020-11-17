@@ -3,10 +3,10 @@ import { BaseHtmlComponent } from './component';
 
 export class NavbarHtmlComponent extends BaseHtmlComponent {
   private navbarDomElement: HTMLElement;
-  private changeThemeIcon: ChangeThemeIconHtmlComponent;
+  private changeThemeIcon = new ChangeThemeIconHtmlComponent();
 
   _preInsertHtml() {
-    this.changeThemeIcon = new ChangeThemeIconHtmlComponent();
+    this.changeThemeIcon.preInsertHtml();
   }
 
   _toHtml() {

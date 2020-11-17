@@ -9,6 +9,14 @@ export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
   private changeToDarkThemeButtonDomElement: HTMLElement;
   private changeToLightThemeButtonDomElement: HTMLElement;
 
+  _preInsertHtml(): void {
+    const appStorage = this.getAppStorage();
+    appStorage.currentTheme = appStorage.currentTheme || LIGHT_THEME_VALUE;
+    document.body.classList.remove(DARK_THEME_VALUE, LIGHT_THEME_VALUE);
+    document.body.classList.add(appStorage.currentTheme);
+    this.saveAppStorage(appStorage);
+  }
+
   _toHtml() {
     return /* html */ `
       <span class="change-theme-icon-container">
@@ -24,7 +32,6 @@ export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
 
   _postInsertHtml() {
     this.initDomElements();
-    this.setThemeFromLocalStorage();
     this.showHideToggleThemeIcons();
     this.changeToDarkThemeButtonDomElement.addEventListener('click', this.handleToggleThemeClickEvent.bind(this));
     this.changeToLightThemeButtonDomElement.addEventListener('click', this.handleToggleThemeClickEvent.bind(this));
@@ -33,14 +40,6 @@ export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
   private initDomElements() {
     this.changeToDarkThemeButtonDomElement = document.getElementById(CHANGE_TO_DARK_THEME_ICON_ID);
     this.changeToLightThemeButtonDomElement = document.getElementById(CHANGE_TO_LIGHT_THEME_ICON_ID);
-  }
-
-  private setThemeFromLocalStorage() {
-    const appStorage = this.getAppStorage();
-    appStorage.currentTheme = appStorage.currentTheme || LIGHT_THEME_VALUE;
-    document.body.classList.remove(DARK_THEME_VALUE, LIGHT_THEME_VALUE);
-    document.body.classList.add(appStorage.currentTheme);
-    this.saveAppStorage(appStorage);
   }
 
   private showHideToggleThemeIcons() {
