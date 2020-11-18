@@ -1,4 +1,8 @@
-import { ENABLE_CAPITAL_LETTERS_CHANGE_EVENT, ENABLE_PUNCTUATION_LETTERS_CHANGE_EVENT } from '../constants/event.constant';
+import {
+  APP_SETTINGS_CHANGE_EVENT,
+  ENABLE_CAPITAL_LETTERS_CHANGE_EVENT,
+  ENABLE_PUNCTUATION_LETTERS_CHANGE_EVENT as ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT,
+} from '../constants/event.constant';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
 import { BaseBlockHtmlComponent } from './component';
 import { SwitchHtmlComponent, SwitchState } from './switch.component';
@@ -16,7 +20,7 @@ export class AppSettingsHtmlComponent extends BaseBlockHtmlComponent {
     const enableCapitalLettersState = appStorage.enableCapitalLetters ? SwitchState.ON : SwitchState.OFF;
     const enablePunctuationCharacters = appStorage.enablePunctuationCharacters ? SwitchState.ON : SwitchState.OFF;
     this.enableCapitalLettersSwitch = new SwitchHtmlComponent(ENABLE_CAPITAL_LETTERS_CHANGE_EVENT, enableCapitalLettersState);
-    this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(ENABLE_PUNCTUATION_LETTERS_CHANGE_EVENT, enablePunctuationCharacters);
+    this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT, enablePunctuationCharacters);
     this.changeThemeIcon.preInsertHtml();
     this.enableCapitalLettersSwitch.preInsertHtml();
     this.enablePunctuationCharactersSwitch.preInsertHtml();
@@ -48,5 +52,21 @@ export class AppSettingsHtmlComponent extends BaseBlockHtmlComponent {
     this.changeThemeIcon.postInsertHtml();
     this.enableCapitalLettersSwitch.postInsertHtml();
     this.enablePunctuationCharactersSwitch.postInsertHtml();
+    this.addCustomEventListener(ENABLE_CAPITAL_LETTERS_CHANGE_EVENT, this.handleEnableCapitalLettersChangeEvent.bind(this));
+    this.addCustomEventListener(ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT, this.handlePunctuationCharactersChangeEvent.bind(this));
+  }
+
+  private handleEnableCapitalLettersChangeEvent() {
+    const appStorage = this.getAppStorage();
+    appStorage.enableCapitalLetters = !appStorage.enableCapitalLetters;
+    this.saveAppStorage(appStorage);
+    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+  }
+
+  private handlePunctuationCharactersChangeEvent() {
+    const appStorage = this.getAppStorage();
+    appStorage.enablePunctuationCharacters = !appStorage.enablePunctuationCharacters;
+    this.saveAppStorage(appStorage);
+    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 }

@@ -2,7 +2,7 @@ import { BaseBlockHtmlComponent } from './component';
 import englishQuotes from '../data/english-quotes';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { AppStorage } from '../models/app-storage.model';
-import { END_TYPING_EVENT } from '../constants/event.constant';
+import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
 const CHARS_To_TYPE: RegExp = /^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$/;
@@ -30,6 +30,11 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     this.textToTypeIndex = this.appStorage.textToTypeIndex;
     this.setTextToType();
     document.body.addEventListener('keydown', this.handleKeyDownEvent.bind(this));
+    this.addCustomEventListener(APP_SETTINGS_CHANGE_EVENT, this.handleAppSettingsChangeEvent.bind(this));
+  }
+
+  private handleAppSettingsChangeEvent() {
+    this.setTextToType();
   }
 
   private handleKeyDownEvent(event) {
@@ -80,7 +85,16 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private setTextToType(): void {
-    const textToTypeCharArray = englishQuotes[this.textToTypeIndex].split('');
+    clearInterval(this.blinkInterval);
+    const appStorage = this.getAppStorage();
+    let textToType = englishQuotes[this.textToTypeIndex];
+    if (!appStorage.enableCapitalLetters) {
+      textToType = textToType.toLowerCase();
+    }
+    if (!appStorage.enablePunctuationCharacters) {
+      textToType = textToType.replace(/[^A-Za-z ]/g, '');
+    }
+    const textToTypeCharArray = textToType.split('');
     this.textToTypeDomElement.innerHTML = `${textToTypeCharArray.map(this.charToSpan).join('')}`;
     this.currentCharToTypeDomElement = this.textToTypeDomElement.querySelector('span');
     this.currentCharToTypeDomElement.classList.add('cursor');

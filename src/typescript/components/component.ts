@@ -139,7 +139,6 @@ export abstract class BaseBlockHtmlComponent extends BaseHtmlComponent {
   }
 
   _toHtml(): string {
-    console.log(this.containerId);
     return `<div id="${this.containerId}">${this.__toHtml()}</div>`;
   }
 
@@ -173,7 +172,6 @@ export abstract class BaseInlineHtmlComponent extends BaseHtmlComponent {
   }
 
   _toHtml(): string {
-    console.log(this.containerId);
     return `<span id="${this.containerId}">${this.__toHtml()}</span>`;
   }
 
