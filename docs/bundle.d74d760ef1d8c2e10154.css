@@ -853,6 +853,8 @@ body.light {
   --border-color: #dfe1e5;
   --icon-color: var(--text-color-03);
   --pre-load-background: linear-gradient(270deg, var(--background-color-05), var(--background-color-04), var(--background-color-03));
+  --box-shadow-01: 0 2px 5px 0 rgba(74, 74, 74, 0.2);
+  --box-shadow-02: 0 0 5px 2px rgba(74, 74, 74, 0.2);
   --body-color: var(--text-color-03);
   --body-background-color: var(--background-color-01);
   --navbar-background-color: var(--background-color-01);
@@ -872,7 +874,8 @@ body.light {
   --check-progress-link-border-color: var(--secondary-color);
   --check-progress-link-color-on-hover: var(--white-color);
   --check-progress-link-background-color-on-hover: var(--secondary-color);
-  --switch-on-color: #065fd4; }
+  --switch-on-color: #065fd4;
+  --app-settings-box-shadow: var(--box-shadow-01); }
 
 body.dark {
   --primary-color: #078eed;
@@ -895,6 +898,8 @@ body.dark {
   --border-color: #353b46;
   --icon-color: var(--text-color-03);
   --pre-load-background: linear-gradient(270deg, var(--background-color-05), var(--background-color-04), var(--background-color-03));
+  --box-shadow-01: 0 -2px 5px rgba(0, 0, 0, 1);
+  --box-shadow-02: 0 -2px 10px rgba(0, 0, 0, 1);
   --body-color: var(--text-color-03);
   --body-background-color: var(--background-color-01);
   --navbar-background-color: var(--background-color-01);
@@ -914,7 +919,8 @@ body.dark {
   --check-progress-link-border-color: var(--secondary-color);
   --check-progress-link-color-on-hover: var(--white-color);
   --check-progress-link-background-color-on-hover: var(--secondary-color);
-  --switch-on-color: #1378fd; }
+  --switch-on-color: #1378fd;
+  --app-settings-box-shadow: var(--box-shadow-01); }
 
 :root {
   --transition: all 0.15s ease-in-out;
@@ -1081,11 +1087,18 @@ nav .left {
     transition-property: color; }
 
 nav .right {
+  z-index: 999;
+  position: relative;
   display: flex;
   align-items: center; }
   nav .right .iconify {
     font-size: 2.75rem;
     margin-left: 1rem; }
+  nav .right .app-settings-drop-down {
+    z-index: 999;
+    position: absolute;
+    top: calc(100% + 2rem);
+    right: 0; }
 
 footer {
   color: var(--footer-color);
@@ -1187,4 +1200,17 @@ footer {
 
 .switch-on {
   color: var(--switch-on-color); }
+
+.app-settings-container {
+  border-radius: 0.3rem;
+  padding: 0.5rem 0;
+  min-width: 30rem;
+  box-shadow: var(--app-settings-box-shadow); }
+  .app-settings-container .app-setting-container {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+  .app-settings-container span {
+    font-size: 1.32rem; }
 

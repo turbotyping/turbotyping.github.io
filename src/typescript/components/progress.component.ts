@@ -1,13 +1,13 @@
 import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY, PROGRESS_DIV_ID } from '../constants/constant';
 import { CHANGE_THEME_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { BaseHtmlComponent, BaseHtmlContainer, HtmlComponent } from './component';
+import { BaseBlockHtmlContainer, HtmlComponent, BaseBlockHtmlComponent } from './component';
 const Chart = require('chart.js');
 
 const GRID_LINES_COLOR_IN_DARK_THEME = '#333';
 const GRID_LINES_COLOR_IN_LIGHT_THEME = '#eeeeee';
 
-export abstract class AbstractProgressHtmlComponent extends BaseHtmlComponent {
+export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlComponent {
   private notEnoughSamplesId: string;
   private progressCanvasId: string;
   private canvasDomElement: HTMLCanvasElement;
@@ -18,12 +18,12 @@ export abstract class AbstractProgressHtmlComponent extends BaseHtmlComponent {
   abstract getProgressBorderColor(): string;
   abstract toChartData(stats: TypedTextStats[]): number[];
 
-  _preInsertHtml(): void {
+  __preInsertHtml(): void {
     this.notEnoughSamplesId = this.getRandomId();
     this.progressCanvasId = this.getRandomId();
   }
 
-  _toHtml() {
+  __toHtml() {
     // prettier-ignore
     return /* html */ `
       <div>
@@ -33,7 +33,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseHtmlComponent {
     `;
   }
 
-  protected _postInsertHtml(): void {
+  __postInsertHtml(): void {
     this.initDomElements();
     this.setGridLinesColor();
     this.update();
@@ -134,16 +134,12 @@ export class SpeedProgressHtmlComponent extends AbstractProgressHtmlComponent {
   }
 }
 
-export class ProgressContainerHtmlComponent extends BaseHtmlContainer {
-  private components: HtmlComponent[];
-
-  protected getComponents(): HtmlComponent[] {
-    if (!this.components) {
-      this.components = [];
-      this.components.push(new SpeedProgressHtmlComponent());
-      this.components.push(new ErrorsProgressHtmlComponent());
-    }
-    return this.components;
+export class ProgressContainerHtmlComponent extends BaseBlockHtmlContainer {
+  protected __getComponents(): HtmlComponent[] {
+    const res = [];
+    res.push(new SpeedProgressHtmlComponent());
+    res.push(new ErrorsProgressHtmlComponent());
+    return res;
   }
 
   protected getContainerBeginTag(): string {

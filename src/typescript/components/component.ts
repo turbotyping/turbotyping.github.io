@@ -11,10 +11,26 @@ export interface HtmlComponent {
   postInsertHtml(): void;
 
   getClassName(): string;
+
+  show(): void;
+
+  hide(): void;
+
+  toggle(): void;
+
+  stopPropagation(event): void;
 }
 
 export abstract class BaseHtmlComponent implements HtmlComponent {
+  abstract show(): void;
+  abstract hide(): void;
+  abstract toggle(): void;
+
   private static appStorage: AppStorage;
+
+  stopPropagation(event) {
+    event.stopPropagation();
+  }
 
   toHtml(): string {
     try {
@@ -114,14 +130,102 @@ export abstract class BaseHtmlComponent implements HtmlComponent {
   }
 }
 
-export abstract class BaseStaticHtmlComponent extends BaseHtmlComponent {
+export abstract class BaseBlockHtmlComponent extends BaseHtmlComponent {
+  private containerId: string;
+
+  _preInsertHtml(): void {
+    this.containerId = this.getRandomId();
+    this.__preInsertHtml();
+  }
+
+  _toHtml(): string {
+    return `<div id="${this.containerId}">${this.__toHtml()}</div>`;
+  }
+
   _postInsertHtml(): void {
+    this.__postInsertHtml();
+  }
+
+  show(): void {
+    document.getElementById(this.containerId).classList.remove('hide');
+  }
+
+  hide(): void {
+    document.getElementById(this.containerId).classList.add('hide');
+  }
+
+  toggle(): void {
+    document.getElementById(this.containerId).classList.toggle('hide');
+  }
+
+  abstract __preInsertHtml(): void;
+  abstract __toHtml(): string;
+  abstract __postInsertHtml(): void;
+}
+
+export abstract class BaseInlineHtmlComponent extends BaseHtmlComponent {
+  private containerId: string;
+
+  _preInsertHtml(): void {
+    this.containerId = this.getRandomId();
+    this.__preInsertHtml();
+  }
+
+  _postInsertHtml(): void {
+    this.__postInsertHtml();
+  }
+
+  _toHtml(): string {
+    return `<span id="${this.containerId}">${this.__toHtml()}</span>`;
+  }
+
+  show(): void {
+    document.getElementById(this.containerId).classList.remove('hide');
+  }
+
+  hide(): void {
+    document.getElementById(this.containerId).classList.add('hide');
+  }
+
+  toggle(): void {
+    document.getElementById(this.containerId).classList.toggle('hide');
+  }
+
+  abstract __preInsertHtml(): void;
+  abstract __toHtml(): string;
+  abstract __postInsertHtml(): void;
+}
+
+export abstract class BaseBlockStaticHtmlComponent extends BaseBlockHtmlComponent {
+  __preInsertHtml(): void {
+    // nothing to do by default!
+  }
+  __postInsertHtml(): void {
     // nothing to do by default!
   }
 }
 
-export abstract class BaseHtmlContainer extends BaseHtmlComponent {
-  protected _toHtml(): string {
+export abstract class BaseInlineStaticHtmlComponent extends BaseInlineHtmlComponent {
+  __preInsertHtml(): void {
+    // nothing to do by default!
+  }
+  __postInsertHtml(): void {
+    // nothing to do by default!
+  }
+}
+
+export abstract class BaseBlockHtmlContainer extends BaseBlockHtmlComponent {
+  private componentsArray: HtmlComponent[];
+
+  __preInsertHtml(): void {
+    // nothing to do by default!
+  }
+
+  __postInsertHtml(): void {
+    // nothing to do by default!
+  }
+
+  __toHtml(): string {
     return `
       ${this.getContainerBeginTag()}
       ${this.getComponents()
@@ -139,11 +243,57 @@ export abstract class BaseHtmlContainer extends BaseHtmlComponent {
     this.getComponents().forEach((component) => component.preInsertHtml());
   }
 
-  _postInsertHtml(): void {
+  protected getComponents(): HtmlComponent[] {
+    if (!this.componentsArray) {
+      this.componentsArray = this.__getComponents();
+    }
+    return this.componentsArray;
+  }
+
+  protected abstract __getComponents(): HtmlComponent[];
+
+  protected abstract getContainerBeginTag(): string;
+
+  protected abstract getContainerEndTag(): string;
+}
+
+export abstract class BaseInlineHtmlContainer extends BaseInlineHtmlComponent {
+  private componentsArray: HtmlComponent[];
+
+  __preInsertHtml(): void {
     // nothing to do by default!
   }
 
-  protected abstract getComponents(): HtmlComponent[];
+  __postInsertHtml(): void {
+    // nothing to do by default!
+  }
+
+  __toHtml(): string {
+    return `
+      ${this.getContainerBeginTag()}
+      ${this.getComponents()
+        .map((component) => component.toHtml())
+        .join('')}
+      ${this.getContainerEndTag()}
+    `;
+  }
+
+  postInsertHtml(): void {
+    this.getComponents().forEach((component) => component.postInsertHtml());
+  }
+
+  preInsertHtml(): void {
+    this.getComponents().forEach((component) => component.preInsertHtml());
+  }
+
+  protected getComponents(): HtmlComponent[] {
+    if (!this.componentsArray) {
+      this.componentsArray = this.__getComponents();
+    }
+    return this.componentsArray;
+  }
+
+  protected abstract __getComponents(): HtmlComponent[];
 
   protected abstract getContainerBeginTag(): string;
 

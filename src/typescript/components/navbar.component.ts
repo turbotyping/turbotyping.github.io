@@ -1,15 +1,18 @@
-import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
-import { BaseHtmlComponent } from './component';
-import { SwitchHtmlComponent, SwitchState } from './switch.component';
+import { AppSettingsHtmlComponent } from './app-settings.component';
+import { BaseBlockHtmlComponent } from './component';
 
-export class NavbarHtmlComponent extends BaseHtmlComponent {
+const APP_SETTINGS_ICON_ID = 'APP_SETTINGS_ICON_ID';
+
+export class NavbarHtmlComponent extends BaseBlockHtmlComponent {
   private navbarDomElement: HTMLElement;
-  private changeThemeIcon = new ChangeThemeIconHtmlComponent();
-  _preInsertHtml() {
-    this.changeThemeIcon.preInsertHtml();
+  private appSettingsIconDomElement: HTMLElement;
+  private appSettings = new AppSettingsHtmlComponent();
+
+  __preInsertHtml() {
+    this.appSettings.preInsertHtml();
   }
 
-  _toHtml() {
+  __toHtml() {
     return /* html */ `
       <nav>
         <div class='left'>
@@ -19,16 +22,30 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
           </a>
         </div>
         <div class='right'>
-          <span class="change-theme-icon">${this.changeThemeIcon.toHtml()}</span>
+          <span ID="${APP_SETTINGS_ICON_ID}"><span class="iconify" data-icon="jam:settings-alt" data-inline="false" data-rotate="270deg"></span></span>
+          <div class="app-settings-drop-down">${this.appSettings.toHtml()}<div>
         </div>
       </nav>
     `;
   }
 
-  _postInsertHtml() {
-    this.changeThemeIcon.postInsertHtml();
+  __postInsertHtml() {
+    this.appSettings.postInsertHtml();
     this.navbarDomElement = document.querySelector('nav');
+    this.appSettingsIconDomElement = document.getElementById(APP_SETTINGS_ICON_ID);
+    this.appSettingsIconDomElement.addEventListener('click', this.handleAppSettingsIconClickEvent.bind(this));
     window.addEventListener('scroll', this.onWindowScrollEvent.bind(this));
+    document.addEventListener('click', this.handleDocumentClickEvent.bind(this));
+    this.appSettings.hide();
+  }
+
+  private handleDocumentClickEvent() {
+    this.appSettings.hide();
+  }
+
+  private handleAppSettingsIconClickEvent(event) {
+    event.stopPropagation();
+    this.appSettings.toggle();
   }
 
   private onWindowScrollEvent() {

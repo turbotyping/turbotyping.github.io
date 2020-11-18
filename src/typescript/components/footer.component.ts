@@ -1,7 +1,7 @@
-import { BaseStaticHtmlComponent } from "./component";
+import { BaseBlockStaticHtmlComponent } from './component';
 
-export class FooterHtmlComponent extends BaseStaticHtmlComponent {
-  _toHtml() {
+export class FooterHtmlComponent extends BaseBlockStaticHtmlComponent {
+  __toHtml() {
     return /* html */ `
       <footer>
         <p>© 2020 enjoytyping.github.io</p>
@@ -11,6 +11,4 @@ export class FooterHtmlComponent extends BaseStaticHtmlComponent {
       </footer>
     `;
   }
-
 }
-

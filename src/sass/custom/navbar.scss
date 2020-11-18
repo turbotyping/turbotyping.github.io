@@ -41,10 +41,19 @@ nav .left {
 }
 
 nav .right {
+  z-index: 999;
+  position: relative;
   display: flex;
   align-items: center;
   & .iconify {
     font-size: 2.75rem;
     margin-left: 1rem;
+  }
+
+  & .app-settings-drop-down {
+    z-index: 999;
+    position: absolute;
+    top: calc(100% + 2rem);
+    right: 0;
   }
 }

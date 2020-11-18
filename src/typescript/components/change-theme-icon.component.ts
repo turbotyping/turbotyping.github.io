@@ -1,15 +1,15 @@
 import { DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../constants/constant';
 import { CHANGE_THEME_EVENT } from '../constants/event.constant';
-import { BaseHtmlComponent } from './component';
+import { BaseInlineHtmlComponent } from './component';
 
 const CHANGE_TO_DARK_THEME_ICON_ID = 'CHANGE_TO_DARK_THEME_ICON_ID';
 const CHANGE_TO_LIGHT_THEME_ICON_ID = 'CHANGE_TO_LIGHT_THEME_ICON_ID';
 
-export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
+export class ChangeThemeIconHtmlComponent extends BaseInlineHtmlComponent {
   private changeToDarkThemeButtonDomElement: HTMLElement;
   private changeToLightThemeButtonDomElement: HTMLElement;
 
-  _preInsertHtml(): void {
+  __preInsertHtml(): void {
     const appStorage = this.getAppStorage();
     appStorage.currentTheme = appStorage.currentTheme || LIGHT_THEME_VALUE;
     document.body.classList.remove(DARK_THEME_VALUE, LIGHT_THEME_VALUE);
@@ -17,7 +17,7 @@ export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
     this.saveAppStorage(appStorage);
   }
 
-  _toHtml() {
+  __toHtml() {
     return /* html */ `
       <span class="change-theme-icon-container">
         <span id='${CHANGE_TO_DARK_THEME_ICON_ID}' class='pointer change-theme-icon'>
@@ -30,7 +30,7 @@ export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
     `;
   }
 
-  _postInsertHtml() {
+  __postInsertHtml() {
     this.initDomElements();
     this.showHideToggleThemeIcons();
     this.changeToDarkThemeButtonDomElement.addEventListener('click', this.handleToggleThemeClickEvent.bind(this));

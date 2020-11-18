@@ -1,6 +1,6 @@
-import { BaseHtmlComponent } from './component';
+import { BaseInlineHtmlComponent } from './component';
 
-export class SwitchHtmlComponent extends BaseHtmlComponent {
+export class SwitchHtmlComponent extends BaseInlineHtmlComponent {
   private switchContainerId: string;
   private switchContainerDomElement: HTMLElement;
   private switchOffId: string;
@@ -12,22 +12,22 @@ export class SwitchHtmlComponent extends BaseHtmlComponent {
     super();
   }
 
-  _preInsertHtml(): void {
+  __preInsertHtml(): void {
     this.switchContainerId = this.getRandomId();
     this.switchOffId = this.getRandomId();
     this.switchOnId = this.getRandomId();
   }
 
-  _toHtml() {
+  __toHtml() {
     return /* html */ `
       <span id="${this.switchContainerId}" class="switch-container">
-        <span id="${this.switchOffId}"><span class="iconify switch-off" data-icon="mdi:toggle-switch-off" data-inline="false"></span></span>
-        <span id="${this.switchOnId}"><span class="iconify switch-on" data-icon="mdi:toggle-switch" data-inline="false"></span></span>
+        <span id="${this.switchOffId}"><span class="iconify switch-off" data-icon="ic:outline-check-box-outline-blank" data-inline="false"></span></span>
+        <span id="${this.switchOnId}"><span class="iconify switch-on" data-icon="ic:outline-check-box" data-inline="false"></span></span>
       </span>
     `;
   }
 
-  protected _postInsertHtml(): void {
+  __postInsertHtml(): void {
     this.switchContainerDomElement = document.getElementById(this.switchContainerId);
     this.switchOffDomElement = document.getElementById(this.switchOffId);
     this.switchOnDomElement = document.getElementById(this.switchOnId);

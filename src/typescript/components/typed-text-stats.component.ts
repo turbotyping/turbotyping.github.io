@@ -1,17 +1,21 @@
 import { END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { BaseHtmlComponent } from './component';
+import { BaseBlockHtmlComponent } from './component';
 
 const TYPED_TEXT_SECONDS_DOM_ELEMENT_ID = 'TypedTextSeconds';
 const TYPED_TEXT_WPM_DOM_ELEMENT_ID = 'TypedTextWpm';
 const TYPED_TEXT_ERRORS_DOM_ELEMENT_ID = 'TypedTextErrors';
 
-export class TypedTextHtmlComponent extends BaseHtmlComponent {
+export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
   private typedTextSecondsDomElement: HTMLElement;
   private typedTextWpmDomElement: HTMLElement;
   private typedTextErrorsDomElement: HTMLElement;
 
-  _toHtml() {
+  __preInsertHtml(): void {
+    // do nothing by default
+  }
+
+  __toHtml() {
     return /* html */ `
       <div class="typed-text-stats-container">
         <div class="typed-text-stat-container">
@@ -30,7 +34,7 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
     `;
   }
 
-  protected _postInsertHtml(): void {
+  __postInsertHtml(): void {
     this.typedTextSecondsDomElement = document.getElementById(TYPED_TEXT_SECONDS_DOM_ELEMENT_ID);
     this.typedTextWpmDomElement = document.getElementById(TYPED_TEXT_WPM_DOM_ELEMENT_ID);
     this.typedTextErrorsDomElement = document.getElementById(TYPED_TEXT_ERRORS_DOM_ELEMENT_ID);

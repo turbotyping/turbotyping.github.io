@@ -1,4 +1,4 @@
-import { BaseHtmlComponent } from './component';
+import { BaseBlockHtmlComponent } from './component';
 import englishQuotes from '../data/english-quotes';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { AppStorage } from '../models/app-storage.model';
@@ -7,7 +7,7 @@ import { END_TYPING_EVENT } from '../constants/event.constant';
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
 const CHARS_To_TYPE: RegExp = /^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$/;
 
-export class TextToTypeHtmlComponent extends BaseHtmlComponent {
+export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private textToTypeDomElement: HTMLElement;
   private currentCharToTypeDomElement: HTMLElement;
   private textToTypeIndex: number = -1;
@@ -16,11 +16,15 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   private stats: TypedTextStats;
   private appStorage: AppStorage;
 
-  _toHtml() {
+  __preInsertHtml(): void {
+    // do nothing by default
+  }
+
+  __toHtml() {
     return `<div id="${TEXT_TO_TYPE_DOM_ELEMENT_ID}" class="text-to-type"></div>`;
   }
 
-  protected _postInsertHtml(): void {
+  __postInsertHtml(): void {
     this.textToTypeDomElement = document.getElementById(TEXT_TO_TYPE_DOM_ELEMENT_ID);
     this.appStorage = this.getAppStorage();
     this.textToTypeIndex = this.appStorage.textToTypeIndex;
