@@ -139,6 +139,7 @@ export abstract class BaseBlockHtmlComponent extends BaseHtmlComponent {
   }
 
   _toHtml(): string {
+    console.log(this.containerId);
     return `<div id="${this.containerId}">${this.__toHtml()}</div>`;
   }
 
@@ -171,12 +172,13 @@ export abstract class BaseInlineHtmlComponent extends BaseHtmlComponent {
     this.__preInsertHtml();
   }
 
-  _postInsertHtml(): void {
-    this.__postInsertHtml();
+  _toHtml(): string {
+    console.log(this.containerId);
+    return `<span id="${this.containerId}">${this.__toHtml()}</span>`;
   }
 
-  _toHtml(): string {
-    return `<span id="${this.containerId}">${this.__toHtml()}</span>`;
+  _postInsertHtml(): void {
+    this.__postInsertHtml();
   }
 
   show(): void {
@@ -218,11 +220,7 @@ export abstract class BaseBlockHtmlContainer extends BaseBlockHtmlComponent {
   private componentsArray: HtmlComponent[];
 
   __preInsertHtml(): void {
-    // nothing to do by default!
-  }
-
-  __postInsertHtml(): void {
-    // nothing to do by default!
+    this.getComponents().forEach((component) => component.preInsertHtml());
   }
 
   __toHtml(): string {
@@ -235,12 +233,8 @@ export abstract class BaseBlockHtmlContainer extends BaseBlockHtmlComponent {
     `;
   }
 
-  postInsertHtml(): void {
+  __postInsertHtml(): void {
     this.getComponents().forEach((component) => component.postInsertHtml());
-  }
-
-  preInsertHtml(): void {
-    this.getComponents().forEach((component) => component.preInsertHtml());
   }
 
   protected getComponents(): HtmlComponent[] {
@@ -261,11 +255,7 @@ export abstract class BaseInlineHtmlContainer extends BaseInlineHtmlComponent {
   private componentsArray: HtmlComponent[];
 
   __preInsertHtml(): void {
-    // nothing to do by default!
-  }
-
-  __postInsertHtml(): void {
-    // nothing to do by default!
+    this.getComponents().forEach((component) => component.preInsertHtml());
   }
 
   __toHtml(): string {
@@ -278,12 +268,8 @@ export abstract class BaseInlineHtmlContainer extends BaseInlineHtmlComponent {
     `;
   }
 
-  postInsertHtml(): void {
+  __postInsertHtml(): void {
     this.getComponents().forEach((component) => component.postInsertHtml());
-  }
-
-  preInsertHtml(): void {
-    this.getComponents().forEach((component) => component.preInsertHtml());
   }
 
   protected getComponents(): HtmlComponent[] {
