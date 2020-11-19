@@ -3,6 +3,7 @@ import { CHANGE_THEME_EVENT, END_TYPING_EVENT } from '../constants/event.constan
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlContainer, HtmlComponent, BaseBlockHtmlComponent } from './component';
 const Chart = require('chart.js');
+const smooth = require('array-smooth');
 
 const GRID_LINES_COLOR_IN_DARK_THEME = '#333';
 const GRID_LINES_COLOR_IN_LIGHT_THEME = '#eeeeee';
@@ -59,6 +60,21 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
     }
   }
 
+  private avg(array) {
+    return array.reduce((a, b) => a + b, 0) / array.length;
+  }
+
+  private smooth(vector, variance = 1) {
+    const t_avg = this.avg(vector) * variance;
+    const ret = Array(vector.length);
+    for (var i = 0; i < vector.length; i++) {
+      let prev = i > 0 ? ret[i - 1] : vector[i];
+      let next = i < vector.length ? vector[i] : vector[i - 1];
+      ret[i] = this.avg([t_avg, this.avg([prev, vector[i], next])]);
+    }
+    return ret;
+  }
+
   private update() {
     const stats = this.getAppStorage().typedTextStats;
     if (!stats || stats.length < MIN_STATS_TO_DISPLAY) {
@@ -72,7 +88,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
           labels: Array.from({ length: stats.length }, (_, i) => i + 1),
           datasets: [
             {
-              data: this.toChartData(stats),
+              data: smooth(this.toChartData(stats), 3),
               label: `${this.getProgressName()}`,
               borderColor: `${this.getProgressBorderColor()}`,
               fill: false,
