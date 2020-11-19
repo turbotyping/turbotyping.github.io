@@ -1,5 +1,6 @@
 import { BaseBlockHtmlComponent } from './component';
 import englishQuotes from '../data/english-quotes';
+import prophetMohamedPbuhQuotes from '../data/prophet-mohamed-pbuh-quotes';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { AppStorage } from '../models/app-storage.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
@@ -108,7 +109,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private setTextToType(): void {
     clearInterval(this.blinkInterval);
     const appStorage = this.getAppStorage();
-    let textToType = englishQuotes[this.textToTypeIndex];
+    let textToType = prophetMohamedPbuhQuotes[this.textToTypeIndex];
     if (!appStorage.enableCapitalLetters) {
       textToType = textToType.toLowerCase();
     }
