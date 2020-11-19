@@ -76,6 +76,8 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
               label: `${this.getProgressName()}`,
               borderColor: `${this.getProgressBorderColor()}`,
               fill: false,
+              showLine: false,
+              backgroundColor: `${this.getProgressBorderColor()}`,
             },
           ],
         },
