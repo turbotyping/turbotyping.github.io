@@ -46,7 +46,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     if (expectedChar !== char) {
       this.nextCurrentCharToTypeCssClass = 'NOK';
       this.stats.increaseErrors();
-      return;
+      if (this.getAppStorage().stopOnError) return;
     }
     clearInterval(this.blinkInterval);
     this.currentCharToTypeDomElement.classList.add(this.nextCurrentCharToTypeCssClass);

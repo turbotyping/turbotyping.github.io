@@ -875,7 +875,8 @@ body.light {
   --check-progress-link-color-on-hover: var(--white-color);
   --check-progress-link-background-color-on-hover: var(--secondary-color);
   --switch-on-color: #065fd4;
-  --app-settings-box-shadow: var(--box-shadow-01); }
+  --app-settings-box-shadow: var(--box-shadow-01);
+  --app-settings-background-color: var(--background-color-01); }
 
 body.dark {
   --primary-color: #078eed;
@@ -920,7 +921,8 @@ body.dark {
   --check-progress-link-color-on-hover: var(--white-color);
   --check-progress-link-background-color-on-hover: var(--secondary-color);
   --switch-on-color: #1378fd;
-  --app-settings-box-shadow: var(--box-shadow-01); }
+  --app-settings-box-shadow: var(--box-shadow-01);
+  --app-settings-background-color: var(--background-color-01); }
 
 :root {
   --transition: all 0.15s ease-in-out;
@@ -1208,7 +1210,8 @@ footer {
   border-radius: 0.3rem;
   padding: 0.5rem 0;
   min-width: 30rem;
-  box-shadow: var(--app-settings-box-shadow); }
+  box-shadow: var(--app-settings-box-shadow);
+  background-color: var(--app-settings-background-color); }
   .app-settings-container .app-setting-container {
     padding: 2rem;
     display: flex;

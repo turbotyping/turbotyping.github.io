@@ -43,6 +43,7 @@ body.light {
   --check-progress-link-background-color-on-hover: var(--secondary-color);
   --switch-on-color: #065fd4;
   --app-settings-box-shadow: var(--box-shadow-01);
+  --app-settings-background-color: var(--background-color-01);
 }
 
 body.dark {
@@ -90,4 +91,5 @@ body.dark {
   --check-progress-link-background-color-on-hover: var(--secondary-color);
   --switch-on-color: #1378fd;
   --app-settings-box-shadow: var(--box-shadow-01);
+  --app-settings-background-color: var(--background-color-01);
 }
