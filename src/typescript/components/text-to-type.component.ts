@@ -4,6 +4,8 @@ import { TypedTextStats } from '../models/typed-text-stats.model';
 import { AppStorage } from '../models/app-storage.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 
+const BACKSPACE_KEY = 'Backspace';
+const SPACE_KEY = ' ';
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
 const CHARS_To_TYPE: RegExp = /^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$/;
 
@@ -39,11 +41,22 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private handleKeyDownEvent(event) {
     this.stats.handleKeyDownEvent();
-    const char = event.key;
-    const expectedChar = this.currentCharToTypeDomElement.dataset.key;
-    if (char === ' ') event.preventDefault();
-    if (!CHARS_To_TYPE.test(char)) return;
-    if (expectedChar !== char) {
+    const typedKey = event.key;
+    if (typedKey === SPACE_KEY) event.preventDefault();
+    if (typedKey === BACKSPACE_KEY) {
+      const previousCharToType = this.getPreviousCharToType();
+      if (previousCharToType) {
+        this.currentCharToTypeDomElement.classList.remove('cursor');
+        this.currentCharToTypeDomElement = previousCharToType;
+        this.currentCharToTypeDomElement.classList.remove('OK', 'NOK');
+        this.currentCharToTypeDomElement.classList.add('cursor');
+      }
+      return;
+    }
+    if (!CHARS_To_TYPE.test(typedKey)) return;
+
+    const expectedKey = this.currentCharToTypeDomElement.dataset.key;
+    if (expectedKey !== typedKey) {
       this.nextCurrentCharToTypeCssClass = 'NOK';
       this.stats.increaseErrors();
       if (this.getAppStorage().stopOnError) return;
@@ -76,6 +89,14 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     let res = this.currentCharToTypeDomElement.nextElementSibling;
     while (res?.tagName === 'WBR') {
       res = res.nextElementSibling;
+    }
+    return res as HTMLElement;
+  }
+
+  private getPreviousCharToType(): HTMLElement {
+    let res = this.currentCharToTypeDomElement.previousElementSibling;
+    while (res?.tagName === 'WBR') {
+      res = res.previousElementSibling;
     }
     return res as HTMLElement;
   }
