@@ -91,7 +91,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
           labels: Array.from({ length: stats.length }, (_, i) => i + 1),
           datasets: [
             {
-              data: smooth(this.toChartData(stats), this.smoothness),
+              data: this.smoothness == 0 ? this.toChartData(stats) : smooth(this.toChartData(stats), this.smoothness),
               label: `${this.getProgressName()}`,
               borderColor: `${this.getProgressBorderColor()}`,
               fill: false,

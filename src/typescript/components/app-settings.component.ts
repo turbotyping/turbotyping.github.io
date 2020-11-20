@@ -17,7 +17,7 @@ export class AppSettingsHtmlComponent extends BaseBlockHtmlComponent {
 
   __preInsertHtml(): void {
     const appStorage = this.getAppStorage();
-    appStorage.stopOnError = appStorage.stopOnError || true;
+    appStorage.stopOnError = appStorage.stopOnError || false;
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || false;
     const stopOnErrorState = appStorage.stopOnError ? SwitchState.ON : SwitchState.OFF;
