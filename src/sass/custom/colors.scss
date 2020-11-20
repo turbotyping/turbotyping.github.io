@@ -44,6 +44,8 @@ body.light {
   --switch-on-color: #065fd4;
   --app-settings-box-shadow: var(--box-shadow-01);
   --app-settings-background-color: var(--background-color-01);
+  --slider-color: var(--primary-color);
+  --slider-background-color: var(--border-color);
 }
 
 body.dark {
@@ -92,4 +94,6 @@ body.dark {
   --switch-on-color: #1378fd;
   --app-settings-box-shadow: var(--box-shadow-01);
   --app-settings-background-color: var(--background-color-01);
+  --slider-color: var(--secondary-color);
+  --slider-background-color: var(--border-color);
 }

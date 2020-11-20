@@ -9,6 +9,22 @@
     border: 0.1rem solid var(--border-color);
     border-radius: 0.3rem;
   }
+
+  & .progress-smoothness {
+    width: 80%;
+    margin: 6rem auto 0;
+    display: flex;
+    align-items: center;
+
+    & span {
+      font-size: 1.4rem;
+      margin-right: 3rem;
+    }
+
+    & .progress-smoothness-slider {
+      flex: 1;
+    }
+  }
 }
 
 .check-progress-link {

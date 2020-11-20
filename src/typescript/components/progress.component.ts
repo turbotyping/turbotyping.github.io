@@ -2,6 +2,7 @@ import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY, PROGRESS_DIV_ID } from '../cons
 import { CHANGE_THEME_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlContainer, HtmlComponent, BaseBlockHtmlComponent } from './component';
+import { SliderHtmlComponent } from './slider.component';
 const Chart = require('chart.js');
 const smooth = require('array-smooth');
 
@@ -14,14 +15,20 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
   private canvasDomElement: HTMLCanvasElement;
   private notEnoughSamplesDomElement: HTMLElement;
   private gridLinesColor: string;
+  private slider: SliderHtmlComponent;
+  private sliderChangeEventName: string;
+  private smoothness: number = 3;
 
   abstract getProgressName(): string;
   abstract getProgressBorderColor(): string;
   abstract toChartData(stats: TypedTextStats[]): number[];
 
   __preInsertHtml(): void {
+    this.sliderChangeEventName = this.getRandomId();
+    this.slider = new SliderHtmlComponent(0, 10, this.smoothness, this.sliderChangeEventName);
     this.notEnoughSamplesId = this.getRandomId();
     this.progressCanvasId = this.getRandomId();
+    this.slider.preInsertHtml();
   }
 
   __toHtml() {
@@ -30,16 +37,27 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
       <div>
         <p id="${this.notEnoughSamplesId}" class="not-enough-samples">Not enough samples to display ${this.getProgressName()} progress</p> 
         <canvas id="${this.progressCanvasId}" width="40" height="40"></canvas>
+        <div class="progress-smoothness">
+          <span>Smoothness</span>
+          <div class="progress-smoothness-slider">${this.slider.toHtml()}</div>
+        </div>
       </div>
     `;
   }
 
   __postInsertHtml(): void {
+    this.slider.postInsertHtml();
     this.initDomElements();
     this.setGridLinesColor();
     this.update();
     this.addCustomEventListener(END_TYPING_EVENT, this.update.bind(this));
     this.addCustomEventListener(CHANGE_THEME_EVENT, this.handleChangeThemeEvent.bind(this));
+    this.addCustomEventListener(this.sliderChangeEventName, this.handleSliderChangeEvent.bind(this));
+  }
+
+  private handleSliderChangeEvent(event) {
+    this.smoothness = event.detail.value;
+    this.update();
   }
 
   private handleChangeThemeEvent(): void {
@@ -60,21 +78,6 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
     }
   }
 
-  private avg(array) {
-    return array.reduce((a, b) => a + b, 0) / array.length;
-  }
-
-  private smooth(vector, variance = 1) {
-    const t_avg = this.avg(vector) * variance;
-    const ret = Array(vector.length);
-    for (var i = 0; i < vector.length; i++) {
-      let prev = i > 0 ? ret[i - 1] : vector[i];
-      let next = i < vector.length ? vector[i] : vector[i - 1];
-      ret[i] = this.avg([t_avg, this.avg([prev, vector[i], next])]);
-    }
-    return ret;
-  }
-
   private update() {
     const stats = this.getAppStorage().typedTextStats;
     if (!stats || stats.length < MIN_STATS_TO_DISPLAY) {
@@ -88,7 +91,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
           labels: Array.from({ length: stats.length }, (_, i) => i + 1),
           datasets: [
             {
-              data: smooth(this.toChartData(stats), 3),
+              data: smooth(this.toChartData(stats), this.smoothness),
               label: `${this.getProgressName()}`,
               borderColor: `${this.getProgressBorderColor()}`,
               fill: false,
