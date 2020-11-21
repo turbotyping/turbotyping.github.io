@@ -1,4 +1,4 @@
-import { AppSettingsHtmlComponent } from './app-settings.component';
+import { AppSettingsDialogHtmlComponent } from './app-settings-dialog.component';
 import { BaseBlockHtmlComponent } from './component';
 
 const APP_SETTINGS_ICON_ID = 'APP_SETTINGS_ICON_ID';
@@ -6,7 +6,7 @@ const APP_SETTINGS_ICON_ID = 'APP_SETTINGS_ICON_ID';
 export class NavbarHtmlComponent extends BaseBlockHtmlComponent {
   private navbarDomElement: HTMLElement;
   private appSettingsIconDomElement: HTMLElement;
-  private appSettings = new AppSettingsHtmlComponent();
+  private appSettings = new AppSettingsDialogHtmlComponent();
 
   __preInsertHtml() {
     this.appSettings.preInsertHtml();
@@ -35,17 +35,11 @@ export class NavbarHtmlComponent extends BaseBlockHtmlComponent {
     this.appSettingsIconDomElement = document.getElementById(APP_SETTINGS_ICON_ID);
     this.appSettingsIconDomElement.addEventListener('click', this.handleAppSettingsIconClickEvent.bind(this));
     window.addEventListener('scroll', this.onWindowScrollEvent.bind(this));
-    document.addEventListener('click', this.handleDocumentClickEvent.bind(this));
-    this.appSettings.hide();
-  }
-
-  private handleDocumentClickEvent() {
-    this.appSettings.hide();
   }
 
   private handleAppSettingsIconClickEvent(event) {
     event.stopPropagation();
-    this.appSettings.toggle();
+    this.appSettings.show();
   }
 
   private onWindowScrollEvent() {

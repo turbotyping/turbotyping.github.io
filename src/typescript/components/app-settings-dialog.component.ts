@@ -1,19 +1,18 @@
 import {
   APP_SETTINGS_CHANGE_EVENT,
   ENABLE_CAPITAL_LETTERS_CHANGE_EVENT,
-  ENABLE_PUNCTUATION_LETTERS_CHANGE_EVENT as ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT,
+  ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT,
   STOP_ON_ERROR_CHANGE_EVENT,
 } from '../constants/event.constant';
+import { AbstractDialogHtmlComponent } from './abstract-dialog.component';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
-import { BaseBlockHtmlComponent } from './component';
 import { SwitchHtmlComponent, SwitchState } from './switch.component';
 
-export class AppSettingsHtmlComponent extends BaseBlockHtmlComponent {
+export class AppSettingsDialogHtmlComponent extends AbstractDialogHtmlComponent {
   private changeThemeIcon = new ChangeThemeIconHtmlComponent();
   private stopOnErrorSwitch: SwitchHtmlComponent;
   private enableCapitalLettersSwitch: SwitchHtmlComponent;
   private enablePunctuationCharactersSwitch: SwitchHtmlComponent;
-  private container: HTMLElement;
 
   __preInsertHtml(): void {
     const appStorage = this.getAppStorage();
@@ -33,32 +32,32 @@ export class AppSettingsHtmlComponent extends BaseBlockHtmlComponent {
     this.saveAppStorage(appStorage);
   }
 
-  __toHtml() {
+  getDialogTitle(): string {
+    return 'Settings';
+  }
+
+  getDialogBody(): string {
     return /* html */ `
-      <div class="app-settings-container">
-        <div class="app-setting-container">
-          <span>Change theme</span>
-          <span>${this.changeThemeIcon.toHtml()}</span>
-        </div>
-        <div class="app-setting-container">
-          <span>Stop on error</span>
-          <span>${this.stopOnErrorSwitch.toHtml()}</span>
-        </div>
-        <div class="app-setting-container">
-          <span>Enable capital letters</span>
-          <span>${this.enableCapitalLettersSwitch.toHtml()}</span>
-        </div>
-        <div class="app-setting-container">
-          <span>Enable punctuation characters</span>
-          <span>${this.enablePunctuationCharactersSwitch.toHtml()}</span>
-        </div>
+      <div class="app-setting">
+        <span>Change theme</span>
+        <span>${this.changeThemeIcon.toHtml()}</span>
+      </div>
+      <div class="app-setting">
+        <span>Stop on error</span>
+        <span>${this.stopOnErrorSwitch.toHtml()}</span>
+      </div>
+      <div class="app-setting">
+        <span>Enable capital letters</span>
+        <span>${this.enableCapitalLettersSwitch.toHtml()}</span>
+      </div>
+      <div class="app-setting">
+        <span>Enable punctuation characters</span>
+        <span>${this.enablePunctuationCharactersSwitch.toHtml()}</span>
       </div>
     `;
   }
 
   __postInsertHtml(): void {
-    this.container = document.querySelector('.app-settings-container');
-    this.container.addEventListener('click', this.stopPropagation.bind(this));
     this.changeThemeIcon.postInsertHtml();
     this.stopOnErrorSwitch.postInsertHtml();
     this.enableCapitalLettersSwitch.postInsertHtml();

@@ -38,11 +38,12 @@ body.light {
   --typed-text-stat-value-color: var(--text-color-03);
   --typed-text-stat-container-border-color: var(--secondary-color);
   --switch-on-color: #065fd4;
-  --app-settings-box-shadow: var(--box-shadow-01);
-  --app-settings-background-color: var(--background-color-01);
+  --dialog-box-shadow: var(--box-shadow-01);
+  --dialog-background-color: var(--background-color-01);
   --slider-color: var(--primary-color);
   --slider-background-color: var(--border-color);
   --check-progress-link-icon-color-on-hover: var(--secondary-color);
+  --close-color: #f1505e;
 }
 
 body.dark {
@@ -85,9 +86,10 @@ body.dark {
   --typed-text-stat-value-color: var(--text-color-03);
   --typed-text-stat-container-border-color: var(--secondary-color);
   --switch-on-color: #1378fd;
-  --app-settings-box-shadow: var(--box-shadow-01);
-  --app-settings-background-color: var(--background-color-01);
+  --dialog-box-shadow: var(--box-shadow-01);
+  --dialog-background-color: var(--background-color-01);
   --slider-color: var(--secondary-color);
   --slider-background-color: var(--border-color);
   --check-progress-link-icon-color-on-hover: var(--secondary-color);
+  --close-color: #f1505e;
 }
