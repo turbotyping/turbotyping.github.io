@@ -1,11 +1,11 @@
 import { BaseBlockHtmlContainer, HtmlComponent } from './component';
-import { FirstPageHtmlComponent } from './first-page.component';
+import { TextToTypePageHtmlComponent } from './text-to-type-page.component';
 import { ProgressContainerHtmlComponent } from './progress.component';
 
 export class MainHtmlComponent extends BaseBlockHtmlContainer {
   protected __getComponents(): HtmlComponent[] {
     const res = [];
-    res.push(new FirstPageHtmlComponent());
+    res.push(new TextToTypePageHtmlComponent());
     res.push(new ProgressContainerHtmlComponent());
     return res;
   }
