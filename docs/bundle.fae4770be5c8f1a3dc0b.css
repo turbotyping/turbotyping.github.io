@@ -1165,24 +1165,24 @@ footer {
     .typed-text-stats-container .iconify:hover {
       color: var(--check-progress-link-icon-color-on-hover); }
 
-.progress-container {
+.progress-page {
   padding-top: calc(3rem + var(--navbar-height));
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10rem; }
-  .progress-container .not-enough-samples {
+  .progress-page .not-enough-samples {
     padding: 4rem 2rem;
     border: 0.1rem solid var(--border-color);
     border-radius: 0.3rem; }
-  .progress-container .progress-smoothness {
+  .progress-page .progress-smoothness {
     width: 80%;
     margin: 6rem auto 0;
     display: flex;
     align-items: center; }
-    .progress-container .progress-smoothness span {
+    .progress-page .progress-smoothness span {
       font-size: 1.4rem;
       margin-right: 3rem; }
-    .progress-container .progress-smoothness .progress-smoothness-slider {
+    .progress-page .progress-smoothness .progress-smoothness-slider {
       flex: 1; }
 
 .first-page {

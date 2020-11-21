@@ -1,7 +1,7 @@
-import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY, PROGRESS_DIV_ID } from '../constants/constant';
+import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY } from '../constants/constant';
 import { CHANGE_THEME_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { BaseBlockHtmlContainer, HtmlComponent, BaseBlockHtmlComponent } from './component';
+import { BaseBlockHtmlComponent } from './component';
 import { SliderHtmlComponent } from './slider.component';
 const Chart = require('chart.js');
 const smooth = require('array-smooth');
@@ -152,22 +152,5 @@ export class SpeedProgressHtmlComponent extends AbstractProgressHtmlComponent {
 
   toChartData(stats: TypedTextStats[]): number[] {
     return stats.map((stat) => stat.wpm);
-  }
-}
-
-export class ProgressContainerHtmlComponent extends BaseBlockHtmlContainer {
-  protected __getComponents(): HtmlComponent[] {
-    const res = [];
-    res.push(new SpeedProgressHtmlComponent());
-    res.push(new ErrorsProgressHtmlComponent());
-    return res;
-  }
-
-  protected getContainerBeginTag(): string {
-    return `<div id="${PROGRESS_DIV_ID}" class="progress-container">`;
-  }
-
-  protected getContainerEndTag(): string {
-    return '</div>';
   }
 }
