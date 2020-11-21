@@ -1,3 +1,4 @@
+import { PROGRESS_DIV_ID } from '../constants/constant';
 import { END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlComponent } from './component';
@@ -29,6 +30,11 @@ export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
         <div class="typed-text-stat-container">
           <span id="${TYPED_TEXT_ERRORS_DOM_ELEMENT_ID}" class="typed-text-stat-value">0</span>
           <span class="typed-text-stat-label">errors</span>
+        </div>
+        <div class="typed-text-stat-container check-progress-link">
+          <a href="#${PROGRESS_DIV_ID}">
+            <span class="iconify" data-icon="gridicons:stats-alt-2" data-inline="false"></span>
+          </a>
         </div>
       </div>
     `;

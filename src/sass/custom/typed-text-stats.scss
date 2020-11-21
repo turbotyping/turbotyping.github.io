@@ -12,7 +12,7 @@
     width: 12rem;
     height: 12rem;
     border-radius: 100rem;
-    margin: 1rem 2.5rem;
+    margin: 1rem 1.5rem;
   }
 
   & .typed-text-stat-value {
@@ -24,5 +24,15 @@
 
   & .typed-text-stat-label {
     font-size: 1.5rem;
+  }
+
+  & .iconify {
+    font-size: 6rem;
+    transition: var(--transition);
+    transition-property: color;
+
+    &:hover {
+      color: var(--check-progress-link-icon-color-on-hover);
+    }
   }
 }

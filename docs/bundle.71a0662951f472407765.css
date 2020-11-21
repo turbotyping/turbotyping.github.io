@@ -870,15 +870,12 @@ body.light {
   --whitespace-color: #ccc;
   --typed-text-stat-value-color: var(--text-color-03);
   --typed-text-stat-container-border-color: var(--secondary-color);
-  --check-progress-link-color: var(--secondary-color);
-  --check-progress-link-border-color: var(--secondary-color);
-  --check-progress-link-color-on-hover: var(--white-color);
-  --check-progress-link-background-color-on-hover: var(--secondary-color);
   --switch-on-color: #065fd4;
   --app-settings-box-shadow: var(--box-shadow-01);
   --app-settings-background-color: var(--background-color-01);
   --slider-color: var(--primary-color);
-  --slider-background-color: var(--border-color); }
+  --slider-background-color: var(--border-color);
+  --check-progress-link-icon-color-on-hover: var(--secondary-color); }
 
 body.dark {
   --primary-color: #078eed;
@@ -918,15 +915,12 @@ body.dark {
   --whitespace-color: #676767;
   --typed-text-stat-value-color: var(--text-color-03);
   --typed-text-stat-container-border-color: var(--secondary-color);
-  --check-progress-link-color: var(--secondary-color);
-  --check-progress-link-border-color: var(--secondary-color);
-  --check-progress-link-color-on-hover: var(--white-color);
-  --check-progress-link-background-color-on-hover: var(--secondary-color);
   --switch-on-color: #1378fd;
   --app-settings-box-shadow: var(--box-shadow-01);
   --app-settings-background-color: var(--background-color-01);
   --slider-color: var(--secondary-color);
-  --slider-background-color: var(--border-color); }
+  --slider-background-color: var(--border-color);
+  --check-progress-link-icon-color-on-hover: var(--secondary-color); }
 
 :root {
   --transition: all 0.15s ease-in-out;
@@ -1156,7 +1150,7 @@ footer {
     width: 12rem;
     height: 12rem;
     border-radius: 100rem;
-    margin: 1rem 2.5rem; }
+    margin: 1rem 1.5rem; }
   .typed-text-stats-container .typed-text-stat-value {
     font-size: 4rem;
     line-height: 4.2rem;
@@ -1164,6 +1158,12 @@ footer {
     color: var(--typed-text-stat-value-color); }
   .typed-text-stats-container .typed-text-stat-label {
     font-size: 1.5rem; }
+  .typed-text-stats-container .iconify {
+    font-size: 6rem;
+    transition: var(--transition);
+    transition-property: color; }
+    .typed-text-stats-container .iconify:hover {
+      color: var(--check-progress-link-icon-color-on-hover); }
 
 .progress-container {
   padding-top: calc(3rem + var(--navbar-height));
@@ -1184,19 +1184,6 @@ footer {
       margin-right: 3rem; }
     .progress-container .progress-smoothness .progress-smoothness-slider {
       flex: 1; }
-
-.check-progress-link {
-  padding: 1rem 3rem;
-  color: var(--check-progress-link-color);
-  transition: var(--transition);
-  transition-property: color, background-color;
-  border: 0.1rem solid var(--check-progress-link-border-color);
-  border-radius: 100rem;
-  text-decoration: none; }
-  .check-progress-link:hover {
-    color: var(--check-progress-link-color-on-hover);
-    background-color: var(--check-progress-link-background-color-on-hover);
-    text-decoration: none; }
 
 .first-page {
   padding-bottom: 5rem;
