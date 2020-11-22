@@ -8,7 +8,7 @@ export class SwitchHtmlComponent extends BaseInlineHtmlComponent {
   private switchOnId: string;
   private switchOnDomElement: HTMLElement;
 
-  constructor(private event: string, private state: SwitchState = SwitchState.OFF) {
+  constructor(private event: string, private active: boolean) {
     super();
   }
 
@@ -38,23 +38,18 @@ export class SwitchHtmlComponent extends BaseInlineHtmlComponent {
   private update() {
     this.switchOnDomElement.classList.remove('hide');
     this.switchOffDomElement.classList.remove('hide');
-    if (this.state === SwitchState.OFF) {
-      this.switchOnDomElement.classList.add('hide');
-    } else {
+    if (this.active) {
       this.switchOffDomElement.classList.add('hide');
+    } else {
+      this.switchOnDomElement.classList.add('hide');
     }
   }
 
   private handleSwitchClickEvent() {
-    this.state = this.state === SwitchState.OFF ? SwitchState.ON : SwitchState.OFF;
+    this.active = !this.active;
     this.update();
     this.dispatchCustomEvent(this.event, {
-      newState: this.state,
+      active: this.active,
     });
   }
-}
-
-export enum SwitchState {
-  OFF,
-  ON,
 }

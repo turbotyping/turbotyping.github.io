@@ -18,9 +18,10 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private nextCurrentCharToTypeCssClass = 'OK';
   private stats: TypedTextStats;
   private appStorage: AppStorage;
+  private keyboardSound: HTMLAudioElement;
 
   __preInsertHtml(): void {
-    // do nothing by default
+    this.keyboardSound = new Audio('keyboard-press-sound-effect.mp3');
   }
 
   __toHtml() {
@@ -42,6 +43,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private handleKeyDownEvent(event) {
     this.stats.handleKeyDownEvent();
+    this.handleKeySounds();
     const typedKey = event.key;
     if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
@@ -77,6 +79,14 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       this.dispatchCustomEvent(END_TYPING_EVENT, this.stats);
       this.textToTypeIndex = (this.textToTypeIndex + 1) % englishQuotes.length;
       this.setTextToType();
+    }
+  }
+
+  private handleKeySounds() {
+    if (this.getAppStorage().enableSounds) {
+      this.keyboardSound.pause();
+      this.keyboardSound.currentTime = 0.15;
+      this.keyboardSound.play();
     }
   }
 
