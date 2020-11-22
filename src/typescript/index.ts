@@ -1,9 +1,9 @@
 import '../sass/index.scss';
 
-import { HtmlComponent } from './components/core/component.interface';
-import { NavbarHtmlComponent } from './components/navbar.component';
 import { MainHtmlComponent } from './components/main.component';
 import { FooterHtmlComponent } from './components/footer.component';
+import { HtmlComponent } from './components/base/component.interface';
+import { NavbarHtmlComponent } from './components/navbar.component';
 
 const body = document.querySelector('body');
 

@@ -5,8 +5,8 @@ import {
   ENABLE_SOUNDS_CHANGE_EVENT,
   STOP_ON_ERROR_CHANGE_EVENT,
 } from '../constants/event.constant';
+import { BaseDialogHtmlComponent } from './base/base-dialog.component';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
-import { BaseDialogHtmlComponent } from './core/base-dialog.component';
 import { SwitchHtmlComponent } from './core/switch.component';
 
 export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {

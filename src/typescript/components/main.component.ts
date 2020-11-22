@@ -1,5 +1,5 @@
-import { BaseBlockHtmlContainer } from './core/base-block-container';
-import { HtmlComponent } from './core/component.interface';
+import { BaseBlockHtmlContainer } from './base/base-block-container';
+import { HtmlComponent } from './base/component.interface';
 import { ProgressPageHtmlComponent } from './progress-page.component';
 import { TextToTypePageHtmlComponent } from './text-to-type-page.component';
 

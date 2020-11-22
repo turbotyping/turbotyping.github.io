@@ -1,3 +1,11 @@
+.text-to-type-page {
+  padding-bottom: 5rem;
+  height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .text-to-type {
   width: 80rem;
   margin: 4rem auto 0;

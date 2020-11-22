@@ -1,0 +1,20 @@
+footer {
+  color: var(--footer-color);
+  background-color: var(--footer-background-color);
+  transition: var(--transition);
+  transition-property: color, background-color;
+  margin-top: var(--footer-margin-top);
+  padding: var(--footer-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & p {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+  }
+
+  & a {
+    font-size: var(--footer-icon-font-size);
+  }
+}

@@ -1,7 +1,7 @@
 import { PROGRESS_DIV_ID } from '../constants/constant';
 import { END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { BaseBlockHtmlComponent } from './core/base-block-component';
+import { BaseBlockHtmlComponent } from './base/base-block-component';
 
 const TYPED_TEXT_SECONDS_DOM_ELEMENT_ID = 'TypedTextSeconds';
 const TYPED_TEXT_WPM_DOM_ELEMENT_ID = 'TypedTextWpm';
