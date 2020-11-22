@@ -19,7 +19,7 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
 
   protected _toHtml(): string {
     return /* html */ `
-      <dialog id="${this.dialogId}" class="dialog">
+      <dialog id="${this.dialogId}" class="dialog ${this.getDialogCssClass()}">
         <div id="${this.dialogContainerId}" class="dialog-container">
           <div class="dialog-header">
             <span>${this.getDialogTitle()}</span>
@@ -34,6 +34,8 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
       </dialog>
     `;
   }
+
+  abstract getDialogCssClass(): string;
 
   abstract getDialogTitle(): string;
 

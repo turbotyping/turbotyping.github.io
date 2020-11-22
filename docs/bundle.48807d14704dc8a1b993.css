@@ -877,7 +877,10 @@ body.light {
   --check-progress-link-icon-color-on-hover: var(--secondary-color);
   --close-color: #f1505e;
   --dialog-background-color: var(--background-color-02);
-  --dialog-backdrop-background-color: var(--background-color-01); }
+  --dialog-backdrop-background-color: var(--background-color-01);
+  --select-options-background-color: var(--background-color-02);
+  --select-option-background-color-on-hover: var(--background-color-03);
+  --select-options-box-shadow: var(--box-shadow-01); }
 
 body.dark {
   --primary-color: #078eed;
@@ -924,7 +927,10 @@ body.dark {
   --slider-background-color: var(--border-color);
   --check-progress-link-icon-color-on-hover: var(--secondary-color);
   --dialog-background-color: var(--background-color-02);
-  --dialog-backdrop-background-color: var(--background-color-01); }
+  --dialog-backdrop-background-color: var(--background-color-01);
+  --select-options-background-color: var(--background-color-02);
+  --select-option-background-color-on-hover: var(--background-color-03);
+  --select-options-box-shadow: var(--box-shadow-01); }
 
 :root {
   --transition: all 0.15s ease-in-out;
@@ -1037,7 +1043,7 @@ p {
   color: var(--primary-color); }
 
 .hide {
-  display: none; }
+  display: none !important; }
 
 .pre-load {
   background: var(--pre-load-background);
@@ -1133,6 +1139,35 @@ p {
         color: var(--close-color); }
   .dialog .dialog-body {
     padding: 4rem 2rem 2rem; }
+
+.select-container {
+  position: relative;
+  cursor: pointer; }
+  .select-container .select-header {
+    padding: 0.8rem 1rem 0.8rem 1.6rem;
+    border-radius: 0.3rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem; }
+    .select-container .select-header .iconify {
+      margin-left: 1rem; }
+  .select-container .select-options {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--select-options-background-color);
+    box-shadow: var(--select-options-box-shadow);
+    border-radius: 0.3rem;
+    padding: 0.5rem 0; }
+  .select-container .select-option {
+    padding: 0.8rem 1.6rem; }
+  .select-container .select-option:hover {
+    background-color: var(--select-option-background-color-on-hover); }
 
 nav {
   background-color: var(--navbar-background-color);
@@ -1279,14 +1314,16 @@ footer {
 .change-theme-icon-container .change-theme-icon {
   display: none; }
 
-.app-setting {
-  padding-bottom: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; }
-  .app-setting:last-child {
-    padding-bottom: 0; }
-  .app-setting span {
-    font-size: 1.5rem;
-    color: var(--body-color); }
+.app-settings-dialog {
+  --dialog-min-width: 60rem; }
+  .app-settings-dialog .app-setting {
+    padding-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+    .app-settings-dialog .app-setting:last-child {
+      padding-bottom: 0; }
+    .app-settings-dialog .app-setting span {
+      font-size: 1.5rem;
+      color: var(--body-color); }
 

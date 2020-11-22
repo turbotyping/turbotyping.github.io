@@ -1,15 +1,19 @@
-.app-setting {
-  padding-bottom: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.app-settings-dialog {
+  --dialog-min-width: 60rem;
 
-  &:last-child {
-    padding-bottom: 0;
-  }
+  & .app-setting {
+    padding-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  & span {
-    font-size: 1.5rem;
-    color: var(--body-color);
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    & span {
+      font-size: 1.5rem;
+      color: var(--body-color);
+    }
   }
 }

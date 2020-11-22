@@ -1,6 +1,4 @@
 export class SelectOption<T> {
-  label: String;
+  label: string;
   value: T;
 }
-
-export class StringSelectOption extends SelectOption<String> {}

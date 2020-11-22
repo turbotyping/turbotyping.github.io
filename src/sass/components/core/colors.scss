@@ -45,6 +45,9 @@ body.light {
   --close-color: #f1505e;
   --dialog-background-color: var(--background-color-02);
   --dialog-backdrop-background-color: var(--background-color-01);
+  --select-options-background-color: var(--background-color-02);
+  --select-option-background-color-on-hover: var(--background-color-03);
+  --select-options-box-shadow: var(--box-shadow-01);
 }
 
 body.dark {
@@ -94,4 +97,7 @@ body.dark {
   --check-progress-link-icon-color-on-hover: var(--secondary-color);
   --dialog-background-color: var(--background-color-02);
   --dialog-backdrop-background-color: var(--background-color-01);
+  --select-options-background-color: var(--background-color-02);
+  --select-option-background-color-on-hover: var(--background-color-03);
+  --select-options-box-shadow: var(--box-shadow-01);
 }

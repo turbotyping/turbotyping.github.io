@@ -1,9 +1,9 @@
 import { BaseBlockHtmlComponent } from './base/base-block-component';
-import englishQuotes from '../data/english-quotes';
 import prophetMohamedPbuhQuotes from '../data/prophet-mohamed-pbuh-quotes';
+import commonEnglishQuotes from '../data/common-english-quotes';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { AppStorage } from '../models/app-storage.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
+import { TextToTypeCategory } from '../models/text-to-type-category.enum';
 
 const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
@@ -13,11 +13,9 @@ const CHARS_To_TYPE: RegExp = /^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ 
 export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private textToTypeDomElement: HTMLElement;
   private currentCharToTypeDomElement: HTMLElement;
-  private textToTypeIndex: number = -1;
   private blinkInterval: any;
   private nextCurrentCharToTypeCssClass = 'OK';
   private stats: TypedTextStats;
-  private appStorage: AppStorage;
   private keyboardSound: HTMLAudioElement;
 
   __preInsertHtml(): void {
@@ -29,9 +27,10 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   __postInsertHtml(): void {
+    const appStorage = this.getAppStorage();
+    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES;
+    this.saveAppStorage(appStorage);
     this.textToTypeDomElement = document.getElementById(TEXT_TO_TYPE_DOM_ELEMENT_ID);
-    this.appStorage = this.getAppStorage();
-    this.textToTypeIndex = this.appStorage.textToTypeIndex;
     this.setTextToType();
     document.body.addEventListener('keydown', this.handleKeyDownEvent.bind(this));
     this.addCustomEventListener(APP_SETTINGS_CHANGE_EVENT, this.handleAppSettingsChangeEvent.bind(this));
@@ -75,9 +74,8 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       this.blinkInterval = setInterval(this.toggleBlinkCssClass.bind(this), 350);
     } else {
       this.stats.endType();
-      this.updateAppStorage();
+      this.updateAppStorageOnEndTyping();
       this.dispatchCustomEvent(END_TYPING_EVENT, this.stats);
-      this.textToTypeIndex = (this.textToTypeIndex + 1) % englishQuotes.length;
       this.setTextToType();
     }
   }
@@ -90,10 +88,11 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     }
   }
 
-  private updateAppStorage() {
-    this.appStorage.textToTypeIndex = this.textToTypeIndex;
-    this.appStorage.typedTextStats.push(this.stats);
-    this.saveAppStorage(this.appStorage);
+  private updateAppStorageOnEndTyping() {
+    const appStorage = this.getAppStorage();
+    appStorage.textToTypeIndex = (appStorage.textToTypeIndex + 1) % this.getTextsToTypeLength();
+    appStorage.typedTextStats.push(this.stats);
+    this.saveAppStorage(appStorage);
   }
 
   private getNextCharToType(): HTMLElement {
@@ -119,7 +118,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private setTextToType(): void {
     clearInterval(this.blinkInterval);
     const appStorage = this.getAppStorage();
-    let textToType = prophetMohamedPbuhQuotes[this.textToTypeIndex];
+    let textToType = this.getTextToType();
     if (!appStorage.enableCapitalLetters) {
       textToType = textToType.toLowerCase();
     }
@@ -138,5 +137,27 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private charToSpan(c: string) {
     if (c === ' ') return `<span data-key=" " class="whitespace">␣</span><wbr>`;
     return `<span data-key="${c}">${c}</span>`;
+  }
+
+  private getTextToType(): string {
+    const appStorage = this.getAppStorage();
+    if (appStorage.textToTypeCategory === TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES) {
+      return prophetMohamedPbuhQuotes[appStorage.textToTypeIndex];
+    }
+    if (appStorage.textToTypeCategory === TextToTypeCategory.COMMON_ENGLISH_QUOTES) {
+      return commonEnglishQuotes[appStorage.textToTypeIndex];
+    }
+    return 'Sunt cillum est dolore veniam officia.';
+  }
+
+  private getTextsToTypeLength(): number {
+    const appStorage = this.getAppStorage();
+    if (appStorage.textToTypeCategory === TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES) {
+      return prophetMohamedPbuhQuotes.length;
+    }
+    if (appStorage.textToTypeCategory === TextToTypeCategory.COMMON_ENGLISH_QUOTES) {
+      return commonEnglishQuotes.length;
+    }
+    return 0;
   }
 }
