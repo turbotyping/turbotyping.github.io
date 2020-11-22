@@ -17,7 +17,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
   private gridLinesColor: string;
   private slider: SliderHtmlComponent;
   private sliderChangeEventName: string;
-  private smoothness: number = 3;
+  private smoothness: number = 8;
 
   abstract getProgressName(): string;
   abstract getProgressBorderColor(): string;
