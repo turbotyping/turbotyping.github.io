@@ -1,4 +1,4 @@
-import { BaseBlockHtmlComponent } from './component';
+import { BaseBlockHtmlComponent } from './core/base-block-component';
 import englishQuotes from '../data/english-quotes';
 import prophetMohamedPbuhQuotes from '../data/prophet-mohamed-pbuh-quotes';
 import { TypedTextStats } from '../models/typed-text-stats.model';

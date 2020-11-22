@@ -1,4 +1,4 @@
-import { BaseInlineHtmlComponent } from './component';
+import { BaseInlineHtmlComponent } from './base-inline-component';
 
 export class SwitchHtmlComponent extends BaseInlineHtmlComponent {
   private switchContainerId: string;

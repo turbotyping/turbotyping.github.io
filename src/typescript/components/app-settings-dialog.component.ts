@@ -5,11 +5,11 @@ import {
   ENABLE_SOUNDS_CHANGE_EVENT,
   STOP_ON_ERROR_CHANGE_EVENT,
 } from '../constants/event.constant';
-import { AbstractDialogHtmlComponent } from './abstract-dialog.component';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
-import { SwitchHtmlComponent } from './switch.component';
+import { BaseDialogHtmlComponent } from './core/base-dialog.component';
+import { SwitchHtmlComponent } from './core/switch.component';
 
-export class AppSettingsDialogHtmlComponent extends AbstractDialogHtmlComponent {
+export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private changeThemeIcon = new ChangeThemeIconHtmlComponent();
   private stopOnErrorSwitch: SwitchHtmlComponent;
   private enableCapitalLettersSwitch: SwitchHtmlComponent;

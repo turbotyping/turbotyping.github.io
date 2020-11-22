@@ -1,8 +1,8 @@
 import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY } from '../constants/constant';
 import { CHANGE_THEME_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { BaseBlockHtmlComponent } from './component';
-import { SliderHtmlComponent } from './slider.component';
+import { BaseBlockHtmlComponent } from './core/base-block-component';
+import { SliderHtmlComponent } from './core/slider.component';
 const Chart = require('chart.js');
 const smooth = require('array-smooth');
 

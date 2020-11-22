@@ -1,6 +1,6 @@
-import { BaseBlockStaticHtmlComponent } from './component';
+import { BaseStaticBlockHtmlComponent } from './core/base-static-block-component';
 
-export class FooterHtmlComponent extends BaseBlockStaticHtmlComponent {
+export class FooterHtmlComponent extends BaseStaticBlockHtmlComponent {
   __toHtml() {
     return /* html */ `
       <footer>

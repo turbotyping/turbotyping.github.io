@@ -1,5 +1,5 @@
 import { PROGRESS_DIV_ID } from '../constants/constant';
-import { BaseBlockHtmlComponent } from './component';
+import { BaseBlockHtmlComponent } from './core/base-block-component';
 import { ErrorsProgressHtmlComponent, SpeedProgressHtmlComponent } from './progress.component';
 
 export class ProgressPageHtmlComponent extends BaseBlockHtmlComponent {

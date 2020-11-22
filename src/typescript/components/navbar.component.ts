@@ -1,5 +1,5 @@
 import { AppSettingsDialogHtmlComponent } from './app-settings-dialog.component';
-import { BaseBlockHtmlComponent } from './component';
+import { BaseBlockHtmlComponent } from './core/base-block-component';
 
 const APP_SETTINGS_ICON_ID = 'APP_SETTINGS_ICON_ID';
 

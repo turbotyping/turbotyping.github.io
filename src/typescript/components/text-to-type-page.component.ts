@@ -1,4 +1,5 @@
-import { BaseBlockHtmlContainer, HtmlComponent } from './component';
+import { BaseBlockHtmlContainer } from './core/base-block-container';
+import { HtmlComponent } from './core/component.interface';
 import { TextToTypeHtmlComponent } from './text-to-type.component';
 import { TypedTextHtmlComponent } from './typed-text-stats.component';
 

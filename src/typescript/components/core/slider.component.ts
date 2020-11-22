@@ -1,4 +1,4 @@
-import { BaseBlockHtmlComponent } from './component';
+import { BaseBlockHtmlComponent } from './base-block-component';
 
 export class SliderHtmlComponent extends BaseBlockHtmlComponent {
   private sliderId: string;

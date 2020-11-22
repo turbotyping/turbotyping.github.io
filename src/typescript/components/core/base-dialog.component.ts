@@ -1,6 +1,6 @@
-import { BaseHtmlComponent } from './component';
+import { BaseHtmlComponent } from './base-component';
 
-export abstract class AbstractDialogHtmlComponent extends BaseHtmlComponent {
+export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   private dialogId: string;
   private dialogCloseButtonId: string;
   private dialog: HTMLDialogElement;
