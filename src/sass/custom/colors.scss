@@ -39,11 +39,12 @@ body.light {
   --typed-text-stat-container-border-color: var(--secondary-color);
   --switch-on-color: #065fd4;
   --dialog-box-shadow: var(--box-shadow-01);
-  --dialog-background-color: var(--background-color-01);
   --slider-color: var(--primary-color);
   --slider-background-color: var(--border-color);
   --check-progress-link-icon-color-on-hover: var(--secondary-color);
   --close-color: #f1505e;
+  --dialog-background-color: var(--background-color-02);
+  --dialog-backdrop-background-color: var(--background-color-01);
 }
 
 body.dark {
@@ -91,5 +92,6 @@ body.dark {
   --slider-color: var(--secondary-color);
   --slider-background-color: var(--border-color);
   --check-progress-link-icon-color-on-hover: var(--secondary-color);
-  --close-color: #f1505e;
+  --dialog-background-color: var(--background-color-02);
+  --dialog-backdrop-background-color: var(--background-color-01);
 }

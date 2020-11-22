@@ -10,6 +10,10 @@
   box-shadow: var(--dialog-box-shadow);
   background-color: var(--dialog-background-color);
 
+  &::backdrop {
+    background-color: #181a1fc4;
+  }
+
   & .dialog-header {
     padding: 1rem 0 1.5rem;
     margin: 0 2rem;
