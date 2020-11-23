@@ -42,8 +42,8 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private handleKeyDownEvent(event) {
     this.stats.handleKeyDownEvent();
-    this.handleKeySounds();
     const typedKey = event.key;
+    this.handleKeySounds(typedKey);
     if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
       const previousCharToType = this.getPreviousCharToType();
@@ -80,8 +80,8 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     }
   }
 
-  private handleKeySounds() {
-    if (this.getAppStorage().enableSounds) {
+  private handleKeySounds(typedKey: string) {
+    if (this.getAppStorage().enableSounds && (CHARS_To_TYPE.test(typedKey) || typedKey === BACKSPACE_KEY)) {
       this.keyboardSound.pause();
       this.keyboardSound.currentTime = 0.15;
       this.keyboardSound.play();
