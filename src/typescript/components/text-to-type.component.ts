@@ -115,10 +115,10 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     this.textToTypeDomElement.classList.toggle('blink');
   }
 
-  private setTextToType(): void {
+  private async setTextToType() {
     clearInterval(this.blinkInterval);
     const appStorage = this.getAppStorage();
-    let textToType = this.getTextToType();
+    let textToType = await this.getTextToType();
     if (!appStorage.enableCapitalLetters) {
       textToType = textToType.toLowerCase();
     }
@@ -139,8 +139,18 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     return `<span data-key="${c}">${c}</span>`;
   }
 
-  private getTextToType(): string {
+  private async getTextToType(): Promise<string> {
     const appStorage = this.getAppStorage();
+    if (appStorage.textToTypeCategory === TextToTypeCategory.ENGLISH_QURAN) {
+      return await fetch(`http://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/en.asad`)
+        .then((response) => response.json())
+        .then((response) => response.data.text);
+    }
+    if (appStorage.textToTypeCategory === TextToTypeCategory.FRENCH_QURAN) {
+      return await fetch(`http://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/fr.hamidullah`)
+        .then((response) => response.json())
+        .then((response) => response.data.text);
+    }
     if (appStorage.textToTypeCategory === TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES) {
       return prophetMohamedPbuhQuotes[appStorage.textToTypeIndex];
     }
@@ -158,6 +168,6 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     if (appStorage.textToTypeCategory === TextToTypeCategory.COMMON_ENGLISH_QUOTES) {
       return commonEnglishQuotes.length;
     }
-    return 0;
+    return Number.MAX_VALUE;
   }
 }

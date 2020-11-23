@@ -41,8 +41,30 @@ export class TextToTypeReferenceHtmlComponent extends BaseInlineHtmlComponent {
         this.referenceAnchor = `<a href="https://medium.com/@kehruba.imran/45-quotes-of-our-beloved-prophet-muhammad-pbuh-about-the-discipline-of-life-97cd017c6f81" target="_blank">— Prophet Mohamed PBUH</a>`;
         break;
       }
-      default: {
+      case TextToTypeCategory.ENGLISH_QURAN: {
         this.referenceAnchor = '— Reference';
+        const url = `http://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/en.asad`;
+        fetch(url)
+          .then((response) => response.json())
+          .then((response) => {
+            this.referenceAnchor = `<a href="${url}" target="_blank">— ${response.data.surah.englishName} (${response.data.numberInSurah})</a>`;
+            this.reference.innerHTML = this.referenceAnchor;
+          });
+        break;
+      }
+      case TextToTypeCategory.FRENCH_QURAN: {
+        this.referenceAnchor = '— Reference';
+        const url = `http://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/fr.hamidullah`;
+        fetch(url)
+          .then((response) => response.json())
+          .then((response) => {
+            this.referenceAnchor = `<a href="${url}" target="_blank">— ${response.data.surah.englishName} (${response.data.numberInSurah})</a>`;
+            this.reference.innerHTML = this.referenceAnchor;
+          });
+        break;
+      }
+      default: {
+        this.referenceAnchor = `— Reference`;
         break;
       }
     }
