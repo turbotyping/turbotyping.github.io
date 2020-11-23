@@ -48,6 +48,7 @@ body.light {
   --select-options-background-color: var(--background-color-02);
   --select-option-background-color-on-hover: var(--background-color-03);
   --select-options-box-shadow: var(--box-shadow-01);
+  --text-to-type-reference-color: var(--primary-color);
 }
 
 body.dark {
@@ -100,4 +101,5 @@ body.dark {
   --select-options-background-color: var(--background-color-02);
   --select-option-background-color-on-hover: var(--background-color-03);
   --select-options-box-shadow: var(--box-shadow-01);
+  --text-to-type-reference-color: var(--primary-color);
 }

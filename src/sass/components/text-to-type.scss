@@ -34,3 +34,17 @@
     background-color: var(--current-char-to-type-background-color);
   }
 }
+
+.text-to-type-reference {
+  width: 82rem;
+  margin: 2rem auto 0;
+  font-size: 1.6rem;
+  float: right;
+  color: var(--text-to-type-reference-color);
+  font-style: italic;
+  font-weight: bold;
+
+  & span {
+    float: right;
+  }
+}

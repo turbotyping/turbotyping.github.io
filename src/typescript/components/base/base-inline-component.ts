@@ -9,7 +9,7 @@ export abstract class BaseInlineHtmlComponent extends BaseHtmlComponent {
   }
 
   _toHtml(): string {
-    return `<span id="${this.containerId}">${this.__toHtml()}</span>`;
+    return `<span id="${this.containerId}" class="${this.getContainerClass()}">${this.__toHtml()}</span>`;
   }
 
   _postInsertHtml(): void {
@@ -26,6 +26,10 @@ export abstract class BaseInlineHtmlComponent extends BaseHtmlComponent {
 
   toggle(): void {
     document.getElementById(this.containerId).classList.toggle('hide');
+  }
+
+  getContainerClass(): string {
+    return 'inline-container';
   }
 
   abstract __preInsertHtml(): void;

@@ -880,7 +880,8 @@ body.light {
   --dialog-backdrop-background-color: var(--background-color-01);
   --select-options-background-color: var(--background-color-02);
   --select-option-background-color-on-hover: var(--background-color-03);
-  --select-options-box-shadow: var(--box-shadow-01); }
+  --select-options-box-shadow: var(--box-shadow-01);
+  --text-to-type-reference-color: var(--primary-color); }
 
 body.dark {
   --primary-color: #078eed;
@@ -930,7 +931,8 @@ body.dark {
   --dialog-backdrop-background-color: var(--background-color-01);
   --select-options-background-color: var(--background-color-02);
   --select-option-background-color-on-hover: var(--background-color-03);
-  --select-options-box-shadow: var(--box-shadow-01); }
+  --select-options-box-shadow: var(--box-shadow-01);
+  --text-to-type-reference-color: var(--primary-color); }
 
 :root {
   --transition: all 0.15s ease-in-out;
@@ -1258,6 +1260,17 @@ footer {
   .text-to-type.blink span.cursor {
     color: var(--current-char-to-type-color);
     background-color: var(--current-char-to-type-background-color); }
+
+.text-to-type-reference {
+  width: 82rem;
+  margin: 2rem auto 0;
+  font-size: 1.6rem;
+  float: right;
+  color: var(--text-to-type-reference-color);
+  font-style: italic;
+  font-weight: bold; }
+  .text-to-type-reference span {
+    float: right; }
 
 .typed-text-stats-container {
   margin: 10rem auto 0;

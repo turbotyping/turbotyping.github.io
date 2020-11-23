@@ -145,7 +145,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       return prophetMohamedPbuhQuotes[appStorage.textToTypeIndex];
     }
     if (appStorage.textToTypeCategory === TextToTypeCategory.COMMON_ENGLISH_QUOTES) {
-      return commonEnglishQuotes[appStorage.textToTypeIndex];
+      return commonEnglishQuotes[appStorage.textToTypeIndex].quote;
     }
     return 'Sunt cillum est dolore veniam officia.';
   }
