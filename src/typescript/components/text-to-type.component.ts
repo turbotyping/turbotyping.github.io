@@ -142,12 +142,12 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private async getTextToType(): Promise<string> {
     const appStorage = this.getAppStorage();
     if (appStorage.textToTypeCategory === TextToTypeCategory.ENGLISH_QURAN) {
-      return await fetch(`http://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/en.asad`)
+      return await fetch(`https://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/en.asad`)
         .then((response) => response.json())
         .then((response) => response.data.text);
     }
     if (appStorage.textToTypeCategory === TextToTypeCategory.FRENCH_QURAN) {
-      return await fetch(`http://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/fr.hamidullah`)
+      return await fetch(`https://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/fr.hamidullah`)
         .then((response) => response.json())
         .then((response) => response.data.text);
     }

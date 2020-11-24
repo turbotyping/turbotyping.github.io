@@ -43,7 +43,7 @@ export class TextToTypeReferenceHtmlComponent extends BaseInlineHtmlComponent {
       }
       case TextToTypeCategory.ENGLISH_QURAN: {
         this.referenceAnchor = '— Reference';
-        const url = `http://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/en.asad`;
+        const url = `https://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/en.asad`;
         fetch(url)
           .then((response) => response.json())
           .then((response) => {
@@ -54,7 +54,7 @@ export class TextToTypeReferenceHtmlComponent extends BaseInlineHtmlComponent {
       }
       case TextToTypeCategory.FRENCH_QURAN: {
         this.referenceAnchor = '— Reference';
-        const url = `http://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/fr.hamidullah`;
+        const url = `https://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/fr.hamidullah`;
         fetch(url)
           .then((response) => response.json())
           .then((response) => {
