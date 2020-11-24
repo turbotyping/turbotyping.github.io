@@ -7,8 +7,9 @@ import { TextToTypeCategory } from '../models/text-to-type-category.enum';
 
 const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
+const ENTER_KEY = 'Enter';
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
-const CHARS_To_TYPE: RegExp = /^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$/;
+const CHARS_To_TYPE: RegExp = /(^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$|Enter)/;
 
 export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private textToTypeDomElement: HTMLElement;
@@ -43,6 +44,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private handleKeyDownEvent(event) {
     this.stats.handleKeyDownEvent();
     const typedKey = event.key;
+    console.log(typedKey);
     this.handleKeySounds(typedKey);
     if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
@@ -97,7 +99,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private getNextCharToType(): HTMLElement {
     let res = this.currentCharToTypeDomElement.nextElementSibling;
-    while (res?.tagName === 'WBR') {
+    while (res?.tagName === 'WBR' || res?.tagName === 'BR') {
       res = res.nextElementSibling;
     }
     return res as HTMLElement;
@@ -105,7 +107,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private getPreviousCharToType(): HTMLElement {
     let res = this.currentCharToTypeDomElement.previousElementSibling;
-    while (res?.tagName === 'WBR') {
+    while (res?.tagName === 'WBR' || res?.tagName === 'BR') {
       res = res.previousElementSibling;
     }
     return res as HTMLElement;
@@ -135,7 +137,8 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private charToSpan(c: string) {
-    if (c === ' ') return `<span data-key=" " class="whitespace">␣</span><wbr>`;
+    if (c === ' ') return `<span data-key="${SPACE_KEY}" class="whitespace">␣</span><wbr>`;
+    if (c === '\n') return `<span data-key="${ENTER_KEY}" class="whitespace">↵</span><br>`;
     return `<span data-key="${c}">${c}</span>`;
   }
 
