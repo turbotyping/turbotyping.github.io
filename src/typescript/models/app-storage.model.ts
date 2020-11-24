@@ -1,8 +1,8 @@
-import { TextToTypeCategory } from './text-to-type-category.enum';
+import { TextToTypeLanguage } from './text-to-type-category.enum';
 import { TypedTextStats } from './typed-text-stats.model';
 
 export class AppStorage {
-  textToTypeCategory: TextToTypeCategory;
+  textToTypeLanguage: TextToTypeLanguage;
   currentTheme: string;
   enableSounds: boolean;
   enableCapitalLetters: boolean;

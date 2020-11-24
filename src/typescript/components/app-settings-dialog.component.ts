@@ -4,9 +4,9 @@ import {
   ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT,
   ENABLE_SOUNDS_CHANGE_EVENT,
   STOP_ON_ERROR_CHANGE_EVENT,
-  TEXT_TO_TYPE_CATEGORY_CHANGE_EVENT,
+  TEXT_TO_TYPE_LANGUAGE_CHANGE_EVENT,
 } from '../constants/event.constant';
-import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../models/text-to-type-category.enum';
+import { TextToTypeLanguage, TEXT_TO_TYPE_LANGUAGES } from '../models/text-to-type-category.enum';
 import { BaseDialogHtmlComponent } from './base/base-dialog.component';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
 import { SelectHtmlComponent } from './core/select.component';
@@ -18,11 +18,11 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private enableCapitalLettersSwitch: SwitchHtmlComponent;
   private enablePunctuationCharactersSwitch: SwitchHtmlComponent;
   private enableSoundsSwitch: SwitchHtmlComponent;
-  private textToTypeCategoriesSelect: SelectHtmlComponent<TextToTypeCategory>;
+  private textToTypeLanguagesSelect: SelectHtmlComponent<TextToTypeLanguage>;
 
   __preInsertHtml(): void {
     const appStorage = this.getAppStorage();
-    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES;
+    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
     appStorage.stopOnError = appStorage.stopOnError || false;
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || false;
@@ -34,17 +34,17 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT,
       appStorage.enablePunctuationCharacters
     );
-    this.textToTypeCategoriesSelect = new SelectHtmlComponent<TextToTypeCategory>(
-      TEXT_TO_TYPE_CATEGORY_CHANGE_EVENT,
-      TEXT_TO_TYPE_CATEGORIES,
-      appStorage.textToTypeCategory
+    this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(
+      TEXT_TO_TYPE_LANGUAGE_CHANGE_EVENT,
+      TEXT_TO_TYPE_LANGUAGES,
+      appStorage.textToTypeLanguage
     );
     this.changeThemeIcon.preInsertHtml();
     this.stopOnErrorSwitch.preInsertHtml();
     this.enableCapitalLettersSwitch.preInsertHtml();
     this.enablePunctuationCharactersSwitch.preInsertHtml();
     this.enableSoundsSwitch.preInsertHtml();
-    this.textToTypeCategoriesSelect.preInsertHtml();
+    this.textToTypeLanguagesSelect.preInsertHtml();
     this.saveAppStorage(appStorage);
   }
 
@@ -79,8 +79,8 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
         <span>${this.enableSoundsSwitch.toHtml()}</span>
       </div>
       <div class="app-setting">
-        <span>Text to type category</span>
-        <span>${this.textToTypeCategoriesSelect.toHtml()}</span>
+        <span>Text to type language</span>
+        <span>${this.textToTypeLanguagesSelect.toHtml()}</span>
       </div>
     `;
   }
@@ -91,12 +91,12 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enableCapitalLettersSwitch.postInsertHtml();
     this.enablePunctuationCharactersSwitch.postInsertHtml();
     this.enableSoundsSwitch.postInsertHtml();
-    this.textToTypeCategoriesSelect.postInsertHtml();
+    this.textToTypeLanguagesSelect.postInsertHtml();
     this.addCustomEventListener(STOP_ON_ERROR_CHANGE_EVENT, this.handleStopOnErrorChangeEvent.bind(this));
     this.addCustomEventListener(ENABLE_CAPITAL_LETTERS_CHANGE_EVENT, this.handleEnableCapitalLettersChangeEvent.bind(this));
     this.addCustomEventListener(ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT, this.handleEnablePunctuationCharactersChangeEvent.bind(this));
     this.addCustomEventListener(ENABLE_SOUNDS_CHANGE_EVENT, this.handleEnableSoundsChangeEvent.bind(this));
-    this.addCustomEventListener(TEXT_TO_TYPE_CATEGORY_CHANGE_EVENT, this.handleTextToTypeCategoryChangeEvent.bind(this));
+    this.addCustomEventListener(TEXT_TO_TYPE_LANGUAGE_CHANGE_EVENT, this.handleTextToTypeLanguageChangeEvent.bind(this));
   }
 
   private handleStopOnErrorChangeEvent() {
@@ -127,13 +127,13 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
-  private handleTextToTypeCategoryChangeEvent(event) {
+  private handleTextToTypeLanguageChangeEvent(event) {
     const appStorage = this.getAppStorage();
-    const textToTypeCategory: TextToTypeCategory = event.detail.selectedValue;
-    if (textToTypeCategory !== appStorage.textToTypeCategory) {
+    const textToTypeLanguage: TextToTypeLanguage = event.detail.selectedValue;
+    if (textToTypeLanguage !== appStorage.textToTypeLanguage) {
       appStorage.textToTypeIndex = 0;
     }
-    appStorage.textToTypeCategory = textToTypeCategory;
+    appStorage.textToTypeLanguage = textToTypeLanguage;
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }

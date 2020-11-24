@@ -1,9 +1,9 @@
 import { BaseBlockHtmlComponent } from './base/base-block-component';
-import prophetMohamedPbuhQuotes from '../data/prophet-mohamed-pbuh-quotes';
-import commonEnglishQuotes from '../data/common-english-quotes';
+import englishPhrases from '../data/english-phrases';
+import frenchPhrases from '../data/french-phrases';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
-import { TextToTypeCategory } from '../models/text-to-type-category.enum';
+import { TextToTypeLanguage } from '../models/text-to-type-category.enum';
 
 const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
@@ -29,7 +29,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   __postInsertHtml(): void {
     const appStorage = this.getAppStorage();
-    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES;
+    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
     this.saveAppStorage(appStorage);
     this.textToTypeDomElement = document.getElementById(TEXT_TO_TYPE_DOM_ELEMENT_ID);
     this.setTextToType();
@@ -44,7 +44,6 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private handleKeyDownEvent(event) {
     this.stats.handleKeyDownEvent();
     const typedKey = event.key;
-    console.log(typedKey);
     this.handleKeySounds(typedKey);
     if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
@@ -145,32 +144,22 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private async getTextToType(): Promise<string> {
     const appStorage = this.getAppStorage();
-    if (appStorage.textToTypeCategory === TextToTypeCategory.ENGLISH_QURAN) {
-      return await fetch(`https://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/en.asad`)
-        .then((response) => response.json())
-        .then((response) => response.data.text);
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
+      return englishPhrases[appStorage.textToTypeIndex].quote;
     }
-    if (appStorage.textToTypeCategory === TextToTypeCategory.FRENCH_QURAN) {
-      return await fetch(`https://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/fr.hamidullah`)
-        .then((response) => response.json())
-        .then((response) => response.data.text);
-    }
-    if (appStorage.textToTypeCategory === TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES) {
-      return prophetMohamedPbuhQuotes[appStorage.textToTypeIndex];
-    }
-    if (appStorage.textToTypeCategory === TextToTypeCategory.COMMON_ENGLISH_QUOTES) {
-      return commonEnglishQuotes[appStorage.textToTypeIndex].quote;
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
+      return frenchPhrases[appStorage.textToTypeIndex].quote;
     }
     return 'Sunt cillum est dolore veniam officia.';
   }
 
   private getTextsToTypeLength(): number {
     const appStorage = this.getAppStorage();
-    if (appStorage.textToTypeCategory === TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES) {
-      return prophetMohamedPbuhQuotes.length;
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
+      return englishPhrases.length;
     }
-    if (appStorage.textToTypeCategory === TextToTypeCategory.COMMON_ENGLISH_QUOTES) {
-      return commonEnglishQuotes.length;
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
+      return frenchPhrases.length;
     }
     return Number.MAX_VALUE;
   }

@@ -1,7 +1,8 @@
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
-import { TextToTypeCategory } from '../models/text-to-type-category.enum';
+import { TextToTypeLanguage } from '../models/text-to-type-category.enum';
 import { BaseInlineHtmlComponent } from './base/base-inline-component';
-import commonEnglishQuotes from '../data/common-english-quotes';
+import englishPhrases from '../data/english-phrases';
+import frenchPhrases from '../data/french-phrases';
 
 export class TextToTypeReferenceHtmlComponent extends BaseInlineHtmlComponent {
   private referenceAnchor: string;
@@ -31,36 +32,15 @@ export class TextToTypeReferenceHtmlComponent extends BaseInlineHtmlComponent {
 
   private update() {
     const appStorage = this.getAppStorage();
-    switch (appStorage.textToTypeCategory) {
-      case TextToTypeCategory.COMMON_ENGLISH_QUOTES: {
-        const englishQuote = commonEnglishQuotes[appStorage.textToTypeIndex];
-        this.referenceAnchor = `<a href="${englishQuote.reference}" target="_blank">— ${englishQuote.author}</a>`;
+    switch (appStorage.textToTypeLanguage) {
+      case TextToTypeLanguage.ENGLISH: {
+        const englishPhrase = englishPhrases[appStorage.textToTypeIndex];
+        this.referenceAnchor = `<a href="${englishPhrase.reference}" target="_blank">— ${englishPhrase.author}</a>`;
         break;
       }
-      case TextToTypeCategory.PROPHET_MOHAMED_PBUH_QUOTES: {
-        this.referenceAnchor = `<a href="https://medium.com/@kehruba.imran/45-quotes-of-our-beloved-prophet-muhammad-pbuh-about-the-discipline-of-life-97cd017c6f81" target="_blank">— Prophet Mohamed PBUH</a>`;
-        break;
-      }
-      case TextToTypeCategory.ENGLISH_QURAN: {
-        this.referenceAnchor = '— Reference';
-        const url = `https://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/en.asad`;
-        fetch(url)
-          .then((response) => response.json())
-          .then((response) => {
-            this.referenceAnchor = `<a href="${url}" target="_blank">— ${response.data.surah.englishName} (${response.data.numberInSurah})</a>`;
-            this.reference.innerHTML = this.referenceAnchor;
-          });
-        break;
-      }
-      case TextToTypeCategory.FRENCH_QURAN: {
-        this.referenceAnchor = '— Reference';
-        const url = `https://api.alquran.cloud/v1/ayah/${appStorage.textToTypeIndex + 1}/fr.hamidullah`;
-        fetch(url)
-          .then((response) => response.json())
-          .then((response) => {
-            this.referenceAnchor = `<a href="${url}" target="_blank">— ${response.data.surah.englishName} (${response.data.numberInSurah})</a>`;
-            this.reference.innerHTML = this.referenceAnchor;
-          });
+      case TextToTypeLanguage.FRENCH: {
+        const frenchPhrase = frenchPhrases[appStorage.textToTypeIndex];
+        this.referenceAnchor = `<a href="${frenchPhrase.reference}" target="_blank">— ${frenchPhrase.author}</a>`;
         break;
       }
       default: {
