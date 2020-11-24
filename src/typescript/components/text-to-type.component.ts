@@ -139,6 +139,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private charToSpan(c: string) {
     if (c === ' ') return `<span data-key="${SPACE_KEY}" class="whitespace">␣</span><wbr>`;
     if (c === '\n') return `<span data-key="${ENTER_KEY}" class="whitespace">↵</span><br>`;
+    if (c === '"') return `<span data-key='"'>"</span>`;
     return `<span data-key="${c}">${c}</span>`;
   }
 

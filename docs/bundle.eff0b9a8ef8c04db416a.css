@@ -1238,18 +1238,18 @@ footer {
 
 .text-to-type-page {
   padding-bottom: 5rem;
-  height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--navbar-height));
   display: flex;
   flex-direction: column;
   align-items: center; }
 
 .text-to-type {
-  width: 80rem;
+  max-width: 90rem;
   margin: 4rem auto 0;
   white-space: pre-wrap; }
   .text-to-type span {
     font-family: 'Roboto Mono';
-    font-size: 2.2rem; }
+    font-size: 1.8rem; }
   .text-to-type span.whitespace {
     padding: 0 0.2rem;
     color: var(--whitespace-color); }
@@ -1262,7 +1262,7 @@ footer {
     background-color: var(--current-char-to-type-background-color); }
 
 .text-to-type-reference {
-  width: 80rem;
+  width: 90rem;
   margin: 2rem auto 0;
   font-size: 1.6rem;
   float: right;
