@@ -1,6 +1,6 @@
-import { BaseInlineHtmlComponent } from '../base/base-inline-component';
+import { BaseInlineUserInputHtmlComponent } from '../base/base-inline-user-input-component';
 
-export class SwitchHtmlComponent extends BaseInlineHtmlComponent {
+export class SwitchHtmlComponent extends BaseInlineUserInputHtmlComponent<boolean> {
   private switchContainerId: string;
   private switchContainerDomElement: HTMLElement;
   private switchOffId: string;
@@ -8,7 +8,7 @@ export class SwitchHtmlComponent extends BaseInlineHtmlComponent {
   private switchOnId: string;
   private switchOnDomElement: HTMLElement;
 
-  constructor(private event: string, private active: boolean) {
+  constructor(private value: boolean) {
     super();
   }
 
@@ -35,10 +35,14 @@ export class SwitchHtmlComponent extends BaseInlineHtmlComponent {
     this.switchContainerDomElement.addEventListener('click', this.handleSwitchClickEvent.bind(this));
   }
 
+  getValue(): boolean {
+    return this.value;
+  }
+
   private update() {
     this.switchOnDomElement.classList.remove('hide');
     this.switchOffDomElement.classList.remove('hide');
-    if (this.active) {
+    if (this.value) {
       this.switchOffDomElement.classList.add('hide');
     } else {
       this.switchOnDomElement.classList.add('hide');
@@ -46,10 +50,8 @@ export class SwitchHtmlComponent extends BaseInlineHtmlComponent {
   }
 
   private handleSwitchClickEvent() {
-    this.active = !this.active;
+    this.value = !this.value;
     this.update();
-    this.dispatchCustomEvent(this.event, {
-      active: this.active,
-    });
+    this.executeCallbacks();
   }
 }

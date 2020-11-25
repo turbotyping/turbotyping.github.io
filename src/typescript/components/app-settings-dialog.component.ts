@@ -1,11 +1,4 @@
-import {
-  APP_SETTINGS_CHANGE_EVENT,
-  ENABLE_CAPITAL_LETTERS_CHANGE_EVENT,
-  ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT,
-  ENABLE_SOUNDS_CHANGE_EVENT,
-  STOP_ON_ERROR_CHANGE_EVENT,
-  TEXT_TO_TYPE_LANGUAGE_CHANGE_EVENT,
-} from '../constants/event.constant';
+import { APP_SETTINGS_CHANGE_EVENT } from '../constants/event.constant';
 import { TextToTypeLanguage, TEXT_TO_TYPE_LANGUAGES } from '../models/text-to-type-category.enum';
 import { BaseDialogHtmlComponent } from './base/base-dialog.component';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
@@ -27,18 +20,11 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || false;
     appStorage.enableSounds = appStorage.enableSounds || false;
-    this.stopOnErrorSwitch = new SwitchHtmlComponent(STOP_ON_ERROR_CHANGE_EVENT, appStorage.stopOnError);
-    this.enableCapitalLettersSwitch = new SwitchHtmlComponent(ENABLE_CAPITAL_LETTERS_CHANGE_EVENT, appStorage.enableCapitalLetters);
-    this.enableSoundsSwitch = new SwitchHtmlComponent(ENABLE_SOUNDS_CHANGE_EVENT, appStorage.enableSounds);
-    this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(
-      ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT,
-      appStorage.enablePunctuationCharacters
-    );
-    this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(
-      TEXT_TO_TYPE_LANGUAGE_CHANGE_EVENT,
-      TEXT_TO_TYPE_LANGUAGES,
-      appStorage.textToTypeLanguage
-    );
+    this.stopOnErrorSwitch = new SwitchHtmlComponent(appStorage.stopOnError);
+    this.enableCapitalLettersSwitch = new SwitchHtmlComponent(appStorage.enableCapitalLetters);
+    this.enableSoundsSwitch = new SwitchHtmlComponent(appStorage.enableSounds);
+    this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(appStorage.enablePunctuationCharacters);
+    this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(TEXT_TO_TYPE_LANGUAGES, appStorage.textToTypeLanguage);
     this.changeThemeIcon.preInsertHtml();
     this.stopOnErrorSwitch.preInsertHtml();
     this.enableCapitalLettersSwitch.preInsertHtml();
@@ -92,48 +78,47 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enablePunctuationCharactersSwitch.postInsertHtml();
     this.enableSoundsSwitch.postInsertHtml();
     this.textToTypeLanguagesSelect.postInsertHtml();
-    this.addCustomEventListener(STOP_ON_ERROR_CHANGE_EVENT, this.handleStopOnErrorChangeEvent.bind(this));
-    this.addCustomEventListener(ENABLE_CAPITAL_LETTERS_CHANGE_EVENT, this.handleEnableCapitalLettersChangeEvent.bind(this));
-    this.addCustomEventListener(ENABLE_PUNCTUATION_CHARACTERS_CHANGE_EVENT, this.handleEnablePunctuationCharactersChangeEvent.bind(this));
-    this.addCustomEventListener(ENABLE_SOUNDS_CHANGE_EVENT, this.handleEnableSoundsChangeEvent.bind(this));
-    this.addCustomEventListener(TEXT_TO_TYPE_LANGUAGE_CHANGE_EVENT, this.handleTextToTypeLanguageChangeEvent.bind(this));
+    this.stopOnErrorSwitch.onUpdate(this.handleStopOnErrorChangeEvent.bind(this));
+    this.enableCapitalLettersSwitch.onUpdate(this.handleEnableCapitalLettersChangeEvent.bind(this));
+    this.enablePunctuationCharactersSwitch.onUpdate(this.handleEnablePunctuationCharactersChangeEvent.bind(this));
+    this.enableSoundsSwitch.onUpdate(this.handleEnableSoundsChangeEvent.bind(this));
+    this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
   }
 
-  private handleStopOnErrorChangeEvent() {
+  private handleStopOnErrorChangeEvent(value: boolean) {
     const appStorage = this.getAppStorage();
-    appStorage.stopOnError = !appStorage.stopOnError;
+    appStorage.stopOnError = value;
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
-  private handleEnableCapitalLettersChangeEvent() {
+  private handleEnableCapitalLettersChangeEvent(value: boolean) {
     const appStorage = this.getAppStorage();
-    appStorage.enableCapitalLetters = !appStorage.enableCapitalLetters;
+    appStorage.enableCapitalLetters = value;
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
-  private handleEnablePunctuationCharactersChangeEvent() {
+  private handleEnablePunctuationCharactersChangeEvent(value: boolean) {
     const appStorage = this.getAppStorage();
-    appStorage.enablePunctuationCharacters = !appStorage.enablePunctuationCharacters;
+    appStorage.enablePunctuationCharacters = value;
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
-  private handleEnableSoundsChangeEvent() {
+  private handleEnableSoundsChangeEvent(value: boolean) {
     const appStorage = this.getAppStorage();
-    appStorage.enableSounds = !appStorage.enableSounds;
+    appStorage.enableSounds = value;
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
-  private handleTextToTypeLanguageChangeEvent(event) {
+  private handleTextToTypeLanguageChangeEvent(value: TextToTypeLanguage) {
     const appStorage = this.getAppStorage();
-    const textToTypeLanguage: TextToTypeLanguage = event.detail.selectedValue;
-    if (textToTypeLanguage !== appStorage.textToTypeLanguage) {
+    if (value !== appStorage.textToTypeLanguage) {
       appStorage.textToTypeIndex = 0;
     }
-    appStorage.textToTypeLanguage = textToTypeLanguage;
+    appStorage.textToTypeLanguage = value;
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }

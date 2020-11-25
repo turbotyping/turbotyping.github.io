@@ -16,7 +16,6 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
   private notEnoughSamplesDomElement: HTMLElement;
   private gridLinesColor: string;
   private slider: SliderHtmlComponent;
-  private sliderChangeEventName: string;
   private smoothness: number = 8;
 
   abstract getProgressName(): string;
@@ -24,8 +23,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
   abstract toChartData(stats: TypedTextStats[]): number[];
 
   __preInsertHtml(): void {
-    this.sliderChangeEventName = this.getRandomId();
-    this.slider = new SliderHtmlComponent(0, 10, this.smoothness, this.sliderChangeEventName);
+    this.slider = new SliderHtmlComponent(0, 10, this.smoothness);
     this.notEnoughSamplesId = this.getRandomId();
     this.progressCanvasId = this.getRandomId();
     this.slider.preInsertHtml();
@@ -52,11 +50,11 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
     this.update();
     this.addCustomEventListener(END_TYPING_EVENT, this.update.bind(this));
     this.addCustomEventListener(CHANGE_THEME_EVENT, this.handleChangeThemeEvent.bind(this));
-    this.addCustomEventListener(this.sliderChangeEventName, this.handleSliderChangeEvent.bind(this));
+    this.slider.onUpdate(this.handleSliderChangeEvent.bind(this));
   }
 
-  private handleSliderChangeEvent(event) {
-    this.smoothness = event.detail.value;
+  private handleSliderChangeEvent(value: number) {
+    this.smoothness = value;
     this.update();
   }
 

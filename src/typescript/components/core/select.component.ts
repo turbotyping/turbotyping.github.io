@@ -1,7 +1,7 @@
 import { SelectOption } from '../../models/select-option.model';
-import { BaseInlineBlockHtmlComponent } from '../base/base-inlineblock-component';
+import { BaseInlineUserInputHtmlComponent } from '../base/base-inline-user-input-component';
 
-export class SelectHtmlComponent<T> extends BaseInlineBlockHtmlComponent {
+export class SelectHtmlComponent<T> extends BaseInlineUserInputHtmlComponent<T> {
   private arrowDownId: string;
   private arrowDown: HTMLElement;
   private arrowUpId: string;
@@ -14,10 +14,9 @@ export class SelectHtmlComponent<T> extends BaseInlineBlockHtmlComponent {
   private selectOptionsId: string;
   private selectOptions: HTMLElement;
   private selectContainerId: string;
-  private selectContainer: HTMLElement;
   private open: boolean;
 
-  constructor(private event: string, private options: SelectOption<T>[], private selectedOptionValue?: T) {
+  constructor(private options: SelectOption<T>[], private selectedOptionValue?: T) {
     super();
   }
 
@@ -52,11 +51,14 @@ export class SelectHtmlComponent<T> extends BaseInlineBlockHtmlComponent {
     this.arrowUp = document.getElementById(this.arrowUpId);
     this.selectHeader = document.getElementById(this.selectHeaderId);
     this.selectOptions = document.getElementById(this.selectOptionsId);
-    this.selectContainer = document.getElementById(this.selectContainerId);
     this.selectHeaderLabel = document.getElementById(this.selectHeaderLabelId);
     this.update();
     this.selectHeader.addEventListener('click', this.handleSelectHeaderClickEvent.bind(this));
     this.selectOptions.addEventListener('click', this.handleSelectOptionsClickEvent.bind(this));
+  }
+
+  getValue(): T {
+    return this.options.find((o) => o.label === this.selectHeaderLabelText)?.value || null;
   }
 
   private getSelectOptionsHtml(): string {
@@ -86,9 +88,7 @@ export class SelectHtmlComponent<T> extends BaseInlineBlockHtmlComponent {
     this.selectHeaderLabelText = selectedOption.innerText;
     this.toggleOpen();
     this.update();
-    this.dispatchCustomEvent(this.event, {
-      selectedValue: this.options.find((o) => o.label === this.selectHeaderLabelText)?.value || null,
-    });
+    this.executeCallbacks();
   }
 
   private toggleOpen() {

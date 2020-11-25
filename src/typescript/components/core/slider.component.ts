@@ -1,10 +1,10 @@
-import { BaseBlockHtmlComponent } from '../base/base-block-component';
+import { BaseBlockUserInputHtmlComponent } from '../base/base-block-user-input-component';
 
-export class SliderHtmlComponent extends BaseBlockHtmlComponent {
+export class SliderHtmlComponent extends BaseBlockUserInputHtmlComponent<number> {
   private sliderId: string;
   private sliderDomElement: HTMLElement;
 
-  constructor(private min: number, private max: number, private value: number, private event: string) {
+  constructor(private min: number, private max: number, private value: number) {
     super();
   }
 
@@ -25,9 +25,12 @@ export class SliderHtmlComponent extends BaseBlockHtmlComponent {
     this.sliderDomElement.onchange = this.update.bind(this);
   }
 
+  getValue(): number {
+    return this.value;
+  }
+
   private update(event) {
-    this.dispatchCustomEvent(this.event, {
-      value: event.target.value,
-    });
+    this.value = event.target.value;
+    this.executeCallbacks();
   }
 }
