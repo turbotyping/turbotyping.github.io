@@ -20,14 +20,17 @@ export class TypedTextStats {
     this.errors++;
   }
 
+  decreaseErrors(): void {
+    this.errors--;
+  }
+
   endType(): void {
     this.endTime = new Date();
-    this.wpm = Math.round((this.charsToType / 5) / this.getDurationInMin());
+    this.wpm = Math.round(this.charsToType / 5 / this.getDurationInMin());
     this.seconds = Math.round(this.getDurationInMin() * 60);
   }
 
   getDurationInMin(): number {
-      return ((((+this.endTime - +this.startTime) % 86400000) % 3600000) / 60000);
+    return (((+this.endTime - +this.startTime) % 86400000) % 3600000) / 60000;
   }
-
 }

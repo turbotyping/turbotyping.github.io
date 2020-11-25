@@ -51,6 +51,9 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       if (previousCharToType) {
         this.currentCharToTypeDomElement.classList.remove('cursor');
         this.currentCharToTypeDomElement = previousCharToType;
+        if (this.currentCharToTypeDomElement.classList.contains('NOK')) {
+          this.stats.decreaseErrors();
+        }
         this.currentCharToTypeDomElement.classList.remove('OK', 'NOK');
         this.currentCharToTypeDomElement.classList.add('cursor');
       }
