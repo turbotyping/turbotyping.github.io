@@ -122,13 +122,14 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private async setTextToType() {
     clearInterval(this.blinkInterval);
     const appStorage = this.getAppStorage();
-    let textToType = await this.getTextToType();
+    let textToType = this.getTextToType();
     if (!appStorage.enableCapitalLetters) {
       textToType = textToType.toLowerCase();
     }
     if (!appStorage.enablePunctuationCharacters) {
       textToType = textToType.replace(/[^A-Za-z ]/g, '');
     }
+    textToType = textToType.replace(/ +/g, ' ');
     const textToTypeCharArray = textToType.split('');
     this.textToTypeDomElement.innerHTML = `${textToTypeCharArray.map(this.charToSpan).join('')}`;
     this.currentCharToTypeDomElement = this.textToTypeDomElement.querySelector('span');
@@ -145,7 +146,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     return `<span data-key="${c}">${c}</span>`;
   }
 
-  private async getTextToType(): Promise<string> {
+  private getTextToType(): string {
     const appStorage = this.getAppStorage();
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
       return englishPhrases[appStorage.textToTypeIndex].quote;
