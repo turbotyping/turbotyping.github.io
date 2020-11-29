@@ -1,6 +1,6 @@
 import { BaseBlockHtmlComponent } from './base/base-block-component';
-import englishPhrases from '../data/english-phrases';
-import frenchPhrases from '../data/french-phrases';
+import englishQuotes from '../data/quotes.english';
+import frenchQuotes from '../data/quotes.french';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TextToTypeLanguage } from '../models/text-to-type-category.enum';
@@ -164,10 +164,10 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private getTextToType(): string {
     const appStorage = this.getAppStorage();
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
-      return englishPhrases[appStorage.textToTypeIndex].quote;
+      return englishQuotes[appStorage.textToTypeIndex].quote;
     }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
-      return frenchPhrases[appStorage.textToTypeIndex].quote;
+      return frenchQuotes[appStorage.textToTypeIndex].quote;
     }
     return 'Sunt cillum est dolore veniam officia.';
   }
@@ -175,10 +175,10 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private getTextsToTypeLength(): number {
     const appStorage = this.getAppStorage();
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
-      return englishPhrases.length;
+      return englishQuotes.length;
     }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
-      return frenchPhrases.length;
+      return frenchQuotes.length;
     }
     return Number.MAX_VALUE;
   }

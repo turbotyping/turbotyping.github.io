@@ -1,8 +1,8 @@
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TextToTypeLanguage } from '../models/text-to-type-category.enum';
 import { BaseInlineHtmlComponent } from './base/base-inline-component';
-import englishPhrases from '../data/english-phrases';
-import frenchPhrases from '../data/french-phrases';
+import englishQuotes from '../data/quotes.english';
+import frenchQuotes from '../data/quotes.french';
 
 export class TextToTypeReferenceHtmlComponent extends BaseInlineHtmlComponent {
   private referenceAnchor: string;
@@ -34,12 +34,12 @@ export class TextToTypeReferenceHtmlComponent extends BaseInlineHtmlComponent {
     const appStorage = this.getAppStorage();
     switch (appStorage.textToTypeLanguage) {
       case TextToTypeLanguage.ENGLISH: {
-        const englishPhrase = englishPhrases[appStorage.textToTypeIndex];
+        const englishPhrase = englishQuotes[appStorage.textToTypeIndex];
         this.referenceAnchor = `<a href="${englishPhrase.reference}" target="_blank">— ${englishPhrase.author}</a>`;
         break;
       }
       case TextToTypeLanguage.FRENCH: {
-        const frenchPhrase = frenchPhrases[appStorage.textToTypeIndex];
+        const frenchPhrase = frenchQuotes[appStorage.textToTypeIndex];
         this.referenceAnchor = `<a href="${frenchPhrase.reference}" target="_blank">— ${frenchPhrase.author}</a>`;
         break;
       }
