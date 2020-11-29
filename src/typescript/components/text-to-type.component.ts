@@ -10,7 +10,8 @@ const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
 const ENTER_KEY = 'Enter';
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
-const CHARS_To_TYPE: RegExp = /(^[A-Za-z0-9é"'\(-è_çà\)=:/;.,?<>!~#{\[|@\]}+ ]$|Enter)/;
+const CHARS_To_TYPE: RegExp = /(^[A-Za-z0-9é"'\(-èëê_çàôùœâ\)=:/;.,?<>!~#{\[|@\]}+ ]$|Enter)/;
+const CHARS_To_TYPE_WITHOUT_PUNCTUATION: RegExp = /[^A-Za-z0-9àçéèëêôùœâ ]/g;
 
 export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private textToTypeDomElement: HTMLElement;
@@ -65,8 +66,8 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     }
     if (!CHARS_To_TYPE.test(typedKey)) return;
 
-    const expectedKey = this.currentCharToTypeDomElement.dataset.key;
-    if (expectedKey !== typedKey) {
+    const expectedKeyRegex = new RegExp(this.currentCharToTypeDomElement.dataset.keyRegex);
+    if (!expectedKeyRegex.test(typedKey)) {
       this.nextCurrentCharToTypeCssClass = 'NOK';
       this.stats.increaseErrors();
       if (this.getAppStorage().stopOnError) return;
@@ -131,7 +132,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       textToType = textToType.toLowerCase();
     }
     if (!appStorage.enablePunctuationCharacters) {
-      textToType = textToType.replace(/[^A-Za-z ]/g, '');
+      textToType = textToType.replace(CHARS_To_TYPE_WITHOUT_PUNCTUATION, '');
     }
     textToType = textToType.replace(/ +/g, ' ');
     const textToTypeCharArray = textToType.split('');
@@ -144,10 +145,20 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private charToSpan(c: string) {
-    if (c === ' ') return `<span data-key="${SPACE_KEY}" class="whitespace">␣</span><wbr>`;
-    if (c === '\n') return `<span data-key="${ENTER_KEY}" class="whitespace">↵</span><br>`;
-    if (c === '"') return `<span data-key='"'>"</span>`;
-    return `<span data-key="${c}">${c}</span>`;
+    if (c === ' ') return `<span data-key-regex="${SPACE_KEY}" class="whitespace">␣</span><wbr>`;
+    if (c === '\n') return `<span data-key-regex="${ENTER_KEY}" class="whitespace">↵</span><br>`;
+    if (c === '"') return `<span data-key-regex='"'>"</span>`;
+    if (c === 'é') return `<span data-key-regex='[ée]'>é</span>`;
+    if (c === 'è') return `<span data-key-regex='[èe]'>è</span>`;
+    if (c === 'ê') return `<span data-key-regex='[êe]'>ê</span>`;
+    if (c === 'ë') return `<span data-key-regex='[ëe]'>ë</span>`;
+    if (c === 'à') return `<span data-key-regex='[àa]'>à</span>`;
+    if (c === 'ç') return `<span data-key-regex='[çc]'>ç</span>`;
+    if (c === 'ô') return `<span data-key-regex='[ôo]'>ô</span>`;
+    if (c === 'ù') return `<span data-key-regex='[ùu]'>ù</span>`;
+    if (c === 'œ') return `<span data-key-regex='[œoe]'>œ</span>`;
+    if (c === 'â') return `<span data-key-regex='[âa]'>â</span>`;
+    return `<span data-key-regex="${c}">${c}</span>`;
   }
 
   private getTextToType(): string {
