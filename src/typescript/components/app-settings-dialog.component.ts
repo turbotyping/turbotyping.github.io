@@ -3,6 +3,7 @@ import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../models/text-to-t
 import { TextToTypeLanguage, TEXT_TO_TYPE_LANGUAGES } from '../models/text-to-type-language.enum';
 import { BaseDialogHtmlComponent } from './base/base-dialog.component';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
+import { InputHtmlComponent } from './core/input.component';
 import { SelectHtmlComponent } from './core/select.component';
 import { SwitchHtmlComponent } from './core/switch.component';
 
@@ -12,6 +13,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private enableCapitalLettersSwitch: SwitchHtmlComponent;
   private enablePunctuationCharactersSwitch: SwitchHtmlComponent;
   private enableSoundsSwitch: SwitchHtmlComponent;
+  private maxCharactersToType: InputHtmlComponent;
   private textToTypeCategoriesSelect: SelectHtmlComponent<TextToTypeCategory>;
   private textToTypeLanguagesSelect: SelectHtmlComponent<TextToTypeLanguage>;
 
@@ -23,10 +25,12 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || false;
     appStorage.enableSounds = appStorage.enableSounds || false;
+    appStorage.maxCharactersToType = appStorage.maxCharactersToType || 1000;
     this.stopOnErrorSwitch = new SwitchHtmlComponent(appStorage.stopOnError);
     this.enableCapitalLettersSwitch = new SwitchHtmlComponent(appStorage.enableCapitalLetters);
     this.enableSoundsSwitch = new SwitchHtmlComponent(appStorage.enableSounds);
     this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(appStorage.enablePunctuationCharacters);
+    this.maxCharactersToType = new InputHtmlComponent(appStorage.maxCharactersToType.toString());
     this.textToTypeCategoriesSelect = new SelectHtmlComponent<TextToTypeCategory>(TEXT_TO_TYPE_CATEGORIES, appStorage.textToTypeCategory);
     this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(TEXT_TO_TYPE_LANGUAGES, appStorage.textToTypeLanguage);
     this.changeThemeIcon.preInsertHtml();
@@ -34,6 +38,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enableCapitalLettersSwitch.preInsertHtml();
     this.enablePunctuationCharactersSwitch.preInsertHtml();
     this.enableSoundsSwitch.preInsertHtml();
+    this.maxCharactersToType.preInsertHtml();
     this.textToTypeCategoriesSelect.preInsertHtml();
     this.textToTypeLanguagesSelect.preInsertHtml();
     this.saveAppStorage(appStorage);
@@ -70,6 +75,10 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
         <span>${this.enableSoundsSwitch.toHtml()}</span>
       </div>
       <div class="app-setting">
+        <span>Max characters to type</span>
+        <span>${this.maxCharactersToType.toHtml()}</span>
+      </div>
+      <div class="app-setting">
         <span>Text to type Category</span>
         <span>${this.textToTypeCategoriesSelect.toHtml()}</span>
       </div>
@@ -88,12 +97,18 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enableSoundsSwitch.postInsertHtml();
     this.textToTypeCategoriesSelect.postInsertHtml();
     this.textToTypeLanguagesSelect.postInsertHtml();
+    this.maxCharactersToType.postInsertHtml();
     this.stopOnErrorSwitch.onUpdate(this.handleStopOnErrorChangeEvent.bind(this));
     this.enableCapitalLettersSwitch.onUpdate(this.handleEnableCapitalLettersChangeEvent.bind(this));
     this.enablePunctuationCharactersSwitch.onUpdate(this.handleEnablePunctuationCharactersChangeEvent.bind(this));
     this.enableSoundsSwitch.onUpdate(this.handleEnableSoundsChangeEvent.bind(this));
     this.textToTypeCategoriesSelect.onUpdate(this.handleTextToTypeCategoryChangeEvent.bind(this));
     this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
+  }
+
+  show(): void {
+    this.dialog.showModal();
+    this.maxCharactersToType.blur();
   }
 
   private handleStopOnErrorChangeEvent(value: boolean) {

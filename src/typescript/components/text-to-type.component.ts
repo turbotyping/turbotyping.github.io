@@ -135,7 +135,6 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     if (!appStorage.enableCapitalLetters) {
       textToType = textToType.toLowerCase();
     }
-    console.log(textToType);
     if (!appStorage.enablePunctuationCharacters) {
       textToType = textToType.replace(CHARS_To_TYPE_WITHOUT_PUNCTUATION, '');
     }

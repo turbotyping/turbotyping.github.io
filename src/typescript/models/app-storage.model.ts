@@ -5,6 +5,7 @@ import { TypedTextStats } from './typed-text-stats.model';
 export class AppStorage {
   textToTypeCategory: TextToTypeCategory;
   textToTypeLanguage: TextToTypeLanguage;
+  maxCharactersToType: number;
   currentTheme: string;
   enableSounds: boolean;
   enableCapitalLetters: boolean;

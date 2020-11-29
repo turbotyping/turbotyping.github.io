@@ -1,12 +1,12 @@
 import { BaseHtmlComponent } from './base-component';
 
 export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
-  private dialogId: string;
-  private dialogContainerId: string;
-  private dialogCloseButtonId: string;
-  private dialog: HTMLDialogElement;
-  private dialogContainer: HTMLElement;
-  private dialogCloseButton: HTMLElement;
+  protected dialogId: string;
+  protected dialogContainerId: string;
+  protected dialogCloseButtonId: string;
+  protected dialog: HTMLDialogElement;
+  protected dialogContainer: HTMLElement;
+  protected dialogCloseButton: HTMLElement;
 
   _preInsertHtml(): void {
     this.dialogId = this.getRandomId();
