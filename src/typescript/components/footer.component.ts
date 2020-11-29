@@ -4,10 +4,9 @@ export class FooterHtmlComponent extends BaseStaticBlockHtmlComponent {
   __toHtml() {
     return /* html */ `
       <footer>
-        <p>© 2020 enjoytyping.github.io</p>
-        <a href="https://github.com/enjoytyping/enjoytyping.github.io" target="_blank">
-          <span class="iconify" data-icon="codicon:github-inverted" data-inline="false"></span>
-        </a>
+        <p>This website was mainly inspired from <a href="https://www.keybr.com/" target="_blank">keybr</a> website
+        <p>It lets users type <b>Quotes</b> and <b>Poems</b> while improving their typing skills :)</p>
+        <p class="copyright">© 2020 enjoytyping.github.io</p>
       </footer>
     `;
   }

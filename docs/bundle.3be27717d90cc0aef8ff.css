@@ -1228,15 +1228,12 @@ footer {
   transition: var(--transition);
   transition-property: color, background-color;
   margin-top: var(--footer-margin-top);
-  padding: var(--footer-padding);
-  display: flex;
-  align-items: center;
-  justify-content: space-between; }
+  padding: var(--footer-padding); }
   footer p {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     margin-bottom: 0; }
-  footer a {
-    font-size: var(--footer-icon-font-size); }
+  footer .copyright {
+    margin-top: 3rem; }
 
 .text-to-type-page {
   padding-bottom: 5rem;
