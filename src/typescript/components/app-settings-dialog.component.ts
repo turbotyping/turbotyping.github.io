@@ -98,10 +98,12 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.textToTypeCategoriesSelect.postInsertHtml();
     this.textToTypeLanguagesSelect.postInsertHtml();
     this.maxCharactersToType.postInsertHtml();
+    this.maxCharactersToType.onValidate(this.validateMaxCharactersToType);
     this.stopOnErrorSwitch.onUpdate(this.handleStopOnErrorChangeEvent.bind(this));
     this.enableCapitalLettersSwitch.onUpdate(this.handleEnableCapitalLettersChangeEvent.bind(this));
     this.enablePunctuationCharactersSwitch.onUpdate(this.handleEnablePunctuationCharactersChangeEvent.bind(this));
     this.enableSoundsSwitch.onUpdate(this.handleEnableSoundsChangeEvent.bind(this));
+    this.maxCharactersToType.onUpdate(this.handleMaxCharactersToTypeChangeEvent.bind(this));
     this.textToTypeCategoriesSelect.onUpdate(this.handleTextToTypeCategoryChangeEvent.bind(this));
     this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
   }
@@ -109,6 +111,13 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   show(): void {
     this.dialog.showModal();
     this.maxCharactersToType.blur();
+  }
+
+  private validateMaxCharactersToType(value: string) {
+    const number = Number.parseInt(value);
+    if (Number.isNaN(number)) {
+      throw new Error('max characters to type must be a number');
+    }
   }
 
   private handleStopOnErrorChangeEvent(value: boolean) {
@@ -135,6 +144,13 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private handleEnableSoundsChangeEvent(value: boolean) {
     const appStorage = this.getAppStorage();
     appStorage.enableSounds = value;
+    this.saveAppStorage(appStorage);
+    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+  }
+
+  private handleMaxCharactersToTypeChangeEvent(value: string) {
+    const appStorage = this.getAppStorage();
+    appStorage.maxCharactersToType = +value;
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }

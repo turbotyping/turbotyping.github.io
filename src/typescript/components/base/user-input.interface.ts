@@ -1,5 +1,5 @@
 export interface UserInput<T> {
   onUpdate(callback: (value: T) => void);
 
-  getValue(): T;
+  onValidate(validator: (value: T) => void);
 }

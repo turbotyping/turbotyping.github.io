@@ -139,6 +139,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       textToType = textToType.replace(CHARS_To_TYPE_WITHOUT_PUNCTUATION, '');
     }
     textToType = textToType.replace(/ +/g, ' ');
+    textToType = textToType.substring(0, appStorage.maxCharactersToType);
     const textToTypeCharArray = textToType.split('');
     this.textToTypeDomElement.innerHTML = `${textToTypeCharArray.map(this.charToSpan).join('')}`;
     this.currentCharToTypeDomElement = this.textToTypeDomElement.querySelector('span');

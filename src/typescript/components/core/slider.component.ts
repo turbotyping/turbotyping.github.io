@@ -25,12 +25,7 @@ export class SliderHtmlComponent extends BaseBlockUserInputHtmlComponent<number>
     this.sliderDomElement.onchange = this.update.bind(this);
   }
 
-  getValue(): number {
-    return this.value;
-  }
-
   private update(event) {
-    this.value = event.target.value;
-    this.executeCallbacks();
+    this.executeCallbacks(event.target.value);
   }
 }

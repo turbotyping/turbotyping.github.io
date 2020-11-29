@@ -92,7 +92,7 @@ export class SelectHtmlComponent<T> extends BaseInlineUserInputHtmlComponent<T> 
     this.selectHeaderLabelText = selectedOption.innerText;
     this.toggleOpen();
     this.update();
-    this.executeCallbacks();
+    this.executeCallbacks(this.getValue());
   }
 
   private toggleOpen() {

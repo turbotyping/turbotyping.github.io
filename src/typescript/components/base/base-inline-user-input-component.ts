@@ -3,14 +3,21 @@ import { UserInput } from './user-input.interface';
 
 export abstract class BaseInlineUserInputHtmlComponent<T> extends BaseInlineHtmlComponent implements UserInput<T> {
   private callbacks: ((value: T) => void)[] = [];
+  private validators: ((value: T) => void)[] = [];
 
   onUpdate(callback: (value: T) => void) {
     this.callbacks.push(callback);
   }
 
-  abstract getValue(): T;
+  onValidate(validator: (value: T) => void) {
+    this.validators.push(validator);
+  }
 
-  executeCallbacks(): void {
-    this.callbacks.forEach((callback) => callback(this.getValue()));
+  executeCallbacks(value: T): void {
+    this.callbacks.forEach((callback) => callback(value));
+  }
+
+  executeValidator(value: T): void {
+    this.validators.forEach((validator) => validator(value));
   }
 }
