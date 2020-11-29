@@ -5,6 +5,7 @@ import { TypedTextStats } from '../models/typed-text-stats.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TextToTypeLanguage } from '../models/text-to-type-category.enum';
 
+const INACTIVITY_TIMEOUT = 8000;
 const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
 const ENTER_KEY = 'Enter';
@@ -15,6 +16,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private textToTypeDomElement: HTMLElement;
   private currentCharToTypeDomElement: HTMLElement;
   private blinkInterval: any;
+  private inactivityTimeout: any;
   private nextCurrentCharToTypeCssClass = 'OK';
   private stats: TypedTextStats;
   private keyboardSound: HTMLAudioElement;
@@ -43,6 +45,8 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private handleKeyDownEvent(event) {
     this.stats.handleKeyDownEvent();
+    clearTimeout(this.inactivityTimeout);
+    this.inactivityTimeout = setTimeout(this.setTextToType.bind(this), INACTIVITY_TIMEOUT);
     const typedKey = event.key;
     this.handleKeySounds(typedKey);
     if (typedKey === SPACE_KEY) event.preventDefault();
