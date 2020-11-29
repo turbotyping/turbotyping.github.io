@@ -79,7 +79,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
         <span>${this.maxCharactersToType.toHtml()}</span>
       </div>
       <div class="app-setting">
-        <span>Text to type Category</span>
+        <span>Text to type category</span>
         <span>${this.textToTypeCategoriesSelect.toHtml()}</span>
       </div>
       <div class="app-setting">
