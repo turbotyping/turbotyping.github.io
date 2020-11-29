@@ -1,5 +1,6 @@
 import { APP_SETTINGS_CHANGE_EVENT } from '../constants/event.constant';
-import { TextToTypeLanguage, TEXT_TO_TYPE_LANGUAGES } from '../models/text-to-type-category.enum';
+import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../models/text-to-type-category.enum';
+import { TextToTypeLanguage, TEXT_TO_TYPE_LANGUAGES } from '../models/text-to-type-language.enum';
 import { BaseDialogHtmlComponent } from './base/base-dialog.component';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
 import { SelectHtmlComponent } from './core/select.component';
@@ -11,10 +12,12 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private enableCapitalLettersSwitch: SwitchHtmlComponent;
   private enablePunctuationCharactersSwitch: SwitchHtmlComponent;
   private enableSoundsSwitch: SwitchHtmlComponent;
+  private textToTypeCategoriesSelect: SelectHtmlComponent<TextToTypeCategory>;
   private textToTypeLanguagesSelect: SelectHtmlComponent<TextToTypeLanguage>;
 
   __preInsertHtml(): void {
     const appStorage = this.getAppStorage();
+    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.QUOTES;
     appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
     appStorage.stopOnError = appStorage.stopOnError || false;
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
@@ -24,12 +27,14 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enableCapitalLettersSwitch = new SwitchHtmlComponent(appStorage.enableCapitalLetters);
     this.enableSoundsSwitch = new SwitchHtmlComponent(appStorage.enableSounds);
     this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(appStorage.enablePunctuationCharacters);
+    this.textToTypeCategoriesSelect = new SelectHtmlComponent<TextToTypeCategory>(TEXT_TO_TYPE_CATEGORIES, appStorage.textToTypeCategory);
     this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(TEXT_TO_TYPE_LANGUAGES, appStorage.textToTypeLanguage);
     this.changeThemeIcon.preInsertHtml();
     this.stopOnErrorSwitch.preInsertHtml();
     this.enableCapitalLettersSwitch.preInsertHtml();
     this.enablePunctuationCharactersSwitch.preInsertHtml();
     this.enableSoundsSwitch.preInsertHtml();
+    this.textToTypeCategoriesSelect.preInsertHtml();
     this.textToTypeLanguagesSelect.preInsertHtml();
     this.saveAppStorage(appStorage);
   }
@@ -65,6 +70,10 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
         <span>${this.enableSoundsSwitch.toHtml()}</span>
       </div>
       <div class="app-setting">
+        <span>Text to type Category</span>
+        <span>${this.textToTypeCategoriesSelect.toHtml()}</span>
+      </div>
+      <div class="app-setting">
         <span>Text to type language</span>
         <span>${this.textToTypeLanguagesSelect.toHtml()}</span>
       </div>
@@ -77,11 +86,13 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enableCapitalLettersSwitch.postInsertHtml();
     this.enablePunctuationCharactersSwitch.postInsertHtml();
     this.enableSoundsSwitch.postInsertHtml();
+    this.textToTypeCategoriesSelect.postInsertHtml();
     this.textToTypeLanguagesSelect.postInsertHtml();
     this.stopOnErrorSwitch.onUpdate(this.handleStopOnErrorChangeEvent.bind(this));
     this.enableCapitalLettersSwitch.onUpdate(this.handleEnableCapitalLettersChangeEvent.bind(this));
     this.enablePunctuationCharactersSwitch.onUpdate(this.handleEnablePunctuationCharactersChangeEvent.bind(this));
     this.enableSoundsSwitch.onUpdate(this.handleEnableSoundsChangeEvent.bind(this));
+    this.textToTypeCategoriesSelect.onUpdate(this.handleTextToTypeCategoryChangeEvent.bind(this));
     this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
   }
 
@@ -109,6 +120,16 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private handleEnableSoundsChangeEvent(value: boolean) {
     const appStorage = this.getAppStorage();
     appStorage.enableSounds = value;
+    this.saveAppStorage(appStorage);
+    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+  }
+
+  private handleTextToTypeCategoryChangeEvent(value: TextToTypeCategory) {
+    const appStorage = this.getAppStorage();
+    if (value !== appStorage.textToTypeCategory) {
+      appStorage.textToTypeIndex = 0;
+    }
+    appStorage.textToTypeCategory = value;
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }

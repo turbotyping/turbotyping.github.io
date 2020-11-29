@@ -1,6 +1,11 @@
 .select-container {
   position: relative;
   cursor: pointer;
+
+  &.open {
+    z-index: 100;
+  }
+
   & .select-header {
     padding: 0.8rem 1rem 0.8rem 1.6rem;
     border-radius: 0.3rem;

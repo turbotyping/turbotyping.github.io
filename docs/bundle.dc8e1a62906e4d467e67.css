@@ -1145,6 +1145,8 @@ p {
 .select-container {
   position: relative;
   cursor: pointer; }
+  .select-container.open {
+    z-index: 100; }
   .select-container .select-header {
     padding: 0.8rem 1rem 0.8rem 1.6rem;
     border-radius: 0.3rem;

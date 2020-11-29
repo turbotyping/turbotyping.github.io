@@ -1,9 +1,13 @@
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import englishQuotes from '../data/quotes.english';
 import frenchQuotes from '../data/quotes.french';
+import englishPoems from '../data/poems.english';
+import frenchPoems from '../data/poems.french';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
-import { TextToTypeLanguage } from '../models/text-to-type-category.enum';
+import { TextToTypeLanguage } from '../models/text-to-type-language.enum';
+import { TextToTypeCategory } from '../models/text-to-type-category.enum';
+import { TextToType } from '../models/text-to-type.model';
 
 const INACTIVITY_TIMEOUT = 8000;
 const BACKSPACE_KEY = 'Backspace';
@@ -11,7 +15,7 @@ const SPACE_KEY = ' ';
 const ENTER_KEY = 'Enter';
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
 const CHARS_To_TYPE: RegExp = /(^[A-Za-z0-9é"'\(-èëê_çàôùœâ\)=:/;.,?<>!~#{\[|@\]}+ ]$|Enter)/;
-const CHARS_To_TYPE_WITHOUT_PUNCTUATION: RegExp = /[^A-Za-z0-9àçéèëêôùœâ ]/g;
+const CHARS_To_TYPE_WITHOUT_PUNCTUATION: RegExp = /[^A-Za-z0-9àçéèëêôùœâ\n ]/g;
 
 export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private textToTypeDomElement: HTMLElement;
@@ -131,6 +135,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     if (!appStorage.enableCapitalLetters) {
       textToType = textToType.toLowerCase();
     }
+    console.log(textToType);
     if (!appStorage.enablePunctuationCharacters) {
       textToType = textToType.replace(CHARS_To_TYPE_WITHOUT_PUNCTUATION, '');
     }
@@ -163,23 +168,35 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private getTextToType(): string {
     const appStorage = this.getAppStorage();
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
-      return englishQuotes[appStorage.textToTypeIndex].quote;
-    }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
-      return frenchQuotes[appStorage.textToTypeIndex].quote;
+    const textToTypeArray = this.getTextToTypeArray();
+    if (textToTypeArray.length > 0) {
+      return textToTypeArray[appStorage.textToTypeIndex].text;
     }
     return 'Sunt cillum est dolore veniam officia.';
   }
 
   private getTextsToTypeLength(): number {
-    const appStorage = this.getAppStorage();
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
-      return englishQuotes.length;
-    }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
-      return frenchQuotes.length;
+    const textToTypeArray = this.getTextToTypeArray();
+    if (textToTypeArray.length > 0) {
+      return textToTypeArray.length;
     }
     return Number.MAX_VALUE;
+  }
+
+  private getTextToTypeArray(): TextToType[] {
+    const appStorage = this.getAppStorage();
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
+      return englishQuotes;
+    }
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
+      return englishPoems;
+    }
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
+      return frenchQuotes;
+    }
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
+      return frenchPoems;
+    }
+    return [];
   }
 }

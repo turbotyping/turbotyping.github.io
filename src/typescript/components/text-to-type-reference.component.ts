@@ -1,5 +1,5 @@
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
-import { TextToTypeLanguage } from '../models/text-to-type-category.enum';
+import { TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { BaseInlineHtmlComponent } from './base/base-inline-component';
 import englishQuotes from '../data/quotes.english';
 import frenchQuotes from '../data/quotes.french';

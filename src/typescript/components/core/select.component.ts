@@ -14,6 +14,7 @@ export class SelectHtmlComponent<T> extends BaseInlineUserInputHtmlComponent<T> 
   private selectOptionsId: string;
   private selectOptions: HTMLElement;
   private selectContainerId: string;
+  private selectContainer: HTMLElement;
   private open: boolean;
 
   constructor(private options: SelectOption<T>[], private selectedOptionValue?: T) {
@@ -47,6 +48,7 @@ export class SelectHtmlComponent<T> extends BaseInlineUserInputHtmlComponent<T> 
   }
 
   __postInsertHtml(): void {
+    this.selectContainer = document.getElementById(this.selectContainerId);
     this.arrowDown = document.getElementById(this.arrowDownId);
     this.arrowUp = document.getElementById(this.arrowUpId);
     this.selectHeader = document.getElementById(this.selectHeaderId);
@@ -69,7 +71,9 @@ export class SelectHtmlComponent<T> extends BaseInlineUserInputHtmlComponent<T> 
     this.selectHeaderLabel.innerText = this.selectHeaderLabelText;
     this.arrowDown.classList.add('hide');
     this.arrowUp.classList.add('hide');
+    this.selectContainer.classList.remove('open');
     if (this.open) {
+      this.selectContainer.classList.add('open');
       this.arrowUp.classList.remove('hide');
       this.selectOptions.classList.remove('hide');
     } else {

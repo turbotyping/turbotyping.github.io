@@ -1,17 +1,17 @@
 import { SelectOption } from './select-option.model';
 
-export enum TextToTypeLanguage {
-  ENGLISH = 'ENGLISH',
-  FRENCH = 'FRENCH',
+export enum TextToTypeCategory {
+  QUOTES = 'QUOTES',
+  POEMS = 'POEMS',
 }
 
-export const TEXT_TO_TYPE_LANGUAGES: SelectOption<TextToTypeLanguage>[] = [
+export const TEXT_TO_TYPE_CATEGORIES: SelectOption<TextToTypeCategory>[] = [
   {
-    label: 'English',
-    value: TextToTypeLanguage.ENGLISH,
+    label: 'Quotes',
+    value: TextToTypeCategory.QUOTES,
   },
   {
-    label: 'French',
-    value: TextToTypeLanguage.FRENCH,
+    label: 'Poems',
+    value: TextToTypeCategory.POEMS,
   },
 ];
