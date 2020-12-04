@@ -1,13 +1,8 @@
 import { BaseBlockHtmlComponent } from './base/base-block-component';
-import englishQuotes from '../data/quotes.english';
-import frenchQuotes from '../data/quotes.french';
-import englishPoems from '../data/poems.english';
-import frenchPoems from '../data/poems.french';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TextToTypeLanguage } from '../models/text-to-type-language.enum';
-import { TextToTypeCategory } from '../models/text-to-type-category.enum';
-import { TextToType } from '../models/text-to-type.model';
+import { AppStorage } from '../models/app-storage.model';
 
 const INACTIVITY_TIMEOUT = 8000;
 const BACKSPACE_KEY = 'Backspace';
@@ -168,7 +163,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private getTextToType(): string {
     const appStorage = this.getAppStorage();
-    const textToTypeArray = this.getTextToTypeArray();
+    const textToTypeArray = AppStorage.getTextToTypeArray(appStorage);
     if (textToTypeArray.length > 0) {
       return textToTypeArray[appStorage.textToTypeIndex].text;
     }
@@ -176,27 +171,11 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private getTextsToTypeLength(): number {
-    const textToTypeArray = this.getTextToTypeArray();
+    const appStorage = this.getAppStorage();
+    const textToTypeArray = AppStorage.getTextToTypeArray(appStorage);
     if (textToTypeArray.length > 0) {
       return textToTypeArray.length;
     }
     return Number.MAX_VALUE;
-  }
-
-  private getTextToTypeArray(): TextToType[] {
-    const appStorage = this.getAppStorage();
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
-      return englishQuotes;
-    }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
-      return englishPoems;
-    }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
-      return frenchQuotes;
-    }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
-      return frenchPoems;
-    }
-    return [];
   }
 }
