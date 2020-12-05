@@ -158,6 +158,9 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     if (c === 'ù') return `<span data-key-regex='[ùu]'>ù</span>`;
     if (c === 'œ') return `<span data-key-regex='[œoe]'>œ</span>`;
     if (c === 'â') return `<span data-key-regex='[âa]'>â</span>`;
+    if (c === '(') return `<span data-key-regex='[(]'>(</span>`;
+    if (c === ')') return `<span data-key-regex='[)]'>)</span>`;
+    if (c === '?') return `<span data-key-regex='[?]'>?</span>`;
     return `<span data-key-regex="${c}">${c}</span>`;
   }
 
