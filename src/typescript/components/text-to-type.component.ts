@@ -80,11 +80,21 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       this.currentCharToTypeDomElement.classList.add('cursor');
       this.textToTypeDomElement.classList.add('blink');
       this.blinkInterval = setInterval(this.toggleBlinkCssClass.bind(this), 350);
+      this.scrollDownWhenNecessary();
     } else {
+      window.scrollTo(0, 0);
       this.stats.endType();
       this.updateAppStorageOnEndTyping();
       this.dispatchCustomEvent(END_TYPING_EVENT, this.stats);
       this.setTextToType();
+    }
+  }
+
+  private scrollDownWhenNecessary() {
+    const windowHeight = window.innerHeight;
+    const top = this.currentCharToTypeDomElement.getBoundingClientRect().top;
+    if (top > (2 * windowHeight) / 3) {
+      window.scrollBy(0, 30);
     }
   }
 
@@ -158,10 +168,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     if (c === 'ù') return `<span data-key-regex='[ùu]'>ù</span>`;
     if (c === 'œ') return `<span data-key-regex='[œoe]'>œ</span>`;
     if (c === 'â') return `<span data-key-regex='[âa]'>â</span>`;
-    if (c === '(') return `<span data-key-regex='[(]'>(</span>`;
-    if (c === ')') return `<span data-key-regex='[)]'>)</span>`;
-    if (c === '?') return `<span data-key-regex='[?]'>?</span>`;
-    return `<span data-key-regex="${c}">${c}</span>`;
+    return `<span data-key-regex="[${c}]">${c}</span>`;
   }
 
   private getTextToType(): string {
