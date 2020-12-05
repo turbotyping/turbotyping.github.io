@@ -6,6 +6,8 @@ import englishQuotes from '../data/quotes.english';
 import frenchQuotes from '../data/quotes.french';
 import englishPoems from '../data/poems.english';
 import frenchPoems from '../data/poems.french';
+import englishKidsStories from '../data/kids-stories.english';
+import frenchKidsStories from '../data/kids-stories.french';
 
 export class AppStorage {
   textToTypeCategory: TextToTypeCategory;
@@ -26,11 +28,17 @@ export class AppStorage {
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
       return englishPoems;
     }
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.KIDS_STORIES) {
+      return englishKidsStories;
+    }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
       return frenchQuotes;
     }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
       return frenchPoems;
+    }
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.KIDS_STORIES) {
+      return frenchKidsStories;
     }
     return [];
   }

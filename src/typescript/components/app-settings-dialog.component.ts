@@ -25,7 +25,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || false;
     appStorage.enableSounds = appStorage.enableSounds || false;
-    appStorage.maxCharactersToType = appStorage.maxCharactersToType || 1000;
+    appStorage.maxCharactersToType = appStorage.maxCharactersToType || 2000;
     this.stopOnErrorSwitch = new SwitchHtmlComponent(appStorage.stopOnError);
     this.enableCapitalLettersSwitch = new SwitchHtmlComponent(appStorage.enableCapitalLetters);
     this.enableSoundsSwitch = new SwitchHtmlComponent(appStorage.enableSounds);
