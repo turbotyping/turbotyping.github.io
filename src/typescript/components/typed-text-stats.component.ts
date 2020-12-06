@@ -84,6 +84,7 @@ export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private animateValue(domElement: HTMLElement, value: number, duration: number = 700) {
+    domElement.innerHTML = '' + 0;
     if (value == 0) return;
     let current = 0;
     const stepTime = Math.abs(Math.floor(duration / value));
