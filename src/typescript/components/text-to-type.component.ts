@@ -108,7 +108,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private updateAppStorageOnEndTyping() {
     const appStorage = this.getAppStorage();
-    appStorage.textToTypeIndex = (appStorage.textToTypeIndex + 1) % this.getTextsToTypeLength();
+    appStorage.textToTypeIndex = AppStorage.nextTextToTypeIndex(appStorage);
     appStorage.typedTextStats.push(this.stats);
     this.saveAppStorage(appStorage);
   }
@@ -178,14 +178,5 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       return textToTypeArray[appStorage.textToTypeIndex].text;
     }
     return 'Sunt cillum est dolore veniam officia.';
-  }
-
-  private getTextsToTypeLength(): number {
-    const appStorage = this.getAppStorage();
-    const textToTypeArray = AppStorage.getTextToTypeArray(appStorage);
-    if (textToTypeArray.length > 0) {
-      return textToTypeArray.length;
-    }
-    return Number.MAX_VALUE;
   }
 }

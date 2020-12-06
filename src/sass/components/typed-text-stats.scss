@@ -26,13 +26,54 @@
     font-size: 1.5rem;
   }
 
-  & .iconify {
+  & .check-progress-link .iconify {
     font-size: 6rem;
     transition: var(--transition);
     transition-property: color;
 
     &:hover {
       color: var(--check-progress-link-icon-color-on-hover);
+    }
+  }
+
+  & .change-text-to-type {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    & .iconify-container {
+      height: 100%;
+      width: 100%;
+      transition: var(--transition);
+      transition-property: color, background-color;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--change-text-to-type-icon-background-color-on-hover);
+
+        & .iconify {
+          color: var(--change-text-to-type-icon-color-on-hover);
+        }
+      }
+    }
+
+    & .iconify {
+      height: 100%;
+      width: 100%;
+      transition: var(--transition);
+      transition-property: color, background-color;
+    }
+
+    & .next {
+      border-bottom-right-radius: 100rem;
+      border-top-right-radius: 100rem;
+    }
+
+    & .previous {
+      border-bottom-left-radius: 100rem;
+      border-top-left-radius: 100rem;
     }
   }
 }

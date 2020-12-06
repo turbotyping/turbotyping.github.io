@@ -21,6 +21,14 @@ export class AppStorage {
   textToTypeIndex: number = 0;
   typedTextStats: TypedTextStats[] = [];
 
+  static nextTextToTypeIndex(appStorage: AppStorage) {
+    return (appStorage.textToTypeIndex + 1) % AppStorage.getTextToTypeArray(appStorage).length;
+  }
+
+  static previousTextToTypeIndex(appStorage: AppStorage) {
+    return (appStorage.textToTypeIndex - 1 + AppStorage.getTextToTypeArray(appStorage).length) % AppStorage.getTextToTypeArray(appStorage).length;
+  }
+
   static getTextToTypeArray(appStorage: AppStorage): TextToType[] {
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
       return englishQuotes;

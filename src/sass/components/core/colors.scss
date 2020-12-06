@@ -54,6 +54,8 @@ body.light {
   --input-border-color: var(--border-color);
   --input-border-color-on-active: var(--primary-color);
   --error-message-color: #f1505e;
+  --change-text-to-type-icon-color-on-hover: var(--white-color);
+  --change-text-to-type-icon-background-color-on-hover: var(--secondary-color);
 }
 
 body.dark {
@@ -113,4 +115,6 @@ body.dark {
   --input-border-color: var(--border-color);
   --input-border-color-on-active: var(--primary-color);
   --error-message-color: #f1505e;
+  --change-text-to-type-icon-color-on-hover: var(--white-color);
+  --change-text-to-type-icon-background-color-on-hover: var(--secondary-color);
 }
