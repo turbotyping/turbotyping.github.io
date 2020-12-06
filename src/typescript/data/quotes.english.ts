@@ -175,7 +175,7 @@ export default [
   },
   {
     text:
-      'Passion drives us everyday , understand your passion, and understand what is that you want in your life because the moment you start doing what you love the most, you’ll start celebrating the process',
+      "Passion drives us everyday, understand your passion, and understand what is that you want in your life because the moment you start doing what you love the most, you'll start celebrating the process",
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Razzab Shaikh',
   },
@@ -271,7 +271,7 @@ export default [
   },
   {
     text:
-      "Over the years, mostly in retrospect, I learned a variety of lessons, and one of the most important is this: You can't hit a target you can’t see. You can't accomplish wonderful things with your life if you have no idea of what they are. You must first become absolutely clear about what you want if you are serious about unlocking the extraordinary power that lies within you",
+      "Over the years, mostly in retrospect, I learned a variety of lessons, and one of the most important is this: You can't hit a target you can't see. You can't accomplish wonderful things with your life if you have no idea of what they are. You must first become absolutely clear about what you want if you are serious about unlocking the extraordinary power that lies within you",
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Brian Tracy',
   },
