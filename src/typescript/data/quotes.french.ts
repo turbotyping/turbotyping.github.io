@@ -19,7 +19,7 @@ export default [
   },
   {
     text:
-      "Un portefeuille vie offre une alternative intéressante à la retraite traditionnelle. C'est une nouvelle façon de penser et de vivre à un âge avancé. Un portfolio typique est un mélange équilibré de travail, d'apprentissage continu, de loisirs, de voyages et d`'avocats, de renouer avec la famille et les amis et de redonner",
+      "Un portefeuille vie offre une alternative intéressante à la retraite traditionnelle. C'est une nouvelle façon de penser et de vivre à un âge avancé. Un portfolio typique est un mélange équilibré de travail, d'apprentissage continu, de loisirs, de voyages et d'avocats, de renouer avec la famille et les amis et de redonner",
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Michael Jeans',
   },
