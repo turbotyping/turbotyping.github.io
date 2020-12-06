@@ -127,7 +127,7 @@ export default [
   },
   {
     text:
-      "En fin de compte, ce qui compte le plus dans la vie, ce n'est pas combien d'argent vous gagnez, combien de choses matérielles vous acquérez. . . Ce sera la façon dont tu guideras les jeunes que tu apporteras au monde",
+      "En fin de compte, ce qui compte le plus dans la vie, ce n'est pas combien d'argent vous gagnez, combien de choses matérielles vous acquérez... Ce sera la façon dont tu guideras les jeunes que tu apporteras au monde",
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Tony Dungy',
   },

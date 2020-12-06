@@ -127,7 +127,7 @@ export default [
   },
   {
     text:
-      "In the end, what's most important in life isn't going to be how much money you make, how many material things you acquire. . . It's going to be the way you guide the young people you bring into the world",
+      "In the end, what's most important in life isn't going to be how much money you make, how many material things you acquire... It's going to be the way you guide the young people you bring into the world",
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Tony Dungy',
   },
