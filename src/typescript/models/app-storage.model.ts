@@ -8,6 +8,7 @@ import englishPoems from '../data/poems.english';
 import frenchPoems from '../data/poems.french';
 import englishKidsStories from '../data/kids-stories.english';
 import frenchKidsStories from '../data/kids-stories.french';
+import javaCode from '../data/java-code';
 
 export class AppStorage {
   textToTypeCategory: TextToTypeCategory;
@@ -47,6 +48,9 @@ export class AppStorage {
     }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.KIDS_STORIES) {
       return frenchKidsStories;
+    }
+    if (appStorage.textToTypeCategory === TextToTypeCategory.JAVA_CODE) {
+      return javaCode;
     }
     return [];
   }

@@ -21,12 +21,16 @@
     color: var(--whitespace-color);
   }
 
+  & span.dot {
+    padding-bottom: 0.4rem;
+  }
+
   & span.NOK {
     color: var(--nok-typed-char-color);
   }
 
   & span.OK {
-    color: var(--ok-typed-char-color);
+    opacity: 0.5;
   }
 
   &.blink span.cursor {

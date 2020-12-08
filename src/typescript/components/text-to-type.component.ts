@@ -3,12 +3,14 @@ import { TypedTextStats } from '../models/typed-text-stats.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { AppStorage } from '../models/app-storage.model';
+import hljs from 'highlight.js';
+import { TextToTypeCategory } from '../models/text-to-type-category.enum';
 
 const INACTIVITY_TIMEOUT = 8000;
 const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
 const ENTER_KEY = 'Enter';
-const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToType';
+const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToTypeId';
 const CHARS_To_TYPE: RegExp = /(^[A-Za-z0-9é"'\(-èëê_çàôùœâ\)=:/;.,?<>!~#{\[|@\]}+ ]$|Enter)/;
 const CHARS_To_TYPE_WITHOUT_PUNCTUATION: RegExp = /[^A-Za-z0-9àçéèëêôùœâ\n ]/g;
 
@@ -26,7 +28,9 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   __toHtml() {
-    return `<div id="${TEXT_TO_TYPE_DOM_ELEMENT_ID}" class="text-to-type"></div>`;
+    return /* html */ `
+      <div id="${TEXT_TO_TYPE_DOM_ELEMENT_ID}" class="text-to-type"></div>
+    `;
   }
 
   __postInsertHtml(): void {
@@ -48,6 +52,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     clearTimeout(this.inactivityTimeout);
     this.inactivityTimeout = setTimeout(this.setTextToType.bind(this), INACTIVITY_TIMEOUT);
     const typedKey = event.key;
+    console.log(typedKey);
     this.handleKeySounds(typedKey);
     if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
@@ -143,32 +148,75 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     if (!appStorage.enablePunctuationCharacters) {
       textToType = textToType.replace(CHARS_To_TYPE_WITHOUT_PUNCTUATION, '');
     }
-    textToType = textToType.replace(/ +/g, ' ');
     textToType = textToType.substring(0, appStorage.maxCharactersToType);
-    const textToTypeCharArray = textToType.split('');
-    this.textToTypeDomElement.innerHTML = `${textToTypeCharArray.map(this.charToSpan).join('')}`;
+    const textToTypeLength = textToType.split('').length;
+    let textToTypeCharArrayAfterTransformation = [];
+    if (appStorage.textToTypeCategory != TextToTypeCategory.JAVA_CODE) {
+      textToTypeCharArrayAfterTransformation = textToType.split('').map((c) => this.charToSpan(c, ''));
+    } else {
+      textToType = hljs.highlight('java', textToType).value;
+      textToType = textToType.replace(/&lt;/g, '<');
+      textToType = textToType.replace(/&gt;/g, '>');
+      textToType = textToType.replace(/&quot;/g, '"');
+      const textToTypeCharArray = textToType.split('');
+      let openingSpanBegin = false;
+      let closingSpanBegin = false;
+      let hljsClass = '';
+      for (let index = 0; index < textToTypeCharArray.length; index++) {
+        let nextTextToType = textToTypeCharArray.slice(index, index + 100).join('');
+        let currentOpeningSpanBegin = /^<span /.test(nextTextToType);
+        let currentClosingSpanBegin = /^<\/span>/.test(nextTextToType);
+        let spanEnd = /^>/.test(nextTextToType);
+        if (currentOpeningSpanBegin) {
+          openingSpanBegin = true;
+          let occurrence = nextTextToType.match(/"(.+?)"/);
+          if (occurrence) {
+            hljsClass = occurrence[1];
+          }
+          continue;
+        }
+        if (openingSpanBegin) {
+          if (spanEnd) openingSpanBegin = false;
+          continue;
+        }
+        if (currentClosingSpanBegin) {
+          closingSpanBegin = true;
+          continue;
+        }
+        if (closingSpanBegin) {
+          if (spanEnd) closingSpanBegin = false;
+          hljsClass = '';
+          continue;
+        }
+        textToTypeCharArrayAfterTransformation.push(this.charToSpan(textToTypeCharArray[index], hljsClass));
+      }
+    }
+
+    this.textToTypeDomElement.innerHTML = textToTypeCharArrayAfterTransformation.join('');
     this.currentCharToTypeDomElement = this.textToTypeDomElement.querySelector('span');
     this.currentCharToTypeDomElement.classList.add('cursor');
     this.textToTypeDomElement.classList.add('blink');
     this.blinkInterval = setInterval(this.toggleBlinkCssClass.bind(this), 350);
-    this.stats = new TypedTextStats(textToTypeCharArray.length);
+    this.stats = new TypedTextStats(textToTypeLength);
   }
 
-  private charToSpan(c: string) {
-    if (c === ' ') return `<span data-key-regex="${SPACE_KEY}" class="whitespace">␣</span><wbr>`;
+  private charToSpan(c: string, clazz: string) {
+    // if (c === ' ') return `<span data-key-regex="${SPACE_KEY}" class="whitespace">␣</span><wbr>`;
+    if (c === ' ') return `<span data-key-regex="${SPACE_KEY}" class="whitespace dot">.</span><wbr>`;
     if (c === '\n') return `<span data-key-regex="${ENTER_KEY}" class="whitespace">↵</span><br>`;
-    if (c === '"') return `<span data-key-regex='"'>"</span>`;
-    if (c === 'é') return `<span data-key-regex='[ée]'>é</span>`;
-    if (c === 'è') return `<span data-key-regex='[èe]'>è</span>`;
-    if (c === 'ê') return `<span data-key-regex='[êe]'>ê</span>`;
-    if (c === 'ë') return `<span data-key-regex='[ëe]'>ë</span>`;
-    if (c === 'à') return `<span data-key-regex='[àa]'>à</span>`;
-    if (c === 'ç') return `<span data-key-regex='[çc]'>ç</span>`;
-    if (c === 'ô') return `<span data-key-regex='[ôo]'>ô</span>`;
-    if (c === 'ù') return `<span data-key-regex='[ùu]'>ù</span>`;
-    if (c === 'œ') return `<span data-key-regex='[œoe]'>œ</span>`;
-    if (c === 'â') return `<span data-key-regex='[âa]'>â</span>`;
-    return `<span data-key-regex="[${c}]">${c}</span>`;
+    if (c === '"') return `<span class="${clazz}" data-key-regex='"'>"</span>`;
+    if (c === 'é') return `<span class="${clazz}" data-key-regex='[ée]'>é</span>`;
+    if (c === 'è') return `<span class="${clazz}" data-key-regex='[èe]'>è</span>`;
+    if (c === 'ê') return `<span class="${clazz}" data-key-regex='[êe]'>ê</span>`;
+    if (c === 'ë') return `<span class="${clazz}" data-key-regex='[ëe]'>ë</span>`;
+    if (c === 'à') return `<span class="${clazz}" data-key-regex='[àa]'>à</span>`;
+    if (c === 'ç') return `<span class="${clazz}" data-key-regex='[çc]'>ç</span>`;
+    if (c === 'ô') return `<span class="${clazz}" data-key-regex='[ôo]'>ô</span>`;
+    if (c === 'ù') return `<span class="${clazz}" data-key-regex='[ùu]'>ù</span>`;
+    if (c === 'œ') return `<span class="${clazz}" data-key-regex='[œoe]'>œ</span>`;
+    if (c === 'â') return `<span class="${clazz}" data-key-regex='[âa]'>â</span>`;
+    if (c === ']') return `<span class="${clazz}" data-key-regex='[\\]]'>]</span>`;
+    return `<span class="${clazz}" data-key-regex="[${c}]">${c}</span>`;
   }
 
   private getTextToType(): string {
