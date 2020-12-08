@@ -29,7 +29,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.textToTypeLanguagesContainerId = this.getRandomId();
     const appStorage = this.getAppStorage();
     appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.CODE;
-    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.JAVA;
+    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.HTML;
     appStorage.stopOnError = appStorage.stopOnError || false;
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || false;
@@ -121,7 +121,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.maxCharactersToType.onUpdate(this.handleMaxCharactersToTypeChangeEvent.bind(this));
     this.textToTypeCategoriesSelect.onUpdate(this.handleTextToTypeCategoryChangeEvent.bind(this));
     this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
-    this.handleTextToTypeCategoryChangeEvent(this.getAppStorage().textToTypeCategory);
+    this.updateAppSettingsBasedOnTextToTypeCategoryAndLanguage();
   }
 
   show(): void {
@@ -197,6 +197,22 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+  }
+
+  private updateAppSettingsBasedOnTextToTypeCategoryAndLanguage() {
+    const appStorage = this.getAppStorage();
+    this.enableCapitalLettersContainer.classList.remove('hide');
+    this.enablePunctuationCharactersContainer.classList.remove('hide');
+    if (appStorage.textToTypeCategory == TextToTypeCategory.CODE) {
+      appStorage.enableCapitalLetters = true;
+      appStorage.enablePunctuationCharacters = true;
+      this.enableCapitalLettersContainer.classList.add('hide');
+      this.enablePunctuationCharactersContainer.classList.add('hide');
+    }
+    this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(
+      getTextToTypeLanguage(appStorage.textToTypeCategory),
+      appStorage.textToTypeLanguage
+    );
   }
 
   private handleTextToTypeLanguageChangeEvent(value: TextToTypeLanguage) {

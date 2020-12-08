@@ -2,9 +2,11 @@ import { SelectOption } from './select-option.model';
 import { TextToTypeCategory } from './text-to-type-category.enum';
 
 export enum TextToTypeLanguage {
-  ENGLISH = 'ENGLISH',
-  FRENCH = 'FRENCH',
-  JAVA = 'JAVA',
+  ENGLISH = 'english',
+  FRENCH = 'french',
+  JAVA = 'java',
+  PYTHON = 'python',
+  HTML = 'html',
 }
 
 export function getTextToTypeLanguage(category: TextToTypeCategory): SelectOption<TextToTypeLanguage>[] {
@@ -13,6 +15,14 @@ export function getTextToTypeLanguage(category: TextToTypeCategory): SelectOptio
       {
         label: 'Java',
         value: TextToTypeLanguage.JAVA,
+      },
+      {
+        label: 'Python',
+        value: TextToTypeLanguage.PYTHON,
+      },
+      {
+        label: 'HTML',
+        value: TextToTypeLanguage.HTML,
       },
     ];
   } else {

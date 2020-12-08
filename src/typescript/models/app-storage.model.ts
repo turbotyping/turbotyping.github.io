@@ -8,7 +8,9 @@ import englishPoems from '../data/poems.english';
 import frenchPoems from '../data/poems.french';
 import englishStories from '../data/stories.english';
 import frenchStories from '../data/stories.french';
-import codeJava from '../data/code.java';
+import javaCode from '../data/code.java';
+import pythonCode from '../data/code.python';
+import htmlCode from '../data/code.html';
 
 export class AppStorage {
   textToTypeCategory: TextToTypeCategory;
@@ -31,26 +33,32 @@ export class AppStorage {
   }
 
   static getTextToTypeArray(appStorage: AppStorage): TextToType[] {
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
+    if (appStorage.textToTypeCategory === TextToTypeCategory.QUOTES && appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
       return englishQuotes;
     }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
-      return englishPoems;
-    }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.STORIES) {
-      return englishStories;
-    }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
+    if (appStorage.textToTypeCategory === TextToTypeCategory.QUOTES && appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
       return frenchQuotes;
     }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
+    if (appStorage.textToTypeCategory === TextToTypeCategory.POEMS && appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
+      return englishPoems;
+    }
+    if (appStorage.textToTypeCategory === TextToTypeCategory.POEMS && appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
       return frenchPoems;
     }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.STORIES) {
+    if (appStorage.textToTypeCategory === TextToTypeCategory.STORIES && appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
+      return englishStories;
+    }
+    if (appStorage.textToTypeCategory === TextToTypeCategory.STORIES && appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH) {
       return frenchStories;
     }
-    if (appStorage.textToTypeCategory === TextToTypeCategory.CODE) {
-      return codeJava;
+    if (appStorage.textToTypeCategory === TextToTypeCategory.CODE && appStorage.textToTypeLanguage === TextToTypeLanguage.JAVA) {
+      return javaCode;
+    }
+    if (appStorage.textToTypeCategory === TextToTypeCategory.CODE && appStorage.textToTypeLanguage === TextToTypeLanguage.PYTHON) {
+      return pythonCode;
+    }
+    if (appStorage.textToTypeCategory === TextToTypeCategory.CODE && appStorage.textToTypeLanguage === TextToTypeLanguage.HTML) {
+      return htmlCode;
     }
     return [];
   }
