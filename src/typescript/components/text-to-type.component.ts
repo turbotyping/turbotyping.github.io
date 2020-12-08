@@ -3,7 +3,7 @@ import { TypedTextStats } from '../models/typed-text-stats.model';
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { AppStorage } from '../models/app-storage.model';
-import hljs from 'highlight.js';
+import * as hljs from './../vendor/highlight.min.js';
 import { TextToTypeCategory } from '../models/text-to-type-category.enum';
 
 const INACTIVITY_TIMEOUT = 8000;
