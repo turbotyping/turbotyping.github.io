@@ -55,6 +55,18 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   getDialogBody(): string {
     return /* html */ `
       <div class="app-setting">
+        <span>Text to type category</span>
+        <span>${this.textToTypeCategoriesSelect.toHtml()}</span>
+      </div>
+      <div class="app-setting">
+        <span>Text to type language</span>
+        <span>${this.textToTypeLanguagesSelect.toHtml()}</span>
+      </div>
+      <div class="app-setting">
+        <span>Max characters to type</span>
+        <span>${this.maxCharactersToType.toHtml()}</span>
+      </div>
+      <div class="app-setting">
         <span>Change theme</span>
         <span>${this.changeThemeIcon.toHtml()}</span>
       </div>
@@ -73,18 +85,6 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       <div class="app-setting">
         <span>Enable sounds</span>
         <span>${this.enableSoundsSwitch.toHtml()}</span>
-      </div>
-      <div class="app-setting">
-        <span>Max characters to type</span>
-        <span>${this.maxCharactersToType.toHtml()}</span>
-      </div>
-      <div class="app-setting">
-        <span>Text to type category</span>
-        <span>${this.textToTypeCategoriesSelect.toHtml()}</span>
-      </div>
-      <div class="app-setting">
-        <span>Text to type language</span>
-        <span>${this.textToTypeLanguagesSelect.toHtml()}</span>
       </div>
     `;
   }
