@@ -37,7 +37,7 @@ export class AppStorage {
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
       return englishPoems;
     }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.KIDS_STORIES) {
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.STORIES) {
       return englishKidsStories;
     }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
@@ -46,10 +46,10 @@ export class AppStorage {
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.POEMS) {
       return frenchPoems;
     }
-    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.KIDS_STORIES) {
+    if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.STORIES) {
       return frenchKidsStories;
     }
-    if (appStorage.textToTypeCategory === TextToTypeCategory.JAVA_CODE) {
+    if (appStorage.textToTypeCategory === TextToTypeCategory.CODE) {
       return javaCode;
     }
     return [];

@@ -157,7 +157,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     textToType = textToType.substring(0, appStorage.maxCharactersToType);
     const textToTypeLength = textToType.split('').length;
     let textToTypeCharArrayAfterTransformation = [];
-    if (appStorage.textToTypeCategory != TextToTypeCategory.JAVA_CODE) {
+    if (appStorage.textToTypeCategory != TextToTypeCategory.CODE) {
       textToTypeCharArrayAfterTransformation = textToType.split('').map((c) => this.charToSpan(c, ''));
     } else {
       textToType = hljs.highlight('java', textToType).value;

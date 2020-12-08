@@ -1,6 +1,6 @@
 import { APP_SETTINGS_CHANGE_EVENT } from '../constants/event.constant';
 import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../models/text-to-type-category.enum';
-import { TextToTypeLanguage, TEXT_TO_TYPE_LANGUAGES } from '../models/text-to-type-language.enum';
+import { getTextToTypeLanguage, TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { BaseDialogHtmlComponent } from './base/base-dialog.component';
 import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
 import { InputHtmlComponent } from './core/input.component';
@@ -16,8 +16,17 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private maxCharactersToType: InputHtmlComponent;
   private textToTypeCategoriesSelect: SelectHtmlComponent<TextToTypeCategory>;
   private textToTypeLanguagesSelect: SelectHtmlComponent<TextToTypeLanguage>;
+  private textToTypeLanguagesContainer: HTMLElement;
+  private enableCapitalLettersContainer: HTMLElement;
+  private enablePunctuationCharactersContainer: HTMLElement;
+  private textToTypeLanguagesContainerId: string;
+  private enableCapitalLettersContainerId: string;
+  private enablePunctuationCharactersContainerId: string;
 
   __preInsertHtml(): void {
+    this.enableCapitalLettersContainerId = this.getRandomId();
+    this.enablePunctuationCharactersContainerId = this.getRandomId();
+    this.textToTypeLanguagesContainerId = this.getRandomId();
     const appStorage = this.getAppStorage();
     appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.QUOTES;
     appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
@@ -32,7 +41,10 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(appStorage.enablePunctuationCharacters);
     this.maxCharactersToType = new InputHtmlComponent(appStorage.maxCharactersToType.toString());
     this.textToTypeCategoriesSelect = new SelectHtmlComponent<TextToTypeCategory>(TEXT_TO_TYPE_CATEGORIES, appStorage.textToTypeCategory);
-    this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(TEXT_TO_TYPE_LANGUAGES, appStorage.textToTypeLanguage);
+    this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(
+      getTextToTypeLanguage(appStorage.textToTypeCategory),
+      appStorage.textToTypeLanguage
+    );
     this.changeThemeIcon.preInsertHtml();
     this.stopOnErrorSwitch.preInsertHtml();
     this.enableCapitalLettersSwitch.preInsertHtml();
@@ -60,7 +72,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       </div>
       <div class="app-setting">
         <span>Text to type language</span>
-        <span>${this.textToTypeLanguagesSelect.toHtml()}</span>
+        <span id="${this.textToTypeLanguagesContainerId}">${this.textToTypeLanguagesSelect.toHtml()}</span>
       </div>
       <div class="app-setting">
         <span>Max characters to type</span>
@@ -74,11 +86,11 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
         <span>Stop on error</span>
         <span>${this.stopOnErrorSwitch.toHtml()}</span>
       </div>
-      <div class="app-setting">
+      <div id="${this.enableCapitalLettersContainerId}" class="app-setting">
         <span>Enable capital letters</span>
         <span>${this.enableCapitalLettersSwitch.toHtml()}</span>
       </div>
-      <div class="app-setting">
+      <div id="${this.enablePunctuationCharactersContainerId}" class="app-setting">
         <span>Enable punctuation characters</span>
         <span>${this.enablePunctuationCharactersSwitch.toHtml()}</span>
       </div>
@@ -90,6 +102,9 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   }
 
   __postInsertHtml(): void {
+    this.enableCapitalLettersContainer = document.getElementById(this.enableCapitalLettersContainerId);
+    this.enablePunctuationCharactersContainer = document.getElementById(this.enablePunctuationCharactersContainerId);
+    this.textToTypeLanguagesContainer = document.getElementById(this.textToTypeLanguagesContainerId);
     this.changeThemeIcon.postInsertHtml();
     this.stopOnErrorSwitch.postInsertHtml();
     this.enableCapitalLettersSwitch.postInsertHtml();
@@ -106,6 +121,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.maxCharactersToType.onUpdate(this.handleMaxCharactersToTypeChangeEvent.bind(this));
     this.textToTypeCategoriesSelect.onUpdate(this.handleTextToTypeCategoryChangeEvent.bind(this));
     this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
+    this.handleTextToTypeCategoryChangeEvent(this.getAppStorage().textToTypeCategory);
   }
 
   show(): void {
@@ -161,6 +177,24 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       appStorage.textToTypeIndex = 0;
     }
     appStorage.textToTypeCategory = value;
+    this.enableCapitalLettersContainer.classList.remove('hide');
+    this.enablePunctuationCharactersContainer.classList.remove('hide');
+    appStorage.textToTypeLanguage = TextToTypeLanguage.ENGLISH;
+    if (value == TextToTypeCategory.CODE) {
+      appStorage.textToTypeLanguage = TextToTypeLanguage.JAVA;
+      appStorage.enableCapitalLetters = true;
+      appStorage.enablePunctuationCharacters = true;
+      this.enableCapitalLettersContainer.classList.add('hide');
+      this.enablePunctuationCharactersContainer.classList.add('hide');
+    }
+    this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(
+      getTextToTypeLanguage(appStorage.textToTypeCategory),
+      appStorage.textToTypeLanguage
+    );
+    this.textToTypeLanguagesSelect.preInsertHtml();
+    this.textToTypeLanguagesContainer.innerHTML = this.textToTypeLanguagesSelect.toHtml();
+    this.textToTypeLanguagesSelect.postInsertHtml();
+    this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
     this.saveAppStorage(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }

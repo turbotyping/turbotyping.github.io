@@ -3,8 +3,8 @@ import { SelectOption } from './select-option.model';
 export enum TextToTypeCategory {
   QUOTES = 'QUOTES',
   POEMS = 'POEMS',
-  KIDS_STORIES = 'KIDS_STORIES',
-  JAVA_CODE = 'JAVA_CODE',
+  STORIES = 'STORIES',
+  CODE = 'CODE',
 }
 
 export const TEXT_TO_TYPE_CATEGORIES: SelectOption<TextToTypeCategory>[] = [
@@ -17,11 +17,11 @@ export const TEXT_TO_TYPE_CATEGORIES: SelectOption<TextToTypeCategory>[] = [
     value: TextToTypeCategory.POEMS,
   },
   {
-    label: 'Kids stories',
-    value: TextToTypeCategory.KIDS_STORIES,
+    label: 'Stories',
+    value: TextToTypeCategory.STORIES,
   },
   {
-    label: 'Java code',
-    value: TextToTypeCategory.JAVA_CODE,
+    label: 'Code',
+    value: TextToTypeCategory.CODE,
   },
 ];
