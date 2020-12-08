@@ -26,6 +26,7 @@
 
   & span.NOK {
     color: var(--nok-typed-char-color);
+    border-bottom: 3px solid var(--nok-typed-char-color);
   }
 
   & span.OK {

@@ -44,7 +44,7 @@
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-number {
-  color: #986801;
+  color: var(--code-attr-color);
 }
 .hljs-symbol,
 .hljs-bullet,
