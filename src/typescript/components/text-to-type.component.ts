@@ -52,7 +52,6 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     clearTimeout(this.inactivityTimeout);
     this.inactivityTimeout = setTimeout(this.setTextToType.bind(this), INACTIVITY_TIMEOUT);
     const typedKey = event.key;
-    console.log(typedKey);
     this.handleKeySounds(typedKey);
     if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
@@ -119,6 +118,13 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private getNextCharToType(): HTMLElement {
+    if (this.currentCharToTypeDomElement.dataset.keyRegex === ENTER_KEY) {
+      let res = <HTMLElement>this.currentCharToTypeDomElement.nextElementSibling;
+      while (res?.tagName === 'WBR' || res?.tagName === 'BR' || res?.dataset.keyRegex === SPACE_KEY) {
+        res = <HTMLElement>res.nextElementSibling;
+      }
+      return res;
+    }
     let res = this.currentCharToTypeDomElement.nextElementSibling;
     while (res?.tagName === 'WBR' || res?.tagName === 'BR') {
       res = res.nextElementSibling;
