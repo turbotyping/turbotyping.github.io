@@ -17,12 +17,11 @@
   }
 
   & span.whitespace {
-    padding: 0 0.2rem;
     color: var(--whitespace-color);
   }
 
-  & span.dot {
-    padding-bottom: 0.4rem;
+  & span.dot.NOK {
+    opacity: 0.7;
   }
 
   & span.NOK {

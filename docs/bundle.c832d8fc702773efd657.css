@@ -1359,10 +1359,9 @@ footer {
     font-family: 'Roboto Mono';
     font-size: 1.8rem; }
   .text-to-type span.whitespace {
-    padding: 0 0.2rem;
     color: var(--whitespace-color); }
-  .text-to-type span.dot {
-    padding-bottom: 0.4rem; }
+  .text-to-type span.dot.NOK {
+    opacity: 0.7; }
   .text-to-type span.NOK {
     color: var(--nok-typed-char-color); }
   .text-to-type span.OK {

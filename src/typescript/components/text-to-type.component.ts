@@ -208,7 +208,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
 
   private charToSpan(c: string, clazz: string) {
     // if (c === ' ') return `<span data-key-regex="${SPACE_KEY}" class="whitespace">␣</span><wbr>`;
-    if (c === ' ') return `<span data-key-regex="${SPACE_KEY}" class="whitespace dot">.</span><wbr>`;
+    if (c === ' ') return `<span data-key-regex="${SPACE_KEY}" class="whitespace dot">&middot;</span><wbr>`;
     if (c === '\n') return `<span data-key-regex="${ENTER_KEY}" class="whitespace">↵</span><br>`;
     if (c === '"') return `<span class="${clazz}" data-key-regex='"'>"</span>`;
     if (c === 'é') return `<span class="${clazz}" data-key-regex='[ée]'>é</span>`;
