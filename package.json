@@ -1,7 +1,7 @@
 {
-  "name": "devknowledge.github.io",
+  "name": "devkeyboard.github.io",
   "version": "1.0.0",
-  "description": "",
+  "description": "devkeyboard.github.io",
   "main": "index.js",
   "scripts": {
     "build:prod": "webpack --prod",
@@ -10,13 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enjoytyping/enjoytyping.github.io.git"
+    "url": "git+https://github.com/devkeyboard/devkeyboard.github.io.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/enjoytyping/enjoytyping.github.io/issues"
+    "url": "https://github.com/devkeyboard/devkeyboard.github.io/issues"
   },
   "devDependencies": {
     "@types/node": "14.14.7",

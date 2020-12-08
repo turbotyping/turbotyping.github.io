@@ -6,7 +6,7 @@ export class FooterHtmlComponent extends BaseStaticBlockHtmlComponent {
       <footer>
         <p>This website was mainly inspired from <a href="https://www.keybr.com/" target="_blank">keybr</a> website
         <p>It lets users type <b>Quotes</b> and <b>Poems</b> while improving their typing skills :)</p>
-        <p class="copyright">© 2020 enjoytyping.github.io</p>
+        <p class="copyright">© 2020 devkeyboard.github.io</p>
       </footer>
     `;
   }

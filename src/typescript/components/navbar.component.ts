@@ -18,7 +18,7 @@ export class NavbarHtmlComponent extends BaseBlockHtmlComponent {
         <div class='left'>
           <a href='/'>
             <img src='/logo.png' alt='logo' />
-            <span>Enjoy Typing</span>
+            <span>DEV Keyboard</span>
           </a>
         </div>
         <div class='right'>

@@ -6,9 +6,9 @@ import englishQuotes from '../data/quotes.english';
 import frenchQuotes from '../data/quotes.french';
 import englishPoems from '../data/poems.english';
 import frenchPoems from '../data/poems.french';
-import englishKidsStories from '../data/kids-stories.english';
-import frenchKidsStories from '../data/kids-stories.french';
-import javaCode from '../data/java-code';
+import englishStories from '../data/stories.english';
+import frenchStories from '../data/stories.french';
+import codeJava from '../data/code.java';
 
 export class AppStorage {
   textToTypeCategory: TextToTypeCategory;
@@ -38,7 +38,7 @@ export class AppStorage {
       return englishPoems;
     }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH && appStorage.textToTypeCategory === TextToTypeCategory.STORIES) {
-      return englishKidsStories;
+      return englishStories;
     }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.QUOTES) {
       return frenchQuotes;
@@ -47,10 +47,10 @@ export class AppStorage {
       return frenchPoems;
     }
     if (appStorage.textToTypeLanguage === TextToTypeLanguage.FRENCH && appStorage.textToTypeCategory === TextToTypeCategory.STORIES) {
-      return frenchKidsStories;
+      return frenchStories;
     }
     if (appStorage.textToTypeCategory === TextToTypeCategory.CODE) {
-      return javaCode;
+      return codeJava;
     }
     return [];
   }

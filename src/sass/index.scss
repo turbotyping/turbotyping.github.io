@@ -1,5 +1,3 @@
-@import 'vendor/fonts';
-@import 'vendor/atom-one-light.min';
 @import 'components/core/mixin';
 @import 'components/core/colors';
 @import 'components/core/constants';
@@ -9,6 +7,8 @@
 @import 'components/core/dialog';
 @import 'components/core/select';
 @import 'components/core/input';
+@import 'vendor/fonts';
+@import 'vendor/atom-one-light.min';
 @import 'components/navbar';
 @import 'components/footer';
 @import 'components/text-to-type';
