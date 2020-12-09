@@ -1,3 +1,5 @@
+import { TypedKeyStats } from './typed-key-stats.model';
+
 export class TypedTextStats {
   charsToType: number;
   startTime: Date;
@@ -5,15 +7,34 @@ export class TypedTextStats {
   seconds: number;
   wpm: number;
   errors: number;
+  lastTypedCharTime: Date;
+  typedKeyStatsMap: Map<string, TypedKeyStats> = new Map<string, TypedKeyStats>();
 
   constructor(charsToType: number) {
     this.charsToType = charsToType;
     this.errors = 0;
   }
 
-  handleKeyDownEvent(): void {
-    if (this.startTime) return;
+  handleKeyDownEvent(typedKey: string, expectedKeyRegex: RegExp): void {
+    if (this.startTime) {
+      const timeToTypeInMs = new Date().getTime() - this.lastTypedCharTime.getTime();
+      let typedKeyStats = this.typedKeyStatsMap.get(typedKey);
+      if (!typedKeyStats) {
+        typedKeyStats = new TypedKeyStats();
+        this.typedKeyStatsMap.set(typedKey, typedKeyStats);
+      }
+      typedKeyStats.increaseTimeToTypeInMs(timeToTypeInMs);
+      if (expectedKeyRegex.test(typedKey)) {
+        typedKeyStats.increaseHitCount();
+      } else {
+        typedKeyStats.increaseMissCount();
+      }
+      typedKeyStats.updateWpm();
+      this.lastTypedCharTime = new Date();
+      return;
+    }
     this.startTime = new Date();
+    this.lastTypedCharTime = new Date();
   }
 
   increaseErrors(): void {
@@ -24,10 +45,11 @@ export class TypedTextStats {
     this.errors--;
   }
 
-  endType(): void {
+  endType(): Map<string, TypedKeyStats> {
     this.endTime = new Date();
     this.wpm = Math.round(this.charsToType / 5 / this.getDurationInMin());
     this.seconds = Math.round(this.getDurationInMin() * 60);
+    return this.typedKeyStatsMap;
   }
 
   getDurationInMin(): number {

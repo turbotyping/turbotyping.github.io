@@ -1363,7 +1363,7 @@ footer {
 
 .text-to-type {
   max-width: 90rem;
-  margin: 4rem auto 0;
+  margin: 5rem auto 0;
   white-space: pre-wrap; }
   .text-to-type span {
     font-family: 'Roboto Mono';
@@ -1393,7 +1393,7 @@ footer {
     float: right; }
 
 .typed-text-stats-container {
-  margin: 10rem auto 0;
+  margin: 8rem auto 0;
   display: flex;
   justify-content: center; }
   .typed-text-stats-container .typed-text-stat-container {

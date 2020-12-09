@@ -11,6 +11,7 @@ import frenchStories from '../data/stories.french';
 import javaCode from '../data/code.java';
 import pythonCode from '../data/code.python';
 import htmlCode from '../data/code.html';
+import { TypedKeyStats } from './typed-key-stats.model';
 
 export class AppStorage {
   textToTypeCategory: TextToTypeCategory;
@@ -23,6 +24,16 @@ export class AppStorage {
   stopOnError: boolean;
   textToTypeIndex: number = 0;
   typedTextStats: TypedTextStats[] = [];
+  typedKeysStatsJson: string;
+
+  get typedKeysStatsMap(): Map<string, TypedKeyStats[]> {
+    return new Map(JSON.parse(this.typedKeysStatsJson || '[]'));
+  }
+
+  set typedKeysStatsMap(typedKeysStatsMap: Map<string, TypedKeyStats[]>) {
+    this.typedKeysStatsJson = JSON.stringify(Array.from(typedKeysStatsMap.entries()));
+    console.log(this.typedKeysStatsJson);
+  }
 
   static nextTextToTypeIndex(appStorage: AppStorage) {
     return (appStorage.textToTypeIndex + 1) % AppStorage.getTextToTypeArray(appStorage).length;

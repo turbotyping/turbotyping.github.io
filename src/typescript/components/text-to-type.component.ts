@@ -5,8 +5,9 @@ import { TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { AppStorage } from '../models/app-storage.model';
 const hljs = require('./../vendor/highlight.min.js');
 import { TextToTypeCategory } from '../models/text-to-type-category.enum';
+import { TypedKeyStats } from '../models/typed-key-stats.model';
 
-const INACTIVITY_TIMEOUT = 8000;
+const INACTIVITY_TIMEOUT = 1000000;
 const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
 const ENTER_KEY = 'Enter';
@@ -20,7 +21,8 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private blinkInterval: any;
   private inactivityTimeout: any;
   private nextCurrentCharToTypeCssClass = 'OK';
-  private stats: TypedTextStats;
+  private typedTextStats: TypedTextStats;
+  private typedKeysStats: Map<string, TypedKeyStats>;
   private keyboardSound: HTMLAudioElement;
 
   __preInsertHtml(): void {
@@ -48,10 +50,10 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private handleKeyDownEvent(event) {
-    this.stats.handleKeyDownEvent();
     clearTimeout(this.inactivityTimeout);
     this.inactivityTimeout = setTimeout(this.setTextToType.bind(this), INACTIVITY_TIMEOUT);
     const typedKey = event.key;
+    const expectedKeyRegex = new RegExp(this.currentCharToTypeDomElement.dataset.keyRegex);
     this.handleKeySounds(typedKey);
     if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
@@ -60,7 +62,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
         this.currentCharToTypeDomElement.classList.remove('cursor');
         this.currentCharToTypeDomElement = previousCharToType;
         if (this.currentCharToTypeDomElement.classList.contains('NOK')) {
-          this.stats.decreaseErrors();
+          this.typedTextStats.decreaseErrors();
         }
         this.currentCharToTypeDomElement.classList.remove('OK', 'NOK');
         this.currentCharToTypeDomElement.classList.add('cursor');
@@ -68,11 +70,10 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       return;
     }
     if (!CHARS_To_TYPE.test(typedKey)) return;
-
-    const expectedKeyRegex = new RegExp(this.currentCharToTypeDomElement.dataset.keyRegex);
+    this.typedTextStats.handleKeyDownEvent(typedKey, expectedKeyRegex);
     if (!expectedKeyRegex.test(typedKey)) {
       this.nextCurrentCharToTypeCssClass = 'NOK';
-      this.stats.increaseErrors();
+      this.typedTextStats.increaseErrors();
       if (this.getAppStorage().stopOnError) return;
     }
     clearInterval(this.blinkInterval);
@@ -87,9 +88,9 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       this.scrollDownWhenNecessary();
     } else {
       window.scrollTo(0, 0);
-      this.stats.endType();
+      this.typedKeysStats = this.typedTextStats.endType();
       this.updateAppStorageOnEndTyping();
-      this.dispatchCustomEvent(END_TYPING_EVENT, this.stats);
+      this.dispatchCustomEvent(END_TYPING_EVENT, this.typedTextStats);
       this.setTextToType();
     }
   }
@@ -113,7 +114,18 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private updateAppStorageOnEndTyping() {
     const appStorage = this.getAppStorage();
     appStorage.textToTypeIndex = AppStorage.nextTextToTypeIndex(appStorage);
-    appStorage.typedTextStats.push(this.stats);
+    appStorage.typedTextStats.push(this.typedTextStats);
+    this.typedKeysStats.forEach((value: TypedKeyStats, key: string) => {
+      let typedKeysStatsMap = appStorage.typedKeysStatsMap;
+      if (!typedKeysStatsMap) typedKeysStatsMap = new Map<string, TypedKeyStats[]>();
+      let typedKeysStats = typedKeysStatsMap.get(key);
+      if (!typedKeysStats) {
+        typedKeysStatsMap.set(key, [value]);
+      } else {
+        typedKeysStatsMap.set(key, [...typedKeysStats, value]);
+      }
+      appStorage.typedKeysStatsMap = typedKeysStatsMap;
+    });
     this.saveAppStorage(appStorage);
   }
 
@@ -203,7 +215,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     this.currentCharToTypeDomElement.classList.add('cursor');
     this.textToTypeDomElement.classList.add('blink');
     this.blinkInterval = setInterval(this.toggleBlinkCssClass.bind(this), 350);
-    this.stats = new TypedTextStats(textToTypeLength);
+    this.typedTextStats = new TypedTextStats(textToTypeLength);
   }
 
   private charToSpan(c: string, clazz: string) {
