@@ -32,7 +32,6 @@ export class AppStorage {
 
   set typedKeysStatsMap(typedKeysStatsMap: Map<string, TypedKeyStats[]>) {
     this.typedKeysStatsJson = JSON.stringify(Array.from(typedKeysStatsMap.entries()));
-    console.log(this.typedKeysStatsJson);
   }
 
   static nextTextToTypeIndex(appStorage: AppStorage) {
