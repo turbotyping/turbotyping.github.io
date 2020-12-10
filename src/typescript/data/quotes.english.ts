@@ -1,6 +1,12 @@
 export default [
   {
     text:
+      'Whether you realize it or not, people are watching your life. Even those who belittle you are watching how you live. How you live your life around those people is how you set an example for them',
+    reference: 'https://www.wow4u.com/lifeq2/',
+    author: 'Heidi Kreider',
+  },
+  {
+    text:
       'Taking responsibility - practicing 100 percent responsibility every day - is about seeing ourselves not as right or wrong, but as an agent, chooser, problem solver, and learner in the complex interrelationships of our lives so that we can better integrate with the people and world around us. When we do this, we enjoy a better and more productive way to live and lead',
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Christopher Avery',
@@ -25,7 +31,7 @@ export default [
   },
   {
     text:
-      'Most of those who have succeeded in life can trace their success back to the essential education they obtained from parents, teachers and/ or friends',
+      'Most of those who have succeeded in life can trace their success back to the essential education they obtained from parents, teachers and or friends',
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'T-Ralph Olaniyi',
   },
@@ -136,12 +142,6 @@ export default [
       'I have come to accept life as a process, and am satisfied that in my ever-going process, I am constantly discovering, expanding, finding the cause of my ignorance, in martial art and especially in life',
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Bruce Lee',
-  },
-  {
-    text:
-      'Whether you realize it or not, people are watching your life. Even those who belittle you are watching how you live. How you live your life around those people is how you set an example for them',
-    reference: 'https://www.wow4u.com/lifeq2/',
-    author: 'Heidi Kreider',
   },
   {
     text:

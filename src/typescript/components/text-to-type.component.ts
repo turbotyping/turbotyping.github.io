@@ -7,7 +7,7 @@ const hljs = require('./../vendor/highlight.min.js');
 import { TextToTypeCategory } from '../models/text-to-type-category.enum';
 import { TypedKeyStats } from '../models/typed-key-stats.model';
 
-const INACTIVITY_TIMEOUT = 1000000;
+const INACTIVITY_TIMEOUT = 10000;
 const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
 const ENTER_KEY = 'Enter';
@@ -116,7 +116,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     appStorage.textToTypeIndex = AppStorage.nextTextToTypeIndex(appStorage);
     appStorage.typedTextStats.push(this.typedTextStats);
     this.typedKeysStats.forEach((value: TypedKeyStats, key: string) => {
-      let typedKeysStatsMap = appStorage.typedKeysStatsMap;
+      let typedKeysStatsMap = AppStorage.getTypedKeysStatsMap(appStorage);
       if (!typedKeysStatsMap) typedKeysStatsMap = new Map<string, TypedKeyStats[]>();
       let typedKeysStats = typedKeysStatsMap.get(key);
       if (!typedKeysStats) {
@@ -124,7 +124,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       } else {
         typedKeysStatsMap.set(key, [...typedKeysStats, value]);
       }
-      appStorage.typedKeysStatsMap = typedKeysStatsMap;
+      AppStorage.setTypedKeysStatsJson(appStorage, typedKeysStatsMap);
     });
     this.saveAppStorage(appStorage);
   }

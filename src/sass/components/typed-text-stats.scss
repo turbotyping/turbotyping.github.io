@@ -1,5 +1,5 @@
 .typed-text-stats-container {
-  margin: 8rem auto 0;
+  margin: 6rem auto 0;
   display: flex;
   justify-content: center;
 
@@ -74,6 +74,44 @@
     & .previous {
       border-bottom-left-radius: 100rem;
       border-top-left-radius: 100rem;
+    }
+  }
+}
+
+.typed-keys-stats-container {
+  margin-top: 3rem;
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: repeat(28, 1fr);
+  & .typed-key {
+    color: black;
+    font-size: 1.4rem;
+    padding: 0.5rem 0.8rem;
+    font-family: 'Roboto Mono';
+    font-weight: bold;
+    cursor: pointer;
+
+    &.no-data-available-yet {
+      color: var(--body-color);
+      background-color: var(--typed-key-no-data-available-yet);
+    }
+    &.avg-wpm-less-than-10 {
+      background-color: var(--typed-key-avg-wpm-less-than-10);
+    }
+    &.avg-wpm-less-than-20 {
+      background-color: var(--typed-key-avg-wpm-less-than-20);
+    }
+    &.avg-wpm-less-than-30 {
+      background-color: var(--typed-key-avg-wpm-less-than-30);
+    }
+    &.avg-wpm-less-than-40 {
+      background-color: var(--typed-key-avg-wpm-less-than-40);
+    }
+    &.avg-wpm-less-than-50 {
+      background-color: var(--typed-key-avg-wpm-less-than-50);
+    }
+    &.avg-wpm-more-than-50 {
+      background-color: var(--typed-key-avg-wpm-more-than-50);
     }
   }
 }

@@ -26,12 +26,12 @@ export class AppStorage {
   typedTextStats: TypedTextStats[] = [];
   typedKeysStatsJson: string;
 
-  get typedKeysStatsMap(): Map<string, TypedKeyStats[]> {
-    return new Map(JSON.parse(this.typedKeysStatsJson || '[]'));
+  static setTypedKeysStatsJson(appStorage: AppStorage, typedKeysStatsMap: Map<string, TypedKeyStats[]>): void {
+    appStorage.typedKeysStatsJson = JSON.stringify(Array.from(typedKeysStatsMap.entries()));
   }
 
-  set typedKeysStatsMap(typedKeysStatsMap: Map<string, TypedKeyStats[]>) {
-    this.typedKeysStatsJson = JSON.stringify(Array.from(typedKeysStatsMap.entries()));
+  static getTypedKeysStatsMap(appStorage: AppStorage): Map<string, TypedKeyStats[]> {
+    return new Map(JSON.parse(appStorage.typedKeysStatsJson || '[]'));
   }
 
   static nextTextToTypeIndex(appStorage: AppStorage) {
