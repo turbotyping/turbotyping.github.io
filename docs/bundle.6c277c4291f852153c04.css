@@ -1350,7 +1350,7 @@ nav .right {
   align-items: center; }
   nav .right .iconify {
     font-size: 2.75rem;
-    margin-left: 1rem; }
+    margin-left: 1.5rem; }
   nav .right .app-settings-drop-down {
     z-index: 999;
     position: absolute;
@@ -1512,7 +1512,7 @@ footer {
       flex: 1; }
 
 .change-theme-icon-container .iconify {
-  font-size: 2.75rem;
+  font-size: 3rem;
   margin-left: 1rem; }
 
 .change-theme-icon-container .change-theme-icon {

@@ -2,13 +2,11 @@ import { APP_SETTINGS_CHANGE_EVENT } from '../constants/event.constant';
 import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../models/text-to-type-category.enum';
 import { getTextToTypeLanguage, TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { BaseDialogHtmlComponent } from './base/base-dialog.component';
-import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
 import { InputHtmlComponent } from './core/input.component';
 import { SelectHtmlComponent } from './core/select.component';
 import { SwitchHtmlComponent } from './core/switch.component';
 
 export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
-  private changeThemeIcon = new ChangeThemeIconHtmlComponent();
   private stopOnErrorSwitch: SwitchHtmlComponent;
   private enableCapitalLettersSwitch: SwitchHtmlComponent;
   private enablePunctuationCharactersSwitch: SwitchHtmlComponent;
@@ -45,7 +43,6 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       getTextToTypeLanguage(appStorage.textToTypeCategory),
       appStorage.textToTypeLanguage
     );
-    this.changeThemeIcon.preInsertHtml();
     this.stopOnErrorSwitch.preInsertHtml();
     this.enableCapitalLettersSwitch.preInsertHtml();
     this.enablePunctuationCharactersSwitch.preInsertHtml();
@@ -79,10 +76,6 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
         <span>${this.maxCharactersToType.toHtml()}</span>
       </div>
       <div class="app-setting">
-        <span>Change theme</span>
-        <span>${this.changeThemeIcon.toHtml()}</span>
-      </div>
-      <div class="app-setting">
         <span>Stop on error</span>
         <span>${this.stopOnErrorSwitch.toHtml()}</span>
       </div>
@@ -105,7 +98,6 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enableCapitalLettersContainer = document.getElementById(this.enableCapitalLettersContainerId);
     this.enablePunctuationCharactersContainer = document.getElementById(this.enablePunctuationCharactersContainerId);
     this.textToTypeLanguagesContainer = document.getElementById(this.textToTypeLanguagesContainerId);
-    this.changeThemeIcon.postInsertHtml();
     this.stopOnErrorSwitch.postInsertHtml();
     this.enableCapitalLettersSwitch.postInsertHtml();
     this.enablePunctuationCharactersSwitch.postInsertHtml();

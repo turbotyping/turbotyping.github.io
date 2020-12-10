@@ -1,5 +1,6 @@
 import { AppSettingsDialogHtmlComponent } from './app-settings-dialog.component';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
+import { ChangeThemeIconHtmlComponent } from './change-theme-icon.component';
 
 const APP_SETTINGS_ICON_ID = 'APP_SETTINGS_ICON_ID';
 
@@ -7,9 +8,11 @@ export class NavbarHtmlComponent extends BaseBlockHtmlComponent {
   private navbarDomElement: HTMLElement;
   private appSettingsIconDomElement: HTMLElement;
   private appSettings = new AppSettingsDialogHtmlComponent();
+  private changeThemeIcon = new ChangeThemeIconHtmlComponent();
 
   __preInsertHtml() {
     this.appSettings.preInsertHtml();
+    this.changeThemeIcon.preInsertHtml();
   }
 
   __toHtml() {
@@ -22,6 +25,7 @@ export class NavbarHtmlComponent extends BaseBlockHtmlComponent {
           </a>
         </div>
         <div class='right'>
+          ${this.changeThemeIcon.toHtml()}
           <span ID="${APP_SETTINGS_ICON_ID}"><span class="iconify" data-icon="jam:settings-alt" data-inline="false" data-rotate="270deg"></span></span>
           <div class="app-settings-drop-down">${this.appSettings.toHtml()}<div>
         </div>
@@ -35,6 +39,7 @@ export class NavbarHtmlComponent extends BaseBlockHtmlComponent {
     this.appSettingsIconDomElement = document.getElementById(APP_SETTINGS_ICON_ID);
     this.appSettingsIconDomElement.addEventListener('click', this.handleAppSettingsIconClickEvent.bind(this));
     window.addEventListener('scroll', this.onWindowScrollEvent.bind(this));
+    this.changeThemeIcon.postInsertHtml();
   }
 
   private handleAppSettingsIconClickEvent(event) {
