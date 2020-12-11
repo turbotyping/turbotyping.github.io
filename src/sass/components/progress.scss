@@ -70,7 +70,7 @@
     font-family: 'Poppins', sans-serif;
 
     &:focus {
-      border: none;
+      border: 1px solid var(--delete-progress-data-button-border-color);
       outline: none;
     }
 

@@ -1,5 +1,5 @@
 import { PROGRESS_DIV_ID } from '../constants/constant';
-import { DELETE_PROGRESS_DATA_EVENT } from '../constants/event.constant';
+import { DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { ProgressHtmlComponent } from './progress.component';
 
@@ -40,6 +40,14 @@ export class ProgressSectionHtmlComponent extends BaseBlockHtmlComponent {
     this.errorProgress.postInsertHtml();
     this.deleteProgressDataButton = document.getElementById(this.deleteProgressDataButtonId);
     this.deleteProgressDataButton.addEventListener('click', this.handleDeleteProgressDataButtonClickEvent.bind(this));
+    this.addCustomEventListener(END_TYPING_EVENT, this.updateGraphs.bind(this));
+    this.addCustomEventListener(DELETE_PROGRESS_DATA_EVENT, this.updateGraphs.bind(this));
+  }
+
+  private updateGraphs() {
+    const appStorage = this.getAppStorage();
+    this.speedProgress.setGraphData(appStorage.typedTextStats.map((s) => s.wpm));
+    this.errorProgress.setGraphData(appStorage.typedTextStats.map((s) => s.errors));
   }
 
   private handleDeleteProgressDataButtonClickEvent() {

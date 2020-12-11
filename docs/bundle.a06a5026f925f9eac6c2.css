@@ -1559,7 +1559,7 @@ footer {
     transition-property: color, background-color, border-color, box-shadow;
     font-family: 'Poppins', sans-serif; }
     .delete-progress-data-button-container button:focus {
-      border: none;
+      border: 1px solid var(--delete-progress-data-button-border-color);
       outline: none; }
     .delete-progress-data-button-container button:hover {
       color: var(--delete-progress-data-button-color-on-hover);
