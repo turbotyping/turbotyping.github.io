@@ -3,7 +3,7 @@ import { DELETE_PROGRESS_DATA_EVENT } from '../constants/event.constant';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { ProgressHtmlComponent } from './progress.component';
 
-export class ProgressPageHtmlComponent extends BaseBlockHtmlComponent {
+export class ProgressSectionHtmlComponent extends BaseBlockHtmlComponent {
   private speedProgress: ProgressHtmlComponent;
   private errorProgress: ProgressHtmlComponent;
   private deleteProgressDataButton: HTMLElement;
@@ -29,7 +29,6 @@ export class ProgressPageHtmlComponent extends BaseBlockHtmlComponent {
       <div id="${PROGRESS_DIV_ID}" class="progress-container">
         <div class="progress-graph">${this.speedProgress.toHtml()}</div>
         <div class="progress-graph">${this.errorProgress.toHtml()}</div>
-        
         <div class="delete-progress-data-button-container">
           <button id="${this.deleteProgressDataButtonId}">Delete Progress Data</button>
         <div>
