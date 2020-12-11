@@ -34,8 +34,8 @@ export class InputHtmlComponent extends BaseInlineUserInputHtmlComponent<string>
     this.input.addEventListener('change', this.onInputChange.bind(this));
   }
 
-  getValue(): string {
-    return this.value;
+  setValue(value: string): void {
+    this.input.value = value;
   }
 
   blur() {

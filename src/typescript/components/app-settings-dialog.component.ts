@@ -178,6 +178,8 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       appStorage.enablePunctuationCharacters = true;
       this.enableCapitalLettersContainer.classList.add('hide');
       this.enablePunctuationCharactersContainer.classList.add('hide');
+      this.enableCapitalLettersSwitch.setValue(true);
+      this.enablePunctuationCharactersSwitch.setValue(true);
     }
     this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(
       getTextToTypeLanguage(appStorage.textToTypeCategory),

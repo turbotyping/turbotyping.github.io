@@ -35,6 +35,11 @@ export class SwitchHtmlComponent extends BaseInlineUserInputHtmlComponent<boolea
     this.switchContainerDomElement.addEventListener('click', this.handleSwitchClickEvent.bind(this));
   }
 
+  setValue(value: boolean): void {
+    this.value = value;
+    this.update();
+  }
+
   private update() {
     this.switchOnDomElement.classList.remove('hide');
     this.switchOffDomElement.classList.remove('hide');

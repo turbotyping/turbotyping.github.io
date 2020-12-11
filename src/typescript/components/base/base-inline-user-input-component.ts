@@ -20,4 +20,6 @@ export abstract class BaseInlineUserInputHtmlComponent<T> extends BaseInlineHtml
   executeValidator(value: T): void {
     this.validators.forEach((validator) => validator(value));
   }
+
+  abstract setValue(value: T): void;
 }

@@ -20,4 +20,6 @@ export abstract class BaseBlockUserInputHtmlComponent<T> extends BaseBlockHtmlCo
   executeValidator(value: T): void {
     this.validators.forEach((validator) => validator(value));
   }
+
+  abstract setValue(value: T): void;
 }

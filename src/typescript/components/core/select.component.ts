@@ -59,6 +59,8 @@ export class SelectHtmlComponent<T> extends BaseInlineUserInputHtmlComponent<T> 
     this.selectOptions.addEventListener('click', this.handleSelectOptionsClickEvent.bind(this));
   }
 
+  setValue(value: T): void {}
+
   getValue(): T {
     return this.options.find((o) => o.label === this.selectHeaderLabelText)?.value || null;
   }
