@@ -69,7 +69,10 @@ body.light {
   --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
   --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
   --delete-progress-data-button-color: #f1505e;
-  --delete-progress-data-button-background-color: var(--background-color-03);
+  --delete-progress-data-button-background-color: transparent;
+  --delete-progress-data-button-color-on-hover: var(--white-color);
+  --delete-progress-data-button-background-color-on-hover: #f1505e;
+  --delete-progress-data-button-border-color: #f1505e;
   --delete-progress-data-button-box-shadow: var(--box-shadow-01); }
 
 body.dark {
@@ -144,7 +147,10 @@ body.dark {
   --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
   --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
   --delete-progress-data-button-color: #f1505e;
-  --delete-progress-data-button-background-color: var(--background-color-03);
+  --delete-progress-data-button-background-color: transparent;
+  --delete-progress-data-button-color-on-hover: var(--white-color);
+  --delete-progress-data-button-background-color-on-hover: #f1505e;
+  --delete-progress-data-button-border-color: #f1505e;
   --delete-progress-data-button-box-shadow: var(--box-shadow-01); }
 
 :root {
@@ -1538,22 +1544,26 @@ footer {
 .delete-progress-data-button-container {
   margin-top: 8rem;
   display: flex;
-  justify-content: flex-end; }
+  justify-content: center; }
   .delete-progress-data-button-container button {
-    padding: 1rem 2rem;
+    padding: 0.5rem 5rem;
     border: none;
     cursor: pointer;
     font-weight: bold;
     font-size: 1.5rem;
     color: var(--delete-progress-data-button-color);
     background-color: var(--delete-progress-data-button-background-color);
+    border: 1px solid var(--delete-progress-data-button-border-color);
+    border-radius: 100rem;
     transition: var(--transition);
-    transition-property: color, background-color, box-shadow;
+    transition-property: color, background-color, border-color, box-shadow;
     font-family: 'Poppins', sans-serif; }
     .delete-progress-data-button-container button:focus {
       border: none;
       outline: none; }
     .delete-progress-data-button-container button:hover {
+      color: var(--delete-progress-data-button-color-on-hover);
+      background-color: var(--delete-progress-data-button-background-color-on-hover);
       box-shadow: var(--delete-progress-data-button-box-shadow); }
 
 .change-theme-icon-container .iconify {
