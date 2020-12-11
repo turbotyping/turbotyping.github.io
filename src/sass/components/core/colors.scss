@@ -69,6 +69,9 @@ body.light {
   --typed-key-avg-wpm-less-than-40: rgb(32, 197, 88);
   --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
   --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
+  --delete-progress-data-button-color: var(--text-color-03);
+  --delete-progress-data-button-background-color: var(--background-color-03);
+  --delete-progress-data-button-box-shadow: var(--box-shadow-01);
 }
 
 body.dark {
@@ -113,7 +116,7 @@ body.dark {
   --switch-on-color: #1378fd;
   --dialog-box-shadow: var(--box-shadow-01);
   --dialog-background-color: var(--background-color-01);
-  --slider-color: var(--secondary-color);
+  --slider-color: var(--primary-color);
   --slider-background-color: var(--border-color);
   --check-progress-link-icon-color-on-hover: var(--secondary-color);
   --close-color: #f1505e;
@@ -143,4 +146,7 @@ body.dark {
   --typed-key-avg-wpm-less-than-40: rgb(32, 197, 88);
   --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
   --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
+  --delete-progress-data-button-color: var(--text-color-03);
+  --delete-progress-data-button-background-color: var(--background-color-03);
+  --delete-progress-data-button-box-shadow: var(--box-shadow-01);
 }

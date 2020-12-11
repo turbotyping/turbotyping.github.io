@@ -1,5 +1,5 @@
 import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY } from '../constants/constant';
-import { CHANGE_THEME_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
+import { CHANGE_THEME_EVENT, DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { SliderHtmlComponent } from './core/slider.component';
@@ -49,6 +49,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
     this.setGridLinesColor();
     this.update();
     this.addCustomEventListener(END_TYPING_EVENT, this.update.bind(this));
+    this.addCustomEventListener(DELETE_PROGRESS_DATA_EVENT, this.update.bind(this));
     this.addCustomEventListener(CHANGE_THEME_EVENT, this.handleChangeThemeEvent.bind(this));
     this.slider.onUpdate(this.handleSliderChangeEvent.bind(this));
   }
@@ -80,6 +81,7 @@ export abstract class AbstractProgressHtmlComponent extends BaseBlockHtmlCompone
     const stats = this.getAppStorage().typedTextStats;
     if (!stats || stats.length < MIN_STATS_TO_DISPLAY) {
       this.canvasDomElement.classList.add('hide');
+      this.notEnoughSamplesDomElement.classList.remove('hide');
     } else {
       this.notEnoughSamplesDomElement.classList.add('hide');
       this.canvasDomElement.classList.remove('hide');

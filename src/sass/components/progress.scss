@@ -1,5 +1,8 @@
-.progress-page {
-  padding-top: calc(3rem + var(--navbar-height));
+.progress-container {
+  padding-top: calc(10rem + var(--navbar-height));
+  position: relative;
+}
+.progress-graphs-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10rem;
@@ -24,5 +27,30 @@
     & .progress-smoothness-slider {
       flex: 1;
     }
+  }
+}
+
+.delete-progress-data-button {
+  position: absolute;
+  top: calc(3rem + var(--navbar-height));
+  right: 0;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--delete-progress-data-button-color);
+  background-color: var(--delete-progress-data-button-background-color);
+  transition: var(--transition);
+  transition-property: color, background-color, box-shadow;
+  font-family: 'Poppins', sans-serif;
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+
+  &:hover {
+    box-shadow: var(--delete-progress-data-button-box-shadow);
   }
 }
