@@ -1503,39 +1503,37 @@ footer {
   max-width: 100rem;
   margin: 0 auto; }
 
-.progress-graph .not-enough-samples {
-  padding: 4rem 2rem;
-  border: 0.1rem solid var(--border-color);
-  border-radius: 0.3rem; }
-
-.progress-graph .chartjs-graph-container {
-  height: 40rem; }
-
-.progress-graph .progress-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4rem;
-  position: relative; }
-
-.progress-graph .progress-name {
-  font-size: 2rem;
-  font-family: 'Poppins', sans-serif;
-  font-weight: bold; }
-
-.progress-graph .progress-slider {
-  cursor: pointer;
-  position: absolute;
-  top: 1rem;
-  right: 0;
-  display: flex;
-  align-items: center;
-  float: right; }
-  .progress-graph .progress-slider span {
-    font-size: 1.4rem;
-    margin-right: 3rem; }
-  .progress-graph .progress-slider .progress-smoothness-slider {
-    flex: 1; }
+.progress-graph {
+  margin-top: 3rem; }
+  .progress-graph .not-enough-samples {
+    padding: 4rem 2rem;
+    border: 0.1rem solid var(--border-color);
+    border-radius: 0.3rem; }
+  .progress-graph .chartjs-graph-container {
+    height: 40rem; }
+  .progress-graph .progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4rem;
+    position: relative; }
+  .progress-graph .progress-name {
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold; }
+  .progress-graph .progress-slider {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    display: flex;
+    align-items: center;
+    float: right; }
+    .progress-graph .progress-slider span {
+      font-size: 1.4rem;
+      margin-right: 3rem; }
+    .progress-graph .progress-slider .progress-smoothness-slider {
+      flex: 1; }
 
 .delete-progress-data-button-container {
   margin-top: 8rem;

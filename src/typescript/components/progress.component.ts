@@ -111,7 +111,7 @@ export class ProgressHtmlComponent extends BaseBlockHtmlComponent {
                 ticks: {
                   autoSkipPadding: 50,
                   beginAtZero: true,
-                  max: 100,
+                  max: Math.max(...this.graphData) + 5,
                 },
               },
             ],
