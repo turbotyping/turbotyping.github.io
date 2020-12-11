@@ -4,7 +4,7 @@ export class SliderHtmlComponent extends BaseBlockUserInputHtmlComponent<number>
   private sliderId: string;
   private sliderDomElement: HTMLElement;
 
-  constructor(private min: number, private max: number, private value: number) {
+  constructor(private min: number, private max: number, private value: number, private title: string) {
     super();
   }
 
@@ -15,7 +15,7 @@ export class SliderHtmlComponent extends BaseBlockUserInputHtmlComponent<number>
   __toHtml() {
     return /* html */ `
       <div class="slider-container">
-        <input type="range" min="${this.min}" max="${this.max}" value="${this.value}" class="slider" id="${this.sliderId}">
+        <input title="${this.title}" type="range" min="${this.min}" max="${this.max}" value="${this.value}" class="slider" id="${this.sliderId}">
       </div>
     `;
   }
