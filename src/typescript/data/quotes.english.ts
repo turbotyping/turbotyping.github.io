@@ -1,15 +1,21 @@
 export default [
   {
     text:
-      'Whether you realize it or not, people are watching your life. Even those who belittle you are watching how you live. How you live your life around those people is how you set an example for them',
+      "Most people can't recognize the good life when they have it... I believe, the good life, is simply when you are able to recognize all the good in your life - where ever and whenever that is",
     reference: 'https://www.wow4u.com/lifeq2/',
-    author: 'Heidi Kreider',
+    author: 'Joel Osteen',
   },
   {
     text:
       'Taking responsibility - practicing 100 percent responsibility every day - is about seeing ourselves not as right or wrong, but as an agent, chooser, problem solver, and learner in the complex interrelationships of our lives so that we can better integrate with the people and world around us. When we do this, we enjoy a better and more productive way to live and lead',
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Christopher Avery',
+  },
+  {
+    text:
+      'Whether you realize it or not, people are watching your life. Even those who belittle you are watching how you live. How you live your life around those people is how you set an example for them',
+    reference: 'https://www.wow4u.com/lifeq2/',
+    author: 'Heidi Kreider',
   },
   {
     text:
@@ -178,12 +184,6 @@ export default [
       "Passion drives us everyday, understand your passion, and understand what is that you want in your life because the moment you start doing what you love the most, you'll start celebrating the process",
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Razzab Shaikh',
-  },
-  {
-    text:
-      "Most people can't recognize the good life when they have it... I believe, the good life, is simply when you are able to recognize all the good in your life - where ever and whenever that is",
-    reference: 'https://www.wow4u.com/lifeq2/',
-    author: 'Joel Osteen',
   },
   {
     text:

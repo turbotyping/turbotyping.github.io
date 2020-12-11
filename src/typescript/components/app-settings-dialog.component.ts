@@ -27,7 +27,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.textToTypeLanguagesContainerId = this.getRandomId();
     const appStorage = this.getAppStorage();
     appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.CODE;
-    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.HTML;
+    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.JAVA;
     appStorage.stopOnError = appStorage.stopOnError || false;
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || false;
