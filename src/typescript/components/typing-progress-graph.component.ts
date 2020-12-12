@@ -101,7 +101,6 @@ export class TypingProgressGraphHtmlComponent extends BaseBlockHtmlComponent {
                 ticks: {
                   autoSkipPadding: 50,
                   beginAtZero: true,
-                  max: Math.max(...this.graphData) + 5,
                 },
               },
             ],
