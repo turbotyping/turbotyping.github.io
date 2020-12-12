@@ -6,8 +6,12 @@ footer {
   margin-top: var(--footer-margin-top);
   padding: var(--footer-padding);
 
+  & a,
   & p {
     font-size: 1.35rem;
+  }
+
+  & p {
     margin-bottom: 0;
   }
 
