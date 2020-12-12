@@ -1,9 +1,9 @@
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { SliderHtmlComponent } from './core/slider.component';
-import { LineGraphHtmlComponent } from './line-graph.component';
+import { ProgressGraphHtmlComponent } from './progress-graph.component';
 
 export class ProgressHtmlComponent extends BaseBlockHtmlComponent {
-  private graph: LineGraphHtmlComponent;
+  private graph: ProgressGraphHtmlComponent;
   private slider: SliderHtmlComponent;
   private smoothness: number = 0;
 
@@ -13,7 +13,7 @@ export class ProgressHtmlComponent extends BaseBlockHtmlComponent {
 
   __preInsertHtml(): void {
     this.slider = new SliderHtmlComponent(0, 10, this.smoothness, 'Smoothness');
-    this.graph = new LineGraphHtmlComponent(this.graphData, this.smoothness);
+    this.graph = new ProgressGraphHtmlComponent(this.graphData, this.smoothness);
     this.slider.preInsertHtml();
     this.graph.preInsertHtml();
   }

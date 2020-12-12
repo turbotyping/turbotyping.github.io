@@ -7,10 +7,12 @@ const smooth = require('array-smooth');
 const GRID_LINES_COLOR_IN_DARK_THEME = '#333';
 const GRID_LINES_COLOR_IN_LIGHT_THEME = '#eeeeee';
 
-export class LineGraphHtmlComponent extends BaseBlockHtmlComponent {
+export class ProgressGraphHtmlComponent extends BaseBlockHtmlComponent {
   private notEnoughSamplesId: string;
-  private progressCanvasId: string;
-  private canvasDomElement: HTMLCanvasElement;
+  private canvasContainerId: string;
+  private canvasContainer: HTMLElement;
+  private canvasId: string;
+  private canvas: HTMLCanvasElement;
   private notEnoughSamplesDomElement: HTMLElement;
   private gridLinesColor: string;
 
@@ -20,19 +22,22 @@ export class LineGraphHtmlComponent extends BaseBlockHtmlComponent {
 
   __preInsertHtml(): void {
     this.notEnoughSamplesId = this.getRandomId();
-    this.progressCanvasId = this.getRandomId();
+    this.canvasContainerId = this.getRandomId();
+    this.canvasId = this.getRandomId();
   }
 
   __toHtml() {
     // prettier-ignore
     return /* html */ `
       <p id="${this.notEnoughSamplesId}" class="not-enough-samples">Not enough samples to display graph progress</p> 
-      <div class="chartjs-graph-container"><canvas id="${this.progressCanvasId}" width="40" height="40"></canvas></div>
+      <div id="${this.canvasContainerId}" class="chartjs-graph-container"><canvas id="${this.canvasId}" width="40" height="40"></canvas></div>
     `;
   }
 
   __postInsertHtml(): void {
-    this.initDomElements();
+    this.canvasContainer = document.getElementById(this.canvasContainerId);
+    this.canvas = <HTMLCanvasElement>document.getElementById(this.canvasId);
+    this.notEnoughSamplesDomElement = document.getElementById(this.notEnoughSamplesId);
     this.setGridLinesColor();
     this.update();
     this.addCustomEventListener(CHANGE_THEME_EVENT, this.handleChangeThemeEvent.bind(this));
@@ -53,11 +58,6 @@ export class LineGraphHtmlComponent extends BaseBlockHtmlComponent {
     this.update();
   }
 
-  private initDomElements(): void {
-    this.canvasDomElement = <HTMLCanvasElement>document.getElementById(this.progressCanvasId);
-    this.notEnoughSamplesDomElement = document.getElementById(this.notEnoughSamplesId);
-  }
-
   private setGridLinesColor() {
     if (this.getAppStorage().currentTheme === DARK_THEME_VALUE) {
       this.gridLinesColor = GRID_LINES_COLOR_IN_DARK_THEME;
@@ -68,12 +68,12 @@ export class LineGraphHtmlComponent extends BaseBlockHtmlComponent {
 
   private update() {
     if (!this.graphData || this.graphData.length < MIN_STATS_TO_DISPLAY) {
-      this.canvasDomElement.classList.add('hide');
+      this.canvasContainer.classList.add('hide');
       this.notEnoughSamplesDomElement.classList.remove('hide');
     } else {
       this.notEnoughSamplesDomElement.classList.add('hide');
-      this.canvasDomElement.classList.remove('hide');
-      new Chart(this.canvasDomElement.getContext('2d'), {
+      this.canvasContainer.classList.remove('hide');
+      new Chart(this.canvas.getContext('2d'), {
         type: 'line',
         data: {
           labels: Array.from({ length: this.graphData.length }, (_, i) => i + 1),

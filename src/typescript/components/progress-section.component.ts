@@ -13,11 +13,11 @@ export class ProgressSectionHtmlComponent extends BaseBlockHtmlComponent {
     this.deleteProgressDataButtonId = this.getRandomId();
     const appStorage = this.getAppStorage();
     this.speedProgress = new ProgressHtmlComponent(
-      'Global Speed progress',
+      'Speed progress',
       appStorage.typedTextStats.map((s) => s.wpm)
     );
     this.errorProgress = new ProgressHtmlComponent(
-      'Global Error progress',
+      'Error progress',
       appStorage.typedTextStats.map((s) => s.errors)
     );
     this.speedProgress.preInsertHtml();
@@ -35,6 +35,7 @@ export class ProgressSectionHtmlComponent extends BaseBlockHtmlComponent {
       </div>
     `;
   }
+
   __postInsertHtml(): void {
     this.speedProgress.postInsertHtml();
     this.errorProgress.postInsertHtml();
