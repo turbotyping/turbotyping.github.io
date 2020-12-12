@@ -11,8 +11,16 @@ export class TypingProgressSectionHtmlComponent extends BaseBlockHtmlComponent {
 
   __preInsertHtml(): void {
     this.deleteProgressDataButtonId = this.getRandomId();
-    this.speedProgress = new TypingProgressHtmlComponent('Speed progress', (typedTextStats) => typedTextStats.map((s) => s.wpm));
-    this.errorProgress = new TypingProgressHtmlComponent('Error progress', (typedTextStats) => typedTextStats.map((s) => s.errors));
+    this.speedProgress = new TypingProgressHtmlComponent(
+      'Speed progress',
+      (typedTextStats) => typedTextStats.map((s) => s.wpm),
+      (typedKeysStats) => typedKeysStats.map((s) => s.wpm)
+    );
+    this.errorProgress = new TypingProgressHtmlComponent(
+      'Error progress',
+      (typedTextStats) => typedTextStats.map((s) => s.errors),
+      (typedKeysStats) => typedKeysStats.map((s) => s.missCount)
+    );
     this.speedProgress.preInsertHtml();
     this.errorProgress.preInsertHtml();
   }

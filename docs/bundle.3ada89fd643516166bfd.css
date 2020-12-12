@@ -1,158 +1,3 @@
-body.light {
-  --primary-color: #078eed;
-  --secondary-color: #f57173;
-  --white-color: #fff;
-  --black-color: #222;
-  --text-color-01: #1e1e1e;
-  --text-color-02: #3b3b3b;
-  --text-color-03: #555555;
-  --text-color-04: #767676;
-  --text-color-05: #d8d8d8;
-  --text-color-06: #eeeeee;
-  --background-color-01: #ffffff;
-  --background-color-02: #fffffc;
-  --background-color-03: #fafafa;
-  --background-color-04: #eeeeee;
-  --background-color-05: #e5e5e5;
-  --box-shadow-01: 0 2px 5px 0 rgba(74, 74, 74, 0.2);
-  --box-shadow-02: 0 0 5px 2px rgba(74, 74, 74, 0.2);
-  --border-color: #dfe1e5;
-  --icon-color: var(--text-color-03);
-  --pre-load-background: linear-gradient(270deg, var(--background-color-05), var(--background-color-04), var(--background-color-03));
-  --box-shadow-01: 0 2px 5px 0 rgba(74, 74, 74, 0.2);
-  --box-shadow-02: 0 0 5px 2px rgba(74, 74, 74, 0.2);
-  --body-color: var(--text-color-03);
-  --body-background-color: var(--background-color-01);
-  --navbar-background-color: var(--background-color-01);
-  --navbar-box-shadow: var(--box-shadow-01);
-  --navbar-logo-text-color: var(--text-color-03);
-  --navbar-logo-text-color-on-hover: var(--primary-color);
-  --footer-color: var(--text-color-03);
-  --footer-background-color: var(--background-color-03);
-  --current-char-to-type-color: var(--white-color);
-  --current-char-to-type-background-color: var(--black-color);
-  --ok-typed-char-color: var(--text-color-05);
-  --nok-typed-char-color: #e06c75;
-  --whitespace-color: rgb(221, 221, 221);
-  --typed-text-stat-value-color: var(--text-color-03);
-  --typed-text-stat-container-border-color: var(--secondary-color);
-  --switch-on-color: #065fd4;
-  --dialog-box-shadow: var(--box-shadow-01);
-  --slider-color: var(--primary-color);
-  --slider-background-color: var(--border-color);
-  --check-progress-link-icon-color-on-hover: var(--secondary-color);
-  --close-color: #f1505e;
-  --dialog-background-color: var(--background-color-02);
-  --dialog-backdrop-background-color: var(--background-color-01);
-  --select-options-background-color: var(--background-color-02);
-  --select-option-background-color-on-hover: var(--background-color-03);
-  --select-options-box-shadow: var(--box-shadow-01);
-  --text-to-type-reference-color: var(--primary-color);
-  --input-color: var(--body-color);
-  --input-background-color: var(--background-color-03);
-  --input-border-color: var(--border-color);
-  --input-border-color-on-active: var(--primary-color);
-  --error-message-color: #f1505e;
-  --change-text-to-type-icon-color-on-hover: var(--white-color);
-  --change-text-to-type-icon-background-color-on-hover: var(--secondary-color);
-  --code-comment-color: #a0a1a7;
-  --code-keyword-color: #a626a4;
-  --code-string-color: #50a14f;
-  --code-title-color: #c18401;
-  --code-attr-color: #986801;
-  --typed-key-stats-border-background-color: var(--body-background-color);
-  --typed-key-no-data-available-yet: var(--background-color-04);
-  --typed-key-avg-wpm-less-than-10: rgb(159, 201, 110);
-  --typed-key-avg-wpm-less-than-20: rgb(151, 189, 143);
-  --typed-key-avg-wpm-less-than-30: rgb(122, 194, 134);
-  --typed-key-avg-wpm-less-than-40: rgb(32, 197, 88);
-  --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
-  --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
-  --delete-progress-data-button-color: #f1505e;
-  --delete-progress-data-button-background-color: transparent;
-  --delete-progress-data-button-color-on-hover: var(--white-color);
-  --delete-progress-data-button-background-color-on-hover: #f1505e;
-  --delete-progress-data-button-border-color: #f1505e;
-  --delete-progress-data-button-box-shadow: var(--box-shadow-01); }
-
-body.dark {
-  --primary-color: #078eed;
-  --secondary-color: #f57173;
-  --white-color: #fff;
-  --black-color: #222;
-  --text-color-01: #fafafa;
-  --text-color-02: #eeeeee;
-  --text-color-03: #cecece;
-  --text-color-04: #b1b1b1;
-  --text-color-05: #a0a0a0;
-  --text-color-06: #747070;
-  --background-color-01: #181a1f;
-  --background-color-02: #21252b;
-  --background-color-03: #282c34;
-  --background-color-04: #2c313a;
-  --background-color-05: #353b46;
-  --box-shadow-01: 0 -2px 5px rgba(0, 0, 0, 1);
-  --box-shadow-02: 0 -2px 10px rgba(0, 0, 0, 1);
-  --border-color: #353b46;
-  --icon-color: var(--text-color-03);
-  --pre-load-background: linear-gradient(270deg, var(--background-color-05), var(--background-color-04), var(--background-color-03));
-  --box-shadow-01: 0 -2px 5px rgba(0, 0, 0, 1);
-  --box-shadow-02: 0 -2px 10px rgba(0, 0, 0, 1);
-  --body-color: var(--text-color-03);
-  --body-background-color: var(--background-color-01);
-  --navbar-background-color: var(--background-color-01);
-  --navbar-box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
-  --navbar-logo-text-color: var(--text-color-03);
-  --navbar-logo-text-color-on-hover: var(--primary-color);
-  --footer-color: var(--text-color-03);
-  --footer-background-color: var(--background-color-03);
-  --current-char-to-type-color: var(--black-color);
-  --current-char-to-type-background-color: var(--white-color);
-  --ok-typed-char-color: var(--text-color-06);
-  --nok-typed-char-color: #e06c75;
-  --whitespace-color: #383838;
-  --typed-text-stat-value-color: var(--text-color-03);
-  --typed-text-stat-container-border-color: var(--secondary-color);
-  --switch-on-color: #1378fd;
-  --dialog-box-shadow: var(--box-shadow-01);
-  --dialog-background-color: var(--background-color-01);
-  --slider-color: var(--primary-color);
-  --slider-background-color: var(--border-color);
-  --check-progress-link-icon-color-on-hover: var(--secondary-color);
-  --close-color: #f1505e;
-  --dialog-background-color: var(--background-color-02);
-  --dialog-backdrop-background-color: var(--background-color-01);
-  --select-options-background-color: var(--background-color-02);
-  --select-option-background-color-on-hover: var(--background-color-03);
-  --select-options-box-shadow: var(--box-shadow-01);
-  --text-to-type-reference-color: var(--primary-color);
-  --input-color: var(--body-color);
-  --input-background-color: var(--background-color-03);
-  --input-border-color: var(--border-color);
-  --input-border-color-on-active: var(--primary-color);
-  --error-message-color: #f1505e;
-  --change-text-to-type-icon-color-on-hover: var(--white-color);
-  --change-text-to-type-icon-background-color-on-hover: var(--secondary-color);
-  --code-comment-color: #5c6370;
-  --code-keyword-color: #c678dd;
-  --code-string-color: #98c379;
-  --code-title-color: #e5c07b;
-  --code-attr-color: #d19a66;
-  --typed-key-stats-border-background-color: var(--body-background-color);
-  --typed-key-no-data-available-yet: var(--background-color-03);
-  --typed-key-avg-wpm-less-than-10: rgb(159, 201, 110);
-  --typed-key-avg-wpm-less-than-20: rgb(151, 189, 143);
-  --typed-key-avg-wpm-less-than-30: rgb(122, 194, 134);
-  --typed-key-avg-wpm-less-than-40: rgb(32, 197, 88);
-  --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
-  --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
-  --delete-progress-data-button-color: #f1505e;
-  --delete-progress-data-button-background-color: transparent;
-  --delete-progress-data-button-color-on-hover: var(--white-color);
-  --delete-progress-data-button-background-color-on-hover: #f1505e;
-  --delete-progress-data-button-border-color: #f1505e;
-  --delete-progress-data-button-box-shadow: var(--box-shadow-01); }
-
 :root {
   --transition: all 0.15s ease-in-out;
   --border-radius: 0.3rem;
@@ -420,6 +265,165 @@ p {
     font-style: italic; }
   .input-container.error .input {
     border-color: var(--error-message-color); }
+
+body.light {
+  --primary-color: #078eed;
+  --secondary-color: #f57173;
+  --white-color: #fff;
+  --black-color: #222;
+  --text-color-01: #1e1e1e;
+  --text-color-02: #3b3b3b;
+  --text-color-03: #555555;
+  --text-color-04: #767676;
+  --text-color-05: #d8d8d8;
+  --text-color-06: #eeeeee;
+  --background-color-01: #ffffff;
+  --background-color-02: #fffffc;
+  --background-color-03: #fafafa;
+  --background-color-04: #eeeeee;
+  --background-color-05: #e5e5e5;
+  --box-shadow-01: 0 2px 5px 0 rgba(74, 74, 74, 0.2);
+  --box-shadow-02: 0 0 5px 2px rgba(74, 74, 74, 0.2);
+  --border-color: #dfe1e5;
+  --icon-color: var(--text-color-03);
+  --pre-load-background: linear-gradient(270deg, var(--background-color-05), var(--background-color-04), var(--background-color-03));
+  --box-shadow-01: 0 2px 5px 0 rgba(74, 74, 74, 0.2);
+  --box-shadow-02: 0 0 5px 2px rgba(74, 74, 74, 0.2);
+  --body-color: var(--text-color-03);
+  --body-background-color: var(--background-color-01);
+  --navbar-background-color: var(--background-color-01);
+  --navbar-box-shadow: var(--box-shadow-01);
+  --navbar-logo-text-color: var(--text-color-03);
+  --navbar-logo-text-color-on-hover: var(--primary-color);
+  --footer-color: var(--text-color-03);
+  --footer-background-color: var(--background-color-03);
+  --current-char-to-type-color: var(--white-color);
+  --current-char-to-type-background-color: var(--black-color);
+  --ok-typed-char-color: var(--text-color-05);
+  --nok-typed-char-color: #e06c75;
+  --whitespace-color: rgb(221, 221, 221);
+  --typed-text-stat-value-color: var(--text-color-03);
+  --typed-text-stat-container-border-color: var(--secondary-color);
+  --switch-on-color: #065fd4;
+  --dialog-box-shadow: var(--box-shadow-01);
+  --slider-color: var(--primary-color);
+  --slider-background-color: var(--border-color);
+  --check-progress-link-icon-color-on-hover: var(--secondary-color);
+  --close-color: #f1505e;
+  --dialog-background-color: var(--background-color-02);
+  --dialog-backdrop-background-color: var(--background-color-01);
+  --select-options-background-color: var(--background-color-02);
+  --select-option-background-color-on-hover: var(--background-color-03);
+  --select-options-box-shadow: var(--box-shadow-01);
+  --text-to-type-reference-color: var(--primary-color);
+  --input-color: var(--body-color);
+  --input-background-color: var(--background-color-03);
+  --input-border-color: var(--border-color);
+  --input-border-color-on-active: var(--primary-color);
+  --error-message-color: #f1505e;
+  --change-text-to-type-icon-color-on-hover: var(--white-color);
+  --change-text-to-type-icon-background-color-on-hover: var(--secondary-color);
+  --code-comment-color: #a0a1a7;
+  --code-keyword-color: #a626a4;
+  --code-string-color: #50a14f;
+  --code-title-color: #c18401;
+  --code-attr-color: #986801;
+  --typed-key-stats-border-background-color: var(--body-background-color);
+  --typed-key-no-data-available-yet: var(--background-color-04);
+  --typed-key-avg-wpm-less-than-10: rgb(159, 201, 110);
+  --typed-key-avg-wpm-less-than-20: rgb(151, 189, 143);
+  --typed-key-avg-wpm-less-than-30: rgb(122, 194, 134);
+  --typed-key-avg-wpm-less-than-40: rgb(32, 197, 88);
+  --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
+  --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
+  --delete-progress-data-button-color: #f1505e;
+  --delete-progress-data-button-background-color: transparent;
+  --delete-progress-data-button-color-on-hover: var(--white-color);
+  --delete-progress-data-button-background-color-on-hover: #f1505e;
+  --delete-progress-data-button-border-color: #f1505e;
+  --delete-progress-data-button-box-shadow: var(--box-shadow-01);
+  --selected-key-color: var(--white-color);
+  --selected-key-background-color: var(--primary-color); }
+
+body.dark {
+  --primary-color: #078eed;
+  --secondary-color: #f57173;
+  --white-color: #fff;
+  --black-color: #222;
+  --text-color-01: #fafafa;
+  --text-color-02: #eeeeee;
+  --text-color-03: #cecece;
+  --text-color-04: #b1b1b1;
+  --text-color-05: #a0a0a0;
+  --text-color-06: #747070;
+  --background-color-01: #181a1f;
+  --background-color-02: #21252b;
+  --background-color-03: #282c34;
+  --background-color-04: #2c313a;
+  --background-color-05: #353b46;
+  --box-shadow-01: 0 -2px 5px rgba(0, 0, 0, 1);
+  --box-shadow-02: 0 -2px 10px rgba(0, 0, 0, 1);
+  --border-color: #353b46;
+  --icon-color: var(--text-color-03);
+  --pre-load-background: linear-gradient(270deg, var(--background-color-05), var(--background-color-04), var(--background-color-03));
+  --box-shadow-01: 0 -2px 5px rgba(0, 0, 0, 1);
+  --box-shadow-02: 0 -2px 10px rgba(0, 0, 0, 1);
+  --body-color: var(--text-color-03);
+  --body-background-color: var(--background-color-01);
+  --navbar-background-color: var(--background-color-01);
+  --navbar-box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+  --navbar-logo-text-color: var(--text-color-03);
+  --navbar-logo-text-color-on-hover: var(--primary-color);
+  --footer-color: var(--text-color-03);
+  --footer-background-color: var(--background-color-03);
+  --current-char-to-type-color: var(--black-color);
+  --current-char-to-type-background-color: var(--white-color);
+  --ok-typed-char-color: var(--text-color-06);
+  --nok-typed-char-color: #e06c75;
+  --whitespace-color: #383838;
+  --typed-text-stat-value-color: var(--text-color-03);
+  --typed-text-stat-container-border-color: var(--secondary-color);
+  --switch-on-color: #1378fd;
+  --dialog-box-shadow: var(--box-shadow-01);
+  --dialog-background-color: var(--background-color-01);
+  --slider-color: var(--primary-color);
+  --slider-background-color: var(--border-color);
+  --check-progress-link-icon-color-on-hover: var(--secondary-color);
+  --close-color: #f1505e;
+  --dialog-background-color: var(--background-color-02);
+  --dialog-backdrop-background-color: var(--background-color-01);
+  --select-options-background-color: var(--background-color-02);
+  --select-option-background-color-on-hover: var(--background-color-03);
+  --select-options-box-shadow: var(--box-shadow-01);
+  --text-to-type-reference-color: var(--primary-color);
+  --input-color: var(--body-color);
+  --input-background-color: var(--background-color-03);
+  --input-border-color: var(--border-color);
+  --input-border-color-on-active: var(--primary-color);
+  --error-message-color: #f1505e;
+  --change-text-to-type-icon-color-on-hover: var(--white-color);
+  --change-text-to-type-icon-background-color-on-hover: var(--secondary-color);
+  --code-comment-color: #5c6370;
+  --code-keyword-color: #c678dd;
+  --code-string-color: #98c379;
+  --code-title-color: #e5c07b;
+  --code-attr-color: #d19a66;
+  --typed-key-stats-border-background-color: var(--body-background-color);
+  --typed-key-no-data-available-yet: var(--background-color-03);
+  --typed-key-avg-wpm-less-than-10: rgb(159, 201, 110);
+  --typed-key-avg-wpm-less-than-20: rgb(151, 189, 143);
+  --typed-key-avg-wpm-less-than-30: rgb(122, 194, 134);
+  --typed-key-avg-wpm-less-than-40: rgb(32, 197, 88);
+  --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
+  --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
+  --delete-progress-data-button-color: #f1505e;
+  --delete-progress-data-button-background-color: transparent;
+  --delete-progress-data-button-color-on-hover: var(--white-color);
+  --delete-progress-data-button-background-color-on-hover: #f1505e;
+  --delete-progress-data-button-border-color: #f1505e;
+  --delete-progress-data-button-box-shadow: var(--box-shadow-01);
+  --selected-key-color: var(--white-color);
+  --selected-key-background-color: var(--primary-color); }
 
 @font-face {
   font-family: 'Anonymous Pro';
@@ -1479,7 +1483,7 @@ footer {
   margin-top: 3rem;
   display: grid;
   grid-gap: 2px;
-  grid-template-columns: repeat(28, 1fr); }
+  grid-template-columns: repeat(26, 1fr); }
   .typed-keys-stats-container .typed-key {
     color: black;
     font-size: 1.4rem;
@@ -1521,7 +1525,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 4rem; }
+    margin-bottom: 2.5rem; }
   .progress-graph .progress-name {
     font-size: 2rem;
     font-family: 'Poppins', sans-serif;
@@ -1551,6 +1555,9 @@ footer {
       font-weight: 700; }
     .progress-graph .progress-slider .progress-smoothness-slider {
       flex: 1; }
+
+.typed-keys-progress {
+  margin-bottom: 2.5rem; }
 
 .delete-progress-data-button-container {
   margin-top: 8rem;
@@ -1597,4 +1604,22 @@ footer {
     .app-settings-dialog .app-setting span {
       font-size: 1.5rem;
       color: var(--body-color); }
+
+.typed-keys-container {
+  margin-top: 3rem;
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: repeat(26, 1fr); }
+  .typed-keys-container .typed-key {
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 0.5rem 0.8rem;
+    font-family: 'Roboto Mono';
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--body-color);
+    background-color: var(--typed-key-no-data-available-yet); }
+    .typed-keys-container .typed-key.selected-key {
+      color: var(--selected-key-color);
+      background-color: var(--selected-key-background-color); }
 

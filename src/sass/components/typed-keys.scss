@@ -1,0 +1,21 @@
+.typed-keys-container {
+  margin-top: 3rem;
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: repeat(26, 1fr);
+  & .typed-key {
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 0.5rem 0.8rem;
+    font-family: 'Roboto Mono';
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--body-color);
+    background-color: var(--typed-key-no-data-available-yet);
+
+    &.selected-key {
+      color: var(--selected-key-color);
+      background-color: var(--selected-key-background-color);
+    }
+  }
+}

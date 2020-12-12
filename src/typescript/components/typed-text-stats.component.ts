@@ -108,8 +108,7 @@ export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
   private updateTypedKeysStats() {
     const appStorage = this.getAppStorage();
     let html = '';
-    //'abcdefghijklmnstopkrstuvwxyz0123456789\'"{}()[]<>+-=@,.;:'.split('').forEach((c) => {
-    'abcdefghijklmnstopkrstuvwxyz'.split('').forEach((c) => {
+    'abcdefghijklmnopqrstuvwxyz'.split('').forEach((c) => {
       const keyStats = AppStorage.getTypedKeysStatsMap(appStorage);
       let cssClass = 'no-data-available-yet';
       let title = 'No data available yet';

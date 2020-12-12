@@ -20,7 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
   }
 
   & .progress-name {
@@ -67,6 +67,10 @@
       flex: 1;
     }
   }
+}
+
+.typed-keys-progress {
+  margin-bottom: 2.5rem;
 }
 
 .delete-progress-data-button-container {

@@ -1,5 +1,4 @@
 @import 'components/core/mixin';
-@import 'components/core/colors';
 @import 'components/core/constants';
 @import 'components/core/base';
 @import 'components/core/switch';
@@ -7,6 +6,7 @@
 @import 'components/core/dialog';
 @import 'components/core/select';
 @import 'components/core/input';
+@import 'components/colors';
 @import 'vendor/fonts';
 @import 'vendor/atom-one-light.min';
 @import 'components/navbar';
@@ -16,3 +16,4 @@
 @import 'components/progress';
 @import 'components/change-theme-icon';
 @import 'components/app-settings-dialog';
+@import 'components/typed-keys';
