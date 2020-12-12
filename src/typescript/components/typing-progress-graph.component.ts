@@ -7,7 +7,7 @@ const smooth = require('array-smooth');
 const GRID_LINES_COLOR_IN_DARK_THEME = '#333';
 const GRID_LINES_COLOR_IN_LIGHT_THEME = '#eeeeee';
 
-export class ProgressGraphHtmlComponent extends BaseBlockHtmlComponent {
+export class TypingProgressGraphHtmlComponent extends BaseBlockHtmlComponent {
   private notEnoughSamplesId: string;
   private canvasContainerId: string;
   private canvasContainer: HTMLElement;

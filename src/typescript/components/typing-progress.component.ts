@@ -2,10 +2,10 @@ import { DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../constants/event
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { SliderHtmlComponent } from './core/slider.component';
-import { ProgressGraphHtmlComponent } from './progress-graph.component';
+import { TypingProgressGraphHtmlComponent } from './typing-progress-graph.component';
 
-export class ProgressHtmlComponent extends BaseBlockHtmlComponent {
-  private graph: ProgressGraphHtmlComponent;
+export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
+  private graph: TypingProgressGraphHtmlComponent;
   private slider: SliderHtmlComponent;
   private smoothness: number = 0;
 
@@ -15,7 +15,7 @@ export class ProgressHtmlComponent extends BaseBlockHtmlComponent {
 
   __preInsertHtml(): void {
     this.slider = new SliderHtmlComponent(0, 10, this.smoothness, 'Smoothness');
-    this.graph = new ProgressGraphHtmlComponent(this.typedTextsStatsToProgressData(this.getAppStorage().typedTextsStats), this.smoothness);
+    this.graph = new TypingProgressGraphHtmlComponent(this.typedTextsStatsToProgressData(this.getAppStorage().typedTextsStats), this.smoothness);
     this.slider.preInsertHtml();
     this.graph.preInsertHtml();
     this.addCustomEventListener(END_TYPING_EVENT, this.updateProgressData.bind(this));

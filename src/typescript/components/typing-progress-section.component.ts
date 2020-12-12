@@ -1,18 +1,18 @@
 import { PROGRESS_DIV_ID } from '../constants/constant';
 import { DELETE_PROGRESS_DATA_EVENT } from '../constants/event.constant';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
-import { ProgressHtmlComponent } from './progress.component';
+import { TypingProgressHtmlComponent } from './typing-progress.component';
 
-export class ProgressSectionHtmlComponent extends BaseBlockHtmlComponent {
-  private speedProgress: ProgressHtmlComponent;
-  private errorProgress: ProgressHtmlComponent;
+export class TypingProgressSectionHtmlComponent extends BaseBlockHtmlComponent {
+  private speedProgress: TypingProgressHtmlComponent;
+  private errorProgress: TypingProgressHtmlComponent;
   private deleteProgressDataButton: HTMLElement;
   private deleteProgressDataButtonId: string;
 
   __preInsertHtml(): void {
     this.deleteProgressDataButtonId = this.getRandomId();
-    this.speedProgress = new ProgressHtmlComponent('Speed progress', (typedTextStats) => typedTextStats.map((s) => s.wpm));
-    this.errorProgress = new ProgressHtmlComponent('Error progress', (typedTextStats) => typedTextStats.map((s) => s.errors));
+    this.speedProgress = new TypingProgressHtmlComponent('Speed progress', (typedTextStats) => typedTextStats.map((s) => s.wpm));
+    this.errorProgress = new TypingProgressHtmlComponent('Error progress', (typedTextStats) => typedTextStats.map((s) => s.errors));
     this.speedProgress.preInsertHtml();
     this.errorProgress.preInsertHtml();
   }
