@@ -8,7 +8,7 @@ export class SpeedProgressTypedKeysHighlighter implements TypedKeysHighlighter {
     const appStorage = JSON.parse(localStorage.getItem(APP_STORAGE_LOCAL_STORAGE_KEY)) || new AppStorage();
     const keyStats = AppStorage.getTypedKeysStatsMap(appStorage);
     container.querySelectorAll(`.${typedKeyCssClass}`).forEach((span) => {
-      let typedKey = span.innerHTML;
+      let typedKey = span.innerHTML.toLowerCase();
       let cssClass = 'not-enough-data-available-yet';
       if (keyStats && keyStats.get(typedKey)) {
         let stats = keyStats

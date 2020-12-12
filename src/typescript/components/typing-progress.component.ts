@@ -9,7 +9,8 @@ import { TypedKeysHighlighter } from './typed-keys-highlighter';
 import { TypedKeysHtmlComponent, TYPED_KEY_CLASS } from './typed-keys.component';
 import { TypingProgressGraphHtmlComponent } from './typing-progress-graph.component';
 
-const TYPED_KEYS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"{}()[]<>+-=,.;:';
+// const TYPED_KEYS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"{}()[]<>+-=,.;:';
+const TYPED_KEYS = 'abcdefghijklmnopqrstuvwxyz';
 
 export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
   private graph: TypingProgressGraphHtmlComponent;
@@ -36,7 +37,7 @@ export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
     this.byKeySwitch = new SwitchHtmlComponent(this.byKeySwitchValue);
     this.slider = new SliderHtmlComponent(0, 10, this.smoothness, 'Smoothness');
     this.graph = new TypingProgressGraphHtmlComponent(this.typedTextsStatsToProgressData(this.getAppStorage().typedTextsStats), this.smoothness);
-    this.typedKeys = new TypedKeysHtmlComponent(TYPED_KEYS, 'A', this.typedKeysStatsToProgressData);
+    this.typedKeys = new TypedKeysHtmlComponent(TYPED_KEYS, 'a');
     this.byKeySwitch.preInsertHtml();
     this.slider.preInsertHtml();
     this.graph.preInsertHtml();
@@ -79,7 +80,7 @@ export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
   private handleProgressByKeyUpdateEvent(active: boolean) {
     if (active) {
       this.typedKeysProgress.classList.remove('hide');
-      this.handleSelectKey('A');
+      this.handleSelectKey('a');
     } else {
       this.typedKeysProgress.classList.add('hide');
       this.useTypedTextsStats();
@@ -87,8 +88,9 @@ export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private handleSelectKey(key: string) {
-    this.typedKeys.selectKey(key);
-    const typedKeysStats = AppStorage.getTypedKeysStatsMap(this.getAppStorage()).get(key) || [];
+    const keyLowercase = key.toLowerCase();
+    this.typedKeys.selectKey(keyLowercase);
+    const typedKeysStats = AppStorage.getTypedKeysStatsMap(this.getAppStorage()).get(keyLowercase) || [];
     this.graph.setGraphData(this.typedKeysStatsToProgressData(typedKeysStats));
     this.typedKeysHighlighter.highligh(this.typedKeysProgressId, TYPED_KEY_CLASS);
   }

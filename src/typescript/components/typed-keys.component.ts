@@ -1,4 +1,3 @@
-import { TypedKeyStats } from '../models/typed-key-stats.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 
 export const TYPED_KEY_CLASS = 'typed-key';
@@ -8,11 +7,7 @@ export class TypedKeysHtmlComponent extends BaseBlockHtmlComponent {
   private typedKeysContainer: HTMLElement;
   private callbacks: ((key: string) => void)[] = [];
 
-  constructor(
-    private keys: string,
-    private selectedKey: string,
-    private typedKeysStatsToProgressData: (typedKeysStats: TypedKeyStats[]) => number[]
-  ) {
+  constructor(private keys: string, private selectedKey: string) {
     super();
   }
 
@@ -53,7 +48,9 @@ export class TypedKeysHtmlComponent extends BaseBlockHtmlComponent {
     this.typedKeysContainer.innerHTML = this.keys
       .split('')
       .map((c) =>
-        c === this.selectedKey ? `<span class="${TYPED_KEY_CLASS} selected-key">${c}</span>` : `<span class="${TYPED_KEY_CLASS}">${c}</span>`
+        c.toUpperCase() === this.selectedKey.toUpperCase()
+          ? `<span class="${TYPED_KEY_CLASS} selected-key">${c.toUpperCase()}</span>`
+          : `<span class="${TYPED_KEY_CLASS}">${c.toUpperCase()}</span>`
       )
       .join('');
   }
