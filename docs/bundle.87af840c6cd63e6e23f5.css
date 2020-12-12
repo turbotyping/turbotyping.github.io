@@ -290,7 +290,7 @@ p {
   font-size: 4.5rem; }
 
 .switch-on {
-  color: var(--switch-on-color); }
+  color: var(--switch-on-color) !important; }
 
 .slider-container {
   width: 100%; }
@@ -1520,24 +1520,35 @@ footer {
   .progress-graph .progress-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 4rem;
-    position: relative; }
+    justify-content: space-between;
+    margin-bottom: 4rem; }
   .progress-graph .progress-name {
     font-size: 2rem;
     font-family: 'Poppins', sans-serif;
     font-weight: bold; }
+  .progress-graph .progress-ctrl {
+    display: flex;
+    align-items: center; }
+  .progress-graph .progress-by-key {
+    display: flex;
+    align-items: center; }
+    .progress-graph .progress-by-key .label {
+      margin-right: 1rem;
+      font-size: 1.4rem;
+      font-weight: 700; }
+    .progress-graph .progress-by-key .iconify {
+      font-size: 2.3rem;
+      margin-right: 2.3rem;
+      color: var(--border-color); }
   .progress-graph .progress-slider {
     cursor: pointer;
-    position: absolute;
-    top: 1rem;
-    right: 0;
     display: flex;
     align-items: center;
     float: right; }
-    .progress-graph .progress-slider span {
+    .progress-graph .progress-slider .label {
+      margin-right: 1.5rem;
       font-size: 1.4rem;
-      margin-right: 3rem; }
+      font-weight: 700; }
     .progress-graph .progress-slider .progress-smoothness-slider {
       flex: 1; }
 
