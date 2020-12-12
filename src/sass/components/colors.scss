@@ -75,8 +75,10 @@ body.light {
   --delete-progress-data-button-background-color-on-hover: #f1505e;
   --delete-progress-data-button-border-color: #f1505e;
   --delete-progress-data-button-box-shadow: var(--box-shadow-01);
+  --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
   --selected-key-background-color: var(--primary-color);
+  --typed-key-with-gte-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
 }
 
 body.dark {
@@ -157,6 +159,8 @@ body.dark {
   --delete-progress-data-button-background-color-on-hover: #f1505e;
   --delete-progress-data-button-border-color: #f1505e;
   --delete-progress-data-button-box-shadow: var(--box-shadow-01);
+  --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
   --selected-key-background-color: var(--primary-color);
+  --typed-key-with-gte-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
 }

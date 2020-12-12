@@ -11,11 +11,23 @@
     font-weight: bold;
     cursor: pointer;
     color: var(--body-color);
-    background-color: var(--typed-key-no-data-available-yet);
+    background-color: var(--typed-key-background-color);
+    position: relative;
 
     &.selected-key {
       color: var(--selected-key-color);
       background-color: var(--selected-key-background-color);
+    }
+
+    &.with-gte-min-stats-to-display-in-app-storage::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 5px;
+      height: 5px;
+      border-radius: 2px;
+      background-color: var(--typed-key-with-gte-min-stats-to-display-in-app-storage-background-color);
     }
   }
 }

@@ -342,8 +342,10 @@ body.light {
   --delete-progress-data-button-background-color-on-hover: #f1505e;
   --delete-progress-data-button-border-color: #f1505e;
   --delete-progress-data-button-box-shadow: var(--box-shadow-01);
+  --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
-  --selected-key-background-color: var(--primary-color); }
+  --selected-key-background-color: var(--primary-color);
+  --typed-key-with-gte-min-stats-to-display-in-app-storage-background-color: var(--secondary-color); }
 
 body.dark {
   --primary-color: #078eed;
@@ -422,8 +424,10 @@ body.dark {
   --delete-progress-data-button-background-color-on-hover: #f1505e;
   --delete-progress-data-button-border-color: #f1505e;
   --delete-progress-data-button-box-shadow: var(--box-shadow-01);
+  --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
-  --selected-key-background-color: var(--primary-color); }
+  --selected-key-background-color: var(--primary-color);
+  --typed-key-with-gte-min-stats-to-display-in-app-storage-background-color: var(--secondary-color); }
 
 @font-face {
   font-family: 'Anonymous Pro';
@@ -1618,8 +1622,18 @@ footer {
     font-weight: bold;
     cursor: pointer;
     color: var(--body-color);
-    background-color: var(--typed-key-no-data-available-yet); }
+    background-color: var(--typed-key-background-color);
+    position: relative; }
     .typed-keys-container .typed-key.selected-key {
       color: var(--selected-key-color);
       background-color: var(--selected-key-background-color); }
+    .typed-keys-container .typed-key.with-gte-min-stats-to-display-in-app-storage::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 5px;
+      height: 5px;
+      border-radius: 2px;
+      background-color: var(--typed-key-with-gte-min-stats-to-display-in-app-storage-background-color); }
 

@@ -1,3 +1,5 @@
+import { MIN_STATS_TO_DISPLAY } from '../constants/constant';
+import { AppStorage } from '../models/app-storage.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 
 export class TypedKeysHtmlComponent extends BaseBlockHtmlComponent {
@@ -43,9 +45,18 @@ export class TypedKeysHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private update() {
+    const typedKeysStatsMap = AppStorage.getTypedKeysStatsMap(this.getAppStorage());
     this.typedKeysContainer.innerHTML = this.keys
       .split('')
-      .map((c) => (c === this.selectedKey ? `<span class="typed-key selected-key">${c}</span>` : `<span class="typed-key">${c}</span>`))
+      .map((c) => {
+        if (c === this.selectedKey) {
+          return `<span class="typed-key selected-key">${c}</span>`;
+        }
+        if ((typedKeysStatsMap.get(c) || []).length >= MIN_STATS_TO_DISPLAY) {
+          return `<span class="typed-key with-gte-min-stats-to-display-in-app-storage">${c}</span>`;
+        }
+        return `<span class="typed-key">${c}</span>`;
+      })
       .join('');
   }
 }
