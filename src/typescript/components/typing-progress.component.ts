@@ -9,7 +9,7 @@ import { TypedKeysHighlighter } from './typed-keys-highlighter';
 import { TypedKeysHtmlComponent, TYPED_KEY_CLASS } from './typed-keys.component';
 import { TypingProgressGraphHtmlComponent } from './typing-progress-graph.component';
 
-const TYPED_KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"{}()[]<>+-=,.;:';
+const TYPED_KEYS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"{}()[]<>+-=,.;:';
 
 export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
   private graph: TypingProgressGraphHtmlComponent;
@@ -79,7 +79,7 @@ export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
   private handleProgressByKeyUpdateEvent(active: boolean) {
     if (active) {
       this.typedKeysProgress.classList.remove('hide');
-      this.handleSelectKey('a');
+      this.handleSelectKey('A');
     } else {
       this.typedKeysProgress.classList.add('hide');
       this.useTypedTextsStats();
