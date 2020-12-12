@@ -1568,7 +1568,7 @@ footer {
   display: flex;
   justify-content: center; }
   .delete-progress-data-button-container button {
-    padding: 0.5rem 5rem;
+    padding: 0.9rem 5rem;
     border: none;
     cursor: pointer;
     font-weight: bold;

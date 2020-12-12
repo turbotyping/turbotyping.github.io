@@ -169,18 +169,21 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       appStorage.textToTypeIndex = 0;
     }
     appStorage.textToTypeCategory = value;
-    this.enableCapitalLettersContainer.classList.remove('hide');
-    this.enablePunctuationCharactersContainer.classList.remove('hide');
-    appStorage.textToTypeLanguage = TextToTypeLanguage.ENGLISH;
     if (value == TextToTypeCategory.CODE) {
       appStorage.textToTypeLanguage = TextToTypeLanguage.JAVA;
       appStorage.enableCapitalLetters = true;
       appStorage.enablePunctuationCharacters = true;
       this.enableCapitalLettersContainer.classList.add('hide');
       this.enablePunctuationCharactersContainer.classList.add('hide');
-      this.enableCapitalLettersSwitch.setValue(true);
-      this.enablePunctuationCharactersSwitch.setValue(true);
+    } else {
+      appStorage.textToTypeLanguage = TextToTypeLanguage.ENGLISH;
+      appStorage.enableCapitalLetters = false;
+      appStorage.enablePunctuationCharacters = false;
+      this.enableCapitalLettersContainer.classList.remove('hide');
+      this.enablePunctuationCharactersContainer.classList.remove('hide');
     }
+    this.enableCapitalLettersSwitch.setValue(appStorage.enableCapitalLetters);
+    this.enablePunctuationCharactersSwitch.setValue(appStorage.enablePunctuationCharacters);
     this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>(
       getTextToTypeLanguage(appStorage.textToTypeCategory),
       appStorage.textToTypeLanguage
