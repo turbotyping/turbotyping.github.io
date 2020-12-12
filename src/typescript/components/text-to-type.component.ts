@@ -167,6 +167,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       textToType = textToType.replace(CHARS_To_TYPE_WITHOUT_PUNCTUATION, '');
     }
     textToType = textToType.substring(0, appStorage.maxCharactersToType);
+    textToType = textToType.trim();
     const textToTypeLength = textToType.split('').length;
     let textToTypeCharArrayAfterTransformation = [];
     if (appStorage.textToTypeCategory != TextToTypeCategory.CODE) {
