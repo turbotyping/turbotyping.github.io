@@ -19,7 +19,7 @@
       background-color: var(--selected-key-background-color);
     }
 
-    &.with-gte-min-stats-to-display-in-app-storage::after {
+    &.with-lt-min-stats-to-display-in-app-storage::after {
       content: '';
       position: absolute;
       top: 4px;
@@ -27,7 +27,7 @@
       width: 5px;
       height: 5px;
       border-radius: 2px;
-      background-color: var(--typed-key-with-gte-min-stats-to-display-in-app-storage-background-color);
+      background-color: var(--typed-key-with-lt-min-stats-to-display-in-app-storage-background-color);
     }
   }
 }

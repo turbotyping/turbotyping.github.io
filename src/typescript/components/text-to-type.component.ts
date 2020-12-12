@@ -55,6 +55,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     const typedKey = event.key;
     const expectedKeyRegex = new RegExp(this.currentCharToTypeDomElement.dataset.keyRegex);
     this.handleKeySounds(typedKey);
+    this.typedTextStats.handleKeyDownEvent(typedKey, expectedKeyRegex);
     if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
       const previousCharToType = this.getPreviousCharToType();
@@ -70,7 +71,6 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
       return;
     }
     if (!CHARS_To_TYPE.test(typedKey)) return;
-    this.typedTextStats.handleKeyDownEvent(typedKey, expectedKeyRegex);
     if (!expectedKeyRegex.test(typedKey)) {
       this.nextCurrentCharToTypeCssClass = 'NOK';
       this.typedTextStats.increaseErrors();
@@ -170,6 +170,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
     const textToTypeLength = textToType.split('').length;
     let textToTypeCharArrayAfterTransformation = [];
     if (appStorage.textToTypeCategory != TextToTypeCategory.CODE) {
+      textToType = textToType.replace(/ +/g, ' ');
       textToTypeCharArrayAfterTransformation = textToType.split('').map((c) => this.charToSpan(c, ''));
     } else {
       textToType = hljs.highlight(appStorage.textToTypeLanguage, textToType).value;

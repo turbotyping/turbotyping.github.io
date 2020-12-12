@@ -78,7 +78,7 @@ body.light {
   --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
   --selected-key-background-color: var(--primary-color);
-  --typed-key-with-gte-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
+  --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
 }
 
 body.dark {
@@ -162,5 +162,5 @@ body.dark {
   --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
   --selected-key-background-color: var(--primary-color);
-  --typed-key-with-gte-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
+  --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
 }

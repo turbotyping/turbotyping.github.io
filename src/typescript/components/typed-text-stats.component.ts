@@ -114,7 +114,7 @@ export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
       let title = 'No data available yet';
       if (keyStats && keyStats.get(c)) {
         let stats = keyStats.get(c);
-        let statsWpm = stats.map((s) => s.wpm);
+        let statsWpm = stats.filter((s) => s.wpm > 0).map((s) => s.wpm);
         let minWpm = Math.min(...statsWpm);
         let maxWpm = Math.max(...statsWpm);
         let avgWpm = Math.round(statsWpm.reduce((sum, current) => sum + current, 0) / statsWpm.length);

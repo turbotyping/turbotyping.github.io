@@ -52,8 +52,8 @@ export class TypedKeysHtmlComponent extends BaseBlockHtmlComponent {
         if (c === this.selectedKey) {
           return `<span class="typed-key selected-key">${c}</span>`;
         }
-        if ((typedKeysStatsMap.get(c) || []).length >= MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH) {
-          return `<span class="typed-key with-gte-min-stats-to-display-in-app-storage">${c}</span>`;
+        if ((typedKeysStatsMap.get(c) || []).filter((s) => s.wpm > 0).length < MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH) {
+          return `<span class="typed-key with-lt-min-stats-to-display-in-app-storage">${c}</span>`;
         }
         return `<span class="typed-key">${c}</span>`;
       })
