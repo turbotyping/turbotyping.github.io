@@ -114,7 +114,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   private updateAppStorageOnEndTyping() {
     const appStorage = this.getAppStorage();
     appStorage.textToTypeIndex = AppStorage.nextTextToTypeIndex(appStorage);
-    appStorage.typedTextStats.push(this.typedTextStats);
+    appStorage.typedTextsStats.push(this.typedTextStats);
     this.typedKeysStats.forEach((value: TypedKeyStats, key: string) => {
       let typedKeysStatsMap = AppStorage.getTypedKeysStatsMap(appStorage);
       if (!typedKeysStatsMap) typedKeysStatsMap = new Map<string, TypedKeyStats[]>();

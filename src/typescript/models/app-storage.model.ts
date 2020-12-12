@@ -23,7 +23,7 @@ export class AppStorage {
   enablePunctuationCharacters: boolean;
   stopOnError: boolean;
   textToTypeIndex: number = 0;
-  typedTextStats: TypedTextStats[] = [];
+  typedTextsStats: TypedTextStats[] = [];
   typedKeysStatsJson: string;
 
   static setTypedKeysStatsJson(appStorage: AppStorage, typedKeysStatsMap: Map<string, TypedKeyStats[]>): void {

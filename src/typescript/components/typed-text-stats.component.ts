@@ -59,8 +59,8 @@ export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
     this.nextTextTextToType.addEventListener('click', this.handleNextTextTextToTypeClickEvent.bind(this));
     this.addCustomEventListener(END_TYPING_EVENT, this.handleEndTypingEvent.bind(this));
     const appStorage = this.getAppStorage();
-    if (appStorage.typedTextStats.length > 0) {
-      this.updateStats(appStorage.typedTextStats[appStorage.typedTextStats.length - 1]);
+    if (appStorage.typedTextsStats.length > 0) {
+      this.updateStats(appStorage.typedTextsStats[appStorage.typedTextsStats.length - 1]);
     }
     this.updateTypedKeysStats();
   }
