@@ -1,13 +1,18 @@
-import { MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../constants/constant';
-import { AppStorage } from '../models/app-storage.model';
+import { TypedKeyStats } from '../models/typed-key-stats.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
+
+export const TYPED_KEY_CLASS = 'typed-key';
 
 export class TypedKeysHtmlComponent extends BaseBlockHtmlComponent {
   private typedKeysContainerId: string;
   private typedKeysContainer: HTMLElement;
   private callbacks: ((key: string) => void)[] = [];
 
-  constructor(private keys: string, private selectedKey: string) {
+  constructor(
+    private keys: string,
+    private selectedKey: string,
+    private typedKeysStatsToProgressData: (typedKeysStats: TypedKeyStats[]) => number[]
+  ) {
     super();
   }
 
@@ -45,18 +50,11 @@ export class TypedKeysHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private update() {
-    const typedKeysStatsMap = AppStorage.getTypedKeysStatsMap(this.getAppStorage());
     this.typedKeysContainer.innerHTML = this.keys
       .split('')
-      .map((c) => {
-        if (c === this.selectedKey) {
-          return `<span class="typed-key selected-key">${c}</span>`;
-        }
-        if ((typedKeysStatsMap.get(c) || []).filter((s) => s.wpm > 0).length < MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH) {
-          return `<span class="typed-key with-lt-min-stats-to-display-in-app-storage">${c}</span>`;
-        }
-        return `<span class="typed-key">${c}</span>`;
-      })
+      .map((c) =>
+        c === this.selectedKey ? `<span class="${TYPED_KEY_CLASS} selected-key">${c}</span>` : `<span class="${TYPED_KEY_CLASS}">${c}</span>`
+      )
       .join('');
   }
 }

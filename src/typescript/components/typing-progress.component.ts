@@ -5,7 +5,8 @@ import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { SliderHtmlComponent } from './core/slider.component';
 import { SwitchHtmlComponent } from './core/switch.component';
-import { TypedKeysHtmlComponent } from './typed-keys.component';
+import { TypedKeysHighlighter } from './typed-keys-highlighter';
+import { TypedKeysHtmlComponent, TYPED_KEY_CLASS } from './typed-keys.component';
 import { TypingProgressGraphHtmlComponent } from './typing-progress-graph.component';
 
 const TYPED_KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"{}()[]<>+-=,.;:';
@@ -23,7 +24,8 @@ export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
   constructor(
     private graphName: string,
     private typedTextsStatsToProgressData: (typedTextsStats: TypedTextStats[]) => number[],
-    private typedKeysStatsToProgressData: (typedKeysStats: TypedKeyStats[]) => number[]
+    private typedKeysStatsToProgressData: (typedKeysStats: TypedKeyStats[]) => number[],
+    private typedKeysHighlighter: TypedKeysHighlighter
   ) {
     super();
   }
@@ -34,7 +36,7 @@ export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
     this.byKeySwitch = new SwitchHtmlComponent(this.byKeySwitchValue);
     this.slider = new SliderHtmlComponent(0, 10, this.smoothness, 'Smoothness');
     this.graph = new TypingProgressGraphHtmlComponent(this.typedTextsStatsToProgressData(this.getAppStorage().typedTextsStats), this.smoothness);
-    this.typedKeys = new TypedKeysHtmlComponent(TYPED_KEYS, 'A');
+    this.typedKeys = new TypedKeysHtmlComponent(TYPED_KEYS, 'A', this.typedKeysStatsToProgressData);
     this.byKeySwitch.preInsertHtml();
     this.slider.preInsertHtml();
     this.graph.preInsertHtml();
@@ -71,6 +73,7 @@ export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
     this.byKeySwitch.onUpdate(this.handleProgressByKeyUpdateEvent.bind(this));
     this.addCustomEventListener(END_TYPING_EVENT, this.handleEndTypingEvent.bind(this));
     this.addCustomEventListener(DELETE_PROGRESS_DATA_EVENT, this.handleDeleteProgressDataEvent.bind(this));
+    this.typedKeysHighlighter.highligh(this.typedKeysProgressId, TYPED_KEY_CLASS);
   }
 
   private handleProgressByKeyUpdateEvent(active: boolean) {
@@ -87,6 +90,7 @@ export class TypingProgressHtmlComponent extends BaseBlockHtmlComponent {
     this.typedKeys.selectKey(key);
     const typedKeysStats = AppStorage.getTypedKeysStatsMap(this.getAppStorage()).get(key) || [];
     this.graph.setGraphData(this.typedKeysStatsToProgressData(typedKeysStats));
+    this.typedKeysHighlighter.highligh(this.typedKeysProgressId, TYPED_KEY_CLASS);
   }
 
   private handleEndTypingEvent() {

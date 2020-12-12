@@ -95,23 +95,23 @@
       color: var(--body-color);
       background-color: var(--typed-key-no-data-available-yet);
     }
-    &.avg-wpm-less-than-10 {
-      background-color: var(--typed-key-avg-wpm-less-than-10);
+    &.avg-wpm-lt-10 {
+      background-color: var(--typed-key-avg-wpm-lt-10);
     }
-    &.avg-wpm-less-than-20 {
-      background-color: var(--typed-key-avg-wpm-less-than-20);
+    &.avg-wpm-lt-20 {
+      background-color: var(--typed-key-avg-wpm-lt-20);
     }
-    &.avg-wpm-less-than-30 {
-      background-color: var(--typed-key-avg-wpm-less-than-30);
+    &.avg-wpm-lt-30 {
+      background-color: var(--typed-key-avg-wpm-lt-30);
     }
-    &.avg-wpm-less-than-40 {
-      background-color: var(--typed-key-avg-wpm-less-than-40);
+    &.avg-wpm-lt-40 {
+      background-color: var(--typed-key-avg-wpm-lt-40);
     }
-    &.avg-wpm-less-than-50 {
-      background-color: var(--typed-key-avg-wpm-less-than-50);
+    &.avg-wpm-lt-50 {
+      background-color: var(--typed-key-avg-wpm-lt-50);
     }
-    &.avg-wpm-more-than-50 {
-      background-color: var(--typed-key-avg-wpm-more-than-50);
+    &.avg-wpm-gte-50 {
+      background-color: var(--typed-key-avg-wpm-gte-50);
     }
   }
 }

@@ -330,12 +330,17 @@ body.light {
   --code-attr-color: #986801;
   --typed-key-stats-border-background-color: var(--body-background-color);
   --typed-key-no-data-available-yet: var(--background-color-04);
-  --typed-key-avg-wpm-less-than-10: rgb(159, 201, 110);
-  --typed-key-avg-wpm-less-than-20: rgb(151, 189, 143);
-  --typed-key-avg-wpm-less-than-30: rgb(122, 194, 134);
-  --typed-key-avg-wpm-less-than-40: rgb(32, 197, 88);
-  --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
-  --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
+  --typed-key-avg-wpm-lt-10: rgb(159, 201, 110);
+  --typed-key-avg-wpm-lt-20: rgb(151, 189, 143);
+  --typed-key-avg-wpm-lt-30: rgb(122, 194, 134);
+  --typed-key-avg-wpm-lt-40: rgb(32, 197, 88);
+  --typed-key-avg-wpm-lt-50: rgb(14, 218, 97);
+  --typed-key-avg-wpm-gte-50: rgb(30, 243, 115);
+  --typed-key-avg-error-eq-0: rgb(14, 218, 97);
+  --typed-key-avg-error-lt-3: #f8969e;
+  --typed-key-avg-error-lt-6: #fa7580;
+  --typed-key-avg-error-lt-10: #fc6370;
+  --typed-key-avg-error-gte-10: #f1505e;
   --delete-progress-data-button-color: #f1505e;
   --delete-progress-data-button-background-color: transparent;
   --delete-progress-data-button-color-on-hover: var(--white-color);
@@ -412,12 +417,17 @@ body.dark {
   --code-attr-color: #d19a66;
   --typed-key-stats-border-background-color: var(--body-background-color);
   --typed-key-no-data-available-yet: var(--background-color-03);
-  --typed-key-avg-wpm-less-than-10: rgb(159, 201, 110);
-  --typed-key-avg-wpm-less-than-20: rgb(151, 189, 143);
-  --typed-key-avg-wpm-less-than-30: rgb(122, 194, 134);
-  --typed-key-avg-wpm-less-than-40: rgb(32, 197, 88);
-  --typed-key-avg-wpm-less-than-50: rgb(14, 218, 97);
-  --typed-key-avg-wpm-more-than-50: rgb(30, 243, 115);
+  --typed-key-avg-wpm-lt-10: rgb(159, 201, 110);
+  --typed-key-avg-wpm-lt-20: rgb(151, 189, 143);
+  --typed-key-avg-wpm-lt-30: rgb(122, 194, 134);
+  --typed-key-avg-wpm-lt-40: rgb(32, 197, 88);
+  --typed-key-avg-wpm-lt-50: rgb(14, 218, 97);
+  --typed-key-avg-wpm-gte-50: rgb(30, 243, 115);
+  --typed-key-avg-error-eq-0: rgb(14, 218, 97);
+  --typed-key-avg-error-lt-3: #f8969e;
+  --typed-key-avg-error-lt-6: #fa7580;
+  --typed-key-avg-error-lt-10: #fc6370;
+  --typed-key-avg-error-gte-10: #f1505e;
   --delete-progress-data-button-color: #f1505e;
   --delete-progress-data-button-background-color: transparent;
   --delete-progress-data-button-color-on-hover: var(--white-color);
@@ -1500,18 +1510,18 @@ footer {
     .typed-keys-stats-container .typed-key.no-data-available-yet {
       color: var(--body-color);
       background-color: var(--typed-key-no-data-available-yet); }
-    .typed-keys-stats-container .typed-key.avg-wpm-less-than-10 {
-      background-color: var(--typed-key-avg-wpm-less-than-10); }
-    .typed-keys-stats-container .typed-key.avg-wpm-less-than-20 {
-      background-color: var(--typed-key-avg-wpm-less-than-20); }
-    .typed-keys-stats-container .typed-key.avg-wpm-less-than-30 {
-      background-color: var(--typed-key-avg-wpm-less-than-30); }
-    .typed-keys-stats-container .typed-key.avg-wpm-less-than-40 {
-      background-color: var(--typed-key-avg-wpm-less-than-40); }
-    .typed-keys-stats-container .typed-key.avg-wpm-less-than-50 {
-      background-color: var(--typed-key-avg-wpm-less-than-50); }
-    .typed-keys-stats-container .typed-key.avg-wpm-more-than-50 {
-      background-color: var(--typed-key-avg-wpm-more-than-50); }
+    .typed-keys-stats-container .typed-key.avg-wpm-lt-10 {
+      background-color: var(--typed-key-avg-wpm-lt-10); }
+    .typed-keys-stats-container .typed-key.avg-wpm-lt-20 {
+      background-color: var(--typed-key-avg-wpm-lt-20); }
+    .typed-keys-stats-container .typed-key.avg-wpm-lt-30 {
+      background-color: var(--typed-key-avg-wpm-lt-30); }
+    .typed-keys-stats-container .typed-key.avg-wpm-lt-40 {
+      background-color: var(--typed-key-avg-wpm-lt-40); }
+    .typed-keys-stats-container .typed-key.avg-wpm-lt-50 {
+      background-color: var(--typed-key-avg-wpm-lt-50); }
+    .typed-keys-stats-container .typed-key.avg-wpm-gte-50 {
+      background-color: var(--typed-key-avg-wpm-gte-50); }
 
 .progress-container {
   padding-top: calc(4rem + var(--navbar-height));
@@ -1629,13 +1639,35 @@ footer {
     .typed-keys-container .typed-key.selected-key {
       color: var(--selected-key-color);
       background-color: var(--selected-key-background-color); }
-    .typed-keys-container .typed-key.with-lt-min-stats-to-display-in-app-storage::after {
+    .typed-keys-container .typed-key::after {
       content: '';
       position: absolute;
-      top: 4px;
-      right: 4px;
-      width: 5px;
-      height: 5px;
-      border-radius: 2px;
-      background-color: var(--typed-key-with-lt-min-stats-to-display-in-app-storage-background-color); }
+      top: 0;
+      right: 0;
+      width: 15px;
+      height: 15px;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%);
+              clip-path: polygon(0 0, 100% 0, 100% 100%); }
+    .typed-keys-container .typed-key.avg-wpm-lt-10::after {
+      background-color: var(--typed-key-avg-wpm-lt-10); }
+    .typed-keys-container .typed-key.avg-wpm-lt-20::after {
+      background-color: var(--typed-key-avg-wpm-lt-20); }
+    .typed-keys-container .typed-key.avg-wpm-lt-30::after {
+      background-color: var(--typed-key-avg-wpm-lt-30); }
+    .typed-keys-container .typed-key.avg-wpm-lt-40::after {
+      background-color: var(--typed-key-avg-wpm-lt-40); }
+    .typed-keys-container .typed-key.avg-wpm-lt-50::after {
+      background-color: var(--typed-key-avg-wpm-lt-50); }
+    .typed-keys-container .typed-key.avg-wpm-gte-50::after {
+      background-color: var(--typed-key-avg-wpm-gte-50); }
+    .typed-keys-container .typed-key.avg-error-eq-0::after {
+      background-color: var(--typed-key-avg-error-eq-0); }
+    .typed-keys-container .typed-key.avg-error-lt-3::after {
+      background-color: var(--typed-key-avg-error-lt-3); }
+    .typed-keys-container .typed-key.avg-error-lt-6::after {
+      background-color: var(--typed-key-avg-error-lt-6); }
+    .typed-keys-container .typed-key.avg-error-lt-10::after {
+      background-color: var(--typed-key-avg-error-lt-10); }
+    .typed-keys-container .typed-key.avg-error-gte-10::after {
+      background-color: var(--typed-key-avg-error-gte-10); }
 

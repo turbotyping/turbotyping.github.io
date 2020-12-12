@@ -124,17 +124,17 @@ export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
           title = `Typing speed: ${avgWpm}`;
         }
         if (avgWpm < 10) {
-          cssClass = 'avg-wpm-less-than-10';
+          cssClass = 'avg-wpm-lt-10';
         } else if (avgWpm < 20) {
-          cssClass = 'avg-wpm-less-than-20';
+          cssClass = 'avg-wpm-lt-20';
         } else if (avgWpm < 30) {
-          cssClass = 'avg-wpm-less-than-30';
+          cssClass = 'avg-wpm-lt-30';
         } else if (avgWpm < 40) {
-          cssClass = 'avg-wpm-less-than-40';
+          cssClass = 'avg-wpm-lt-40';
         } else if (avgWpm < 50) {
-          cssClass = 'avg-wpm-less-than-50';
+          cssClass = 'avg-wpm-lt-50';
         } else {
-          cssClass = 'avg-wpm-more-than-50';
+          cssClass = 'avg-wpm-gte-50';
         }
       }
       html += `<span title="${title}" class="typed-key ${cssClass}">${c.toUpperCase()}</span>`;

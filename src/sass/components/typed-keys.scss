@@ -19,15 +19,49 @@
       background-color: var(--selected-key-background-color);
     }
 
-    &.with-lt-min-stats-to-display-in-app-storage::after {
+    &::after {
       content: '';
       position: absolute;
-      top: 4px;
-      right: 4px;
-      width: 5px;
-      height: 5px;
-      border-radius: 2px;
-      background-color: var(--typed-key-with-lt-min-stats-to-display-in-app-storage-background-color);
+      top: 0;
+      right: 0;
+      width: 15px;
+      height: 15px;
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+
+    &.avg-wpm-lt-10::after {
+      background-color: var(--typed-key-avg-wpm-lt-10);
+    }
+    &.avg-wpm-lt-20::after {
+      background-color: var(--typed-key-avg-wpm-lt-20);
+    }
+    &.avg-wpm-lt-30::after {
+      background-color: var(--typed-key-avg-wpm-lt-30);
+    }
+    &.avg-wpm-lt-40::after {
+      background-color: var(--typed-key-avg-wpm-lt-40);
+    }
+    &.avg-wpm-lt-50::after {
+      background-color: var(--typed-key-avg-wpm-lt-50);
+    }
+    &.avg-wpm-gte-50::after {
+      background-color: var(--typed-key-avg-wpm-gte-50);
+    }
+
+    &.avg-error-eq-0::after {
+      background-color: var(--typed-key-avg-error-eq-0);
+    }
+    &.avg-error-lt-3::after {
+      background-color: var(--typed-key-avg-error-lt-3);
+    }
+    &.avg-error-lt-6::after {
+      background-color: var(--typed-key-avg-error-lt-6);
+    }
+    &.avg-error-lt-10::after {
+      background-color: var(--typed-key-avg-error-lt-10);
+    }
+    &.avg-error-gte-10::after {
+      background-color: var(--typed-key-avg-error-gte-10);
     }
   }
 }
