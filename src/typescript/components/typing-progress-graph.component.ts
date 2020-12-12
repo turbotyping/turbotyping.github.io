@@ -1,4 +1,4 @@
-import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY } from '../constants/constant';
+import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../constants/constant';
 import { CHANGE_THEME_EVENT } from '../constants/event.constant';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 const Chart = require('chart.js');
@@ -67,7 +67,7 @@ export class TypingProgressGraphHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private update() {
-    if (!this.graphData || this.graphData.length < MIN_STATS_TO_DISPLAY) {
+    if (!this.graphData || this.graphData.length < MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH) {
       this.canvasContainer.classList.add('hide');
       this.notEnoughSamplesDomElement.classList.remove('hide');
     } else {

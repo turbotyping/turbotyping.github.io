@@ -23,9 +23,8 @@ export class TypedTextStats {
         typedKeyStats = new TypedKeyStats();
         this.typedKeyStatsMap.set(typedKey, typedKeyStats);
       }
-      typedKeyStats.increaseTimeToTypeInMs(timeToTypeInMs);
       if (expectedKeyRegex.test(typedKey)) {
-        typedKeyStats.increaseHitCount();
+        typedKeyStats.increaseHitCount(timeToTypeInMs);
       } else {
         typedKeyStats.increaseMissCount();
       }

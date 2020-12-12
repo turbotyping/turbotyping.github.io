@@ -13,8 +13,8 @@ export class TypingProgressSectionHtmlComponent extends BaseBlockHtmlComponent {
     this.deleteProgressDataButtonId = this.getRandomId();
     this.speedProgress = new TypingProgressHtmlComponent(
       'Speed progress',
-      (typedTextStats) => typedTextStats.map((s) => s.wpm),
-      (typedKeysStats) => typedKeysStats.map((s) => s.wpm)
+      (typedTextStats) => typedTextStats.filter((s) => s.wpm > 0).map((s) => s.wpm),
+      (typedKeysStats) => typedKeysStats.filter((s) => s.wpm > 0).map((s) => s.wpm)
     );
     this.errorProgress = new TypingProgressHtmlComponent(
       'Error progress',

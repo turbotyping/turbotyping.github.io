@@ -1,4 +1,4 @@
-import { MIN_STATS_TO_DISPLAY } from '../constants/constant';
+import { MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../constants/constant';
 import { AppStorage } from '../models/app-storage.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 
@@ -52,7 +52,7 @@ export class TypedKeysHtmlComponent extends BaseBlockHtmlComponent {
         if (c === this.selectedKey) {
           return `<span class="typed-key selected-key">${c}</span>`;
         }
-        if ((typedKeysStatsMap.get(c) || []).length >= MIN_STATS_TO_DISPLAY) {
+        if ((typedKeysStatsMap.get(c) || []).length >= MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH) {
           return `<span class="typed-key with-gte-min-stats-to-display-in-app-storage">${c}</span>`;
         }
         return `<span class="typed-key">${c}</span>`;

@@ -1,10 +1,11 @@
 export class TypedKeyStats {
-  wpm: number;
+  wpm: number = -1;
   hitCount: number = 0;
   missCount: number = 0;
   timeToTypeInMs: number = 0;
 
-  increaseHitCount(): void {
+  increaseHitCount(timeToTypeInMs: number): void {
+    this.timeToTypeInMs += timeToTypeInMs;
     this.hitCount++;
   }
 
@@ -12,11 +13,9 @@ export class TypedKeyStats {
     this.missCount++;
   }
 
-  increaseTimeToTypeInMs(timeToTypeInMs: number): void {
-    this.timeToTypeInMs += timeToTypeInMs;
-  }
-
   updateWpm() {
-    this.wpm = Math.floor((((this.hitCount + this.missCount) / (this.timeToTypeInMs / 1000)) * 60) / 5);
+    if (this.hitCount > 3) {
+      this.wpm = Math.floor(((this.hitCount / (this.timeToTypeInMs / 1000)) * 60) / 5);
+    }
   }
 }
