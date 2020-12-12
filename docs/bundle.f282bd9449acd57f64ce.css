@@ -349,7 +349,7 @@ body.light {
   --delete-progress-data-button-box-shadow: var(--box-shadow-01);
   --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
-  --selected-key-background-color: var(--primary-color);
+  --selected-key-background-color: var(--secondary-color);
   --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color); }
 
 body.dark {
@@ -436,7 +436,7 @@ body.dark {
   --delete-progress-data-button-box-shadow: var(--box-shadow-01);
   --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
-  --selected-key-background-color: var(--primary-color);
+  --selected-key-background-color: var(--secondary-color);
   --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color); }
 
 @font-face {
@@ -1639,15 +1639,15 @@ footer {
     .typed-keys-container .typed-key.selected-key {
       color: var(--selected-key-color);
       background-color: var(--selected-key-background-color); }
+    .typed-keys-container .typed-key.selected-key::after {
+      display: none; }
     .typed-keys-container .typed-key::after {
       content: '';
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 15px;
-      height: 15px;
-      -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%);
-              clip-path: polygon(0 0, 100% 0, 100% 100%); }
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px; }
     .typed-keys-container .typed-key.avg-wpm-lt-10::after {
       background-color: var(--typed-key-avg-wpm-lt-10); }
     .typed-keys-container .typed-key.avg-wpm-lt-20::after {
