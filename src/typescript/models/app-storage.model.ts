@@ -2,6 +2,8 @@ import { TextToTypeCategory } from './text-to-type-category.enum';
 import { TextToTypeLanguage } from './text-to-type-language.enum';
 import { TextToType } from './text-to-type.model';
 import { TypedTextStats } from './typed-text-stats.model';
+import { TypedKeyStats } from './typed-key-stats.model';
+import { VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../constants/constant';
 import englishQuotes from '../data/quotes.english';
 import frenchQuotes from '../data/quotes.french';
 import englishPoems from '../data/poems.english';
@@ -11,7 +13,7 @@ import frenchStories from '../data/stories.french';
 import javaCode from '../data/code.java';
 import pythonCode from '../data/code.python';
 import htmlCode from '../data/code.html';
-import { TypedKeyStats } from './typed-key-stats.model';
+import welcomeMessage from '../data/welcome-message';
 
 export class AppStorage {
   textToTypeCategory: TextToTypeCategory;
@@ -43,6 +45,9 @@ export class AppStorage {
   }
 
   static getTextToTypeArray(appStorage: AppStorage): TextToType[] {
+    if (localStorage.getItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME) === null) {
+      return [welcomeMessage];
+    }
     if (appStorage.textToTypeCategory === TextToTypeCategory.QUOTES && appStorage.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
       return englishQuotes;
     }

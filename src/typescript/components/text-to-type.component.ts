@@ -1,6 +1,6 @@
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/constant';
+import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../constants/constant';
 import { TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { AppStorage } from '../models/app-storage.model';
 const hljs = require('./../vendor/highlight.min.js');
@@ -112,6 +112,7 @@ export class TextToTypeHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private updateAppStorageOnEndTyping() {
+    localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
     const appStorage = this.getAppStorage();
     appStorage.textToTypeIndex = AppStorage.nextTextToTypeIndex(appStorage);
     appStorage.typedTextsStats.push(this.typedTextStats);

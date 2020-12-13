@@ -1,15 +1,15 @@
 export default [
   {
     text:
-      "Most people can't recognize the good life when they have it... I believe, the good life, is simply when you are able to recognize all the good in your life - where ever and whenever that is",
-    reference: 'https://www.wow4u.com/lifeq2/',
-    author: 'Joel Osteen',
-  },
-  {
-    text:
       'Taking responsibility - practicing 100 percent responsibility every day - is about seeing ourselves not as right or wrong, but as an agent, chooser, problem solver, and learner in the complex interrelationships of our lives so that we can better integrate with the people and world around us. When we do this, we enjoy a better and more productive way to live and lead',
     reference: 'https://www.wow4u.com/lifeq2/',
     author: 'Christopher Avery',
+  },
+  {
+    text:
+      "Most people can't recognize the good life when they have it... I believe, the good life, is simply when you are able to recognize all the good in your life - where ever and whenever that is",
+    reference: 'https://www.wow4u.com/lifeq2/',
+    author: 'Joel Osteen',
   },
   {
     text:

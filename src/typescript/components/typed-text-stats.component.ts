@@ -1,4 +1,4 @@
-import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/constant';
+import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../constants/constant';
 import { AppStorage } from '../models/app-storage.model';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
@@ -65,6 +65,7 @@ export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private handlePreviousTextTextToTypeClickEvent() {
+    localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
     const appStorage = this.getAppStorage();
     appStorage.textToTypeIndex = AppStorage.previousTextToTypeIndex(appStorage);
     this.saveAppStorage(appStorage);
@@ -72,6 +73,7 @@ export class TypedTextHtmlComponent extends BaseBlockHtmlComponent {
   }
 
   private handleNextTextTextToTypeClickEvent() {
+    localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
     const appStorage = this.getAppStorage();
     appStorage.textToTypeIndex = AppStorage.nextTextToTypeIndex(appStorage);
     this.saveAppStorage(appStorage);
