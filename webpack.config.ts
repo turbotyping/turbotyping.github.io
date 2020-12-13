@@ -2,10 +2,10 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: path.join(__dirname, 'src/typescript/index.ts'),
+  entry: path.join(__dirname, 'src/index.ts'),
   output: {
     path: path.join(__dirname, 'docs'),
     filename: 'bundle.[chunkhash].js',
@@ -13,15 +13,13 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: "src/index.html"
+      template: 'src/index.html',
     }),
     new MiniCssExtractPlugin({
       filename: 'bundle.[chunkhash].css',
     }),
     new CopyPlugin({
-      patterns: [
-        { from: "src/assets/", to: "" },
-      ],
+      patterns: [{ from: 'src/assets/', to: '' }],
     }),
   ],
   module: {

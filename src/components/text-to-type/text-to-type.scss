@@ -1,0 +1,55 @@
+@import './atom-one-light.min.css';
+.text-to-type-page {
+  padding-bottom: 5rem;
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-to-type {
+  max-width: 90rem;
+  margin: 5rem auto 0;
+  white-space: pre-wrap;
+
+  & span {
+    font-family: 'Roboto Mono';
+    font-size: 1.8rem;
+  }
+
+  & span.whitespace {
+    color: var(--whitespace-color);
+  }
+
+  & span.dot.NOK {
+    opacity: 0.7;
+  }
+
+  & span.NOK {
+    color: var(--nok-typed-char-color);
+    border-bottom: 3px solid var(--nok-typed-char-color);
+  }
+
+  & span.OK {
+    opacity: 0.5;
+  }
+
+  &.blink span.cursor {
+    color: var(--current-char-to-type-color);
+    background-color: var(--current-char-to-type-background-color);
+  }
+}
+
+.text-to-type-reference {
+  width: 90rem;
+  margin: 2rem auto 0;
+  font-size: 1.6rem;
+  float: right;
+  color: var(--text-to-type-reference-color);
+  font-style: italic;
+  font-weight: bold;
+
+  & span {
+    float: right;
+  }
+}
