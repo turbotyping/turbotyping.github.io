@@ -26,11 +26,11 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enablePunctuationCharactersContainerId = this.getRandomId();
     this.textToTypeLanguagesContainerId = this.getRandomId();
     const appStorage = this.getAppStorage();
-    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.CODE;
-    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.JAVA;
+    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.QUOTES;
+    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
     appStorage.stopOnError = appStorage.stopOnError || false;
-    appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || false;
-    appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || false;
+    appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || true;
+    appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || true;
     appStorage.enableSounds = appStorage.enableSounds || false;
     appStorage.maxCharactersToType = appStorage.maxCharactersToType || 2000;
     this.stopOnErrorSwitch = new SwitchHtmlComponent(appStorage.stopOnError);

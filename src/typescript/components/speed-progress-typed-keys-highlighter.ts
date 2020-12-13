@@ -10,6 +10,7 @@ export class SpeedProgressTypedKeysHighlighter implements TypedKeysHighlighter {
     container.querySelectorAll(`.${typedKeyCssClass}`).forEach((span) => {
       let typedKey = span.innerHTML.toLowerCase();
       let cssClass = 'not-enough-data-available-yet';
+      let title = 'No data available yet';
       if (keyStats && keyStats.get(typedKey)) {
         let stats = keyStats
           .get(typedKey)
@@ -17,6 +18,12 @@ export class SpeedProgressTypedKeysHighlighter implements TypedKeysHighlighter {
           .map((s) => s.wpm);
         if (stats.length >= MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH) {
           let avg = Math.round(stats.reduce((sum, current) => sum + current, 0) / stats.length);
+          let max = Math.max(...stats);
+          if (avg !== max) {
+            title = `Average typing speed: ${avg}wpm. Best typing speed: ${max}wpm`;
+          } else {
+            title = `Typing speed: ${avg}`;
+          }
           if (avg < 10) {
             cssClass = 'avg-wpm-lt-10';
           } else if (avg < 20) {
@@ -33,6 +40,7 @@ export class SpeedProgressTypedKeysHighlighter implements TypedKeysHighlighter {
         }
       }
       span.classList.add(cssClass);
+      span.setAttribute('title', title);
     });
   }
 }

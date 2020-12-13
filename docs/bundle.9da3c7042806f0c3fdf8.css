@@ -135,7 +135,7 @@ p {
   font-size: 4.5rem; }
 
 .switch-on {
-  color: var(--switch-on-color) !important; }
+  color: var(--switch-on-color); }
 
 .slider-container {
   width: 100%; }
@@ -350,7 +350,8 @@ body.light {
   --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
   --selected-key-background-color: var(--secondary-color);
-  --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color); }
+  --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
+  --progress-by-key-icon-color: var(--primary-color); }
 
 body.dark {
   --primary-color: #078eed;
@@ -437,7 +438,8 @@ body.dark {
   --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
   --selected-key-background-color: var(--secondary-color);
-  --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color); }
+  --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
+  --progress-by-key-icon-color: var(--primary-color); }
 
 @font-face {
   font-family: 'Anonymous Pro';
@@ -1530,11 +1532,14 @@ footer {
   margin: 0 auto; }
 
 .progress-graph {
-  margin-top: 3rem; }
+  margin-top: 12rem; }
+  .progress-graph:first-child {
+    margin-top: 0rem; }
   .progress-graph .not-enough-samples {
     padding: 4rem 2rem;
     border: 0.1rem solid var(--border-color);
-    border-radius: 0.3rem; }
+    border-radius: 0.3rem;
+    text-align: center; }
   .progress-graph .chartjs-graph-container {
     height: 40rem; }
   .progress-graph .progress-header {
@@ -1560,6 +1565,8 @@ footer {
       font-size: 2.3rem;
       margin-right: 2.3rem;
       color: var(--border-color); }
+    .progress-graph .progress-by-key .iconify.switch-on {
+      color: var(--progress-by-key-icon-color); }
   .progress-graph .progress-slider {
     cursor: pointer;
     display: flex;

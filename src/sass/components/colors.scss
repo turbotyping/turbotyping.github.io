@@ -84,6 +84,7 @@ body.light {
   --selected-key-color: var(--white-color);
   --selected-key-background-color: var(--secondary-color);
   --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
+  --progress-by-key-icon-color: var(--primary-color);
 }
 
 body.dark {
@@ -173,4 +174,5 @@ body.dark {
   --selected-key-color: var(--white-color);
   --selected-key-background-color: var(--secondary-color);
   --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
+  --progress-by-key-icon-color: var(--primary-color);
 }

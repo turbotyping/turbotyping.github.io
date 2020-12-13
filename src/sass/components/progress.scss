@@ -5,11 +5,17 @@
   margin: 0 auto;
 }
 .progress-graph {
-  margin-top: 3rem;
+  margin-top: 12rem;
+
+  &:first-child {
+    margin-top: 0rem;
+  }
+
   & .not-enough-samples {
     padding: 4rem 2rem;
     border: 0.1rem solid var(--border-color);
     border-radius: 0.3rem;
+    text-align: center;
   }
 
   & .chartjs-graph-container {
@@ -48,6 +54,10 @@
       font-size: 2.3rem;
       margin-right: 2.3rem;
       color: var(--border-color);
+    }
+
+    & .iconify.switch-on {
+      color: var(--progress-by-key-icon-color);
     }
   }
 

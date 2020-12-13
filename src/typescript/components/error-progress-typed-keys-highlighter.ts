@@ -10,10 +10,17 @@ export class ErrorProgressTypedKeysHighlighter implements TypedKeysHighlighter {
     container.querySelectorAll(`.${typedKeyCssClass}`).forEach((span) => {
       let typedKey = span.innerHTML.toLowerCase();
       let cssClass = 'not-enough-data-available-yet';
+      let title = 'No data available yet';
       if (keyStats && keyStats.get(typedKey)) {
         let stats = keyStats.get(typedKey).map((s) => s.missCount);
         if (stats.length >= MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH) {
           let avg = Math.round(stats.reduce((sum, current) => sum + current, 0) / stats.length);
+          let max = Math.max(...stats);
+          if (avg !== max) {
+            title = `Average typing error: ${avg}. Worst typing error: ${max}`;
+          } else {
+            title = `Typing error: ${avg}`;
+          }
           if (avg === 0) {
             cssClass = 'avg-error-eq-0';
           } else if (avg < 3) {
@@ -28,6 +35,7 @@ export class ErrorProgressTypedKeysHighlighter implements TypedKeysHighlighter {
         }
       }
       span.classList.add(cssClass);
+      span.setAttribute('title', title);
     });
   }
 }
