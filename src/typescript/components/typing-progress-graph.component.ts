@@ -1,5 +1,4 @@
-import { DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../constants/constant';
-import { CHANGE_THEME_EVENT } from '../constants/event.constant';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../constants/constant';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 const Chart = require('chart.js');
 const smooth = require('array-smooth');

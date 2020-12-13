@@ -1,4 +1,4 @@
-import { APP_SETTINGS_CHANGE_EVENT } from '../constants/event.constant';
+import { APP_SETTINGS_CHANGE_EVENT } from '../constants/constant';
 import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../models/text-to-type-category.enum';
 import { getTextToTypeLanguage, TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { BaseDialogHtmlComponent } from './base/base-dialog.component';

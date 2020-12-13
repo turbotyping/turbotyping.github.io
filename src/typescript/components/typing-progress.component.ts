@@ -1,11 +1,11 @@
-import { DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
+import { DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../constants/constant';
 import { AppStorage } from '../models/app-storage.model';
 import { TypedKeyStats } from '../models/typed-key-stats.model';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { SliderHtmlComponent } from './core/slider.component';
 import { SwitchHtmlComponent } from './core/switch.component';
-import { TypedKeysHighlighter } from './typed-keys-highlighter';
+import { TypedKeysHighlighter } from '../services/typed-keys-highlighter';
 import { TypedKeysHtmlComponent, TYPED_KEY_CLASS } from './typed-keys.component';
 import { TypingProgressGraphHtmlComponent } from './typing-progress-graph.component';
 

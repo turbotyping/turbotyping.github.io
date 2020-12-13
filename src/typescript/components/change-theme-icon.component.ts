@@ -1,5 +1,4 @@
-import { DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../constants/constant';
-import { CHANGE_THEME_EVENT } from '../constants/event.constant';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../constants/constant';
 import { BaseInlineHtmlComponent } from './base/base-inline-component';
 
 const CHANGE_TO_DARK_THEME_ICON_ID = 'CHANGE_TO_DARK_THEME_ICON_ID';

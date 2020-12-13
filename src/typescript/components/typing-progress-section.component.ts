@@ -1,8 +1,7 @@
-import { PROGRESS_DIV_ID } from '../constants/constant';
-import { DELETE_PROGRESS_DATA_EVENT } from '../constants/event.constant';
+import { DELETE_PROGRESS_DATA_EVENT, PROGRESS_DIV_ID } from '../constants/constant';
 import { BaseBlockHtmlComponent } from './base/base-block-component';
-import { ErrorProgressTypedKeysHighlighter } from './error-progress-typed-keys-highlighter';
-import { SpeedProgressTypedKeysHighlighter } from './speed-progress-typed-keys-highlighter';
+import { ErrorProgressTypedKeysHighlighter } from '../services/error-progress-typed-keys-highlighter';
+import { SpeedProgressTypedKeysHighlighter } from '../services/speed-progress-typed-keys-highlighter';
 import { TypingProgressHtmlComponent } from './typing-progress.component';
 
 export class TypingProgressSectionHtmlComponent extends BaseBlockHtmlComponent {

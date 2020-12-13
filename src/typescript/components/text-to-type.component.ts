@@ -1,6 +1,6 @@
 import { BaseBlockHtmlComponent } from './base/base-block-component';
 import { TypedTextStats } from '../models/typed-text-stats.model';
-import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
+import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/constant';
 import { TextToTypeLanguage } from '../models/text-to-type-language.enum';
 import { AppStorage } from '../models/app-storage.model';
 const hljs = require('./../vendor/highlight.min.js');

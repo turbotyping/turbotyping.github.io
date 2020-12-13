@@ -1,5 +1,4 @@
-import { PROGRESS_DIV_ID } from '../constants/constant';
-import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
+import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/constant';
 import { AppStorage } from '../models/app-storage.model';
 import { TypedTextStats } from '../models/typed-text-stats.model';
 import { BaseBlockHtmlComponent } from './base/base-block-component';

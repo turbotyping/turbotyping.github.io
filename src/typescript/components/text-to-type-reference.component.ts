@@ -1,4 +1,4 @@
-import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/event.constant';
+import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../constants/constant';
 import { AppStorage } from '../models/app-storage.model';
 import { BaseInlineHtmlComponent } from './base/base-inline-component';
 
