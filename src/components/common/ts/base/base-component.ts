@@ -58,7 +58,7 @@ export abstract class BaseHtmlComponent implements IHtmlComponent {
     if (!BaseHtmlComponent.appState) {
       BaseHtmlComponent.appState = JSON.parse(localStorage.getItem(APP_STORAGE_LOCAL_STORAGE_KEY)) || new AppState();
     }
-    return BaseHtmlComponent.appState;
+    return JSON.parse(JSON.stringify(BaseHtmlComponent.appState));
   }
 
   saveAppState(newAppState: AppState): void {

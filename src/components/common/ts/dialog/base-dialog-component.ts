@@ -12,6 +12,7 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   abstract getDialogCssClass(): string;
   abstract getDialogTitle(): string;
   abstract getDialogBody(): string;
+  abstract getDialogFooter(): string;
   abstract postInsertHtmlInternal(): void;
   abstract preInsertHtmlInternal(): void;
 
@@ -34,6 +35,9 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
           </div>
           <div class="dialog-body">
             ${this.getDialogBody()}
+          </div>
+          <div class="dialog-footer">
+            ${this.getDialogFooter()}
           </div>
         </div>
       </dialog>

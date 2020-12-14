@@ -1,0 +1,39 @@
+body.light {
+  --button-secondary-background-color: var(--background-color-04);
+  --button-secondary-color: var(--text-color-03);
+}
+
+body.dark {
+  --button-secondary-background-color: var(--background-color-04);
+  --button-secondary-color: var(--text-color-03);
+}
+
+.button-container {
+  & button {
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    border-radius: 0.2rem;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    transition: var(--transition);
+    transition-property: opacity;
+
+    &.primary {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+
+    &.secondary {
+      background-color: var(--button-secondary-background-color);
+      color: var(--button-secondary-color);
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+  }
+}

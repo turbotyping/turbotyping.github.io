@@ -1,12 +1,13 @@
 import './app-settings-dialog.scss';
 import { APP_SETTINGS_CHANGE_EVENT } from '../../constants/constant';
-import { AppState } from '../common/ts/base/app-state.model';
 import { BaseDialogHtmlComponent } from '../common/ts/dialog/base-dialog-component';
 import { InputHtmlComponent } from '../common/ts/input/input.component';
 import { SelectHtmlComponent } from '../common/ts/select/select.component';
 import { SwitchHtmlComponent } from '../common/ts/switch/switch.component';
 import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../text-to-type/text-to-type-category.enum';
 import { getTextToTypeLanguage, TextToTypeLanguage } from '../text-to-type/text-to-type-language.enum';
+import { ButtonHtmlComponent, ButtonStyle } from '../common/ts/button/button.component';
+import { AppState } from '../common/ts/base/app-state.model';
 
 export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private stopOnErrorSwitch: SwitchHtmlComponent;
@@ -21,10 +22,9 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private textToTypeLanguagesContainerId: string;
   private enableCapitalLettersContainerId: string;
   private enablePunctuationCharactersContainerId: string;
-
-  constructor() {
-    super();
-  }
+  private saveButton: ButtonHtmlComponent;
+  private cancelButton: ButtonHtmlComponent;
+  private appState: AppState;
 
   preInsertHtmlInternal(): void {
     this.enableCapitalLettersContainerId = this.generateId();
@@ -38,6 +38,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || true;
     appStorage.enableSounds = appStorage.enableSounds || false;
     appStorage.maxCharactersToType = appStorage.maxCharactersToType || 2000;
+    this.saveAppState(appStorage);
     this.stopOnErrorSwitch = new SwitchHtmlComponent(appStorage.stopOnError);
     this.enableCapitalLettersSwitch = new SwitchHtmlComponent(appStorage.enableCapitalLetters);
     this.enableSoundsSwitch = new SwitchHtmlComponent(appStorage.enableSounds);
@@ -51,6 +52,8 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       options: getTextToTypeLanguage(appStorage.textToTypeCategory),
       selectedOptionValue: appStorage.textToTypeLanguage,
     });
+    this.saveButton = new ButtonHtmlComponent('Save');
+    this.cancelButton = new ButtonHtmlComponent('Cancel', ButtonStyle.SECONDARY);
     this.stopOnErrorSwitch.preInsertHtml();
     this.enableCapitalLettersSwitch.preInsertHtml();
     this.enablePunctuationCharactersSwitch.preInsertHtml();
@@ -58,7 +61,8 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.maxCharactersToType.preInsertHtml();
     this.textToTypeCategoriesSelect.preInsertHtml();
     this.textToTypeLanguagesSelect.preInsertHtml();
-    this.saveAppState(appStorage);
+    this.saveButton.preInsertHtml();
+    this.cancelButton.preInsertHtml();
   }
 
   getDialogCssClass(): string {
@@ -102,6 +106,15 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     `;
   }
 
+  getDialogFooter(): string {
+    return /* html */ `
+      <div class="app-settings-dialog-footer">
+        ${this.cancelButton.toHtml()}
+        ${this.saveButton.toHtml()}
+      </div>
+    `;
+  }
+
   postInsertHtmlInternal(): void {
     this.enableCapitalLettersContainer = document.getElementById(this.enableCapitalLettersContainerId);
     this.enablePunctuationCharactersContainer = document.getElementById(this.enablePunctuationCharactersContainerId);
@@ -112,6 +125,10 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.textToTypeCategoriesSelect.postInsertHtml();
     this.textToTypeLanguagesSelect.postInsertHtml();
     this.maxCharactersToType.postInsertHtml();
+    this.saveButton.postInsertHtml();
+    this.cancelButton.postInsertHtml();
+    this.appState = this.getAppState();
+    this.updateInnerHTML();
     this.maxCharactersToType.onValidate(this.validateMaxCharactersToType);
     this.stopOnErrorSwitch.onUpdate(this.handleStopOnErrorChangeEvent.bind(this));
     this.enableCapitalLettersSwitch.onUpdate(this.handleEnableCapitalLettersChangeEvent.bind(this));
@@ -120,12 +137,38 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.maxCharactersToType.onUpdate(this.handleMaxCharactersToTypeChangeEvent.bind(this));
     this.textToTypeCategoriesSelect.onUpdate(this.handleTextToTypeCategoryChangeEvent.bind(this));
     this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
-    this.updateAppSettingsBasedOnTextToTypeCategoryAndLanguage();
+    this.saveButton.onClick(this.handleValidateButtonClickEvent.bind(this));
+    this.cancelButton.onClick(this.handleCancelButtonClickEvent.bind(this));
   }
 
   show(): void {
     this.dialog.showModal();
     this.maxCharactersToType.blur();
+    this.appState = this.getAppState();
+    this.updateInnerHTML();
+  }
+
+  private updateInnerHTML() {
+    this.textToTypeCategoriesSelect.update({
+      options: TEXT_TO_TYPE_CATEGORIES,
+      selectedOptionValue: this.appState.textToTypeCategory,
+    });
+    this.textToTypeLanguagesSelect.update({
+      options: getTextToTypeLanguage(this.appState.textToTypeCategory),
+      selectedOptionValue: this.appState.textToTypeLanguage,
+    });
+    this.maxCharactersToType.update('' + this.appState.maxCharactersToType);
+    this.stopOnErrorSwitch.update(this.appState.stopOnError);
+    this.enableCapitalLettersSwitch.update(this.appState.enableCapitalLetters);
+    this.enablePunctuationCharactersSwitch.update(this.appState.enablePunctuationCharacters);
+    this.enableSoundsSwitch.update(this.appState.enableSounds);
+
+    this.enableCapitalLettersContainer.classList.remove('hide');
+    this.enablePunctuationCharactersContainer.classList.remove('hide');
+    if (this.appState.textToTypeCategory == TextToTypeCategory.CODE) {
+      this.enableCapitalLettersContainer.classList.add('hide');
+      this.enablePunctuationCharactersContainer.classList.add('hide');
+    }
   }
 
   private validateMaxCharactersToType(value: string) {
@@ -136,92 +179,65 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   }
 
   private handleStopOnErrorChangeEvent(value: boolean) {
-    const appStorage = this.getAppState();
-    appStorage.stopOnError = value;
-    this.saveAppState(appStorage);
-    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+    this.appState.stopOnError = value;
   }
 
   private handleEnableCapitalLettersChangeEvent(value: boolean) {
-    const appStorage = this.getAppState();
-    appStorage.enableCapitalLetters = value;
-    this.saveAppState(appStorage);
-    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+    this.appState.enableCapitalLetters = value;
   }
 
   private handleEnablePunctuationCharactersChangeEvent(value: boolean) {
-    const appStorage = this.getAppState();
-    appStorage.enablePunctuationCharacters = value;
-    this.saveAppState(appStorage);
-    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+    this.appState.enablePunctuationCharacters = value;
   }
 
   private handleEnableSoundsChangeEvent(value: boolean) {
-    const appStorage = this.getAppState();
-    appStorage.enableSounds = value;
-    this.saveAppState(appStorage);
-    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+    this.appState.enableSounds = value;
   }
 
   private handleMaxCharactersToTypeChangeEvent(value: string) {
-    const appStorage = this.getAppState();
-    appStorage.maxCharactersToType = +value;
-    this.saveAppState(appStorage);
-    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+    this.appState.maxCharactersToType = +value;
   }
 
   private handleTextToTypeCategoryChangeEvent(value: TextToTypeCategory) {
-    const appStorage = this.getAppState();
-    if (value !== appStorage.textToTypeCategory) {
-      appStorage.textToTypeIndex = 0;
+    if (value !== this.appState.textToTypeCategory) {
+      this.appState.textToTypeIndex = 0;
     }
-    appStorage.textToTypeCategory = value;
+    this.appState.textToTypeCategory = value;
     if (value == TextToTypeCategory.CODE) {
-      appStorage.textToTypeLanguage = TextToTypeLanguage.JAVA;
-      appStorage.enableCapitalLetters = true;
-      appStorage.enablePunctuationCharacters = true;
+      this.appState.textToTypeLanguage = TextToTypeLanguage.JAVA;
+      this.appState.enableCapitalLetters = true;
+      this.appState.enablePunctuationCharacters = true;
       this.enableCapitalLettersContainer.classList.add('hide');
       this.enablePunctuationCharactersContainer.classList.add('hide');
     } else {
-      appStorage.textToTypeLanguage = TextToTypeLanguage.ENGLISH;
-      appStorage.enableCapitalLetters = false;
-      appStorage.enablePunctuationCharacters = false;
+      this.appState.textToTypeLanguage = TextToTypeLanguage.ENGLISH;
+      this.appState.enableCapitalLetters = false;
+      this.appState.enablePunctuationCharacters = false;
       this.enableCapitalLettersContainer.classList.remove('hide');
       this.enablePunctuationCharactersContainer.classList.remove('hide');
     }
-    this.enableCapitalLettersSwitch.update(appStorage.enableCapitalLetters);
-    this.enablePunctuationCharactersSwitch.update(appStorage.enablePunctuationCharacters);
+    this.enableCapitalLettersSwitch.update(this.appState.enableCapitalLetters);
+    this.enablePunctuationCharactersSwitch.update(this.appState.enablePunctuationCharacters);
     this.textToTypeLanguagesSelect.update({
-      options: getTextToTypeLanguage(appStorage.textToTypeCategory),
-      selectedOptionValue: appStorage.textToTypeLanguage,
-    });
-    this.saveAppState(appStorage);
-    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
-  }
-
-  private updateAppSettingsBasedOnTextToTypeCategoryAndLanguage() {
-    const appStorage = this.getAppState();
-    this.enableCapitalLettersContainer.classList.remove('hide');
-    this.enablePunctuationCharactersContainer.classList.remove('hide');
-    if (appStorage.textToTypeCategory == TextToTypeCategory.CODE) {
-      appStorage.enableCapitalLetters = true;
-      appStorage.enablePunctuationCharacters = true;
-      this.enableCapitalLettersContainer.classList.add('hide');
-      this.enablePunctuationCharactersContainer.classList.add('hide');
-    }
-    this.textToTypeLanguagesSelect.update({
-      options: getTextToTypeLanguage(appStorage.textToTypeCategory),
-      selectedOptionValue: appStorage.textToTypeLanguage,
+      options: getTextToTypeLanguage(this.appState.textToTypeCategory),
+      selectedOptionValue: this.appState.textToTypeLanguage,
     });
   }
 
   private handleTextToTypeLanguageChangeEvent(value: TextToTypeLanguage) {
-    const appStorage = this.getAppState();
-    if (value !== appStorage.textToTypeLanguage) {
-      appStorage.textToTypeIndex = 0;
+    if (value !== this.appState.textToTypeLanguage) {
+      this.appState.textToTypeIndex = 0;
     }
-    appStorage.textToTypeLanguage = value;
-    this.saveAppState(appStorage);
+    this.appState.textToTypeLanguage = value;
+  }
+
+  private handleValidateButtonClickEvent() {
+    this.saveAppState(this.appState);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+    this.hide();
+  }
+
+  private handleCancelButtonClickEvent() {
+    this.hide();
   }
 }

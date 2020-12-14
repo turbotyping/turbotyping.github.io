@@ -1,24 +1,14 @@
+import './button.scss';
 import { BaseStatefulHtmlComponent } from '../base/base-stateful-component';
 
 export enum ButtonStyle {
-  PRIMARY,
-  PRIMARY_OUTLINE,
-  SECONDARY,
-  SECONDARY_OUTLINE,
-  SUCCESS,
-  SUCCESS_OUTLINE,
-  DANGER,
-  DANGER_OUTLINE,
-  WARNING,
-  WARNING_OUTLINE,
-  INFO,
-  INFO_OUTLINE,
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
 }
 
 export class ButtonHtmlComponentInput {
   label: string;
   style?: ButtonStyle;
-  disabled?: boolean;
 }
 
 export class ButtonHtmlComponent extends BaseStatefulHtmlComponent<ButtonHtmlComponentInput, void> {
@@ -26,12 +16,11 @@ export class ButtonHtmlComponent extends BaseStatefulHtmlComponent<ButtonHtmlCom
   private buttonId: string;
   private input: ButtonHtmlComponentInput;
 
-  constructor(label: string, style?: ButtonStyle, disabled?: boolean) {
+  constructor(label: string, style?: ButtonStyle) {
     super();
     this.input = {
       label,
       style: style ? style : ButtonStyle.PRIMARY,
-      disabled: disabled ? disabled : false,
     };
   }
 
@@ -43,7 +32,7 @@ export class ButtonHtmlComponent extends BaseStatefulHtmlComponent<ButtonHtmlCom
   toHtml() {
     return /* html */ `
       <span id="${this.containerId}" class="button-container">
-        <button id="${this.buttonId}">${this.input.label}</button>
+        <button id="${this.buttonId}" class="${this.input.style}">${this.input.label}</button>
       </span>
     `;
   }
