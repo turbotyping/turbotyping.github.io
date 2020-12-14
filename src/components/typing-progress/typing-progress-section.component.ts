@@ -1,5 +1,5 @@
 import './typing-progress.scss';
-import { DELETE_PROGRESS_DATA_EVENT, PROGRESS_DIV_ID } from '../../constants/constant';
+import { DELETE_PROGRESS_DATA_EVENT, PROGRESS_DIV_ID } from '../common/ts/base/constant';
 import { ErrorProgressTypedKeysHighlighter } from './error-progress-typed-keys-highlighter';
 import { TypingProgressHtmlComponent } from './typing-progress.component';
 import { BaseHtmlComponent } from '../common/ts/base/base-component';

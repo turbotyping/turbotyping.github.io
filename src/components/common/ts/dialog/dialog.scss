@@ -8,7 +8,7 @@
   min-width: var(--dialog-min-width, 30rem);
   width: var(--dialog-width, 40%);
   max-width: var(--dialog-max-width, 100rem);
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
 
   &::backdrop {
     background-color: #181a1fc4;

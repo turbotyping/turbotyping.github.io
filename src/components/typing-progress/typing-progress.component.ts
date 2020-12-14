@@ -1,4 +1,4 @@
-import { DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../../constants/constant';
+import { DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../common/ts/base/constant';
 import { AppState } from '../common/ts/base/app-state.model';
 import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
 import { SliderHtmlComponent } from '../common/ts/slider/slider.component';

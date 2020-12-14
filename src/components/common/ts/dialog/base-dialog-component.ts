@@ -58,7 +58,7 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   }
 
   private handleDialogCloseButtonClickEvent() {
-    this.dialog.close();
+    this.hide();
   }
 
   private handleDocumentClickEvent(event) {

@@ -1,5 +1,5 @@
 import './typed-text-stats.scss';
-import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../../constants/constant';
+import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../common/ts/base/constant';
 import { AppState } from '../common/ts/base/app-state.model';
 import { BaseHtmlComponent } from '../common/ts/base/base-component';
 import { TypedTextStats } from './typed-text-stats.model';

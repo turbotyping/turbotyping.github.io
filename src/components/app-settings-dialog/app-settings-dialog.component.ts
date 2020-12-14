@@ -1,5 +1,5 @@
 import './app-settings-dialog.scss';
-import { APP_SETTINGS_CHANGE_EVENT } from '../../constants/constant';
+import { APP_SETTINGS_CHANGE_EVENT, END_UPDATING_APP_SETTINGS_EVENT, START_UPDATING_APP_SETTINGS_EVENT } from '../common/ts/base/constant';
 import { BaseDialogHtmlComponent } from '../common/ts/dialog/base-dialog-component';
 import { InputHtmlComponent } from '../common/ts/input/input.component';
 import { SelectHtmlComponent } from '../common/ts/select/select.component';
@@ -31,8 +31,8 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enablePunctuationCharactersContainerId = this.generateId();
     this.textToTypeLanguagesContainerId = this.generateId();
     const appStorage = this.getAppState();
-    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.QUOTES;
-    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
+    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.CODE;
+    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.JAVA;
     appStorage.stopOnError = appStorage.stopOnError || false;
     appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || true;
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || true;
@@ -146,6 +146,12 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.maxCharactersToType.blur();
     this.appState = this.getAppState();
     this.updateInnerHTML();
+    this.dispatchCustomEvent(START_UPDATING_APP_SETTINGS_EVENT);
+  }
+
+  hide(): void {
+    super.hide();
+    this.dispatchCustomEvent(END_UPDATING_APP_SETTINGS_EVENT);
   }
 
   private updateInnerHTML() {

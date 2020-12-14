@@ -1485,6 +1485,11 @@ body.dark {
   .text-to-type.blink span.cursor {
     color: var(--current-char-to-type-color);
     background-color: var(--current-char-to-type-background-color); }
+  .text-to-type.disabled {
+    opacity: 0.5; }
+    .text-to-type.disabled span.cursor {
+      color: var(--body-color);
+      background-color: var(--body-background-color); }
 
 .text-to-type-reference {
   width: 90rem;
@@ -1591,7 +1596,7 @@ nav .right {
   min-width: var(--dialog-min-width, 30rem);
   width: var(--dialog-width, 40%);
   max-width: var(--dialog-max-width, 100rem);
-  border-radius: 0.3rem; }
+  border-radius: 0.5rem; }
   .dialog::-webkit-backdrop {
     background-color: #181a1fc4; }
   .dialog::backdrop {
@@ -1657,7 +1662,7 @@ nav .right {
   .select-container.open {
     z-index: 100; }
   .select-container .select-header {
-    padding: 0.8rem 1rem 0.8rem 1.6rem;
+    padding: 0.5rem 0.8rem 0.5rem 1.4rem;
     border-radius: 0.3rem;
     border: 1px solid var(--border-color);
     display: flex;

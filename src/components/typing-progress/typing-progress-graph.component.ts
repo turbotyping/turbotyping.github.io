@@ -1,4 +1,4 @@
-import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../common/ts/base/constant';
 import { BaseStatefulHtmlComponent } from '../common/ts/base/base-stateful-component';
 const Chart = require('chart.js');
 const smooth = require('array-smooth');

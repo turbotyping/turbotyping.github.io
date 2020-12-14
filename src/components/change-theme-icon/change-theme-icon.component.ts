@@ -1,4 +1,4 @@
-import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../../constants/constant';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../common/ts/base/constant';
 import { AppState } from '../common/ts/base/app-state.model';
 import { BaseHtmlComponent } from '../common/ts/base/base-component';
 

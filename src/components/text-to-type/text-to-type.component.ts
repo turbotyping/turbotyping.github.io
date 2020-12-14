@@ -1,6 +1,12 @@
 import './text-to-type.scss';
 const hljs = require('./highlight.min.js');
-import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../../constants/constant';
+import {
+  APP_SETTINGS_CHANGE_EVENT,
+  END_TYPING_EVENT,
+  END_UPDATING_APP_SETTINGS_EVENT,
+  START_UPDATING_APP_SETTINGS_EVENT,
+  VISIT_WEBSITE_FOR_THE_FIRST_TIME,
+} from '../common/ts/base/constant';
 import { AppState } from '../common/ts/base/app-state.model';
 import { BaseHtmlComponent } from '../common/ts/base/base-component';
 import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
@@ -13,7 +19,7 @@ const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
 const ENTER_KEY = 'Enter';
 const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToTypeId';
-const CHARS_To_TYPE: RegExp = /(^[A-Za-z0-9é"'\(-èëê_çàôùœâ\)=:/;.,?<>!~#{\[|@\]}+ ]$|Enter)/;
+const CHARS_To_TYPE: RegExp = /(^[A-Za-z0-9é"'\(-èëê_çàôùœâ\)=:/;.,?<>!~#{\[|@\]}+% ]$|Enter)/;
 const CHARS_To_TYPE_WITHOUT_PUNCTUATION: RegExp = /[^A-Za-z0-9àçéèëêôùœâ\n ]/g;
 
 export class TextToTypeHtmlComponent extends BaseHtmlComponent {
@@ -25,6 +31,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   private typedTextStats: TypedTextStats;
   private typedKeysStats: Map<string, TypedKeyStats>;
   private keyboardSound: HTMLAudioElement;
+  private isDisabled: boolean = false;
 
   preInsertHtml(): void {
     this.keyboardSound = new Audio('keyboard-press-sound-effect.mp3');
@@ -44,10 +51,22 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     this.setTextToType();
     document.body.addEventListener('keydown', this.handleKeyDownEvent.bind(this));
     this.addCustomEventListener(APP_SETTINGS_CHANGE_EVENT, this.handleAppSettingsChangeEvent.bind(this));
+    this.addCustomEventListener(START_UPDATING_APP_SETTINGS_EVENT, this.handleStartUpdatingAppSettingsEvent.bind(this));
+    this.addCustomEventListener(END_UPDATING_APP_SETTINGS_EVENT, this.handleEndUpdatingAppSettingsEvent.bind(this));
   }
 
   getContainerQuerySelector(): string {
     return `#${TEXT_TO_TYPE_DOM_ELEMENT_ID}`;
+  }
+
+  private handleStartUpdatingAppSettingsEvent() {
+    this.textToTypeDomElement.classList.add('disabled');
+    this.isDisabled = true;
+  }
+
+  private handleEndUpdatingAppSettingsEvent() {
+    this.textToTypeDomElement.classList.remove('disabled');
+    this.isDisabled = false;
   }
 
   private handleAppSettingsChangeEvent() {
@@ -55,6 +74,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   }
 
   private handleKeyDownEvent(event) {
+    if (this.isDisabled) return;
     clearTimeout(this.inactivityTimeout);
     this.inactivityTimeout = setTimeout(this.setTextToType.bind(this), INACTIVITY_TIMEOUT);
     const typedKey = event.key;

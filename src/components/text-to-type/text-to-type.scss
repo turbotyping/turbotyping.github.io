@@ -38,6 +38,15 @@
     color: var(--current-char-to-type-color);
     background-color: var(--current-char-to-type-background-color);
   }
+
+  &.disabled {
+    opacity: 0.5;
+
+    & span.cursor {
+      color: var(--body-color);
+      background-color: var(--body-background-color);
+    }
+  }
 }
 
 .text-to-type-reference {

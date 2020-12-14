@@ -1,5 +1,5 @@
 import { TypedKeyStats } from '../../../typed-keys/typed-key-stats.model';
-import { VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../../../../constants/constant';
+import { VISIT_WEBSITE_FOR_THE_FIRST_TIME } from './constant';
 import englishQuotes from '../../../../data/quotes.english';
 import frenchQuotes from '../../../../data/quotes.french';
 import englishPoems from '../../../../data/poems.english';

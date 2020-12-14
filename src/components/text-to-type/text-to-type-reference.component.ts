@@ -1,4 +1,4 @@
-import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../../constants/constant';
+import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../common/ts/base/constant';
 import { AppState } from '../common/ts/base/app-state.model';
 import { BaseHtmlComponent } from '../common/ts/base/base-component';
 

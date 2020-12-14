@@ -1,11 +1,11 @@
-import { APP_STORAGE_LOCAL_STORAGE_KEY, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
+import { APP_STATE_LOCAL_STORAGE_KEY, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../common/ts/base/constant';
 import { AppState } from '../common/ts/base/app-state.model';
 import { TypedKeysHighlighter } from './typed-keys-highlighter';
 
 export class SpeedProgressTypedKeysHighlighter implements TypedKeysHighlighter {
   highligh(typedKeysContainerId: string, typedKeyCssClass: string) {
     const container = document.getElementById(typedKeysContainerId);
-    const appStorage = JSON.parse(localStorage.getItem(APP_STORAGE_LOCAL_STORAGE_KEY)) || new AppState();
+    const appStorage = JSON.parse(localStorage.getItem(APP_STATE_LOCAL_STORAGE_KEY)) || new AppState();
     const keyStats = AppState.getTypedKeysStatsMap(appStorage);
     container.querySelectorAll(`.${typedKeyCssClass}`).forEach((span) => {
       let typedKey = span.innerHTML.toLowerCase();
