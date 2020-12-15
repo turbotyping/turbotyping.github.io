@@ -1,5 +1,5 @@
 import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../_constants/constant';
-import { BaseStatefulHtmlComponent } from '../_core/base-stateful-component';
+import { BaseHtmlComponent } from '../_core/base-component';
 import { IAppStateClient } from '../_state/app-state.client.interface';
 const Chart = require('chart.js');
 const smooth = require('array-smooth');
@@ -12,7 +12,7 @@ export class TypingProgressGraphHtmlComponentInput {
   smoothness?: number;
 }
 
-export class TypingProgressGraphHtmlComponent extends BaseStatefulHtmlComponent<TypingProgressGraphHtmlComponentInput, void> {
+export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
   private notEnoughSamplesId: string;
   private canvasContainerId: string;
   private canvasContainer: HTMLElement;
@@ -57,11 +57,7 @@ export class TypingProgressGraphHtmlComponent extends BaseStatefulHtmlComponent<
     this.addCustomEventListener(CHANGE_THEME_EVENT, this.handleChangeThemeEvent.bind(this));
   }
 
-  getContainerQuerySelector(): string {
-    return this.containerId;
-  }
-
-  update(input: TypingProgressGraphHtmlComponentInput): void {
+  reset(input: TypingProgressGraphHtmlComponentInput): void {
     this.input = { ...this.input, ...input };
     this.updateInnerHTML();
   }

@@ -1,13 +1,14 @@
 import { TypingProgressSectionHtmlComponent } from '../typing-progress/typing-progress-section.component';
-import { IHtmlComponent } from '../_core/base-component.interface';
+import { IHtmlComponent } from '../_core/component.interface';
 import { BaseHtmlContainer } from '../_core/base-container';
 import { TextToTypePageHtmlComponent } from '../text-to-type/text-to-type-page.component';
+import { AppStateClient } from '../_state/app-state.client';
 
 export class MainHtmlComponent extends BaseHtmlContainer {
   getComponents(): IHtmlComponent[] {
     const res = [];
     res.push(new TextToTypePageHtmlComponent());
-    res.push(new TypingProgressSectionHtmlComponent());
+    res.push(new TypingProgressSectionHtmlComponent(AppStateClient.getInstance()));
     return res;
   }
 

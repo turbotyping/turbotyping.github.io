@@ -44,10 +44,6 @@ export class ChangeThemeIconHtmlComponent extends BaseHtmlComponent {
     this.changeToLightThemeButtonDomElement.addEventListener('click', this.handleToggleThemeClickEvent.bind(this));
   }
 
-  getContainerQuerySelector(): string {
-    return this.containerId;
-  }
-
   private updateInnerHTML() {
     this.changeToDarkThemeButtonDomElement.style.display = 'none';
     this.changeToLightThemeButtonDomElement.style.display = 'none';

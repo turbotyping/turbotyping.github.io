@@ -20,8 +20,4 @@ export class FooterHtmlComponent extends BaseHtmlComponent {
   postInsertHtml(): void {
     // nothing to do
   }
-
-  getContainerQuerySelector(): string {
-    return 'footer';
-  }
 }

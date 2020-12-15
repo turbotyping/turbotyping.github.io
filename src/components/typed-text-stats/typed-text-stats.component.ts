@@ -69,10 +69,6 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
     this.updateTypedKeysStats();
   }
 
-  getContainerQuerySelector(): string {
-    return '.typed-text-stats-container';
-  }
-
   private handlePreviousTextTextToTypeClickEvent() {
     localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
     const appState = this.appStateClient.getAppState();

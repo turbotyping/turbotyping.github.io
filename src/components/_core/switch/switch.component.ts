@@ -1,13 +1,14 @@
 import './switch.scss';
-import { BaseStatefulHtmlComponent } from '../base-stateful-component';
+import { BaseHtmlComponent } from '../base-component';
 
-export class SwitchHtmlComponent extends BaseStatefulHtmlComponent<boolean, boolean> {
+export class SwitchHtmlComponent extends BaseHtmlComponent {
   private switchContainerId: string;
   private switchContainerDomElement: HTMLElement;
   private switchOffId: string;
   private switchOffDomElement: HTMLElement;
   private switchOnId: string;
   private switchOnDomElement: HTMLElement;
+  private callbacks: ((value: boolean) => void)[] = [];
 
   constructor(private value: boolean) {
     super();
@@ -36,13 +37,13 @@ export class SwitchHtmlComponent extends BaseStatefulHtmlComponent<boolean, bool
     this.switchContainerDomElement.addEventListener('click', this.handleSwitchClickEvent.bind(this));
   }
 
-  getContainerQuerySelector(): string {
-    return this.switchContainerId;
-  }
-
-  update(input: boolean): void {
+  reset(input: boolean): void {
     this.value = input;
     this.updateInnerHTML();
+  }
+
+  onUpdate(callback: (value: boolean) => void) {
+    this.callbacks.push(callback);
   }
 
   private updateInnerHTML() {
@@ -58,6 +59,6 @@ export class SwitchHtmlComponent extends BaseStatefulHtmlComponent<boolean, bool
   private handleSwitchClickEvent() {
     this.value = !this.value;
     this.updateInnerHTML();
-    this.executeCallbacksOnUpdate(this.value);
+    this.callbacks.forEach((callback) => callback(this.value));
   }
 }

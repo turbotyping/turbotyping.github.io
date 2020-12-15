@@ -53,8 +53,12 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
     this.postInsertHtmlInternal();
   }
 
-  getContainerQuerySelector(): string {
-    return this.dialogContainerId;
+  show(): void {
+    this.dialog.showModal();
+  }
+
+  hide(): void {
+    this.dialog.close();
   }
 
   private handleDialogCloseButtonClickEvent() {
@@ -65,17 +69,5 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
     if (!this.dialogContainer.contains(event.target)) {
       this.hide();
     }
-  }
-
-  show(): void {
-    this.dialog.showModal();
-  }
-
-  hide(): void {
-    this.dialog.close();
-  }
-
-  toggle(): void {
-    // do nothing
   }
 }

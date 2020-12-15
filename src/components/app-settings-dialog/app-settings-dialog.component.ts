@@ -160,19 +160,19 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   }
 
   private updateInnerHTML() {
-    this.textToTypeCategoriesSelect.update({
+    this.textToTypeCategoriesSelect.reset({
       options: TEXT_TO_TYPE_CATEGORIES,
       selectedOptionValue: this.appState.textToTypeCategory,
     });
-    this.textToTypeLanguagesSelect.update({
+    this.textToTypeLanguagesSelect.reset({
       options: getTextToTypeLanguage(this.appState.textToTypeCategory),
       selectedOptionValue: this.appState.textToTypeLanguage,
     });
-    this.maxCharactersToType.update('' + this.appState.maxCharactersToType);
-    this.stopOnErrorSwitch.update(this.appState.stopOnError);
-    this.enableCapitalLettersSwitch.update(this.appState.enableCapitalLetters);
-    this.enablePunctuationCharactersSwitch.update(this.appState.enablePunctuationCharacters);
-    this.enableSoundsSwitch.update(this.appState.enableSounds);
+    this.maxCharactersToType.reset('' + this.appState.maxCharactersToType);
+    this.stopOnErrorSwitch.reset(this.appState.stopOnError);
+    this.enableCapitalLettersSwitch.reset(this.appState.enableCapitalLetters);
+    this.enablePunctuationCharactersSwitch.reset(this.appState.enablePunctuationCharacters);
+    this.enableSoundsSwitch.reset(this.appState.enableSounds);
 
     this.enableCapitalLettersContainer.classList.remove('hide');
     this.enablePunctuationCharactersContainer.classList.remove('hide');
@@ -227,9 +227,9 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       this.enableCapitalLettersContainer.classList.remove('hide');
       this.enablePunctuationCharactersContainer.classList.remove('hide');
     }
-    this.enableCapitalLettersSwitch.update(this.appState.enableCapitalLetters);
-    this.enablePunctuationCharactersSwitch.update(this.appState.enablePunctuationCharacters);
-    this.textToTypeLanguagesSelect.update({
+    this.enableCapitalLettersSwitch.reset(this.appState.enableCapitalLetters);
+    this.enablePunctuationCharactersSwitch.reset(this.appState.enablePunctuationCharacters);
+    this.textToTypeLanguagesSelect.reset({
       options: getTextToTypeLanguage(this.appState.textToTypeCategory),
       selectedOptionValue: this.appState.textToTypeLanguage,
     });

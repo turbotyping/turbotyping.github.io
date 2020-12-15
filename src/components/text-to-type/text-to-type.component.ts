@@ -59,10 +59,6 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     this.addCustomEventListener(END_UPDATING_APP_SETTINGS_EVENT, this.handleEndUpdatingAppSettingsEvent.bind(this));
   }
 
-  getContainerQuerySelector(): string {
-    return `#${TEXT_TO_TYPE_DOM_ELEMENT_ID}`;
-  }
-
   private handleStartUpdatingAppSettingsEvent() {
     this.textToTypeDomElement.classList.add('disabled');
     this.isDisabled = true;

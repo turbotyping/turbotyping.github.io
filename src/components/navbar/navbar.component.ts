@@ -50,10 +50,6 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     this.changeThemeIcon.postInsertHtml();
   }
 
-  getContainerQuerySelector(): string {
-    return 'nav';
-  }
-
   private handleAppSettingsIconClickEvent(event) {
     event.stopPropagation();
     this.appSettingsDialog.show();

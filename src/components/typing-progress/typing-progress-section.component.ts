@@ -60,10 +60,6 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
     this.deleteProgressDataButton.addEventListener('click', this.handleDeleteProgressDataButtonClickEvent.bind(this));
   }
 
-  getContainerQuerySelector(): string {
-    return `#${PROGRESS_DIV_ID}`;
-  }
-
   private handleDeleteProgressDataButtonClickEvent() {
     const appState = this.appStateClient.getAppState();
     appState.typedTextsStats = [];

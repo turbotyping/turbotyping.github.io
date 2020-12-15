@@ -1,19 +1,12 @@
-import { IHtmlComponent } from './base-component.interface';
+import { IHtmlComponent } from './component.interface';
 
 export abstract class BaseHtmlComponent implements IHtmlComponent {
-  private static appState: any;
-
   abstract preInsertHtml(): void;
   abstract toHtml(): string;
   abstract postInsertHtml(): void;
-  abstract getContainerQuerySelector(): string;
 
   insertHtml(parentElement: HTMLElement, insertPosition: InsertPosition): void {
     parentElement.insertAdjacentHTML(insertPosition, this.toHtml());
-  }
-
-  reRender(): void {
-    this.getContainer().innerHTML = this.toHtml();
   }
 
   stopPropagation(event) {
@@ -49,21 +42,5 @@ export abstract class BaseHtmlComponent implements IHtmlComponent {
 
   getComponentName(): string {
     return this.constructor['name'];
-  }
-
-  show(): void {
-    this.getContainer()?.classList.remove('hide');
-  }
-
-  hide(): void {
-    this.getContainer()?.classList.add('hide');
-  }
-
-  toggle(): void {
-    this.getContainer()?.classList.toggle('hide');
-  }
-
-  private getContainer(): HTMLElement {
-    return document.querySelector(this.getContainerQuerySelector());
   }
 }

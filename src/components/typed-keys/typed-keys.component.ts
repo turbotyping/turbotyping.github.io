@@ -1,5 +1,5 @@
 import './typed-keys.scss';
-import { BaseStatefulHtmlComponent } from '../_core/base-stateful-component';
+import { BaseHtmlComponent } from '../_core/base-component';
 
 export const TYPED_KEY_CLASS = 'typed-key';
 
@@ -8,10 +8,11 @@ export class TypedKeysHtmlComponentInput {
   selectedKey: string;
 }
 
-export class TypedKeysHtmlComponent extends BaseStatefulHtmlComponent<TypedKeysHtmlComponentInput, string> {
+export class TypedKeysHtmlComponent extends BaseHtmlComponent {
   private typedKeysContainerId: string;
   private typedKeysContainer: HTMLElement;
   private input: TypedKeysHtmlComponentInput;
+  private callbacks: ((key: string) => void)[] = [];
 
   constructor(keys: string, selectedKey: string) {
     super();
@@ -37,13 +38,8 @@ export class TypedKeysHtmlComponent extends BaseStatefulHtmlComponent<TypedKeysH
     this.typedKeysContainer.addEventListener('click', this.handleTypedKeysClickEvent.bind(this));
   }
 
-  getContainerQuerySelector(): string {
-    return `#${this.typedKeysContainerId}`;
-  }
-
-  update(input: TypedKeysHtmlComponentInput): void {
-    this.input = input;
-    this.updateInnerHTML();
+  onClick(callback: (key: string) => void) {
+    this.callbacks.push(callback);
   }
 
   selectKey(key: string) {
@@ -52,7 +48,7 @@ export class TypedKeysHtmlComponent extends BaseStatefulHtmlComponent<TypedKeysH
   }
 
   private handleTypedKeysClickEvent(event) {
-    this.executeCallbacksOnUpdate(event.target.innerText);
+    this.callbacks.forEach((callback) => callback(event.target.innerText));
   }
 
   private updateInnerHTML() {

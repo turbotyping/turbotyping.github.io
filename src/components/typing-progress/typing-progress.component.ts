@@ -84,15 +84,11 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
     this.typedKeys.postInsertHtml();
 
     this.slider.onUpdate(this.handleSliderChangeEvent.bind(this));
-    this.typedKeys.onUpdate((key) => this.handleSelectKey(key));
+    this.typedKeys.onClick((key) => this.handleSelectKey(key));
     this.byKeySwitch.onUpdate(this.handleProgressByKeyUpdateEvent.bind(this));
     this.addCustomEventListener(END_TYPING_EVENT, this.handleEndTypingEvent.bind(this));
     this.addCustomEventListener(DELETE_PROGRESS_DATA_EVENT, this.handleDeleteProgressDataEvent.bind(this));
     this.typedKeysHighlighter.highligh(this.typedKeysProgressId, TYPED_KEY_CLASS);
-  }
-
-  getContainerQuerySelector(): string {
-    return `#${this.containerId}`;
   }
 
   private handleProgressByKeyUpdateEvent(active: boolean) {
@@ -109,7 +105,7 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
     const keyLowercase = key.toLowerCase();
     this.typedKeys.selectKey(keyLowercase);
     const typedKeysStats = this.appStateClient.getTypedKeysStatsMap().get(keyLowercase) || [];
-    this.graph.update({ graphData: this.typedKeysStatsToProgressData(typedKeysStats) });
+    this.graph.reset({ graphData: this.typedKeysStatsToProgressData(typedKeysStats) });
     this.typedKeysHighlighter.highligh(this.typedKeysProgressId, TYPED_KEY_CLASS);
   }
 
@@ -122,11 +118,11 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
   }
 
   private useTypedTextsStats() {
-    this.graph.update({ graphData: this.typedTextsStatsToProgressData(this.appStateClient.getAppState().typedTextsStats) });
+    this.graph.reset({ graphData: this.typedTextsStatsToProgressData(this.appStateClient.getAppState().typedTextsStats) });
   }
 
   private handleSliderChangeEvent(value: number) {
     this.smoothness = value;
-    this.graph.update({ smoothness: this.smoothness });
+    this.graph.reset({ smoothness: this.smoothness });
   }
 }

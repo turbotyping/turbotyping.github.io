@@ -1,5 +1,5 @@
 import './select.scss';
-import { BaseStatefulHtmlComponent } from '../base-stateful-component';
+import { BaseHtmlComponent } from '../base-component';
 
 export class SelectOption<T> {
   label: string;
@@ -11,7 +11,7 @@ export class SelectHtmlComponentInput<T> {
   selectedOptionValue: T;
 }
 
-export class SelectHtmlComponent<T> extends BaseStatefulHtmlComponent<SelectHtmlComponentInput<T>, T> {
+export class SelectHtmlComponent<T> extends BaseHtmlComponent {
   private arrowDownId: string;
   private arrowDown: HTMLElement;
   private arrowUpId: string;
@@ -26,6 +26,7 @@ export class SelectHtmlComponent<T> extends BaseStatefulHtmlComponent<SelectHtml
   private selectContainerId: string;
   private selectContainer: HTMLElement;
   private open: boolean;
+  private callbacks: ((value: T) => void)[] = [];
 
   constructor(private input: SelectHtmlComponentInput<T>) {
     super();
@@ -67,14 +68,14 @@ export class SelectHtmlComponent<T> extends BaseStatefulHtmlComponent<SelectHtml
     this.selectOptions.addEventListener('click', this.handleSelectOptionsClickEvent.bind(this));
   }
 
-  getContainerQuerySelector(): string {
-    return this.selectContainerId;
-  }
-
-  update(input: SelectHtmlComponentInput<T>): void {
+  reset(input: SelectHtmlComponentInput<T>): void {
     this.input = input;
     this.selectHeaderLabelText = this.input.options.find((o) => o.value === this.input.selectedOptionValue)?.label || 'Select option';
     this.updateInnerHTML();
+  }
+
+  onUpdate(callback: (value: T) => void) {
+    this.callbacks.push(callback);
   }
 
   private updateInnerHTML(): void {
@@ -105,7 +106,7 @@ export class SelectHtmlComponent<T> extends BaseStatefulHtmlComponent<SelectHtml
     this.toggleOpen();
     this.updateInnerHTML();
     const value = this.input.options.find((o) => o.label === this.selectHeaderLabelText)?.value || null;
-    this.executeCallbacksOnUpdate(value);
+    this.callbacks.forEach((callback) => callback(value));
   }
 
   private toggleOpen() {

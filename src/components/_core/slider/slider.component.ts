@@ -1,5 +1,5 @@
 import './slider.scss';
-import { BaseStatefulHtmlComponent } from '../base-stateful-component';
+import { BaseHtmlComponent } from '../base-component';
 
 export class SliderHtmlComponentInput {
   min: number;
@@ -8,9 +8,10 @@ export class SliderHtmlComponentInput {
   title: string;
 }
 
-export class SliderHtmlComponent extends BaseStatefulHtmlComponent<SliderHtmlComponentInput, number> {
+export class SliderHtmlComponent extends BaseHtmlComponent {
   private slider: HTMLElement;
   private sliderId: string;
+  private callbacks: ((value: number) => void)[] = [];
 
   constructor(private input: SliderHtmlComponentInput) {
     super();
@@ -33,15 +34,11 @@ export class SliderHtmlComponent extends BaseStatefulHtmlComponent<SliderHtmlCom
     this.slider.onchange = this.onSliderChange.bind(this);
   }
 
-  getContainerQuerySelector(): string {
-    return this.sliderId;
-  }
-
-  update(input: SliderHtmlComponentInput): void {
-    this.input = input;
+  onUpdate(callback: (value: number) => void) {
+    this.callbacks.push(callback);
   }
 
   private onSliderChange(event) {
-    this.executeCallbacksOnUpdate(event.target.value);
+    this.callbacks.forEach((callback) => callback(event.target.value));
   }
 }

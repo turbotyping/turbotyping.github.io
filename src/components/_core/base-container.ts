@@ -1,5 +1,5 @@
 import { BaseHtmlComponent } from './base-component';
-import { IHtmlComponent } from './base-component.interface';
+import { IHtmlComponent } from './component.interface';
 
 export abstract class BaseHtmlContainer extends BaseHtmlComponent {
   private componentsArray: IHtmlComponent[];

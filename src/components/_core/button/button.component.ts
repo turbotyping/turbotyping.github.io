@@ -1,5 +1,5 @@
 import './button.scss';
-import { BaseStatefulHtmlComponent } from '../base-stateful-component';
+import { BaseHtmlComponent } from '../base-component';
 
 export enum ButtonStyle {
   PRIMARY = 'primary',
@@ -11,17 +11,13 @@ export class ButtonHtmlComponentInput {
   style?: ButtonStyle;
 }
 
-export class ButtonHtmlComponent extends BaseStatefulHtmlComponent<ButtonHtmlComponentInput, void> {
+export class ButtonHtmlComponent extends BaseHtmlComponent {
   private containerId: string;
   private buttonId: string;
-  private input: ButtonHtmlComponentInput;
+  private callbacks: (() => void)[] = [];
 
-  constructor(label: string, style?: ButtonStyle) {
+  constructor(private label: string, private style: ButtonStyle = ButtonStyle.PRIMARY) {
     super();
-    this.input = {
-      label,
-      style: style ? style : ButtonStyle.PRIMARY,
-    };
   }
 
   preInsertHtml(): void {
@@ -32,25 +28,16 @@ export class ButtonHtmlComponent extends BaseStatefulHtmlComponent<ButtonHtmlCom
   toHtml() {
     return /* html */ `
       <span id="${this.containerId}" class="button-container">
-        <button id="${this.buttonId}" class="${this.input.style}">${this.input.label}</button>
+        <button id="${this.buttonId}" class="${this.style}">${this.label}</button>
       </span>
     `;
   }
 
   postInsertHtml(): void {
-    document.getElementById(this.buttonId).addEventListener('click', this.handleButtonClickEvent.bind(this));
+    document.getElementById(this.buttonId).addEventListener('click', () => this.callbacks.forEach((callback) => callback()));
   }
 
-  getContainerQuerySelector(): string {
-    return this.containerId;
-  }
-
-  update(input: ButtonHtmlComponentInput): void {
-    this.input = { ...this.input, ...input };
-    this.reRender();
-  }
-
-  private handleButtonClickEvent() {
-    this.executeCallbacksOnClick();
+  onClick(callback: () => void) {
+    this.callbacks.push(callback);
   }
 }

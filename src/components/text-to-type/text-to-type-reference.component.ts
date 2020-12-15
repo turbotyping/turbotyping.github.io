@@ -1,5 +1,4 @@
 import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../_constants/constant';
-import { AppState } from '../_state/app-state.model';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { IAppStateClient } from '../_state/app-state.client.interface';
 
@@ -29,10 +28,6 @@ export class TextToTypeReferenceHtmlComponent extends BaseHtmlComponent {
     this.updateInnerHTML();
     this.addCustomEventListener(APP_SETTINGS_CHANGE_EVENT, this.updateInnerHTML.bind(this));
     this.addCustomEventListener(END_TYPING_EVENT, this.updateInnerHTML.bind(this));
-  }
-
-  getContainerQuerySelector(): string {
-    return '.text-to-type-reference';
   }
 
   private updateInnerHTML() {

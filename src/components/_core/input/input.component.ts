@@ -1,13 +1,15 @@
 import './input.scss';
-import { BaseStatefulHtmlComponent } from '../base-stateful-component';
+import { BaseHtmlComponent } from '../base-component';
 
-export class InputHtmlComponent extends BaseStatefulHtmlComponent<string, string> {
+export class InputHtmlComponent extends BaseHtmlComponent {
   private inputId: string;
   private input: HTMLInputElement;
   private containerId: string;
   private container: HTMLElement;
   private errorMessageId: string;
   private errorMessage: HTMLElement;
+  private validators: ((value: string) => void)[] = [];
+  private callbacks: ((value: string) => void)[] = [];
 
   constructor(private value: string) {
     super();
@@ -35,12 +37,8 @@ export class InputHtmlComponent extends BaseStatefulHtmlComponent<string, string
     this.input.addEventListener('change', this.onInputChange.bind(this));
   }
 
-  getContainerQuerySelector(): string {
-    return this.containerId;
-  }
-
-  update(input: string): void {
-    this.input.value = input;
+  reset(value: string): void {
+    this.input.value = value;
   }
 
   blur() {
@@ -51,15 +49,23 @@ export class InputHtmlComponent extends BaseStatefulHtmlComponent<string, string
     this.input.focus();
   }
 
+  onValidate(validator: (value: string) => void) {
+    this.validators.push(validator);
+  }
+
+  onUpdate(callback: (value: string) => void) {
+    this.callbacks.push(callback);
+  }
+
   onInputChange() {
     try {
-      this.executeValidators(this.input.value);
+      this.validators.forEach((validator) => validator(this.input.value));
       this.container.classList.remove('error');
     } catch (error) {
       this.container.classList.add('error');
       this.errorMessage.innerHTML = error.message;
       return;
     }
-    this.executeCallbacksOnUpdate(this.input.value);
+    this.callbacks.forEach((callback) => callback(this.input.value));
   }
 }
