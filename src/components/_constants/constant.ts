@@ -1,5 +1,4 @@
-export const APP_STATE_LOCAL_STORAGE_KEY = 'app-state-local-storage-key-v1.0';
-export const VISIT_WEBSITE_FOR_THE_FIRST_TIME = 'visit-website-for-the-first-time-v1.1';
+export const APP_STATE_LOCAL_STORAGE_KEY = 'app-state-local-storage-key-v1.1';
 export const PROGRESS_DIV_ID = 'ProgressDivId';
 export const MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH = 5;
 export const LIGHT_THEME_VALUE = 'light';

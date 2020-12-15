@@ -5,7 +5,6 @@ import {
   END_TYPING_EVENT,
   END_UPDATING_APP_SETTINGS_EVENT,
   START_UPDATING_APP_SETTINGS_EVENT,
-  VISIT_WEBSITE_FOR_THE_FIRST_TIME,
 } from '../_constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
@@ -137,8 +136,8 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   }
 
   private updateAppStorageOnEndTyping() {
-    localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
     const appState = this.appStateClient.getAppState();
+    appState.visitWebsiteForTheFirstTime = false;
     appState.textToTypeIndex = this.appStateClient.nextTextToTypeIndex();
     appState.typedTextsStats.push(this.typedTextStats);
     this.typedKeysStats.forEach((value: TypedKeyStats, key: string) => {
@@ -184,23 +183,23 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private async setTextToType() {
     clearInterval(this.blinkInterval);
-    const appStorage = this.appStateClient.getAppState();
+    const appState = this.appStateClient.getAppState();
     let textToType = this.getTextToType();
-    if (!appStorage.enableCapitalLetters) {
+    if (!appState.enableCapitalLetters) {
       textToType = textToType.toLowerCase();
     }
-    if (!appStorage.enablePunctuationCharacters) {
+    if (!appState.enablePunctuationCharacters) {
       textToType = textToType.replace(CHARS_To_TYPE_WITHOUT_PUNCTUATION, '');
     }
-    textToType = textToType.substring(0, appStorage.maxCharactersToType);
+    textToType = textToType.substring(0, appState.maxCharactersToType);
     textToType = textToType.trim();
     const textToTypeLength = textToType.split('').length;
     let textToTypeCharArrayAfterTransformation = [];
-    if (appStorage.textToTypeCategory != TextToTypeCategory.CODE) {
+    if (appState.textToTypeCategory != TextToTypeCategory.CODE || appState.visitWebsiteForTheFirstTime) {
       textToType = textToType.replace(/ +/g, ' ');
       textToTypeCharArrayAfterTransformation = textToType.split('').map((c) => this.charToSpan(c, ''));
     } else {
-      textToType = hljs.highlight(appStorage.textToTypeLanguage, textToType).value;
+      textToType = hljs.highlight(appState.textToTypeLanguage, textToType).value;
       textToType = textToType.replace(/&lt;/g, '<');
       textToType = textToType.replace(/&gt;/g, '>');
       textToType = textToType.replace(/&quot;/g, '"');

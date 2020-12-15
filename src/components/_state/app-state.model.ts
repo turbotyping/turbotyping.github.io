@@ -3,6 +3,7 @@ import { TypedTextStats } from '../typed-text-stats/typed-text-stats.model';
 import { TextToTypeLanguage } from './text-to-type-language.enum';
 
 export class AppState {
+  visitWebsiteForTheFirstTime: boolean = true;
   textToTypeCategory: TextToTypeCategory;
   textToTypeLanguage: TextToTypeLanguage;
   maxCharactersToType: number;

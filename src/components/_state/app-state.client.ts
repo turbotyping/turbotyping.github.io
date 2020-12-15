@@ -1,5 +1,5 @@
 import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
-import { APP_STATE_LOCAL_STORAGE_KEY, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../_constants/constant';
+import { APP_STATE_LOCAL_STORAGE_KEY } from '../_constants/constant';
 import englishQuotes from './quotes.english';
 import frenchQuotes from './quotes.french';
 import englishPoems from './poems.english';
@@ -58,7 +58,7 @@ export class AppStateClient implements IAppStateClient {
   }
 
   getTextToTypeArray(): TextToType[] {
-    if (localStorage.getItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME) === null) {
+    if (this.appState.visitWebsiteForTheFirstTime) {
       return [welcomeMessage];
     }
     if (this.appState.textToTypeCategory === TextToTypeCategory.QUOTES && this.appState.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {

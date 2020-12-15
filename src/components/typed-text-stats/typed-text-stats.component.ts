@@ -1,5 +1,5 @@
 import './typed-text-stats.scss';
-import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../_constants/constant';
+import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../_constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedTextStats } from './typed-text-stats.model';
 import { IAppStateClient } from '../_state/app-state.client.interface';
@@ -70,18 +70,18 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
   }
 
   private handlePreviousTextTextToTypeClickEvent() {
-    localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
     const appState = this.appStateClient.getAppState();
+    appState.visitWebsiteForTheFirstTime = false;
     appState.textToTypeIndex = this.appStateClient.previousTextToTypeIndex();
     this.appStateClient.saveAppState(appState);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
   private handleNextTextTextToTypeClickEvent() {
-    localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
-    const appStorage = this.appStateClient.getAppState();
-    appStorage.textToTypeIndex = this.appStateClient.nextTextToTypeIndex();
-    this.appStateClient.saveAppState(appStorage);
+    const appState = this.appStateClient.getAppState();
+    appState.visitWebsiteForTheFirstTime = false;
+    appState.textToTypeIndex = this.appStateClient.nextTextToTypeIndex();
+    this.appStateClient.saveAppState(appState);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
@@ -112,7 +112,6 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
   }
 
   private updateTypedKeysStats() {
-    const appStorage = this.appStateClient.getAppState();
     let html = '';
     'abcdefghijklmnopqrstuvwxyz'.split('').forEach((c) => {
       const keyStats = this.appStateClient.getTypedKeysStatsMap();
