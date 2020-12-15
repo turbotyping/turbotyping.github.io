@@ -1,5 +1,5 @@
 import './input.scss';
-import { BaseStatefulHtmlComponent } from '../base/base-stateful-component';
+import { BaseStatefulHtmlComponent } from '../base-stateful-component';
 
 export class InputHtmlComponent extends BaseStatefulHtmlComponent<string, string> {
   private inputId: string;

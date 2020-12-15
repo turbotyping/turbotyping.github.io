@@ -1,13 +1,14 @@
 import './app-settings-dialog.scss';
-import { APP_SETTINGS_CHANGE_EVENT, END_UPDATING_APP_SETTINGS_EVENT, START_UPDATING_APP_SETTINGS_EVENT } from '../common/ts/base/constant';
-import { BaseDialogHtmlComponent } from '../common/ts/dialog/base-dialog-component';
-import { InputHtmlComponent } from '../common/ts/input/input.component';
-import { SelectHtmlComponent } from '../common/ts/select/select.component';
-import { SwitchHtmlComponent } from '../common/ts/switch/switch.component';
-import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../text-to-type/text-to-type-category.enum';
-import { getTextToTypeLanguage, TextToTypeLanguage } from '../text-to-type/text-to-type-language.enum';
-import { ButtonHtmlComponent, ButtonStyle } from '../common/ts/button/button.component';
-import { AppState } from '../common/ts/base/app-state.model';
+import { APP_SETTINGS_CHANGE_EVENT, END_UPDATING_APP_SETTINGS_EVENT, START_UPDATING_APP_SETTINGS_EVENT } from '../_constants/constant';
+import { BaseDialogHtmlComponent } from '../_core/dialog/base-dialog-component';
+import { InputHtmlComponent } from '../_core/input/input.component';
+import { SelectHtmlComponent } from '../_core/select/select.component';
+import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../_state/text-to-type-category.enum';
+import { ButtonHtmlComponent, ButtonStyle } from '../_core/button/button.component';
+import { AppState } from '../_state/app-state.model';
+import { SwitchHtmlComponent } from '../_core/switch/switch.component';
+import { TextToTypeLanguage, getTextToTypeLanguage } from '../_state/text-to-type-language.enum';
+import { IAppStateClient } from '../_state/app-state.client.interface';
 
 export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private stopOnErrorSwitch: SwitchHtmlComponent;
@@ -26,11 +27,15 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private cancelButton: ButtonHtmlComponent;
   private appState: AppState;
 
+  constructor(private appStateClient: IAppStateClient) {
+    super();
+  }
+
   preInsertHtmlInternal(): void {
     this.enableCapitalLettersContainerId = this.generateId();
     this.enablePunctuationCharactersContainerId = this.generateId();
     this.textToTypeLanguagesContainerId = this.generateId();
-    const appStorage = this.getAppState();
+    const appStorage = this.appStateClient.getAppState();
     appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.CODE;
     appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.JAVA;
     appStorage.stopOnError = appStorage.stopOnError || false;
@@ -38,7 +43,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || true;
     appStorage.enableSounds = appStorage.enableSounds || false;
     appStorage.maxCharactersToType = appStorage.maxCharactersToType || 2000;
-    this.saveAppState(appStorage);
+    this.appStateClient.saveAppState(appStorage);
     this.stopOnErrorSwitch = new SwitchHtmlComponent(appStorage.stopOnError);
     this.enableCapitalLettersSwitch = new SwitchHtmlComponent(appStorage.enableCapitalLetters);
     this.enableSoundsSwitch = new SwitchHtmlComponent(appStorage.enableSounds);
@@ -127,7 +132,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.maxCharactersToType.postInsertHtml();
     this.saveButton.postInsertHtml();
     this.cancelButton.postInsertHtml();
-    this.appState = this.getAppState();
+    this.appState = this.appStateClient.getAppState();
     this.updateInnerHTML();
     this.maxCharactersToType.onValidate(this.validateMaxCharactersToType);
     this.stopOnErrorSwitch.onUpdate(this.handleStopOnErrorChangeEvent.bind(this));
@@ -144,7 +149,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   show(): void {
     this.dialog.showModal();
     this.maxCharactersToType.blur();
-    this.appState = this.getAppState();
+    this.appState = this.appStateClient.getAppState();
     this.updateInnerHTML();
     this.dispatchCustomEvent(START_UPDATING_APP_SETTINGS_EVENT);
   }
@@ -238,7 +243,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   }
 
   private handleValidateButtonClickEvent() {
-    this.saveAppState(this.appState);
+    this.appStateClient.saveAppState(this.appState);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
     this.hide();
   }

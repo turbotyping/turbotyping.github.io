@@ -1,4 +1,4 @@
-import { SelectOption } from '../common/ts/select/select.component';
+import { SelectOption } from '../_core/select/select.component';
 import { TextToTypeCategory } from './text-to-type-category.enum';
 
 export enum TextToTypeLanguage {

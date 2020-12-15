@@ -1,8 +1,8 @@
 import './typed-text-stats.scss';
-import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../common/ts/base/constant';
-import { AppState } from '../common/ts/base/app-state.model';
-import { BaseHtmlComponent } from '../common/ts/base/base-component';
+import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT, VISIT_WEBSITE_FOR_THE_FIRST_TIME } from '../_constants/constant';
+import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedTextStats } from './typed-text-stats.model';
+import { IAppStateClient } from '../_state/app-state.client.interface';
 
 const TYPED_TEXT_WPM_DOM_ELEMENT_ID = 'TypedTextWpm';
 const TYPED_TEXT_ERRORS_DOM_ELEMENT_ID = 'TypedTextErrors';
@@ -16,6 +16,10 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
   private nextTextTextToType: HTMLElement;
   private typedKeysStatsId: string;
   private typedKeysStats: HTMLElement;
+
+  constructor(private appStateClient: IAppStateClient) {
+    super();
+  }
 
   preInsertHtml(): void {
     this.previousTextTextToTypeId = this.generateId();
@@ -58,7 +62,7 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
     this.previousTextTextToType.addEventListener('click', this.handlePreviousTextTextToTypeClickEvent.bind(this));
     this.nextTextTextToType.addEventListener('click', this.handleNextTextTextToTypeClickEvent.bind(this));
     this.addCustomEventListener(END_TYPING_EVENT, this.handleEndTypingEvent.bind(this));
-    const appStorage = this.getAppState();
+    const appStorage = this.appStateClient.getAppState();
     if (appStorage.typedTextsStats.length > 0) {
       this.updateStats(appStorage.typedTextsStats[appStorage.typedTextsStats.length - 1]);
     }
@@ -71,17 +75,17 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
 
   private handlePreviousTextTextToTypeClickEvent() {
     localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
-    const appStorage = this.getAppState();
-    appStorage.textToTypeIndex = AppState.previousTextToTypeIndex(appStorage);
-    this.saveAppState(appStorage);
+    const appState = this.appStateClient.getAppState();
+    appState.textToTypeIndex = this.appStateClient.previousTextToTypeIndex();
+    this.appStateClient.saveAppState(appState);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
   private handleNextTextTextToTypeClickEvent() {
     localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
-    const appStorage = this.getAppState();
-    appStorage.textToTypeIndex = AppState.nextTextToTypeIndex(appStorage);
-    this.saveAppState(appStorage);
+    const appStorage = this.appStateClient.getAppState();
+    appStorage.textToTypeIndex = this.appStateClient.nextTextToTypeIndex();
+    this.appStateClient.saveAppState(appStorage);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
@@ -112,10 +116,10 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
   }
 
   private updateTypedKeysStats() {
-    const appStorage = this.getAppState();
+    const appStorage = this.appStateClient.getAppState();
     let html = '';
     'abcdefghijklmnopqrstuvwxyz'.split('').forEach((c) => {
-      const keyStats = AppState.getTypedKeysStatsMap(appStorage);
+      const keyStats = this.appStateClient.getTypedKeysStatsMap();
       let cssClass = 'no-data-available-yet';
       let title = 'No data available yet';
       if (keyStats && keyStats.get(c)) {

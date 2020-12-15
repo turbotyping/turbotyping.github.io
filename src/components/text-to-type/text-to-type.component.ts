@@ -6,13 +6,13 @@ import {
   END_UPDATING_APP_SETTINGS_EVENT,
   START_UPDATING_APP_SETTINGS_EVENT,
   VISIT_WEBSITE_FOR_THE_FIRST_TIME,
-} from '../common/ts/base/constant';
-import { AppState } from '../common/ts/base/app-state.model';
-import { BaseHtmlComponent } from '../common/ts/base/base-component';
+} from '../_constants/constant';
+import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
-import { TextToTypeCategory } from './text-to-type-category.enum';
-import { TextToTypeLanguage } from './text-to-type-language.enum';
+import { TextToTypeCategory } from '../_state/text-to-type-category.enum';
 import { TypedTextStats } from '../typed-text-stats/typed-text-stats.model';
+import { TextToTypeLanguage } from '../_state/text-to-type-language.enum';
+import { IAppStateClient } from '../_state/app-state.client.interface';
 
 const INACTIVITY_TIMEOUT = 10000;
 const BACKSPACE_KEY = 'Backspace';
@@ -33,6 +33,10 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   private keyboardSound: HTMLAudioElement;
   private isDisabled: boolean = false;
 
+  constructor(private appStateClient: IAppStateClient) {
+    super();
+  }
+
   preInsertHtml(): void {
     this.keyboardSound = new Audio('keyboard-press-sound-effect.mp3');
   }
@@ -44,9 +48,9 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   }
 
   postInsertHtml(): void {
-    const appStorage = this.getAppState();
+    const appStorage = this.appStateClient.getAppState();
     appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
-    this.saveAppState(appStorage);
+    this.appStateClient.saveAppState(appStorage);
     this.textToTypeDomElement = document.getElementById(TEXT_TO_TYPE_DOM_ELEMENT_ID);
     this.setTextToType();
     document.body.addEventListener('keydown', this.handleKeyDownEvent.bind(this));
@@ -99,7 +103,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     if (!expectedKeyRegex.test(typedKey)) {
       this.nextCurrentCharToTypeCssClass = 'NOK';
       this.typedTextStats.increaseErrors();
-      if (this.getAppState().stopOnError) return;
+      if (this.appStateClient.getAppState().stopOnError) return;
     }
     clearInterval(this.blinkInterval);
     this.currentCharToTypeDomElement.classList.add(this.nextCurrentCharToTypeCssClass);
@@ -129,7 +133,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   }
 
   private handleKeySounds(typedKey: string) {
-    if (this.getAppState().enableSounds && (CHARS_To_TYPE.test(typedKey) || typedKey === BACKSPACE_KEY)) {
+    if (this.appStateClient.getAppState().enableSounds && (CHARS_To_TYPE.test(typedKey) || typedKey === BACKSPACE_KEY)) {
       this.keyboardSound.pause();
       this.keyboardSound.currentTime = 0.15;
       this.keyboardSound.play();
@@ -138,11 +142,11 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private updateAppStorageOnEndTyping() {
     localStorage.setItem(VISIT_WEBSITE_FOR_THE_FIRST_TIME, 'false');
-    const appStorage = this.getAppState();
-    appStorage.textToTypeIndex = AppState.nextTextToTypeIndex(appStorage);
-    appStorage.typedTextsStats.push(this.typedTextStats);
+    const appState = this.appStateClient.getAppState();
+    appState.textToTypeIndex = this.appStateClient.nextTextToTypeIndex();
+    appState.typedTextsStats.push(this.typedTextStats);
     this.typedKeysStats.forEach((value: TypedKeyStats, key: string) => {
-      let typedKeysStatsMap = AppState.getTypedKeysStatsMap(appStorage);
+      let typedKeysStatsMap = this.appStateClient.getTypedKeysStatsMap();
       if (!typedKeysStatsMap) typedKeysStatsMap = new Map<string, TypedKeyStats[]>();
       let typedKeysStats = typedKeysStatsMap.get(key);
       if (!typedKeysStats) {
@@ -150,9 +154,9 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
       } else {
         typedKeysStatsMap.set(key, [...typedKeysStats, value]);
       }
-      AppState.setTypedKeysStatsJson(appStorage, typedKeysStatsMap);
+      this.appStateClient.setTypedKeysStatsJson(typedKeysStatsMap);
     });
-    this.saveAppState(appStorage);
+    this.appStateClient.saveAppState(appState);
   }
 
   private getNextCharToType(): HTMLElement {
@@ -184,7 +188,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private async setTextToType() {
     clearInterval(this.blinkInterval);
-    const appStorage = this.getAppState();
+    const appStorage = this.appStateClient.getAppState();
     let textToType = this.getTextToType();
     if (!appStorage.enableCapitalLetters) {
       textToType = textToType.toLowerCase();
@@ -266,10 +270,10 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   }
 
   private getTextToType(): string {
-    const appStorage = this.getAppState();
-    const textToTypeArray = AppState.getTextToTypeArray(appStorage);
+    const appState = this.appStateClient.getAppState();
+    const textToTypeArray = this.appStateClient.getTextToTypeArray();
     if (textToTypeArray.length > 0) {
-      return textToTypeArray[appStorage.textToTypeIndex].text;
+      return textToTypeArray[appState.textToTypeIndex].text;
     }
     return 'Sunt cillum est dolore veniam officia.';
   }

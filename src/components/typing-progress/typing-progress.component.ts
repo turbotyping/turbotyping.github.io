@@ -1,13 +1,13 @@
-import { DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../common/ts/base/constant';
-import { AppState } from '../common/ts/base/app-state.model';
+import { DELETE_PROGRESS_DATA_EVENT, END_TYPING_EVENT } from '../_constants/constant';
 import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
-import { SliderHtmlComponent } from '../common/ts/slider/slider.component';
-import { SwitchHtmlComponent } from '../common/ts/switch/switch.component';
+import { SliderHtmlComponent } from '../_core/slider/slider.component';
 import { TypingProgressGraphHtmlComponent } from './typing-progress-graph.component';
-import { BaseHtmlComponent } from '../common/ts/base/base-component';
+import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedKeysHighlighter } from './typed-keys-highlighter';
 import { TypedKeysHtmlComponent, TYPED_KEY_CLASS } from '../typed-keys/typed-keys.component';
 import { TypedTextStats } from '../typed-text-stats/typed-text-stats.model';
+import { SwitchHtmlComponent } from '../_core/switch/switch.component';
+import { IAppStateClient } from '../_state/app-state.client.interface';
 
 // const TYPED_KEYS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"{}()[]<>+-=,.;:';
 const TYPED_KEYS = 'abcdefghijklmnopqrstuvwxyz';
@@ -24,6 +24,7 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
   private containerId: string;
 
   constructor(
+    private appStateClient: IAppStateClient,
     private graphName: string,
     private typedTextsStatsToProgressData: (typedTextsStats: TypedTextStats[]) => number[],
     private typedKeysStatsToProgressData: (typedKeysStats: TypedKeyStats[]) => number[],
@@ -43,7 +44,11 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
       value: this.smoothness,
       title: 'Smoothness',
     });
-    this.graph = new TypingProgressGraphHtmlComponent(this.typedTextsStatsToProgressData(this.getAppState().typedTextsStats), this.smoothness);
+    this.graph = new TypingProgressGraphHtmlComponent(
+      this.appStateClient,
+      this.typedTextsStatsToProgressData(this.appStateClient.getAppState().typedTextsStats),
+      this.smoothness
+    );
     this.typedKeys = new TypedKeysHtmlComponent(TYPED_KEYS, 'a');
     this.byKeySwitch.preInsertHtml();
     this.slider.preInsertHtml();
@@ -103,7 +108,7 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
   private handleSelectKey(key: string) {
     const keyLowercase = key.toLowerCase();
     this.typedKeys.selectKey(keyLowercase);
-    const typedKeysStats = AppState.getTypedKeysStatsMap(this.getAppState()).get(keyLowercase) || [];
+    const typedKeysStats = this.appStateClient.getTypedKeysStatsMap().get(keyLowercase) || [];
     this.graph.update({ graphData: this.typedKeysStatsToProgressData(typedKeysStats) });
     this.typedKeysHighlighter.highligh(this.typedKeysProgressId, TYPED_KEY_CLASS);
   }
@@ -117,7 +122,7 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
   }
 
   private useTypedTextsStats() {
-    this.graph.update({ graphData: this.typedTextsStatsToProgressData(this.getAppState().typedTextsStats) });
+    this.graph.update({ graphData: this.typedTextsStatsToProgressData(this.appStateClient.getAppState().typedTextsStats) });
   }
 
   private handleSliderChangeEvent(value: number) {

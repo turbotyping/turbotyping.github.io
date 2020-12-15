@@ -1,14 +1,15 @@
-import { IHtmlComponent } from '../common/ts/base/base-component.interface';
-import { BaseHtmlContainer } from '../common/ts/base/base-container';
+import { IHtmlComponent } from '../_core/base-component.interface';
+import { BaseHtmlContainer } from '../_core/base-container';
 import { TypedTextHtmlComponent } from '../typed-text-stats/typed-text-stats.component';
 import { TextToTypeReferenceHtmlComponent } from './text-to-type-reference.component';
 import { TextToTypeHtmlComponent } from './text-to-type.component';
+import { AppStateClient } from '../_state/app-state.client';
 
 export class TextToTypePageHtmlComponent extends BaseHtmlContainer {
   getComponents(): IHtmlComponent[] {
     const res = [];
     res.push(new TypedTextHtmlComponent());
-    res.push(new TextToTypeHtmlComponent());
+    res.push(new TextToTypeHtmlComponent(AppStateClient.getInstance()));
     res.push(new TextToTypeReferenceHtmlComponent());
     return res;
   }

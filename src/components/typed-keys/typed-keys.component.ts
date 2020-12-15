@@ -1,5 +1,5 @@
 import './typed-keys.scss';
-import { BaseStatefulHtmlComponent } from '../common/ts/base/base-stateful-component';
+import { BaseStatefulHtmlComponent } from '../_core/base-stateful-component';
 
 export const TYPED_KEY_CLASS = 'typed-key';
 

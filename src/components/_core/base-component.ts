@@ -1,6 +1,4 @@
-import { AppState } from './app-state.model';
 import { IHtmlComponent } from './base-component.interface';
-import { APP_STATE_LOCAL_STORAGE_KEY } from './constant';
 
 export abstract class BaseHtmlComponent implements IHtmlComponent {
   private static appState: any;
@@ -51,18 +49,6 @@ export abstract class BaseHtmlComponent implements IHtmlComponent {
 
   getComponentName(): string {
     return this.constructor['name'];
-  }
-
-  getAppState(): AppState {
-    if (!BaseHtmlComponent.appState) {
-      BaseHtmlComponent.appState = JSON.parse(localStorage.getItem(APP_STATE_LOCAL_STORAGE_KEY)) || new AppState();
-    }
-    return JSON.parse(JSON.stringify(BaseHtmlComponent.appState));
-  }
-
-  saveAppState(newAppState: AppState): void {
-    BaseHtmlComponent.appState = newAppState;
-    return localStorage.setItem(APP_STATE_LOCAL_STORAGE_KEY, JSON.stringify(newAppState));
   }
 
   show(): void {

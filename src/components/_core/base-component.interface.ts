@@ -1,5 +1,3 @@
-import { AppState } from './app-state.model';
-
 export interface IHtmlComponent {
   toHtml(): string;
 
@@ -20,10 +18,6 @@ export interface IHtmlComponent {
   hide(): void;
 
   toggle(): void;
-
-  getAppState(): AppState;
-
-  saveAppState(newAppState: AppState): void;
 
   delayCallback(callback: (...args: any[]) => void, ms: number): (...args: any[]) => void;
 

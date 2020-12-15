@@ -1,5 +1,6 @@
-import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../common/ts/base/constant';
-import { BaseStatefulHtmlComponent } from '../common/ts/base/base-stateful-component';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../_constants/constant';
+import { BaseStatefulHtmlComponent } from '../_core/base-stateful-component';
+import { IAppStateClient } from '../_state/app-state.client.interface';
 const Chart = require('chart.js');
 const smooth = require('array-smooth');
 
@@ -22,7 +23,7 @@ export class TypingProgressGraphHtmlComponent extends BaseStatefulHtmlComponent<
   private containerId: string;
   private input: TypingProgressGraphHtmlComponentInput;
 
-  constructor(graphData: number[], smoothness: number) {
+  constructor(private appStateClient: IAppStateClient, graphData: number[], smoothness: number) {
     super();
     this.input = {
       graphData,
@@ -71,7 +72,7 @@ export class TypingProgressGraphHtmlComponent extends BaseStatefulHtmlComponent<
   }
 
   private setGridLinesColor() {
-    if (this.getAppState().currentTheme === DARK_THEME_VALUE) {
+    if (this.appStateClient.getAppState().currentTheme === DARK_THEME_VALUE) {
       this.gridLinesColor = GRID_LINES_COLOR_IN_DARK_THEME;
     } else {
       this.gridLinesColor = GRID_LINES_COLOR_IN_LIGHT_THEME;

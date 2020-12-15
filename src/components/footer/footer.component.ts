@@ -1,5 +1,5 @@
 import './footer.scss';
-import { BaseHtmlComponent } from '../common/ts/base/base-component';
+import { BaseHtmlComponent } from '../_core/base-component';
 
 export class FooterHtmlComponent extends BaseHtmlComponent {
   preInsertHtml(): void {

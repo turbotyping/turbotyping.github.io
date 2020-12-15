@@ -1,10 +1,9 @@
-import './components/common/scss/common.scss';
+import './components/_scss/common.scss';
 
 import { MainHtmlComponent } from './components/main/main.component';
 import { FooterHtmlComponent } from './components/footer/footer.component';
 import { NavbarHtmlComponent } from './components/navbar/navbar.component';
-import { AppState } from './components/common/ts/base/app-state.model';
-import { IHtmlComponent } from './components/common/ts/base/base-component.interface';
+import { IHtmlComponent } from './components/_core/base-component.interface';
 
 const body = document.querySelector('body');
 

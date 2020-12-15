@@ -1,5 +1,5 @@
 import './select.scss';
-import { BaseStatefulHtmlComponent } from '../base/base-stateful-component';
+import { BaseStatefulHtmlComponent } from '../base-stateful-component';
 
 export class SelectOption<T> {
   label: string;

@@ -1,11 +1,16 @@
-import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../common/ts/base/constant';
-import { AppState } from '../common/ts/base/app-state.model';
-import { BaseHtmlComponent } from '../common/ts/base/base-component';
+import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../_constants/constant';
+import { AppState } from '../_state/app-state.model';
+import { BaseHtmlComponent } from '../_core/base-component';
+import { IAppStateClient } from '../_state/app-state.client.interface';
 
 export class TextToTypeReferenceHtmlComponent extends BaseHtmlComponent {
   private referenceAnchor: string;
   private referenceId: string;
   private reference: HTMLElement;
+
+  constructor(private appStateClient: IAppStateClient) {
+    super();
+  }
 
   preInsertHtml(): void {
     this.referenceId = this.generateId();
@@ -31,9 +36,9 @@ export class TextToTypeReferenceHtmlComponent extends BaseHtmlComponent {
   }
 
   private updateInnerHTML() {
-    const appStorage = this.getAppState();
-    const textToTypeArray = AppState.getTextToTypeArray(appStorage);
-    const textToType = textToTypeArray[appStorage.textToTypeIndex];
+    const appState = this.appStateClient.getAppState();
+    const textToTypeArray = this.appStateClient.getTextToTypeArray();
+    const textToType = textToTypeArray[appState.textToTypeIndex];
     this.referenceAnchor = `<a href="${textToType.reference}" target="_blank">— ${textToType.author}</a>`;
     this.reference.innerHTML = this.referenceAnchor;
   }

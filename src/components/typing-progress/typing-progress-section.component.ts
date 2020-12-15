@@ -1,9 +1,11 @@
 import './typing-progress.scss';
-import { DELETE_PROGRESS_DATA_EVENT, PROGRESS_DIV_ID } from '../common/ts/base/constant';
+import { DELETE_PROGRESS_DATA_EVENT, PROGRESS_DIV_ID } from '../_constants/constant';
 import { ErrorProgressTypedKeysHighlighter } from './error-progress-typed-keys-highlighter';
 import { TypingProgressHtmlComponent } from './typing-progress.component';
-import { BaseHtmlComponent } from '../common/ts/base/base-component';
+import { BaseHtmlComponent } from '../_core/base-component';
 import { SpeedProgressTypedKeysHighlighter } from './speed-progress-typed-keys-highlighter';
+import { IAppStateClient } from '../_state/app-state.client.interface';
+import { AppStateClient } from '../_state/app-state.client';
 
 export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
   private speedProgress: TypingProgressHtmlComponent;
@@ -13,21 +15,27 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
   private speedProgressContainerId: string;
   private errorProgressContainerId: string;
 
+  constructor(private appStateClient: IAppStateClient) {
+    super();
+  }
+
   preInsertHtml(): void {
     this.speedProgressContainerId = this.generateId();
     this.errorProgressContainerId = this.generateId();
     this.deleteProgressDataButtonId = this.generateId();
     this.speedProgress = new TypingProgressHtmlComponent(
+      AppStateClient.getInstance(),
       'Speed progress',
       (typedTextStats) => typedTextStats.filter((s) => s.wpm > 0).map((s) => s.wpm),
       (typedKeysStats) => typedKeysStats.filter((s) => s.wpm > 0).map((s) => s.wpm),
-      new SpeedProgressTypedKeysHighlighter()
+      new SpeedProgressTypedKeysHighlighter(AppStateClient.getInstance())
     );
     this.errorProgress = new TypingProgressHtmlComponent(
+      AppStateClient.getInstance(),
       'Error progress',
       (typedTextStats) => typedTextStats.map((s) => s.errors),
       (typedKeysStats) => typedKeysStats.map((s) => s.missCount),
-      new ErrorProgressTypedKeysHighlighter()
+      new ErrorProgressTypedKeysHighlighter(AppStateClient.getInstance())
     );
     this.speedProgress.preInsertHtml();
     this.errorProgress.preInsertHtml();
@@ -57,10 +65,10 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
   }
 
   private handleDeleteProgressDataButtonClickEvent() {
-    const appStorage = this.getAppState();
-    appStorage.typedTextsStats = [];
-    appStorage.typedKeysStatsJson = '[]';
-    this.saveAppState(appStorage);
+    const appState = this.appStateClient.getAppState();
+    appState.typedTextsStats = [];
+    appState.typedKeysStatsJson = '[]';
+    this.appStateClient.saveAppState(appState);
     this.dispatchCustomEvent(DELETE_PROGRESS_DATA_EVENT);
   }
 }

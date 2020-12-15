@@ -1,4 +1,4 @@
-import { BaseHtmlComponent } from '../base/base-component';
+import { BaseHtmlComponent } from '../base-component';
 import './dialog.scss';
 
 export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {

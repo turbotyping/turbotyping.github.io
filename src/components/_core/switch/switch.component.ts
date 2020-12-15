@@ -1,5 +1,5 @@
 import './switch.scss';
-import { BaseStatefulHtmlComponent } from '../base/base-stateful-component';
+import { BaseStatefulHtmlComponent } from '../base-stateful-component';
 
 export class SwitchHtmlComponent extends BaseStatefulHtmlComponent<boolean, boolean> {
   private switchContainerId: string;

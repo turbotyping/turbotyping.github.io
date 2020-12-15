@@ -1,12 +1,13 @@
-import { APP_STATE_LOCAL_STORAGE_KEY, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../common/ts/base/constant';
-import { AppState } from '../common/ts/base/app-state.model';
+import { MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../_constants/constant';
+import { IAppStateClient } from '../_state/app-state.client.interface';
 import { TypedKeysHighlighter } from './typed-keys-highlighter';
 
 export class ErrorProgressTypedKeysHighlighter implements TypedKeysHighlighter {
+  constructor(private appStateClient: IAppStateClient) {}
+
   public highligh(typedKeysContainerId: string, typedKeyCssClass: string) {
     const container = document.getElementById(typedKeysContainerId);
-    const appStorage = JSON.parse(localStorage.getItem(APP_STATE_LOCAL_STORAGE_KEY)) || new AppState();
-    const keyStats = AppState.getTypedKeysStatsMap(appStorage);
+    const keyStats = this.appStateClient.getTypedKeysStatsMap();
     container.querySelectorAll(`.${typedKeyCssClass}`).forEach((span) => {
       let typedKey = span.innerHTML.toLowerCase();
       let cssClass = 'not-enough-data-available-yet';
