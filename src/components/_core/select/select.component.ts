@@ -66,6 +66,7 @@ export class SelectHtmlComponent<T> extends BaseHtmlComponent {
     this.updateInnerHTML();
     this.selectHeader.addEventListener('click', this.handleSelectHeaderClickEvent.bind(this));
     this.selectOptions.addEventListener('click', this.handleSelectOptionsClickEvent.bind(this));
+    document.addEventListener('click', this.handleDocumentClickEvent.bind(this));
   }
 
   reset(input: SelectHtmlComponentInput<T>): void {
@@ -92,6 +93,13 @@ export class SelectHtmlComponent<T> extends BaseHtmlComponent {
       this.selectOptions.classList.add('hide');
     }
     this.selectOptions.innerHTML = this.input.options.map((o) => `<span class="select-option">${o.label}</span>`).join('');
+  }
+
+  private handleDocumentClickEvent(event) {
+    if (!this.selectContainer.contains(event.target)) {
+      this.open = false;
+      this.updateInnerHTML();
+    }
   }
 
   private handleSelectHeaderClickEvent() {
