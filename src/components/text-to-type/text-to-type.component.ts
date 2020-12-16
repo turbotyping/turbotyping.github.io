@@ -141,7 +141,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     appState.textToTypeIndex = this.appStateClient.nextTextToTypeIndex();
     appState.typedTextsStats.push(this.typedTextStats);
     this.typedKeysStats.forEach((value: TypedKeyStats, key: string) => {
-      let typedKeysStatsMap = this.appStateClient.getTypedKeysStatsMap();
+      let typedKeysStatsMap = this.appStateClient.toTypedKeysStatsMap(appState.typedKeysStatsJson);
       if (!typedKeysStatsMap) typedKeysStatsMap = new Map<string, TypedKeyStats[]>();
       let typedKeysStats = typedKeysStatsMap.get(key);
       if (!typedKeysStats) {
@@ -149,7 +149,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
       } else {
         typedKeysStatsMap.set(key, [...typedKeysStats, value]);
       }
-      this.appStateClient.setTypedKeysStatsJson(typedKeysStatsMap);
+      appState.typedKeysStatsJson = this.appStateClient.toTypedKeysStatsJson(typedKeysStatsMap);
     });
     this.appStateClient.saveAppState(appState);
   }

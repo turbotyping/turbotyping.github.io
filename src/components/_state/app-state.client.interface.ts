@@ -7,7 +7,9 @@ export interface IAppStateClient {
 
   saveAppState(newAppState: AppState): void;
 
-  setTypedKeysStatsJson(typedKeysStatsMap: Map<string, TypedKeyStats[]>): void;
+  toTypedKeysStatsJson(typedKeysStatsMap: Map<string, TypedKeyStats[]>): string;
+
+  toTypedKeysStatsMap(typedKeysStatsJson: string): Map<string, TypedKeyStats[]>;
 
   getTypedKeysStatsMap(): Map<string, TypedKeyStats[]>;
 

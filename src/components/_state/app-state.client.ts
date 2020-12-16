@@ -41,8 +41,12 @@ export class AppStateClient implements IAppStateClient {
     localStorage.setItem(APP_STATE_LOCAL_STORAGE_KEY, JSON.stringify(newAppState));
   }
 
-  setTypedKeysStatsJson(typedKeysStatsMap: Map<string, TypedKeyStats[]>): void {
-    this.appState.typedKeysStatsJson = JSON.stringify(Array.from(typedKeysStatsMap.entries()));
+  toTypedKeysStatsJson(typedKeysStatsMap: Map<string, TypedKeyStats[]>): string {
+    return JSON.stringify(Array.from(typedKeysStatsMap.entries()));
+  }
+
+  toTypedKeysStatsMap(typedKeysStatsJson: string): Map<string, TypedKeyStats[]> {
+    return new Map(JSON.parse(typedKeysStatsJson || '[]'));
   }
 
   getTypedKeysStatsMap(): Map<string, TypedKeyStats[]> {
