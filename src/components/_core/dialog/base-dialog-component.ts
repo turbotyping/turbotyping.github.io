@@ -13,14 +13,11 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   abstract getDialogTitle(): string;
   abstract getDialogBody(): string;
   abstract getDialogFooter(): string;
-  abstract postInsertHtmlInternal(): void;
-  abstract preInsertHtmlInternal(): void;
 
   preInsertHtml(): void {
     this.dialogId = this.generateId();
     this.dialogContainerId = this.generateId();
     this.dialogCloseButtonId = this.generateId();
-    this.preInsertHtmlInternal();
   }
 
   toHtml(): string {
@@ -50,7 +47,6 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
     this.dialogCloseButton = document.getElementById(this.dialogCloseButtonId);
     this.dialogCloseButton.addEventListener('click', this.handleDialogCloseButtonClickEvent.bind(this));
     document.addEventListener('click', this.handleDocumentClickEvent.bind(this));
-    this.postInsertHtmlInternal();
   }
 
   show(): void {

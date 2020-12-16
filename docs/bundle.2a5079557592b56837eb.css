@@ -1724,3 +1724,12 @@ body.dark {
     .button-container button.secondary:hover {
       opacity: 0.85; }
 
+.add-custom-text-to-type-dialog {
+  --dialog-min-width: 60rem; }
+  .add-custom-text-to-type-dialog .add-custom-text-to-type-dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; }
+    .add-custom-text-to-type-dialog .add-custom-text-to-type-dialog-footer > * {
+      margin-left: 1.2rem; }
+

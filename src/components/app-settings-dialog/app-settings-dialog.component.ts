@@ -31,7 +31,8 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     super();
   }
 
-  preInsertHtmlInternal(): void {
+  preInsertHtml(): void {
+    super.preInsertHtml();
     this.enableCapitalLettersContainerId = this.generateId();
     this.enablePunctuationCharactersContainerId = this.generateId();
     this.textToTypeLanguagesContainerId = this.generateId();
@@ -120,7 +121,8 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     `;
   }
 
-  postInsertHtmlInternal(): void {
+  postInsertHtml(): void {
+    super.postInsertHtml();
     this.enableCapitalLettersContainer = document.getElementById(this.enableCapitalLettersContainerId);
     this.enablePunctuationCharactersContainer = document.getElementById(this.enablePunctuationCharactersContainerId);
     this.stopOnErrorSwitch.postInsertHtml();
@@ -142,7 +144,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.maxCharactersToType.onUpdate(this.handleMaxCharactersToTypeChangeEvent.bind(this));
     this.textToTypeCategoriesSelect.onUpdate(this.handleTextToTypeCategoryChangeEvent.bind(this));
     this.textToTypeLanguagesSelect.onUpdate(this.handleTextToTypeLanguageChangeEvent.bind(this));
-    this.saveButton.onClick(this.handleValidateButtonClickEvent.bind(this));
+    this.saveButton.onClick(this.handleSaveButtonClickEvent.bind(this));
     this.cancelButton.onClick(this.handleCancelButtonClickEvent.bind(this));
   }
 
@@ -242,7 +244,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.appState.textToTypeLanguage = value;
   }
 
-  private handleValidateButtonClickEvent() {
+  private handleSaveButtonClickEvent() {
     this.appStateClient.saveAppState(this.appState);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
     this.hide();
