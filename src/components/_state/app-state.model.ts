@@ -4,7 +4,7 @@ import { TextToTypeLanguage } from './text-to-type-language.enum';
 import { TextToType } from '../text-to-type/text-to-type.model';
 
 export class AppState {
-  userProvidedTextsToType: TextToType[];
+  customTextsToType: TextToType[];
   visitWebsiteForTheFirstTime: boolean = true;
   textToTypeCategory: TextToTypeCategory;
   textToTypeLanguage: TextToTypeLanguage;

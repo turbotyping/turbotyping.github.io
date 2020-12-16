@@ -1,6 +1,6 @@
 import './app-settings-dialog.scss';
 import { APP_SETTINGS_CHANGE_EVENT, END_UPDATING_APP_SETTINGS_EVENT, START_UPDATING_APP_SETTINGS_EVENT } from '../_constants/constant';
-import { BaseDialogHtmlComponent } from '../_core/dialog/base-dialog-component';
+import { BaseDialogHtmlComponent, DialogPhase } from '../_core/dialog/base-dialog-component';
 import { InputHtmlComponent } from '../_core/input/input.component';
 import { SelectHtmlComponent } from '../_core/select/select.component';
 import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../_state/text-to-type-category.enum';
@@ -23,16 +23,21 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private textToTypeLanguagesContainerId: string;
   private enableCapitalLettersContainerId: string;
   private enablePunctuationCharactersContainerId: string;
+  private textToTypeLanguageContainerId: string;
+  private textToTypeLanguageContainer: HTMLElement;
   private saveButton: ButtonHtmlComponent;
   private cancelButton: ButtonHtmlComponent;
   private appState: AppState;
 
   constructor(private appStateClient: IAppStateClient) {
     super();
+    this.addPhaseListener(DialogPhase.POST_DIALOG_SHOW, this.postShow.bind(this));
+    this.addPhaseListener(DialogPhase.POST_DIALOG_HIDE, this.postHide.bind(this));
   }
 
   preInsertHtml(): void {
     super.preInsertHtml();
+    this.textToTypeLanguageContainerId = this.generateId();
     this.enableCapitalLettersContainerId = this.generateId();
     this.enablePunctuationCharactersContainerId = this.generateId();
     this.textToTypeLanguagesContainerId = this.generateId();
@@ -85,7 +90,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
         <span>Text to type category</span>
         <span>${this.textToTypeCategoriesSelect.toHtml()}</span>
       </div>
-      <div class="app-setting">
+      <div id="${this.textToTypeLanguageContainerId}" class="app-setting">
         <span>Text to type language</span>
         <span id="${this.textToTypeLanguagesContainerId}">${this.textToTypeLanguagesSelect.toHtml()}</span>
       </div>
@@ -123,6 +128,7 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
 
   postInsertHtml(): void {
     super.postInsertHtml();
+    this.textToTypeLanguageContainer = document.getElementById(this.textToTypeLanguageContainerId);
     this.enableCapitalLettersContainer = document.getElementById(this.enableCapitalLettersContainerId);
     this.enablePunctuationCharactersContainer = document.getElementById(this.enablePunctuationCharactersContainerId);
     this.stopOnErrorSwitch.postInsertHtml();
@@ -148,16 +154,14 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.cancelButton.onClick(this.handleCancelButtonClickEvent.bind(this));
   }
 
-  show(): void {
-    this.dialog.showModal();
+  private postShow(): void {
     this.maxCharactersToType.blur();
     this.appState = this.appStateClient.getAppState();
     this.updateInnerHTML();
     this.dispatchCustomEvent(START_UPDATING_APP_SETTINGS_EVENT);
   }
 
-  hide(): void {
-    super.hide();
+  private postHide(): void {
     this.dispatchCustomEvent(END_UPDATING_APP_SETTINGS_EVENT);
   }
 
@@ -178,9 +182,13 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
 
     this.enableCapitalLettersContainer.classList.remove('hide');
     this.enablePunctuationCharactersContainer.classList.remove('hide');
+    this.textToTypeLanguageContainer.classList.remove('hide');
     if (this.appState.textToTypeCategory == TextToTypeCategory.CODE) {
       this.enableCapitalLettersContainer.classList.add('hide');
       this.enablePunctuationCharactersContainer.classList.add('hide');
+    }
+    if (this.appState.textToTypeCategory == TextToTypeCategory.CUSTOM_TEXT) {
+      this.textToTypeLanguageContainer.classList.add('hide');
     }
   }
 
@@ -220,21 +228,12 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
       this.appState.textToTypeLanguage = TextToTypeLanguage.JAVA;
       this.appState.enableCapitalLetters = true;
       this.appState.enablePunctuationCharacters = true;
-      this.enableCapitalLettersContainer.classList.add('hide');
-      this.enablePunctuationCharactersContainer.classList.add('hide');
     } else {
       this.appState.textToTypeLanguage = TextToTypeLanguage.ENGLISH;
       this.appState.enableCapitalLetters = false;
       this.appState.enablePunctuationCharacters = false;
-      this.enableCapitalLettersContainer.classList.remove('hide');
-      this.enablePunctuationCharactersContainer.classList.remove('hide');
     }
-    this.enableCapitalLettersSwitch.reset(this.appState.enableCapitalLetters);
-    this.enablePunctuationCharactersSwitch.reset(this.appState.enablePunctuationCharacters);
-    this.textToTypeLanguagesSelect.reset({
-      options: getTextToTypeLanguage(this.appState.textToTypeCategory),
-      selectedOptionValue: this.appState.textToTypeLanguage,
-    });
+    this.updateInnerHTML();
   }
 
   private handleTextToTypeLanguageChangeEvent(value: TextToTypeLanguage) {

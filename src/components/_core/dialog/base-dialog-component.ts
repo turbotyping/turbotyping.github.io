@@ -1,6 +1,11 @@
 import { BaseHtmlComponent } from '../base-component';
 import './dialog.scss';
 
+export enum DialogPhase {
+  POST_DIALOG_HIDE,
+  POST_DIALOG_SHOW,
+}
+
 export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   protected dialogId: string;
   protected dialogContainerId: string;
@@ -8,6 +13,8 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   protected dialog: HTMLDialogElement;
   protected dialogContainer: HTMLElement;
   protected dialogCloseButton: HTMLElement;
+  private isVisible: boolean;
+  private callbacks: Map<DialogPhase, (() => void)[]> = new Map<DialogPhase, (() => void)[]>();
 
   abstract getDialogCssClass(): string;
   abstract getDialogTitle(): string;
@@ -15,6 +22,7 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   abstract getDialogFooter(): string;
 
   preInsertHtml(): void {
+    this.isVisible = false;
     this.dialogId = this.generateId();
     this.dialogContainerId = this.generateId();
     this.dialogCloseButtonId = this.generateId();
@@ -50,11 +58,23 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   }
 
   show(): void {
+    this.isVisible = true;
     this.dialog.showModal();
+    (this.callbacks.get(DialogPhase.POST_DIALOG_SHOW) || []).forEach((callback) => callback());
   }
 
   hide(): void {
+    if (!this.isVisible) return;
+    this.isVisible = false;
     this.dialog.close();
+    (this.callbacks.get(DialogPhase.POST_DIALOG_HIDE) || []).forEach((callback) => callback());
+  }
+
+  addPhaseListener(phase: DialogPhase, callback: () => void) {
+    let callbacks = this.callbacks.get(phase);
+    if (!callbacks) callbacks = [];
+    callbacks.push(callback);
+    this.callbacks.set(phase, callbacks);
   }
 
   private handleDialogCloseButtonClickEvent() {

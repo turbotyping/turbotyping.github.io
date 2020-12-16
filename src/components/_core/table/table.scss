@@ -1,0 +1,53 @@
+body.light {
+  --table-head-background-color: var(--background-color-03);
+  --table-body-background-color: var(--background-color-02);
+  --table-body-background-color-on-hover: var(--background-color-04);
+  --table-color: var(--body-color);
+}
+
+body.dark {
+  --table-head-background-color: var(--background-color-03);
+  --table-body-background-color: var(--background-color-02);
+  --table-body-background-color-on-hover: var(--background-color-04);
+  --table-color: var(--body-color);
+}
+
+table {
+  font-size: 1.5rem;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: auto;
+
+  & th {
+    font-weight: 600;
+    text-align: left;
+  }
+
+  & td,
+  & th {
+    padding: 1rem 1.5rem;
+    max-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--table-color);
+  }
+
+  & th {
+    background-color: var(--table-head-background-color);
+    transition: var(--transition);
+    transition-property: background-color;
+  }
+
+  & tbody tr {
+    background-color: var(--table-body-background-color);
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+    transition-property: border-color, background-color;
+
+    &:hover {
+      background-color: var(--table-body-background-color-on-hover);
+    }
+  }
+}

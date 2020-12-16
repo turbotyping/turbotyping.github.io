@@ -9,4 +9,6 @@ export const CHANGE_THEME_EVENT = 'change-theme-event';
 export const APP_SETTINGS_CHANGE_EVENT = 'app-settings-change-event';
 export const START_UPDATING_APP_SETTINGS_EVENT = 'start-changing-app-settings-event';
 export const END_UPDATING_APP_SETTINGS_EVENT = 'end-changing-app-settings-event';
+export const START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT = 'start-changing-custom-text-to-type-event';
+export const END_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT = 'end-changing-custom-text-to-type-event';
 export const DELETE_PROGRESS_DATA_EVENT = 'delete-progress-data-event';

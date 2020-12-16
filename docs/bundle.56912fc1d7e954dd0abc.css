@@ -2,7 +2,8 @@
   --transition: all 0.15s ease-in-out;
   --border-radius: 0.3rem;
   --main-max-width: 2000px;
-  --navbar-height: 6.5rem; }
+  --navbar-height: 6.5rem;
+  --font-family: 'Poppins', sans-serif; }
   @media screen and (max-width: 426px) {
     :root {
       --font-size: 45%;
@@ -1724,12 +1725,103 @@ body.dark {
     .button-container button.secondary:hover {
       opacity: 0.85; }
 
+body.dark {
+  --text-to-add-textarea-label-color: var(--text-color-03);
+  --add-icon-color-on-hover: var(--primary-color); }
+
+body.light {
+  --text-to-add-textarea-label-color: var(--text-color-03);
+  --add-icon-color-on-hover: var(--primary-color); }
+
 .add-custom-text-to-type-dialog {
-  --dialog-min-width: 60rem; }
+  --dialog-min-width: 90rem; }
+  .add-custom-text-to-type-dialog .text-to-add-textarea-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem; }
+    .add-custom-text-to-type-dialog .text-to-add-textarea-header .label {
+      font-weight: bold;
+      color: var(--text-to-add-textarea-label-color); }
+    .add-custom-text-to-type-dialog .text-to-add-textarea-header .iconify {
+      font-size: 3.2rem; }
+      .add-custom-text-to-type-dialog .text-to-add-textarea-header .iconify:hover {
+        color: var(--add-icon-color-on-hover); }
   .add-custom-text-to-type-dialog .add-custom-text-to-type-dialog-footer {
     display: flex;
     align-items: center;
     justify-content: flex-end; }
     .add-custom-text-to-type-dialog .add-custom-text-to-type-dialog-footer > * {
       margin-left: 1.2rem; }
+  .add-custom-text-to-type-dialog .added-custom-texts-table {
+    margin-top: 3.5rem; }
+
+.textarea-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; }
+  .textarea-container .textarea {
+    padding: 0.8rem 1rem;
+    border: none;
+    outline: none;
+    color: var(--input-color);
+    background-color: var(--input-background-color);
+    width: var(--input-width);
+    border-bottom: 2px solid var(--input-border-color);
+    transition: var(--transition);
+    transition-property: color, background-color, border-color;
+    font-size: 1.5rem;
+    font-family: var(--font-family); }
+    .textarea-container .textarea:focus, .textarea-container .textarea:hover {
+      border-color: var(--input-border-color-on-active); }
+  .textarea-container .textarea-error-message {
+    display: none; }
+  .textarea-container.error .textarea-error-message {
+    display: inline;
+    font-size: 1.2rem;
+    color: var(--error-message-color);
+    font-style: italic; }
+  .textarea-container.error .textarea {
+    border-color: var(--error-message-color); }
+
+body.light {
+  --table-head-background-color: var(--background-color-03);
+  --table-body-background-color: var(--background-color-02);
+  --table-body-background-color-on-hover: var(--background-color-04);
+  --table-color: var(--body-color); }
+
+body.dark {
+  --table-head-background-color: var(--background-color-03);
+  --table-body-background-color: var(--background-color-02);
+  --table-body-background-color-on-hover: var(--background-color-04);
+  --table-color: var(--body-color); }
+
+table {
+  font-size: 1.5rem;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: auto; }
+  table th {
+    font-weight: 600;
+    text-align: left; }
+  table td,
+  table th {
+    padding: 1rem 1.5rem;
+    max-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--table-color); }
+  table th {
+    background-color: var(--table-head-background-color);
+    transition: var(--transition);
+    transition-property: background-color; }
+  table tbody tr {
+    background-color: var(--table-body-background-color);
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+    transition-property: border-color, background-color; }
+    table tbody tr:hover {
+      background-color: var(--table-body-background-color-on-hover); }
 

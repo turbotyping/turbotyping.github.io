@@ -65,6 +65,9 @@ export class AppStateClient implements IAppStateClient {
     if (this.appState.visitWebsiteForTheFirstTime) {
       return [welcomeMessage];
     }
+    if (this.appState.textToTypeCategory === TextToTypeCategory.CUSTOM_TEXT) {
+      return this.appState.customTextsToType;
+    }
     if (this.appState.textToTypeCategory === TextToTypeCategory.QUOTES && this.appState.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
       return englishQuotes;
     }

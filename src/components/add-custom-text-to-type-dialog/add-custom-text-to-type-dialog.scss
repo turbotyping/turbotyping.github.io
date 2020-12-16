@@ -1,5 +1,35 @@
+body.dark {
+  --text-to-add-textarea-label-color: var(--text-color-03);
+  --add-icon-color-on-hover: var(--primary-color);
+}
+
+body.light {
+  --text-to-add-textarea-label-color: var(--text-color-03);
+  --add-icon-color-on-hover: var(--primary-color);
+}
+
 .add-custom-text-to-type-dialog {
-  --dialog-min-width: 60rem;
+  --dialog-min-width: 90rem;
+
+  & .text-to-add-textarea-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
+
+    & .label {
+      font-weight: bold;
+      color: var(--text-to-add-textarea-label-color);
+    }
+
+    & .iconify {
+      font-size: 3.2rem;
+
+      &:hover {
+        color: var(--add-icon-color-on-hover);
+      }
+    }
+  }
 
   & .add-custom-text-to-type-dialog-footer {
     display: flex;
@@ -9,5 +39,9 @@
     & > * {
       margin-left: 1.2rem;
     }
+  }
+
+  & .added-custom-texts-table {
+    margin-top: 3.5rem;
   }
 }

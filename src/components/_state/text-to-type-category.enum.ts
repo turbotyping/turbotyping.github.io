@@ -5,6 +5,7 @@ export enum TextToTypeCategory {
   POEMS = 'POEMS',
   STORIES = 'STORIES',
   CODE = 'CODE',
+  CUSTOM_TEXT = 'CUSTOM_TEXT',
 }
 
 export const TEXT_TO_TYPE_CATEGORIES: SelectOption<TextToTypeCategory>[] = [
@@ -23,5 +24,9 @@ export const TEXT_TO_TYPE_CATEGORIES: SelectOption<TextToTypeCategory>[] = [
   {
     label: 'Code',
     value: TextToTypeCategory.CODE,
+  },
+  {
+    label: 'Custom Text',
+    value: TextToTypeCategory.CUSTOM_TEXT,
   },
 ];

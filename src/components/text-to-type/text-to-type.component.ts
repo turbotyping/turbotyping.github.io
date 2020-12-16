@@ -4,7 +4,9 @@ import {
   APP_SETTINGS_CHANGE_EVENT,
   END_TYPING_EVENT,
   END_UPDATING_APP_SETTINGS_EVENT,
+  END_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT,
   START_UPDATING_APP_SETTINGS_EVENT,
+  START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT,
 } from '../_constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
@@ -54,16 +56,18 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     this.setTextToType();
     document.body.addEventListener('keydown', this.handleKeyDownEvent.bind(this));
     this.addCustomEventListener(APP_SETTINGS_CHANGE_EVENT, this.handleAppSettingsChangeEvent.bind(this));
-    this.addCustomEventListener(START_UPDATING_APP_SETTINGS_EVENT, this.handleStartUpdatingAppSettingsEvent.bind(this));
-    this.addCustomEventListener(END_UPDATING_APP_SETTINGS_EVENT, this.handleEndUpdatingAppSettingsEvent.bind(this));
+    this.addCustomEventListener(START_UPDATING_APP_SETTINGS_EVENT, this.disable.bind(this));
+    this.addCustomEventListener(END_UPDATING_APP_SETTINGS_EVENT, this.enable.bind(this));
+    this.addCustomEventListener(START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT, this.disable.bind(this));
+    this.addCustomEventListener(END_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT, this.enable.bind(this));
   }
 
-  private handleStartUpdatingAppSettingsEvent() {
+  private disable() {
     this.textToTypeDomElement.classList.add('disabled');
     this.isDisabled = true;
   }
 
-  private handleEndUpdatingAppSettingsEvent() {
+  private enable() {
     this.textToTypeDomElement.classList.remove('disabled');
     this.isDisabled = false;
   }

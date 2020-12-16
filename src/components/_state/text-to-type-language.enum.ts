@@ -10,31 +10,37 @@ export enum TextToTypeLanguage {
 }
 
 export function getTextToTypeLanguage(category: TextToTypeCategory): SelectOption<TextToTypeLanguage>[] {
-  if (category === TextToTypeCategory.CODE) {
-    return [
-      {
-        label: 'Java',
-        value: TextToTypeLanguage.JAVA,
-      },
-      {
-        label: 'Python',
-        value: TextToTypeLanguage.PYTHON,
-      },
-      {
-        label: 'HTML',
-        value: TextToTypeLanguage.HTML,
-      },
-    ];
-  } else {
-    return [
-      {
-        label: 'English',
-        value: TextToTypeLanguage.ENGLISH,
-      },
-      {
-        label: 'French',
-        value: TextToTypeLanguage.FRENCH,
-      },
-    ];
+  switch (category) {
+    case TextToTypeCategory.CODE: {
+      return [
+        {
+          label: 'Java',
+          value: TextToTypeLanguage.JAVA,
+        },
+        {
+          label: 'Python',
+          value: TextToTypeLanguage.PYTHON,
+        },
+        {
+          label: 'HTML',
+          value: TextToTypeLanguage.HTML,
+        },
+      ];
+    }
+    case TextToTypeCategory.CUSTOM_TEXT: {
+      return [];
+    }
+    default: {
+      return [
+        {
+          label: 'English',
+          value: TextToTypeLanguage.ENGLISH,
+        },
+        {
+          label: 'French',
+          value: TextToTypeLanguage.FRENCH,
+        },
+      ];
+    }
   }
 }
