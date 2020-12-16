@@ -114,3 +114,13 @@
     }
   }
 }
+
+@media screen and (max-width: 426px) {
+  .progress-by-key {
+    display: none !important;
+  }
+
+  .slider-container {
+    width: 10rem !important;
+  }
+}

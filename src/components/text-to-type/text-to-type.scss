@@ -2,9 +2,8 @@
 .text-to-type-page {
   padding-bottom: 5rem;
   min-height: calc(100vh - var(--navbar-height));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 94rem;
+  margin: 0 auto;
 }
 
 .text-to-type {
@@ -50,8 +49,7 @@
 }
 
 .text-to-type-reference {
-  width: 90rem;
-  margin: 2rem auto 0;
+  margin: 2rem 0;
   font-size: 1.6rem;
   float: right;
   color: var(--text-to-type-reference-color);
