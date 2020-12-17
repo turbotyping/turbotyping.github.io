@@ -1,7 +1,7 @@
 {
-  "name": "devkeyboard.github.io",
+  "name": "ah-keyboard.github.io",
   "version": "1.0.0",
-  "description": "devkeyboard.github.io",
+  "description": "ah-keyboard.github.io",
   "main": "index.js",
   "scripts": {
     "build:prod": "webpack --prod",
@@ -10,13 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devkeyboard/devkeyboard.github.io.git"
+    "url": "git+https://github.com/ah-keyboard/ah-keyboard.github.io.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/devkeyboard/devkeyboard.github.io/issues"
+    "url": "https://github.com/ah-keyboard/ah-keyboard.github.io/issues"
   },
   "devDependencies": {
     "@types/node": "14.14.7",
@@ -39,6 +39,8 @@
   "dependencies": {
     "array-smooth": "^1.0.0",
     "chart.js": "^2.9.4",
-    "highlight.js": "^10.4.1"
+    "highlight.js": "^10.4.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }
