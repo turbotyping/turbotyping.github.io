@@ -11,4 +11,5 @@ export const START_UPDATING_APP_SETTINGS_EVENT = 'start-changing-app-settings-ev
 export const END_UPDATING_APP_SETTINGS_EVENT = 'end-changing-app-settings-event';
 export const START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT = 'start-changing-custom-text-to-type-event';
 export const END_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT = 'end-changing-custom-text-to-type-event';
+export const CUSTOM_TEXTS_UPDATE_EVENT = 'custom-texts-update-event';
 export const DELETE_PROGRESS_DATA_EVENT = 'delete-progress-data-event';
