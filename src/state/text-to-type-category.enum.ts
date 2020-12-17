@@ -1,4 +1,4 @@
-import { SelectOption } from '../_core/select/select.component';
+import { SelectOption } from '../components/_core/select/select.component';
 
 export enum TextToTypeCategory {
   QUOTES = 'QUOTES',

@@ -8,13 +8,13 @@ import {
   CUSTOM_TEXTS_UPDATE_EVENT,
   START_UPDATING_APP_SETTINGS_EVENT,
   START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT,
-} from '../_constants/constant';
+} from '../../constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
-import { TextToTypeCategory } from '../_state/text-to-type-category.enum';
+import { TextToTypeCategory } from '../../state/text-to-type-category.enum';
 import { TypedTextStats } from '../typed-text-stats/typed-text-stats.model';
-import { TextToTypeLanguage } from '../_state/text-to-type-language.enum';
-import { IAppStateClient } from '../_state/app-state.client.interface';
+import { TextToTypeLanguage } from '../../state/text-to-type-language.enum';
+import { IAppStateClient } from '../../state/app-state.client.interface';
 
 const INACTIVITY_TIMEOUT = 10000;
 const BACKSPACE_KEY = 'Backspace';

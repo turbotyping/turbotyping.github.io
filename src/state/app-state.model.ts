@@ -1,7 +1,7 @@
 import { TextToTypeCategory } from './text-to-type-category.enum';
-import { TypedTextStats } from '../typed-text-stats/typed-text-stats.model';
+import { TypedTextStats } from '../components/typed-text-stats/typed-text-stats.model';
 import { TextToTypeLanguage } from './text-to-type-language.enum';
-import { TextToType } from '../text-to-type/text-to-type.model';
+import { TextToType } from '../components/text-to-type/text-to-type.model';
 
 export class AppState {
   customTextsToType: TextToType[];

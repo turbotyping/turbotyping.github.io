@@ -1,6 +1,6 @@
-import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../_constants/constant';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
-import { IAppStateClient } from '../_state/app-state.client.interface';
+import { IAppStateClient } from '../../state/app-state.client.interface';
 const Chart = require('chart.js');
 const smooth = require('array-smooth');
 

@@ -1,6 +1,6 @@
-import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../_constants/constant';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, LIGHT_THEME_VALUE } from '../../constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
-import { IAppStateClient } from '../_state/app-state.client.interface';
+import { IAppStateClient } from '../../state/app-state.client.interface';
 
 const CHANGE_TO_DARK_THEME_ICON_ID = 'CHANGE_TO_DARK_THEME_ICON_ID';
 const CHANGE_TO_LIGHT_THEME_ICON_ID = 'CHANGE_TO_LIGHT_THEME_ICON_ID';

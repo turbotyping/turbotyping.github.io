@@ -1,8 +1,8 @@
 import './typed-text-stats.scss';
-import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../_constants/constant';
+import { PROGRESS_DIV_ID, APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../../constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedTextStats } from './typed-text-stats.model';
-import { IAppStateClient } from '../_state/app-state.client.interface';
+import { IAppStateClient } from '../../state/app-state.client.interface';
 
 const TYPED_TEXT_WPM_DOM_ELEMENT_ID = 'TypedTextWpm';
 const TYPED_TEXT_ERRORS_DOM_ELEMENT_ID = 'TypedTextErrors';

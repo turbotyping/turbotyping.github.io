@@ -1734,7 +1734,7 @@ body.light {
   --add-icon-color-on-hover: var(--primary-color); }
 
 .add-custom-text-to-type-dialog {
-  --dialog-min-width: 90rem; }
+  --dialog-min-width: 75rem; }
   .add-custom-text-to-type-dialog .text-to-add-textarea-header {
     display: flex;
     align-items: center;

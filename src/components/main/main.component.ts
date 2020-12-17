@@ -2,7 +2,7 @@ import { TypingProgressSectionHtmlComponent } from '../typing-progress/typing-pr
 import { IHtmlComponent } from '../_core/component.interface';
 import { BaseHtmlContainer } from '../_core/base-container';
 import { TextToTypePageHtmlComponent } from '../text-to-type/text-to-type-page.component';
-import { AppStateClient } from '../_state/app-state.client';
+import { AppStateClient } from '../../state/app-state.client';
 
 export class MainHtmlComponent extends BaseHtmlContainer {
   getComponents(): IHtmlComponent[] {

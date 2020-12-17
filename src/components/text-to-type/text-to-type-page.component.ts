@@ -3,7 +3,7 @@ import { BaseHtmlContainer } from '../_core/base-container';
 import { TypedTextHtmlComponent } from '../typed-text-stats/typed-text-stats.component';
 import { TextToTypeReferenceHtmlComponent } from './text-to-type-reference.component';
 import { TextToTypeHtmlComponent } from './text-to-type.component';
-import { AppStateClient } from '../_state/app-state.client';
+import { AppStateClient } from '../../state/app-state.client';
 
 export class TextToTypePageHtmlComponent extends BaseHtmlContainer {
   getComponents(): IHtmlComponent[] {

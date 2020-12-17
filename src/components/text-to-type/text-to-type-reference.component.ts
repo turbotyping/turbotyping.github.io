@@ -1,6 +1,6 @@
-import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../_constants/constant';
+import { APP_SETTINGS_CHANGE_EVENT, END_TYPING_EVENT } from '../../constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
-import { IAppStateClient } from '../_state/app-state.client.interface';
+import { IAppStateClient } from '../../state/app-state.client.interface';
 
 export class TextToTypeReferenceHtmlComponent extends BaseHtmlComponent {
   private referenceAnchor: string;

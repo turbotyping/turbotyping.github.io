@@ -1,5 +1,5 @@
-import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
-import { APP_STATE_LOCAL_STORAGE_KEY } from '../_constants/constant';
+import { TypedKeyStats } from '../components/typed-keys/typed-key-stats.model';
+import { APP_STATE_LOCAL_STORAGE_KEY } from '../constants/constant';
 import englishQuotes from './quotes.english';
 import frenchQuotes from './quotes.french';
 import englishPoems from './poems.english';
@@ -11,7 +11,7 @@ import pythonCode from './code.python';
 import htmlCode from './code.html';
 import welcomeMessage from './welcome-message';
 import { TextToTypeCategory } from './text-to-type-category.enum';
-import { TextToType } from '../text-to-type/text-to-type.model';
+import { TextToType } from '../components/text-to-type/text-to-type.model';
 import { AppState } from './app-state.model';
 import { IAppStateClient } from './app-state.client.interface';
 import { TextToTypeLanguage } from './text-to-type-language.enum';

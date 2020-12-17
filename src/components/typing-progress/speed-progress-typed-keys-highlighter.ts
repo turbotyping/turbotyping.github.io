@@ -1,5 +1,5 @@
-import { MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../_constants/constant';
-import { IAppStateClient } from '../_state/app-state.client.interface';
+import { MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
+import { IAppStateClient } from '../../state/app-state.client.interface';
 import { TypedKeysHighlighter } from './typed-keys-highlighter';
 
 export class SpeedProgressTypedKeysHighlighter implements TypedKeysHighlighter {

@@ -2,7 +2,7 @@ import './navbar.scss';
 import { AppSettingsDialogHtmlComponent } from '../app-settings-dialog/app-settings-dialog.component';
 import { ChangeThemeIconHtmlComponent } from '../change-theme-icon/change-theme-icon.component';
 import { BaseHtmlComponent } from '../_core/base-component';
-import { AppStateClient } from '../_state/app-state.client';
+import { AppStateClient } from '../../state/app-state.client';
 import { AddCustomTextToTypeDialogHtmlComponent } from '../add-custom-text-to-type-dialog/add-custom-text-to-type-dialog';
 
 const APP_SETTINGS_ICON_ID = 'APP_SETTINGS_ICON_ID';

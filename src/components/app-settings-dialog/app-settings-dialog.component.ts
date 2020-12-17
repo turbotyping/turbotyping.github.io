@@ -1,14 +1,14 @@
 import './app-settings-dialog.scss';
-import { APP_SETTINGS_CHANGE_EVENT, END_UPDATING_APP_SETTINGS_EVENT, START_UPDATING_APP_SETTINGS_EVENT } from '../_constants/constant';
+import { APP_SETTINGS_CHANGE_EVENT, END_UPDATING_APP_SETTINGS_EVENT, START_UPDATING_APP_SETTINGS_EVENT } from '../../constants/constant';
 import { BaseDialogHtmlComponent, DialogPhase } from '../_core/dialog/base-dialog-component';
 import { InputHtmlComponent } from '../_core/input/input.component';
 import { SelectHtmlComponent } from '../_core/select/select.component';
-import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../_state/text-to-type-category.enum';
+import { TextToTypeCategory, TEXT_TO_TYPE_CATEGORIES } from '../../state/text-to-type-category.enum';
 import { ButtonHtmlComponent, ButtonStyle } from '../_core/button/button.component';
-import { AppState } from '../_state/app-state.model';
+import { AppState } from '../../state/app-state.model';
 import { SwitchHtmlComponent } from '../_core/switch/switch.component';
-import { TextToTypeLanguage, getTextToTypeLanguage } from '../_state/text-to-type-language.enum';
-import { IAppStateClient } from '../_state/app-state.client.interface';
+import { TextToTypeLanguage, getTextToTypeLanguage } from '../../state/text-to-type-language.enum';
+import { IAppStateClient } from '../../state/app-state.client.interface';
 
 export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
   private stopOnErrorSwitch: SwitchHtmlComponent;

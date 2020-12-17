@@ -1,13 +1,17 @@
 import './add-custom-text-to-type-dialog.scss';
 import { BaseDialogHtmlComponent, DialogPhase } from '../_core/dialog/base-dialog-component';
 import { ButtonHtmlComponent, ButtonStyle } from '../_core/button/button.component';
-import { IAppStateClient } from '../_state/app-state.client.interface';
+import { IAppStateClient } from '../../state/app-state.client.interface';
 import { TextAreaHtmlComponent } from '../_core/textarea/textarea.component';
-import { END_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT, CUSTOM_TEXTS_UPDATE_EVENT, START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT } from '../_constants/constant';
-import { AppState } from '../_state/app-state.model';
+import {
+  END_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT,
+  CUSTOM_TEXTS_UPDATE_EVENT,
+  START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT,
+} from '../../constants/constant';
+import { AppState } from '../../state/app-state.model';
 import { TableAction, TableColumn, TableHtmlComponent } from '../_core/table/table.component';
-import { TextToTypeCategory } from '../_state/text-to-type-category.enum';
-import { TextToTypeLanguage } from '../_state/text-to-type-language.enum';
+import { TextToTypeCategory } from '../../state/text-to-type-category.enum';
+import { TextToTypeLanguage } from '../../state/text-to-type-language.enum';
 
 class DisplayedCustomTextToAdd {
   text: string;

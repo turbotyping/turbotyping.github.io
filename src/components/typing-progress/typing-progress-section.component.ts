@@ -1,11 +1,11 @@
 import './typing-progress.scss';
-import { DELETE_PROGRESS_DATA_EVENT, PROGRESS_DIV_ID } from '../_constants/constant';
+import { DELETE_PROGRESS_DATA_EVENT, PROGRESS_DIV_ID } from '../../constants/constant';
 import { ErrorProgressTypedKeysHighlighter } from './error-progress-typed-keys-highlighter';
 import { TypingProgressHtmlComponent } from './typing-progress.component';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { SpeedProgressTypedKeysHighlighter } from './speed-progress-typed-keys-highlighter';
-import { IAppStateClient } from '../_state/app-state.client.interface';
-import { AppStateClient } from '../_state/app-state.client';
+import { IAppStateClient } from '../../state/app-state.client.interface';
+import { AppStateClient } from '../../state/app-state.client';
 
 export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
   private speedProgress: TypingProgressHtmlComponent;

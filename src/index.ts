@@ -1,4 +1,4 @@
-import './components/_scss/common.scss';
+import './styles/common.scss';
 
 import { MainHtmlComponent } from './components/main/main.component';
 import { FooterHtmlComponent } from './components/footer/footer.component';

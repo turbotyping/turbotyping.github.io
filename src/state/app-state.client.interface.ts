@@ -1,5 +1,5 @@
-import { TypedKeyStats } from '../typed-keys/typed-key-stats.model';
-import { TextToType } from '../text-to-type/text-to-type.model';
+import { TypedKeyStats } from '../components/typed-keys/typed-key-stats.model';
+import { TextToType } from '../components/text-to-type/text-to-type.model';
 import { AppState } from './app-state.model';
 
 export interface IAppStateClient {
