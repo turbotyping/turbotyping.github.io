@@ -35,7 +35,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
         <div class='left'>
           <a href='/'>
             <img src='/logo.png' alt='logo' />
-            <span>AH Keyboard</span>
+            <span>Turbo Typing</span>
           </a>
         </div>
         <div class='right'>

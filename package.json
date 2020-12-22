@@ -1,7 +1,6 @@
 {
-  "name": "ah-keyboard.github.io",
+  "name": "turbotyping.github.io",
   "version": "1.0.0",
-  "description": "ah-keyboard.github.io",
   "main": "index.js",
   "scripts": {
     "build:prod": "webpack --prod",
