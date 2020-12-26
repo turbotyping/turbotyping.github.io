@@ -1,4 +1,4 @@
-## Welcome to [AH Keyboard](https://ah-keyboard.github.io/) github repository!
+## Welcome to [Turbo Typing](https://turbotyping.github.io/) github repository!
 
 This website was mainly inspired from [keybr](https://www.keybr.com) website, really great job done by the keybr's team!
 
