@@ -71,7 +71,6 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
 
   private handlePreviousTextTextToTypeClickEvent() {
     const appState = this.appStateClient.getAppState();
-    appState.visitWebsiteForTheFirstTime = false;
     appState.textToTypeIndex = this.appStateClient.previousTextToTypeIndex();
     this.appStateClient.saveAppState(appState);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
@@ -79,7 +78,6 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
 
   private handleNextTextTextToTypeClickEvent() {
     const appState = this.appStateClient.getAppState();
-    appState.visitWebsiteForTheFirstTime = false;
     appState.textToTypeIndex = this.appStateClient.nextTextToTypeIndex();
     this.appStateClient.saveAppState(appState);
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);

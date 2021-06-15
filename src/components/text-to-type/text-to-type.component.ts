@@ -143,7 +143,6 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private updateAppStorageOnEndTyping() {
     const appState = this.appStateClient.getAppState();
-    appState.visitWebsiteForTheFirstTime = false;
     appState.textToTypeIndex = this.appStateClient.nextTextToTypeIndex();
     appState.typedTextsStats.push(this.typedTextStats);
     this.typedKeysStats.forEach((value: TypedKeyStats, key: string) => {
