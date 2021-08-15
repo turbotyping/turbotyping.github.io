@@ -15,6 +15,18 @@ import { TextToType } from '../components/text-to-type/text-to-type.model';
 import { AppState } from './app-state.model';
 import { IAppStateClient } from './app-state.client.interface';
 import { TextToTypeLanguage } from './text-to-type-language.enum';
+import { LoremIpsum } from 'lorem-ipsum';
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 5,
+    min: 3,
+  },
+  wordsPerSentence: {
+    max: 12,
+    min: 4,
+  },
+});
 
 export class AppStateClient implements IAppStateClient {
   private static instance: AppStateClient = null;
@@ -69,6 +81,15 @@ export class AppStateClient implements IAppStateClient {
     }
     if (this.appState.textToTypeCategory === TextToTypeCategory.CUSTOM_TEXT) {
       return this.appState.customTextsToType;
+    }
+    if (this.appState.textToTypeCategory === TextToTypeCategory.RANDOM_TEXT) {
+      return [
+        {
+          text: lorem.generateParagraphs(1),
+          reference: 'https://www.npmjs.com/package/lorem-ipsum',
+          author: 'Lorem Ipsum',
+        },
+      ];
     }
     if (this.appState.textToTypeCategory === TextToTypeCategory.QUOTES && this.appState.textToTypeLanguage === TextToTypeLanguage.ENGLISH) {
       return englishQuotes;

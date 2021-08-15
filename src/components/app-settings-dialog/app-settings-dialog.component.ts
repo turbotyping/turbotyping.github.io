@@ -190,6 +190,9 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     if (this.appState.textToTypeCategory == TextToTypeCategory.CUSTOM_TEXT) {
       this.textToTypeLanguageContainer.classList.add('hide');
     }
+    if (this.appState.textToTypeCategory == TextToTypeCategory.RANDOM_TEXT) {
+      this.textToTypeLanguageContainer.classList.add('hide');
+    }
   }
 
   private validateMaxCharactersToType(value: string) {
@@ -226,12 +229,8 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.appState.textToTypeCategory = value;
     if (value == TextToTypeCategory.CODE) {
       this.appState.textToTypeLanguage = TextToTypeLanguage.JAVA;
-      this.appState.enableCapitalLetters = true;
-      this.appState.enablePunctuationCharacters = true;
     } else {
       this.appState.textToTypeLanguage = TextToTypeLanguage.ENGLISH;
-      this.appState.enableCapitalLetters = false;
-      this.appState.enablePunctuationCharacters = false;
     }
     this.updateInnerHTML();
   }
