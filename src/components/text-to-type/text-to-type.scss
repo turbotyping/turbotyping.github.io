@@ -1,5 +1,6 @@
 @import './atom-one-light.min.css';
 .text-to-type-page {
+  position: relative;
   padding-bottom: 20rem;
   min-height: calc(100vh - var(--navbar-height));
   max-width: 94rem;
@@ -59,4 +60,13 @@
   & span {
     float: right;
   }
+}
+
+.view-typing-progress-button {
+  position: absolute;
+  bottom: 10rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--secondary-color);
+  font-weight: bold;
 }

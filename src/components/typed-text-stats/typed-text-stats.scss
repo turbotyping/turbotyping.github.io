@@ -49,6 +49,9 @@
       transition: var(--transition);
       transition-property: color, background-color;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:hover {
         background-color: var(--change-text-to-type-icon-background-color-on-hover);
@@ -60,8 +63,8 @@
     }
 
     & .iconify {
-      height: 100%;
-      width: 100%;
+      height: 75%;
+      width: 75%;
       transition: var(--transition);
       transition-property: color, background-color;
     }

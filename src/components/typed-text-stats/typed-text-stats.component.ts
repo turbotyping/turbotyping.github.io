@@ -30,6 +30,9 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
   toHtml() {
     return /* html */ `
       <div class="typed-text-stats-container">
+        <div class="typed-text-stat-container change-text-to-type">
+          <span id="${this.previousTextTextToTypeId}" class="iconify-container previous"><span class="iconify" data-icon="eva:arrow-ios-back-outline" data-inline="false"></span></span>
+        </div>
         <div class="typed-text-stat-container">
           <span id="${TYPED_TEXT_WPM_DOM_ELEMENT_ID}" class="typed-text-stat-value">0</span>
           <span class="typed-text-stat-label">word/min</span>
@@ -38,13 +41,7 @@ export class TypedTextHtmlComponent extends BaseHtmlComponent {
           <span id="${TYPED_TEXT_ERRORS_DOM_ELEMENT_ID}" class="typed-text-stat-value">0</span>
           <span class="typed-text-stat-label">errors</span>
         </div>
-        <div class="typed-text-stat-container check-progress-link">
-          <a href="#${PROGRESS_DIV_ID}">
-            <span class="iconify" data-icon="gridicons:stats-alt-2" data-inline="false"></span>
-          </a>
-        </div>
         <div class="typed-text-stat-container change-text-to-type">
-          <span id="${this.previousTextTextToTypeId}" class="iconify-container previous"><span class="iconify" data-icon="eva:arrow-ios-back-outline" data-inline="false"></span></span>
           <span id="${this.nextTextTextToTypeId}" class="iconify-container next"><span class="iconify" data-icon="eva:arrow-ios-forward-fill" data-inline="false"></span></span>
         </div>
       </div>
