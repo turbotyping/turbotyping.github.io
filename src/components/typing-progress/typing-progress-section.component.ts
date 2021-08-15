@@ -28,14 +28,18 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
       'Speed progress',
       (typedTextStats) => typedTextStats.filter((s) => s.wpm > 0).map((s) => s.wpm),
       (typedKeysStats) => typedKeysStats.filter((s) => s.wpm > 0).map((s) => s.wpm),
-      new SpeedProgressTypedKeysHighlighter(AppStateClient.getInstance())
+      new SpeedProgressTypedKeysHighlighter(AppStateClient.getInstance()),
+      '#AECBFA',
+      true
     );
     this.errorProgress = new TypingProgressHtmlComponent(
       AppStateClient.getInstance(),
       'Error progress',
       (typedTextStats) => typedTextStats.map((s) => s.errors),
       (typedKeysStats) => typedKeysStats.map((s) => s.missCount),
-      new ErrorProgressTypedKeysHighlighter(AppStateClient.getInstance())
+      new ErrorProgressTypedKeysHighlighter(AppStateClient.getInstance()),
+      '#FFB1C1',
+      false
     );
     this.speedProgress.preInsertHtml();
     this.errorProgress.preInsertHtml();

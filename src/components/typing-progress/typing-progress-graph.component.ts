@@ -2,7 +2,6 @@ import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRA
 import { BaseHtmlComponent } from '../_core/base-component';
 import { IAppStateClient } from '../../state/app-state.client.interface';
 const Chart = require('chart.js');
-const smooth = require('array-smooth');
 
 const GRID_LINES_COLOR_IN_DARK_THEME = '#333';
 const GRID_LINES_COLOR_IN_LIGHT_THEME = '#eeeeee';
@@ -10,24 +9,26 @@ const GRID_LINES_COLOR_IN_LIGHT_THEME = '#eeeeee';
 export class TypingProgressGraphHtmlComponentInput {
   graphData?: number[];
   smoothness?: number;
+  barColor?: string;
+  withAverageLine?: boolean;
 }
 
 export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
   private notEnoughSamplesId: string;
   private canvasContainerId: string;
   private canvasContainer: HTMLElement;
-  private canvasId: string;
-  private canvas: HTMLCanvasElement;
   private notEnoughSamplesDomElement: HTMLElement;
   private gridLinesColor: string;
   private containerId: string;
   private input: TypingProgressGraphHtmlComponentInput;
 
-  constructor(private appStateClient: IAppStateClient, graphData: number[], smoothness: number) {
+  constructor(private appStateClient: IAppStateClient, graphData: number[], smoothness: number, barColor: string, withAverageLine: boolean) {
     super();
     this.input = {
       graphData,
       smoothness,
+      barColor,
+      withAverageLine,
     };
   }
 
@@ -35,7 +36,6 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
     this.containerId = this.generateId();
     this.notEnoughSamplesId = this.generateId();
     this.canvasContainerId = this.generateId();
-    this.canvasId = this.generateId();
   }
 
   toHtml() {
@@ -43,14 +43,13 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
     return /* html */ `
       <div id="${this.containerId}">
         <p id="${this.notEnoughSamplesId}" class="not-enough-samples">Not enough samples to display progress</p> 
-        <div id="${this.canvasContainerId}" class="chartjs-graph-container"><canvas id="${this.canvasId}" width="40" height="40"></canvas></div>
+        <div id="${this.canvasContainerId}" class="chartjs-graph-container"></div>
       </div>
     `;
   }
 
   postInsertHtml(): void {
     this.canvasContainer = document.getElementById(this.canvasContainerId);
-    this.canvas = <HTMLCanvasElement>document.getElementById(this.canvasId);
     this.notEnoughSamplesDomElement = document.getElementById(this.notEnoughSamplesId);
     this.setGridLinesColor();
     this.updateInnerHTML();
@@ -58,6 +57,7 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
   }
 
   reset(input: TypingProgressGraphHtmlComponentInput): void {
+    console.log(input);
     this.input = { ...this.input, ...input };
     this.updateInnerHTML();
   }
@@ -82,24 +82,23 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
     } else {
       this.notEnoughSamplesDomElement.classList.add('hide');
       this.canvasContainer.classList.remove('hide');
-      new Chart(this.canvas.getContext('2d'), {
-        type: 'line',
+      const canvas = document.createElement('canvas');
+      this.canvasContainer.innerHTML = '';
+      this.canvasContainer.appendChild(canvas);
+      new Chart(canvas.getContext('2d'), {
         data: {
           labels: Array.from({ length: this.input.graphData.length }, (_, i) => i + 1),
-          datasets: [
-            {
-              data: this.input.smoothness == 0 ? this.input.graphData : smooth(this.input.graphData, this.input.smoothness),
-              borderColor: '#087eed',
-              fill: false,
-              showLine: false,
-              backgroundColor: '#087eed',
-            },
-          ],
+          datasets: this.getGraphDataset(),
         },
         options: {
           maintainAspectRatio: false,
           legend: {
-            display: false,
+            display: true,
+          },
+          elements: {
+            point: {
+              radius: 0,
+            },
           },
           scales: {
             yAxes: [
@@ -127,5 +126,45 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
         },
       });
     }
+  }
+
+  private getGraphDataset() {
+    if (this.input.withAverageLine) {
+      return [
+        {
+          label: 'Moyenne',
+          type: 'line',
+          data: this.toMovingAverageArray(this.input.graphData),
+          borderWidth: 5,
+          borderColor: '#1967D2',
+          backgroundColor: '#FFFFFF00',
+        },
+        {
+          label: 'Words per minute',
+          type: 'bar',
+          data: this.input.graphData,
+          backgroundColor: this.input.barColor,
+        },
+      ];
+    } else {
+      return [
+        {
+          label: 'Errors per minute',
+          type: 'bar',
+          data: this.input.graphData,
+          backgroundColor: this.input.barColor,
+        },
+      ];
+    }
+  }
+
+  private toMovingAverageArray(array) {
+    const result = [];
+    for (let i = 0; i < array.length; i++) {
+      const subArr = array.slice(Math.max(i - 5, 0), Math.min(i + 1, array.length));
+      const avg = subArr.reduce((a, b) => a + (isNaN(b) ? 0 : b), 0) / subArr.length;
+      result.push(avg);
+    }
+    return result;
   }
 }
