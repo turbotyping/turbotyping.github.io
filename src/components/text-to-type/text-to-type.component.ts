@@ -80,13 +80,13 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private handleKeyDownEvent(event) {
     if (this.isDisabled) return;
+    event.preventDefault();
     clearTimeout(this.inactivityTimeout);
     this.inactivityTimeout = setTimeout(this.setTextToType.bind(this), INACTIVITY_TIMEOUT);
     const typedKey = event.key;
     const expectedKeyRegex = new RegExp(this.currentCharToTypeDomElement.dataset.keyRegex);
     this.handleKeySounds(typedKey);
     this.typedTextStats.handleKeyDownEvent(typedKey, expectedKeyRegex);
-    if (typedKey === SPACE_KEY) event.preventDefault();
     if (typedKey === BACKSPACE_KEY) {
       const previousCharToType = this.getPreviousCharToType();
       if (previousCharToType) {
