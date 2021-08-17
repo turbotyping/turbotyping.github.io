@@ -1553,6 +1553,8 @@ nav .right {
     position: absolute;
     top: calc(100% + 2rem);
     right: 0; }
+  nav .right .select {
+    margin-right: 1.5rem; }
 
 .app-settings-dialog {
   --dialog-min-width: 60rem;
@@ -1661,6 +1663,7 @@ nav .right {
     .select-container .select-header .iconify {
       margin-left: 1rem; }
   .select-container .select-options {
+    font-size: 1.5rem;
     position: absolute;
     top: calc(100% + 0.5rem);
     left: 0;

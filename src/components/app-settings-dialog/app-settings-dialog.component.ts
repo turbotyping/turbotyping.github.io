@@ -41,27 +41,27 @@ export class AppSettingsDialogHtmlComponent extends BaseDialogHtmlComponent {
     this.enableCapitalLettersContainerId = this.generateId();
     this.enablePunctuationCharactersContainerId = this.generateId();
     this.textToTypeLanguagesContainerId = this.generateId();
-    const appStorage = this.appStateClient.getAppState();
-    appStorage.textToTypeCategory = appStorage.textToTypeCategory || TextToTypeCategory.QUOTES;
-    appStorage.textToTypeLanguage = appStorage.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
-    appStorage.stopOnError = appStorage.stopOnError || false;
-    appStorage.enableCapitalLetters = appStorage.enableCapitalLetters || true;
-    appStorage.enablePunctuationCharacters = appStorage.enablePunctuationCharacters || true;
-    appStorage.enableSounds = appStorage.enableSounds || false;
-    appStorage.maxCharactersToType = appStorage.maxCharactersToType || 2000;
-    this.appStateClient.saveAppState(appStorage);
-    this.stopOnErrorSwitch = new SwitchHtmlComponent(appStorage.stopOnError);
-    this.enableCapitalLettersSwitch = new SwitchHtmlComponent(appStorage.enableCapitalLetters);
-    this.enableSoundsSwitch = new SwitchHtmlComponent(appStorage.enableSounds);
-    this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(appStorage.enablePunctuationCharacters);
-    this.maxCharactersToType = new InputHtmlComponent(appStorage.maxCharactersToType.toString());
+    this.appState = this.appStateClient.getAppState();
+    this.appState.textToTypeCategory = this.appState.textToTypeCategory || TextToTypeCategory.QUOTES;
+    this.appState.textToTypeLanguage = this.appState.textToTypeLanguage || TextToTypeLanguage.ENGLISH;
+    this.appState.stopOnError = this.appState.stopOnError || false;
+    this.appState.enableCapitalLetters = this.appState.enableCapitalLetters || true;
+    this.appState.enablePunctuationCharacters = this.appState.enablePunctuationCharacters || true;
+    this.appState.enableSounds = this.appState.enableSounds || false;
+    this.appState.maxCharactersToType = this.appState.maxCharactersToType || 2000;
+    this.appStateClient.saveAppState(this.appState);
+    this.stopOnErrorSwitch = new SwitchHtmlComponent(this.appState.stopOnError);
+    this.enableCapitalLettersSwitch = new SwitchHtmlComponent(this.appState.enableCapitalLetters);
+    this.enableSoundsSwitch = new SwitchHtmlComponent(this.appState.enableSounds);
+    this.enablePunctuationCharactersSwitch = new SwitchHtmlComponent(this.appState.enablePunctuationCharacters);
+    this.maxCharactersToType = new InputHtmlComponent(this.appState.maxCharactersToType.toString());
     this.textToTypeCategoriesSelect = new SelectHtmlComponent<TextToTypeCategory>({
       options: TEXT_TO_TYPE_CATEGORIES,
-      selectedOptionValue: appStorage.textToTypeCategory,
+      selectedOptionValue: this.appState.textToTypeCategory,
     });
     this.textToTypeLanguagesSelect = new SelectHtmlComponent<TextToTypeLanguage>({
-      options: getTextToTypeLanguage(appStorage.textToTypeCategory),
-      selectedOptionValue: appStorage.textToTypeLanguage,
+      options: getTextToTypeLanguage(this.appState.textToTypeCategory),
+      selectedOptionValue: this.appState.textToTypeLanguage,
     });
     this.saveButton = new ButtonHtmlComponent('Save');
     this.cancelButton = new ButtonHtmlComponent('Cancel', ButtonStyle.SECONDARY);

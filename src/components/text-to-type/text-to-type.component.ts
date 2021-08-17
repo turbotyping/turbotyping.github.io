@@ -80,6 +80,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private handleKeyDownEvent(event) {
     if (this.isDisabled) return;
+    console.log(event.key);
     event.preventDefault();
     clearTimeout(this.inactivityTimeout);
     this.inactivityTimeout = setTimeout(this.setTextToType.bind(this), INACTIVITY_TIMEOUT);
