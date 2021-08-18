@@ -31,15 +31,18 @@ body {
 }
 
 main {
-  padding-top: var(--navbar-height);
-  width: var(--main-width);
-  max-width: var(--main-max-width);
+  padding: 12rem 6rem;
   margin: 0 auto;
   flex: 1;
 }
 
+p {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
 a {
-  font-size: 1.6rem;
+  font-weight: bold;
   color: var(--primary-color);
   text-decoration: none;
   cursor: pointer;
@@ -48,45 +51,10 @@ a {
   }
 }
 
-p {
-  font-size: 1.6rem;
-}
-
-.bold {
+.website-name {
   font-weight: bold;
 }
 
-.pointer {
-  cursor: pointer;
-}
-
-.iconify {
-  color: var(--icon-color);
-  transition: var(--transition);
-  transition-property: color;
-  cursor: pointer;
-}
-
-.primary-color {
-  color: var(--primary-color);
-}
-
-.hide {
-  display: none !important;
-}
-
-.pre-load {
-  background: var(--pre-load-background);
-  background-size: 600% 600%;
-  animation: pre-load 1s ease infinite;
-  animation-direction: reverse;
-}
-
-@keyframes pre-load {
-  0% {
-    background-position: 0 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+.sorry-message {
+  margin-top: 1rem;
 }

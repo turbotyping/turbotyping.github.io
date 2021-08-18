@@ -80,8 +80,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
   private handleKeyDownEvent(event) {
     if (this.isDisabled) return;
-    console.log(event.key);
-    event.preventDefault();
+    this.preventDefaultEventExceptFunctionKeys(event);
     clearTimeout(this.inactivityTimeout);
     this.inactivityTimeout = setTimeout(this.setTextToType.bind(this), INACTIVITY_TIMEOUT);
     const typedKey = event.key;
@@ -123,6 +122,12 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
       this.updateAppStorageOnEndTyping();
       this.dispatchCustomEvent(END_TYPING_EVENT, this.typedTextStats);
       this.setTextToType();
+    }
+  }
+
+  private preventDefaultEventExceptFunctionKeys(event: any) {
+    if (/F[1-9]+/.test(event.key)) {
+      event.preventDefault();
     }
   }
 
