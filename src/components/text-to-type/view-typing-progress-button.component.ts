@@ -11,9 +11,11 @@ export class ViewTypingProgressButtonHtmlComponent extends BaseHtmlComponent {
 
   toHtml(): string {
     return /* html */ `
+    <span class="view-typing-progress-button-container">
       <a class="view-typing-progress-button" href="#${PROGRESS_DIV_ID}">
         View typing progress
       </a>
+    </span>
     `;
   }
   postInsertHtml(): void {}

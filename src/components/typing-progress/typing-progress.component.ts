@@ -5,18 +5,18 @@ import { BaseHtmlComponent } from '../_core/base-component';
 import { TypedKeysHighlighter } from './typed-keys-highlighter';
 import { TypedKeysHtmlComponent, TYPED_KEY_CLASS } from '../typed-keys/typed-keys.component';
 import { TypedTextStats } from '../typed-text-stats/typed-text-stats.model';
-import { SwitchHtmlComponent } from '../_core/switch/switch.component';
 import { IAppStateClient } from '../../state/app-state.client.interface';
+import { Color } from '../_core/color';
+import { LabeledSwitchHtmlComponent } from '../_core/switch/labled-switch.component';
 
 // const TYPED_KEYS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"{}()[]<>+-=,.;:';
 const TYPED_KEYS = 'abcdefghijklmnopqrstuvwxyz';
 
 export class TypingProgressHtmlComponent extends BaseHtmlComponent {
   private graph: TypingProgressGraphHtmlComponent;
-  private byKeySwitch: SwitchHtmlComponent;
-  private byKeySwitchValue: boolean;
   private smoothness: number = 0;
   private typedKeysProgressId: string;
+  private progressByKeySwitch: LabeledSwitchHtmlComponent;
   private typedKeysProgress: HTMLElement;
   private typedKeys: TypedKeysHtmlComponent;
   private containerId: string;
@@ -27,7 +27,7 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
     private typedTextsStatsToProgressData: (typedTextsStats: TypedTextStats[]) => number[],
     private typedKeysStatsToProgressData: (typedKeysStats: TypedKeyStats[]) => number[],
     private typedKeysHighlighter: TypedKeysHighlighter,
-    private barColor: string,
+    private barColor: Color,
     private withAverageLine: boolean
   ) {
     super();
@@ -36,8 +36,6 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
   preInsertHtml(): void {
     this.containerId = this.generateId();
     this.typedKeysProgressId = this.generateId();
-    this.byKeySwitchValue = false;
-    this.byKeySwitch = new SwitchHtmlComponent(this.byKeySwitchValue);
     this.graph = new TypingProgressGraphHtmlComponent(
       this.appStateClient,
       this.typedTextsStatsToProgressData(this.appStateClient.getAppState().typedTextsStats),
@@ -46,7 +44,8 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
       this.withAverageLine
     );
     this.typedKeys = new TypedKeysHtmlComponent(TYPED_KEYS, 'a');
-    this.byKeySwitch.preInsertHtml();
+    this.progressByKeySwitch = new LabeledSwitchHtmlComponent('By key', false);
+    this.progressByKeySwitch.preInsertHtml();
     this.graph.preInsertHtml();
     this.typedKeys.preInsertHtml();
   }
@@ -57,9 +56,7 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
       <div id="${this.containerId}">
         <div class="progress-header">
           <span class="progress-name">${this.graphName}</span>
-          <div class="progress-ctrl">
-            <div class="progress-by-key"><span class="label">By key </span>${this.byKeySwitch.toHtml()}</div>
-          </div>
+          <span class="progress-by-key">${this.progressByKeySwitch.toHtml()}</span>
         </div>
         <div id="${this.typedKeysProgressId}" class="typed-keys-progress">${this.typedKeys.toHtml()}</div>
         <div class="progress-body">
@@ -72,24 +69,23 @@ export class TypingProgressHtmlComponent extends BaseHtmlComponent {
   postInsertHtml(): void {
     this.typedKeysProgress = document.getElementById(this.typedKeysProgressId);
     this.typedKeysProgress.classList.add('hide');
-    this.byKeySwitch.postInsertHtml();
     this.graph.postInsertHtml();
     this.typedKeys.postInsertHtml();
-
+    this.progressByKeySwitch.postInsertHtml();
+    this.progressByKeySwitch.onUpdate(this.handleProgressByKeyUpdateEvent.bind(this));
     this.typedKeys.onClick((key) => this.handleSelectKey(key));
-    this.byKeySwitch.onUpdate(this.handleProgressByKeyUpdateEvent.bind(this));
     this.addCustomEventListener(END_TYPING_EVENT, this.handleEndTypingEvent.bind(this));
     this.addCustomEventListener(DELETE_PROGRESS_DATA_EVENT, this.handleDeleteProgressDataEvent.bind(this));
     this.typedKeysHighlighter.highligh(this.typedKeysProgressId, TYPED_KEY_CLASS);
   }
 
-  private handleProgressByKeyUpdateEvent(active: boolean) {
-    if (active) {
+  private handleProgressByKeyUpdateEvent(value: boolean) {
+    if (value) {
       this.typedKeysProgress.classList.remove('hide');
-      this.handleSelectKey('a');
+      this.useTypedTextsStats();
     } else {
       this.typedKeysProgress.classList.add('hide');
-      this.useTypedTextsStats();
+      this.handleSelectKey('a');
     }
   }
 

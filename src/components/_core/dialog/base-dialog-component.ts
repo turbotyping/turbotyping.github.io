@@ -7,10 +7,11 @@ export enum DialogPhase {
 }
 
 export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
+  protected dialogBackgroundId: string;
   protected dialogId: string;
   protected dialogContainerId: string;
   protected dialogCloseButtonId: string;
-  protected dialog: HTMLDialogElement;
+  protected dialog: HTMLElement;
   protected dialogContainer: HTMLElement;
   protected dialogCloseButton: HTMLElement;
   private isVisible: boolean;
@@ -23,6 +24,7 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
 
   preInsertHtml(): void {
     this.isVisible = false;
+    this.dialogBackgroundId = this.generateId();
     this.dialogId = this.generateId();
     this.dialogContainerId = this.generateId();
     this.dialogCloseButtonId = this.generateId();
@@ -30,43 +32,45 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
 
   toHtml(): string {
     return /* html */ `
-      <dialog id="${this.dialogId}" class="dialog ${this.getDialogCssClass()}">
-        <div id="${this.dialogContainerId}" class="dialog-container">
-          <div class="dialog-header">
-            <span>${this.getDialogTitle()}</span>
-            <span id="${this.dialogCloseButtonId}">
-              <span class="close iconify" data-icon="eva:close-outline" data-inline="false"></span>
-            </span>
-          </div>
-          <div class="dialog-body">
-            ${this.getDialogBody()}
-          </div>
-          <div class="dialog-footer">
-            ${this.getDialogFooter()}
+      <div id="${this.dialogBackgroundId}" class="hide dialog-background">
+        <div id="${this.dialogId}" class="dialog ${this.getDialogCssClass()}">
+          <div id="${this.dialogContainerId}" class="dialog-container">
+            <div class="dialog-header">
+              <span>${this.getDialogTitle()}</span>
+              <span id="${this.dialogCloseButtonId}">
+                <span class="close iconify" data-icon="eva:close-outline" data-inline="false"></span>
+              </span>
+            </div>
+            <div class="dialog-body">
+              ${this.getDialogBody()}
+            </div>
+            <div class="dialog-footer">
+              ${this.getDialogFooter()}
+            </div>
           </div>
         </div>
-      </dialog>
+      </div>
     `;
   }
 
   postInsertHtml(): void {
-    this.dialog = <HTMLDialogElement>document.getElementById(this.dialogId);
+    this.dialog = document.getElementById(this.dialogBackgroundId);
     this.dialogContainer = document.getElementById(this.dialogContainerId);
     this.dialogCloseButton = document.getElementById(this.dialogCloseButtonId);
     this.dialogCloseButton.addEventListener('click', this.handleDialogCloseButtonClickEvent.bind(this));
     document.addEventListener('click', this.handleDocumentClickEvent.bind(this));
   }
 
-  show(): void {
+  open(): void {
     this.isVisible = true;
-    this.dialog.showModal();
+    this.dialog.classList.remove('hide');
     (this.callbacks.get(DialogPhase.POST_DIALOG_SHOW) || []).forEach((callback) => callback());
   }
 
-  hide(): void {
+  close(): void {
     if (!this.isVisible) return;
     this.isVisible = false;
-    this.dialog.close();
+    this.dialog.classList.add('hide');
     (this.callbacks.get(DialogPhase.POST_DIALOG_HIDE) || []).forEach((callback) => callback());
   }
 
@@ -78,12 +82,12 @@ export abstract class BaseDialogHtmlComponent extends BaseHtmlComponent {
   }
 
   private handleDialogCloseButtonClickEvent() {
-    this.hide();
+    this.close();
   }
 
   private handleDocumentClickEvent(event) {
     if (!this.dialogContainer.contains(event.target)) {
-      this.hide();
+      this.close();
     }
   }
 }

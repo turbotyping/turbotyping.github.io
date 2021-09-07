@@ -13,6 +13,7 @@ export enum TableAction {
 export class TableHtmlComponentInput<T> {
   columns: TableColumn[];
   rows: T[];
+  emptyTableMessage: string;
 }
 
 export class TableHtmlComponent<T> extends BaseHtmlComponent {
@@ -21,11 +22,12 @@ export class TableHtmlComponent<T> extends BaseHtmlComponent {
   private input: TableHtmlComponentInput<T>;
   private callbacks: Map<TableAction, ((value: T) => void)[]> = new Map<TableAction, ((value: T) => void)[]>();
 
-  constructor(columns: TableColumn[] = [], rows: T[] = []) {
+  constructor(emptyTableMessage: string, columns: TableColumn[] = [], rows: T[] = []) {
     super();
     this.input = {
       columns,
       rows,
+      emptyTableMessage,
     };
   }
 
@@ -50,6 +52,7 @@ export class TableHtmlComponent<T> extends BaseHtmlComponent {
     this.input = {
       columns,
       rows,
+      emptyTableMessage: this.input.emptyTableMessage,
     };
     this.updateInnerHTML();
   }
@@ -72,7 +75,13 @@ export class TableHtmlComponent<T> extends BaseHtmlComponent {
 
   private updateInnerHTML() {
     if (this.input.rows?.length == 0) {
-      this.container.innerHTML = '';
+      const html = /* html */ `
+        <div class="table-header">
+          ${this.input.columns.map((c) => `<span class="table-data">${c.label}</span>`).join('')}
+        </div>
+        <p class="empty-table">${this.input.emptyTableMessage}</p>
+      `;
+      this.container.innerHTML = html;
       return;
     }
     const html = /* html */ `

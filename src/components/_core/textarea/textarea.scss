@@ -2,22 +2,24 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  position: relative;
 
   & .textarea {
     padding: 0.8rem 1rem;
+    border-radius: 0.3rem;
     border: none;
     outline: none;
     color: var(--input-color);
     background-color: var(--input-background-color);
+    border: 2px solid var(--input-background-color);
     width: var(--input-width);
-    border-bottom: 2px solid var(--input-border-color);
     transition: var(--transition);
     transition-property: color, background-color, border-color;
     font-size: 1.5rem;
     font-family: var(--font-family);
+    resize: vertical;
 
-    &:focus,
-    &:hover {
+    &:focus {
       border-color: var(--input-border-color-on-active);
     }
   }
@@ -27,6 +29,8 @@
   }
 
   &.error .textarea-error-message {
+    position: absolute;
+    bottom: -1.6rem;
     display: inline;
     font-size: 1.2rem;
     color: var(--error-message-color);
@@ -36,4 +40,15 @@
   &.error .textarea {
     border-color: var(--error-message-color);
   }
+}
+
+.textarea-label {
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 100rem;
+}
+
+.textarea-label-mandatory {
+  color: #ff4a59;
+  font-size: 1.5rem;
 }

@@ -26,9 +26,8 @@ export class TypedTextStats {
       if (expectedKeyRegex.test(typedKey)) {
         typedKeyStats.increaseHitCount(timeToTypeInMs);
       } else {
-        typedKeyStats.increaseMissCount();
+        typedKeyStats.increaseMissCount(timeToTypeInMs);
       }
-      typedKeyStats.updateWpm();
       this.lastTypedCharTime = new Date();
       return;
     }

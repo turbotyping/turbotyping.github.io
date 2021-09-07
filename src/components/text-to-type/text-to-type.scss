@@ -1,20 +1,93 @@
 @import './atom-one-light.min.css';
 .text-to-type-page {
   position: relative;
-  padding-bottom: 20rem;
-  min-height: calc(100vh - var(--navbar-height));
-  max-width: 94rem;
+  height: calc(100vh - var(--navbar-height));
+  max-width: 105rem;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.text-to-type {
-  max-width: 90rem;
-  margin: 5rem auto 0;
-  white-space: pre-wrap;
+.separator {
+  height: 4rem;
+  flex-shrink: 0;
+}
+
+.view-typing-progress-link {
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-style: italic;
+  float: right;
+  color: var(--secondary-color);
+  margin-top: 0.3rem;
+  margin-bottom: 3rem;
+  align-self: flex-end;
+  border: 2px solid transparent;
+  border-radius: 0.3rem;
+
+  &:focus {
+    color: var(--primary-color);
+  }
+}
+
+.toggle-typing-button-container {
+  position: relative;
+}
+
+.toggle-typing-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  cursor: pointer;
+  z-index: 100;
+  background-color: transparent;
+  color: var(--body-color);
+  font-size: 1.35rem;
+  font-weight: bold;
+  padding: 0.4rem 1rem;
+  border-radius: 0.3rem;
+  border: 2px solid transparent;
+  box-shadow: var(--box-shadow-02);
+  background-color: var(--background-color-05);
+}
+
+.text-to-type-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    background-color: var(--text-to-type-background-color);
+  }
+
+  & .text-to-type {
+    position: relative;
+    padding: 2rem;
+    background-color: var(--text-to-type-background-color);
+    border-radius: 0.3rem;
+    white-space: pre-wrap;
+
+    &.blink span.cursor {
+      color: var(--current-char-to-type-color);
+      background-color: var(--current-char-to-type-background-color);
+    }
+
+    &.disabled {
+      cursor: pointer;
+      & span {
+        opacity: 0.5;
+      }
+
+      & span.cursor {
+        color: var(--body-color);
+        background-color: var(--body-background-color);
+      }
+    }
+  }
 
   & span {
     font-family: 'Roboto Mono';
-    font-size: 1.8rem;
   }
 
   & span.whitespace {
@@ -33,40 +106,65 @@
   & span.OK {
     opacity: 0.5;
   }
+}
 
-  &.blink span.cursor {
-    color: var(--current-char-to-type-color);
-    background-color: var(--current-char-to-type-background-color);
-  }
-
-  &.disabled {
-    opacity: 0.5;
-
-    & span.cursor {
-      color: var(--body-color);
-      background-color: var(--body-background-color);
-    }
-  }
+.text-to-type-top-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .text-to-type-reference {
-  margin: 2rem 0;
   font-size: 1.6rem;
-  float: right;
   color: var(--text-to-type-reference-color);
-  font-style: italic;
   font-weight: bold;
+  padding: 0.75rem 2rem;
+  background-color: var(--text-to-type-background-color);
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
 
-  & span {
-    float: right;
+  &:hover a {
+    text-decoration: none;
   }
 }
 
-.view-typing-progress-button {
+.text-to-type-ctrl {
+  margin-bottom: 0.5rem;
+  & .label {
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-right: 0.6rem;
+    color: var(--text-to-type-ctrl-label-color);
+  }
+
+  & .font-size-label {
+    margin-left: 1.5rem;
+  }
+}
+
+.view-typing-progress-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-visual-helper-container {
+  position: relative;
+}
+
+.scroll-visual-helper {
+  z-index: 1;
   position: absolute;
-  bottom: 10rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--secondary-color);
-  font-weight: bold;
+  width: 100%;
+  height: 4rem;
+}
+
+.scroll-to-top-visual-helper {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.scroll-to-bottom-visual-helper {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }

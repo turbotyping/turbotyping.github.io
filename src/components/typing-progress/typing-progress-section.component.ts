@@ -6,6 +6,9 @@ import { BaseHtmlComponent } from '../_core/base-component';
 import { SpeedProgressTypedKeysHighlighter } from './speed-progress-typed-keys-highlighter';
 import { IAppStateClient } from '../../state/app-state.client.interface';
 import { AppStateClient } from '../../state/app-state.client';
+import { TYPING_ERROR_GRAPH_BAR_COLOR, TYPING_SPEED_GRAPH_BAR_COLOR } from '../_core/color';
+import IAdsService from '../../services/ads/ads.service';
+import AmazonAdsService from '../../services/ads/amazon-ads.service';
 
 export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
   private speedProgress: TypingProgressHtmlComponent;
@@ -15,7 +18,7 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
   private speedProgressContainerId: string;
   private errorProgressContainerId: string;
 
-  constructor(private appStateClient: IAppStateClient) {
+  constructor(private appStateClient: IAppStateClient = AppStateClient.getInstance(), private adsService: IAdsService = new AmazonAdsService()) {
     super();
   }
 
@@ -29,7 +32,7 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
       (typedTextStats) => typedTextStats.filter((s) => s.wpm > 0).map((s) => s.wpm),
       (typedKeysStats) => typedKeysStats.filter((s) => s.wpm > 0).map((s) => s.wpm),
       new SpeedProgressTypedKeysHighlighter(AppStateClient.getInstance()),
-      '#AECBFA',
+      TYPING_SPEED_GRAPH_BAR_COLOR,
       true
     );
     this.errorProgress = new TypingProgressHtmlComponent(
@@ -38,7 +41,7 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
       (typedTextStats) => typedTextStats.map((s) => s.errors),
       (typedKeysStats) => typedKeysStats.map((s) => s.missCount),
       new ErrorProgressTypedKeysHighlighter(AppStateClient.getInstance()),
-      '#FFB1C1',
+      TYPING_ERROR_GRAPH_BAR_COLOR,
       false
     );
     this.speedProgress.preInsertHtml();
@@ -46,9 +49,12 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
   }
 
   toHtml(): string {
+    const ads = this.adsService.get728x90Ads(2);
     return /* html */ `
       <div id="${PROGRESS_DIV_ID}" class="progress-container">
+        <div class="typing-progress-advertise-container ad0">${ads[0]}</div>
         <div id="${this.speedProgressContainerId}" class="progress-graph">${this.speedProgress.toHtml()}</div>
+        <div class="typing-progress-advertise-container ad1">${ads[1]}</div>
         <div id="${this.errorProgressContainerId}" class="progress-graph">${this.errorProgress.toHtml()}</div>
         <div class="delete-progress-data-button-container">
           <button id="${this.deleteProgressDataButtonId}">Delete Progress Data</button>

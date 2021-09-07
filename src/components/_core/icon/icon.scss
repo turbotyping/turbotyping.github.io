@@ -1,0 +1,20 @@
+.button-icon {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 0.3rem;
+  height: 4rem;
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--button-background-color);
+
+  &:hover {
+    background-color: var(--button-background-color-on-hover);
+  }
+}
+
+.button-icon .iconify {
+  color: var(--button-icon-color);
+  font-size: 2.75rem;
+}

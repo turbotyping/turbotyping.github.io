@@ -1,8 +1,19 @@
+.dialog-background {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .dialog {
   position: fixed;
   top: 8rem;
+  left: 50%;
+  transform: translateX(-50%);
   border: none;
-  margin: 0 auto;
   border-radius: 0.3rem;
   box-shadow: var(--dialog-box-shadow);
   min-width: var(--dialog-min-width, 30rem);
@@ -54,5 +65,23 @@
     border-top: 1px solid var(--border-color);
     padding-top: 2rem;
     font-size: 1.6rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .dialog {
+    --dialog-width: 50%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .dialog {
+    --dialog-width: 60%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .dialog {
+    --dialog-width: 80%;
   }
 }

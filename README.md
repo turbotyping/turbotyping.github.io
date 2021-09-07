@@ -4,4 +4,4 @@ This website was mainly inspired from [keybr](https://www.keybr.com) website, re
 
 What we can find in our website, is the ability to write codes, quotes, poems... while improving your typing skills.
 
-For any suggestion, please feel free to create a [ticket](https://github.com/ah-keyboard/devkeyboard.github.io/issues/new) in our repository and we will try to add it ASAP.
+For any suggestion, please feel free to create a [ticket](https://github.com/turbotyping/turbotyping.github.io/issues/new) in our repository and we will try to add it ASAP.

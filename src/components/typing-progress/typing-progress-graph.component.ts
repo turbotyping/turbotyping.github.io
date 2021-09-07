@@ -1,6 +1,7 @@
-import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, LIGHT_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { IAppStateClient } from '../../state/app-state.client.interface';
+import { Color } from '../_core/color';
 const Chart = require('chart.js');
 
 const GRID_LINES_COLOR_IN_DARK_THEME = '#333';
@@ -9,7 +10,7 @@ const GRID_LINES_COLOR_IN_LIGHT_THEME = '#eeeeee';
 export class TypingProgressGraphHtmlComponentInput {
   graphData?: number[];
   smoothness?: number;
-  barColor?: string;
+  barColor?: Color;
   withAverageLine?: boolean;
 }
 
@@ -22,7 +23,7 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
   private containerId: string;
   private input: TypingProgressGraphHtmlComponentInput;
 
-  constructor(private appStateClient: IAppStateClient, graphData: number[], smoothness: number, barColor: string, withAverageLine: boolean) {
+  constructor(private appStateClient: IAppStateClient, graphData: number[], smoothness: number, barColor: Color, withAverageLine: boolean) {
     super();
     this.input = {
       graphData,
@@ -57,7 +58,6 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
   }
 
   reset(input: TypingProgressGraphHtmlComponentInput): void {
-    console.log(input);
     this.input = { ...this.input, ...input };
     this.updateInnerHTML();
   }
@@ -136,14 +136,14 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
           type: 'line',
           data: this.toMovingAverageArray(this.input.graphData),
           borderWidth: 5,
-          borderColor: '#1967D2',
-          backgroundColor: '#FFFFFF00',
+          borderColor: this.getAvgSpeedBorderColor(),
+          backgroundColor: this.getAvgSpeedBackgroundColor(),
         },
         {
           label: 'Words per minute',
           type: 'bar',
           data: this.input.graphData,
-          backgroundColor: this.input.barColor,
+          backgroundColor: this.input.barColor.get(),
         },
       ];
     } else {
@@ -152,10 +152,18 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
           label: 'Errors per minute',
           type: 'bar',
           data: this.input.graphData,
-          backgroundColor: this.input.barColor,
+          backgroundColor: this.input.barColor.get(),
         },
       ];
     }
+  }
+
+  private getAvgSpeedBorderColor() {
+    return '#1967D2';
+  }
+
+  private getAvgSpeedBackgroundColor() {
+    return '#FFFFFF00';
   }
 
   private toMovingAverageArray(array) {

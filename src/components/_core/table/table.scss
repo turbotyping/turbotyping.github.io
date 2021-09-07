@@ -1,14 +1,12 @@
 body.light {
-  --table-head-background-color: var(--background-color-03);
-  --table-row-background-color: var(--background-color-02);
-  --table-body-background-color-on-hover: var(--background-color-04);
+  --table-head-background-color: var(--background-color-04);
+  --table-row-background-color: var(--background-color-03);
   --table-color: var(--body-color);
 }
 
 body.dark {
   --table-head-background-color: var(--background-color-03);
   --table-row-background-color: var(--background-color-02);
-  --table-body-background-color-on-hover: var(--background-color-04);
   --table-color: var(--body-color);
 }
 
@@ -28,6 +26,7 @@ body.dark {
   & .table-header {
     padding: 1rem 0;
     background-color: var(--table-head-background-color);
+    font-weight: bold;
   }
 
   & .table-row {
@@ -45,7 +44,11 @@ body.dark {
     background-color: var(--table-row-background-color);
     padding: 0;
 
-    & .iconify.delete:hover {
+    & .delete {
+      font-size: 3rem;
+    }
+
+    & .delete:hover {
       color: red;
     }
   }
@@ -53,4 +56,11 @@ body.dark {
   & .table-row:hover .table-row-actions {
     display: inline;
   }
+}
+
+.empty-table {
+  font-size: 1.3rem;
+  padding: 1.2rem 1.5rem;
+  font-style: italic;
+  background-color: var(--table-row-background-color);
 }

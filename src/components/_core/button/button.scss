@@ -13,8 +13,7 @@ body.dark {
     padding: 0.6rem 1.5rem;
     cursor: pointer;
     border-radius: 0.2rem;
-    border: none;
-    outline: none;
+    border: 2px solid transparent;
     font-weight: bold;
     transition: var(--transition);
     transition-property: opacity;

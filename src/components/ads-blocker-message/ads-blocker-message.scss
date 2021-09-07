@@ -1,0 +1,57 @@
+.ads-blocker-message-container {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  padding: 4rem;
+  background-color: #242427;
+  opacity: 0.85;
+  color: var(--ads-blocker-message-container-color);
+  transition: 1.5s;
+  box-shadow: var(--box-shadow-02);
+
+  &.active {
+    bottom: 0;
+  }
+
+  & .ads-blocker-message-left {
+    margin-right: 10rem;
+  }
+
+  & .ads-blocker-message-header {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+
+  & p {
+    font-size: 1.4rem;
+    color: #999;
+  }
+  & a {
+    font-size: 1.4rem;
+    color: #999;
+    text-decoration: underline;
+  }
+
+  & button {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 1rem 4rem;
+    border: 2px solid #eee;
+    background-color: transparent;
+    color: #eee;
+    box-shadow: 0 0 0 0 #ddd;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: #eee;
+      color: #242427;
+    }
+  }
+}

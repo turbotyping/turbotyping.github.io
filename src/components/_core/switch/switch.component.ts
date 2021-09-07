@@ -2,8 +2,6 @@ import './switch.scss';
 import { BaseHtmlComponent } from '../base-component';
 
 export class SwitchHtmlComponent extends BaseHtmlComponent {
-  private switchContainerId: string;
-  private switchContainerDomElement: HTMLElement;
   private switchOffId: string;
   private switchOffDomElement: HTMLElement;
   private switchOnId: string;
@@ -15,26 +13,25 @@ export class SwitchHtmlComponent extends BaseHtmlComponent {
   }
 
   preInsertHtml(): void {
-    this.switchContainerId = this.generateId();
     this.switchOffId = this.generateId();
     this.switchOnId = this.generateId();
   }
 
   toHtml() {
     return /* html */ `
-      <span id="${this.switchContainerId}" class="switch-container">
-        <span id="${this.switchOffId}"><span class="iconify switch-off" data-icon="ic:outline-check-box-outline-blank" data-inline="false"></span></span>
-        <span id="${this.switchOnId}"><span class="iconify switch-on" data-icon="ic:outline-check-box" data-inline="false"></span></span>
+      <span class="switch-container">
+        <button id="${this.switchOffId}"><svg class="switch-off" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5a5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3a3 3 0 0 1 3-3a3 3 0 0 1 3 3a3 3 0 0 1-3 3z" fill="currentColor"/></svg></button>
+        <button id="${this.switchOnId}"><svg class="switch-on" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5a5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3a3 3 0 0 1 3-3a3 3 0 0 1 3 3a3 3 0 0 1-3 3z" fill="currentColor"/></svg></button>
       </span>
     `;
   }
 
   postInsertHtml(): void {
-    this.switchContainerDomElement = document.getElementById(this.switchContainerId);
     this.switchOffDomElement = document.getElementById(this.switchOffId);
     this.switchOnDomElement = document.getElementById(this.switchOnId);
     this.updateInnerHTML();
-    this.switchContainerDomElement.addEventListener('click', this.handleSwitchClickEvent.bind(this));
+    this.switchOffDomElement.addEventListener('click', this.handleSwitchClickEvent.bind(this));
+    this.switchOnDomElement.addEventListener('click', this.handleSwitchClickEvent.bind(this));
   }
 
   reset(input: boolean): void {
@@ -60,5 +57,7 @@ export class SwitchHtmlComponent extends BaseHtmlComponent {
     this.value = !this.value;
     this.updateInnerHTML();
     this.callbacks.forEach((callback) => callback(this.value));
+    this.switchOffDomElement.focus();
+    this.switchOnDomElement.focus();
   }
 }

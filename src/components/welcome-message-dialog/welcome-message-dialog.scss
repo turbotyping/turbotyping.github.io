@@ -1,0 +1,60 @@
+.welcome-message-dialog {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  & .dialog-body {
+    padding-bottom: 0;
+  }
+
+  & .enjoy {
+    float: right;
+    margin-top: 10rem;
+    margin-right: 0.8rem;
+    display: flex;
+    padding-bottom: 0.5rem;
+
+    & .letter {
+      font-family: cursive;
+      font-size: 3rem;
+      font-weight: bold;
+      width: 4.4rem;
+      height: 4.4rem;
+      border-radius: 100rem;
+      box-shadow: var(--box-shadow-02);
+      margin-right: -0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    & .E {
+      background-color: #67cbff;
+    }
+
+    & .N {
+      background-color: #f6ae67;
+    }
+
+    & .J {
+      background-color: #ff689b;
+    }
+
+    & .O {
+      background-color: #9acc32;
+    }
+
+    & .Y {
+      background-color: #65cafc;
+    }
+
+    & .exclamation {
+      background-color: #fd6599;
+    }
+  }
+
+  & .dialog-footer {
+    display: none;
+  }
+}

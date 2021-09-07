@@ -1,6 +1,7 @@
 import { SelectOption } from '../components/_core/select/select.component';
 
 export enum TextToTypeCategory {
+  TRAINING = 'TRAINING',
   QUOTES = 'QUOTES',
   POEMS = 'POEMS',
   STORIES = 'STORIES',
@@ -10,6 +11,10 @@ export enum TextToTypeCategory {
 }
 
 export const TEXT_TO_TYPE_CATEGORIES: SelectOption<TextToTypeCategory>[] = [
+  {
+    label: 'Training',
+    value: TextToTypeCategory.TRAINING,
+  },
   {
     label: 'Quotes',
     value: TextToTypeCategory.QUOTES,

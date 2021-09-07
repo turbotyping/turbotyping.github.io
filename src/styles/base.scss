@@ -4,11 +4,52 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  @include hide-scroll-bar;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 1.6em;
+  background-color: var(--body-background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 0.4em solid transparent;
+  background-clip: padding-box;
+  border-radius: 100rem;
+  background-color: var(--scrollbar-color);
+}
+
+*:focus,
+*:focus-visible {
+  outline: none;
+  border-color: var(--focus-color) !important;
+}
+
+html,
+body {
+  --transition: all 0.15s ease-in-out;
+  --border-radius: 0.3rem;
+  --navbar-height: 6.5rem;
+  --font-family: 'Poppins', sans-serif;
+
+  @media screen and (max-width: 426px) {
+    --font-size: 45%;
+  }
+
+  @media screen and (min-width: 427px) and (max-width: 768px) {
+    --font-size: 52%;
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    --font-size: 58%;
+  }
+
+  @media screen and (min-width: 1025px) and (max-width: 1920px) {
+    --font-size: 62.5%;
+  }
+
+  @media screen and (min-width: 1921px) {
+    --font-size: 62.5%;
+  }
 }
 
 html {
@@ -24,37 +65,61 @@ body {
   transition-property: color, background-color;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  padding: 12rem 6rem;
-  margin: 0 auto;
-  flex: 1;
-}
-
-p {
-  text-align: center;
-  font-size: 2.5rem;
-}
-
 a {
-  font-weight: bold;
+  font-size: 1.6rem;
   color: var(--primary-color);
   text-decoration: none;
   cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 0.3rem;
   &:hover {
     text-decoration: underline;
   }
 }
 
-.website-name {
+p {
+  font-size: 1.6rem;
+}
+
+.bold {
   font-weight: bold;
 }
 
-.sorry-message {
-  margin-top: 1rem;
+.pointer {
+  cursor: pointer;
+}
+
+.iconify {
+  color: var(--icon-color);
+  transition: var(--transition);
+  transition-property: color;
+  cursor: pointer;
+}
+
+.primary-color {
+  color: var(--primary-color);
+}
+
+.secondary-color {
+  color: var(--secondary-color);
+}
+
+.hide {
+  display: none !important;
+}
+
+.pre-load {
+  background: var(--pre-load-background);
+  background-size: 600% 600%;
+  animation: pre-load 1s ease infinite;
+  animation-direction: reverse;
+}
+
+@keyframes pre-load {
+  0% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }

@@ -44,20 +44,20 @@ nav .right {
   z-index: 999;
   position: relative;
   display: flex;
-  align-items: center;
-  & .iconify {
-    font-size: 2.75rem;
-    margin-left: 1.5rem;
+  align-items: stretch;
+
+  & > select {
+    width: 18rem;
   }
 
-  & .app-settings-drop-down {
-    z-index: 999;
-    position: absolute;
-    top: calc(100% + 2rem);
-    right: 0;
+  & > select,
+  & > button {
+    margin-left: 1rem;
   }
+}
 
-  & .select {
-    margin-right: 1.5rem;
+@media only screen and (max-width: 768px) {
+  nav .right > select {
+    display: none;
   }
 }

@@ -1,6 +1,8 @@
 body.light {
   --primary-color: #078eed;
   --secondary-color: #f57173;
+  --focus-color: #0060df;
+  --focus-box-shadow-secondary: 0px 0px 3px 2px var(--secondary-color);
   --white-color: #fff;
   --black-color: #222;
   --text-color-01: #1e1e1e;
@@ -16,6 +18,7 @@ body.light {
   --background-color-05: #e5e5e5;
   --box-shadow-01: 0 2px 5px 0 rgba(74, 74, 74, 0.2);
   --box-shadow-02: 0 0 5px 2px rgba(74, 74, 74, 0.2);
+  --focus-box-shadow: 0 0 0 4px #0074cc26;
   --border-color: #dfe1e5;
   --icon-color: var(--text-color-03);
   --pre-load-background: linear-gradient(270deg, var(--background-color-05), var(--background-color-04), var(--background-color-03));
@@ -37,7 +40,8 @@ body.light {
   --whitespace-color: rgb(221, 221, 221);
   --typed-text-stat-value-color: var(--text-color-03);
   --typed-text-stat-container-border-color: var(--secondary-color);
-  --switch-on-color: #065fd4;
+  --switch-on-color: #1a73e8;
+  --switch-off-color: #bdc1c6;
   --dialog-box-shadow: var(--box-shadow-01);
   --slider-color: var(--primary-color);
   --slider-background-color: var(--border-color);
@@ -51,6 +55,8 @@ body.light {
   --text-to-type-reference-color: var(--primary-color);
   --input-color: var(--body-color);
   --input-background-color: var(--background-color-03);
+  --select-background-color: var(--background-color-03);
+  --select-background-color-on-hover: var(--background-color-04);
   --input-border-color: var(--border-color);
   --input-border-color-on-active: var(--primary-color);
   --error-message-color: #f1505e;
@@ -69,7 +75,8 @@ body.light {
   --typed-key-avg-wpm-lt-40: rgb(32, 197, 88);
   --typed-key-avg-wpm-lt-50: rgb(14, 218, 97);
   --typed-key-avg-wpm-gte-50: rgb(30, 243, 115);
-  --typed-key-avg-error-eq-0: rgb(14, 218, 97);
+  --typed-key-avg-wpm-color: rgb(19, 231, 104);
+  --typed-key-avg-error-eq-0: rgb(16, 236, 104);
   --typed-key-avg-error-lt-3: #f8969e;
   --typed-key-avg-error-lt-6: #fa7580;
   --typed-key-avg-error-lt-10: #fc6370;
@@ -82,14 +89,47 @@ body.light {
   --delete-progress-data-button-box-shadow: var(--box-shadow-01);
   --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
-  --selected-key-background-color: var(--secondary-color);
+  --selected-key-background-color: var(--primary-color);
   --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
   --progress-by-key-icon-color: var(--primary-color);
+  --text-to-type-background-color: var(--background-color-03);
+  --click-to-enable-color: var(--text-color-01);
+  --click-to-enable-background-color: var(--background-color-01);
+  --training-keys-background-color: #f1f1f1;
+  --increase-decrease-font-icon-background-color-on-hover: var(--background-color-04);
+  --increase-decrease-value-background-color-on-hover: var(--background-color-04);
+  --arrow-background-color: var(--background-color-01);
+  --text-to-type-ctrl-label-color: var(--text-color-04);
+  --feedback-icon-container-background-color: var(--background-color-04);
+  --feedback-icon-background-color-on-hover: var(--background-color-01);
+  --side-panel-background-background-color: #eeeeee44;
+  --side-panel-background-color: var(--background-color-01);
+  --icon-background-color: var(--background-color-04);
+  --toast-info-color: #004889;
+  --toast-info-background-color: #cce5ff;
+  --toast-info-border-color: #b8daff;
+
+  --toast-warn-color: #663c00;
+  --toast-warn-background-color: #fff4e5;
+  --toast-warn-border-color: #fcead0;
+
+  --toast-error-color: #611a15;
+  --toast-error-background-color: #fdecea;
+  --toast-error-border-color: #fadad7;
+  --button-background-color: var(--background-color-03);
+  --button-background-color-on-hover: var(--background-color-04);
+  --button-icon-color: var(--body-color);
+  --toggle-typing-button-background-color: var(--background-color-03);
+  --scrollbar-color: rgba(0, 0, 0, 0.15);
+  --cookies-consentement-container-color: #fafafa;
+  --cookies-consentement-container-background-color: #006dfc;
 }
 
 body.dark {
   --primary-color: #078eed;
   --secondary-color: #f57173;
+  --focus-color: #0060df;
+  --focus-box-shadow-secondary: 0px 0px 3px 2px var(--secondary-color);
   --white-color: #fff;
   --black-color: #222;
   --text-color-01: #fafafa;
@@ -105,7 +145,9 @@ body.dark {
   --background-color-05: #353b46;
   --box-shadow-01: 0 -2px 5px rgba(0, 0, 0, 1);
   --box-shadow-02: 0 -2px 10px rgba(0, 0, 0, 1);
+  --focus-box-shadow: 0 0 0 4px #0074cc26;
   --border-color: #353b46;
+  --focus-border-color: #6bbbf7;
   --icon-color: var(--text-color-03);
   --pre-load-background: linear-gradient(270deg, var(--background-color-05), var(--background-color-04), var(--background-color-03));
   --box-shadow-01: 0 -2px 5px rgba(0, 0, 0, 1);
@@ -126,7 +168,8 @@ body.dark {
   --whitespace-color: #383838;
   --typed-text-stat-value-color: var(--text-color-03);
   --typed-text-stat-container-border-color: var(--secondary-color);
-  --switch-on-color: #1378fd;
+  --switch-on-color: #1a73e8;
+  --switch-off-color: #d3d3d3;
   --dialog-box-shadow: var(--box-shadow-01);
   --dialog-background-color: var(--background-color-01);
   --slider-color: var(--primary-color);
@@ -141,6 +184,8 @@ body.dark {
   --text-to-type-reference-color: var(--primary-color);
   --input-color: var(--body-color);
   --input-background-color: var(--background-color-03);
+  --select-background-color: var(--background-color-03);
+  --select-background-color-on-hover: var(--background-color-04);
   --input-border-color: var(--border-color);
   --input-border-color-on-active: var(--primary-color);
   --error-message-color: #f1505e;
@@ -159,6 +204,7 @@ body.dark {
   --typed-key-avg-wpm-lt-40: rgb(32, 197, 88);
   --typed-key-avg-wpm-lt-50: rgb(14, 218, 97);
   --typed-key-avg-wpm-gte-50: rgb(30, 243, 115);
+  --typed-key-avg-wpm-color: rgb(30, 243, 115);
   --typed-key-avg-error-eq-0: rgb(14, 218, 97);
   --typed-key-avg-error-lt-3: #f8969e;
   --typed-key-avg-error-lt-6: #fa7580;
@@ -172,7 +218,36 @@ body.dark {
   --delete-progress-data-button-box-shadow: var(--box-shadow-01);
   --typed-key-background-color: var(--background-color-04);
   --selected-key-color: var(--white-color);
-  --selected-key-background-color: var(--secondary-color);
+  --selected-key-background-color: var(--primary-color);
   --typed-key-with-lt-min-stats-to-display-in-app-storage-background-color: var(--secondary-color);
   --progress-by-key-icon-color: var(--primary-color);
+  --text-to-type-background-color: var(--background-color-02);
+  --click-to-enable-color: var(--text-color-01);
+  --click-to-enable-background-color: var(--background-color-01);
+  --training-keys-background-color: var(--background-color-04);
+  --increase-decrease-font-icon-background-color-on-hover: var(--background-color-04);
+  --increase-decrease-value-background-color-on-hover: var(--background-color-04);
+  --arrow-background-color: var(--background-color-02);
+  --text-to-type-ctrl-label-color: var(--text-color-04);
+  --feedback-icon-container-background-color: var(--background-color-04);
+  --feedback-icon-background-color-on-hover: var(--background-color-01);
+  --side-panel-background-background-color: #3b3b3b44;
+  --side-panel-background-color: var(--background-color-01);
+  --icon-background-color: var(--background-color-04);
+  --toast-info-color: #a6d5fa;
+  --toast-info-background-color: #063f75;
+  --toast-info-border-color: #030e18;
+  --toast-warn-color: #ffd599;
+  --toast-warn-background-color: #190f00;
+  --toast-warn-border-color: #190f00;
+  --toast-error-color: #fab3ae;
+  --toast-error-background-color: #180605;
+  --toast-error-border-color: #180605;
+  --button-background-color: var(--background-color-03);
+  --button-background-color-on-hover: var(--background-color-04);
+  --button-icon-color: var(--body-color);
+  --toggle-typing-button-background-color: var(--background-color-03);
+  --scrollbar-color: #727272;
+  --cookies-consentement-container-color: #fafafa;
+  --cookies-consentement-container-background-color: #006dfc;
 }

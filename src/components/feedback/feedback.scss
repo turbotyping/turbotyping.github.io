@@ -1,0 +1,67 @@
+.feedback-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  border: 2px solid transparent;
+  background-color: var(--feedback-icon-container-background-color);
+  border-radius: 100rem;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--box-shadow-02);
+
+  & .feedback-label,
+  & .iconify {
+    transition: 0.6s;
+  }
+
+  & .iconify {
+    font-size: 5rem;
+    padding: 1rem;
+    border-radius: 100rem;
+    border: 3px solid var(--feedback-icon-container-background-color);
+  }
+
+  & .feedback-label {
+    white-space: nowrap;
+    width: 0;
+    overflow: hidden;
+    font-size: 1.35rem;
+    font-weight: bold;
+  }
+
+  &:hover {
+    & .feedback-label {
+      width: 23rem;
+      padding-left: 2rem;
+    }
+    & .iconify {
+      background-color: var(--feedback-icon-background-color-on-hover);
+    }
+  }
+}
+
+.feedback-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.feedback-form-inputs {
+  flex: 1;
+  margin-bottom: 5rem;
+}
+
+.feedback-form-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  & button {
+    margin-left: 1rem;
+  }
+}
+
+.email-input {
+  margin-bottom: 2rem;
+}

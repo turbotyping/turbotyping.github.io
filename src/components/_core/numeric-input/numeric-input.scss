@@ -1,0 +1,45 @@
+.increase-decrease-value-container {
+  border: 1px solid var(--border-color);
+  border-radius: 100rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  & .value,
+  & .increase-value,
+  & .decrease-value {
+    font-size: 1.3rem;
+    padding: 0.2rem 0.75rem;
+  }
+
+  & .increase-value,
+  & .decrease-value {
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+  }
+
+  & .increase-value:hover,
+  & .decrease-value:hover {
+    background-color: var(--increase-decrease-value-background-color-on-hover);
+  }
+
+  & .value {
+    border: none;
+    outline: none;
+    text-align: center;
+    background-color: var(--body-background-color);
+    color: var(--body-color);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    font-family: 'Roboto Mono', monospace;
+
+    &:focus,
+    &:focus-visible {
+      border: none !important;
+      border-left: 1px solid var(--border-color) !important;
+      border-right: 1px solid var(--border-color) !important;
+    }
+  }
+}

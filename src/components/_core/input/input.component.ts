@@ -35,6 +35,7 @@ export class InputHtmlComponent extends BaseHtmlComponent {
     this.container = document.getElementById(this.containerId);
     this.errorMessage = document.getElementById(this.errorMessageId);
     this.input.addEventListener('change', this.onInputChange.bind(this));
+    this.input.addEventListener('keyup', this.onInputKeyUp.bind(this));
   }
 
   reset(value: string): void {
@@ -57,7 +58,19 @@ export class InputHtmlComponent extends BaseHtmlComponent {
     this.callbacks.push(callback);
   }
 
-  onInputChange() {
+  isNotValid(): boolean {
+    return this.container.classList.contains('error') || !this.getValue();
+  }
+
+  getValue(): string {
+    return this.input.value;
+  }
+
+  dispatchChangeEvent(): void {
+    this.input.dispatchEvent(new Event('change'));
+  }
+
+  private onInputChange() {
     try {
       this.validators.forEach((validator) => validator(this.input.value));
       this.container.classList.remove('error');
@@ -67,5 +80,16 @@ export class InputHtmlComponent extends BaseHtmlComponent {
       return;
     }
     this.callbacks.forEach((callback) => callback(this.input.value));
+  }
+
+  private onInputKeyUp() {
+    try {
+      this.validators.forEach((validator) => validator(this.input.value));
+      this.container.classList.remove('error');
+    } catch (error) {
+      this.container.classList.add('error');
+      this.errorMessage.innerHTML = error.message;
+      return;
+    }
   }
 }

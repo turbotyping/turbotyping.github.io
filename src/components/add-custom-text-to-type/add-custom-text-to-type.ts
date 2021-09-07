@@ -1,5 +1,4 @@
-import './add-custom-text-to-type-dialog.scss';
-import { BaseDialogHtmlComponent, DialogPhase } from '../_core/dialog/base-dialog-component';
+import './add-custom-text-to-type.scss';
 import { ButtonHtmlComponent, ButtonStyle } from '../_core/button/button.component';
 import { IAppStateClient } from '../../state/app-state.client.interface';
 import { TextAreaHtmlComponent } from '../_core/textarea/textarea.component';
@@ -7,21 +6,24 @@ import {
   END_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT,
   CUSTOM_TEXTS_UPDATE_EVENT,
   START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT,
+  APP_SETTINGS_CHANGE_EVENT,
 } from '../../constants/constant';
 import { AppState } from '../../state/app-state.model';
 import { TableAction, TableColumn, TableHtmlComponent } from '../_core/table/table.component';
 import { TextToTypeCategory } from '../../state/text-to-type-category.enum';
-import { TextToTypeLanguage } from '../../state/text-to-type-language.enum';
+import { TextToTypeSubCategory } from '../../state/text-to-type-sub-category.enum';
+import { BaseSidePanelHtmlComponent } from '../_core/side-panel/side-panel.component';
+import { IconHtmlComponent } from '../_core/icon/icon.component';
 
 class DisplayedCustomTextToAdd {
   text: string;
 }
 
-export class AddCustomTextToTypeDialogHtmlComponent extends BaseDialogHtmlComponent {
+export class AddCustomTextToTypeSidePanelHtmlComponent extends BaseSidePanelHtmlComponent {
   private saveButton: ButtonHtmlComponent;
   private cancelButton: ButtonHtmlComponent;
   private customTextToAddTextArea: TextAreaHtmlComponent;
-  private addIconId: string;
+  private addIcon: IconHtmlComponent;
   private appState: AppState;
   private displayedCustomTextToAddTable: TableHtmlComponent<DisplayedCustomTextToAdd>;
   private customTextsUpdated: boolean = false;
@@ -30,12 +32,10 @@ export class AddCustomTextToTypeDialogHtmlComponent extends BaseDialogHtmlCompon
     super();
     this.saveButton = new ButtonHtmlComponent('Save');
     this.cancelButton = new ButtonHtmlComponent('Cancel', ButtonStyle.SECONDARY);
-    this.customTextToAddTextArea = new TextAreaHtmlComponent('');
+    this.customTextToAddTextArea = new TextAreaHtmlComponent('', '100%', '20rem');
     this.appState = this.appStateClient.getAppState();
-    this.displayedCustomTextToAddTable = new TableHtmlComponent<DisplayedCustomTextToAdd>();
-    this.addPhaseListener(DialogPhase.POST_DIALOG_SHOW, this.postShow.bind(this));
-    this.addPhaseListener(DialogPhase.POST_DIALOG_HIDE, this.postHide.bind(this));
-    this.addIconId = this.generateId();
+    this.displayedCustomTextToAddTable = new TableHtmlComponent<DisplayedCustomTextToAdd>('No custom text has been added yet!');
+    this.addIcon = new IconHtmlComponent('ion:add-outline', 'Add');
   }
 
   preInsertHtml(): void {
@@ -44,32 +44,28 @@ export class AddCustomTextToTypeDialogHtmlComponent extends BaseDialogHtmlCompon
     this.cancelButton.preInsertHtml();
     this.customTextToAddTextArea.preInsertHtml();
     this.displayedCustomTextToAddTable.preInsertHtml();
+    this.addIcon.preInsertHtml();
   }
 
-  getDialogCssClass(): string {
-    return 'add-custom-text-to-type-dialog';
+  getSidePanelCssClass(): string {
+    return 'add-custom-text-to-type-side-panel';
   }
 
-  getDialogTitle(): string {
+  getTitle(): string {
     return 'Custom text to type';
   }
 
-  getDialogBody(): string {
+  getBody(): string {
     return /* html */ `
       <div class="text-to-add-textarea-header">
         <span class="label">Text to add</span>
-        <span id="${this.addIconId}" title="Add"><span class="iconify" data-icon="ion:add-outline" data-inline="false"></span></span>
+        ${this.addIcon.toHtml()}
       </div>
       ${this.customTextToAddTextArea.toHtml()}
       <div class="added-custom-texts-table">
         ${this.displayedCustomTextToAddTable.toHtml()}
       </div>
-    `;
-  }
-
-  getDialogFooter(): string {
-    return /* html */ `
-      <div class="add-custom-text-to-type-dialog-footer">
+      <div class="add-custom-text-to-type-buttons">
         ${this.cancelButton.toHtml()}
         ${this.saveButton.toHtml()}
       </div>
@@ -78,6 +74,7 @@ export class AddCustomTextToTypeDialogHtmlComponent extends BaseDialogHtmlCompon
 
   postInsertHtml(): void {
     super.postInsertHtml();
+    this.addIcon.postInsertHtml();
     this.saveButton.postInsertHtml();
     this.cancelButton.postInsertHtml();
     this.customTextToAddTextArea.postInsertHtml();
@@ -87,7 +84,7 @@ export class AddCustomTextToTypeDialogHtmlComponent extends BaseDialogHtmlCompon
     this.updateInnerHTML();
     this.saveButton.onClick(this.handleSaveButtonClickEvent.bind(this));
     this.cancelButton.onClick(this.handleCancelButtonClickEvent.bind(this));
-    document.getElementById(this.addIconId).addEventListener('click', this.handleAddIconClickEvent.bind(this));
+    this.addIcon.onClick(this.handleAddIconClickEvent.bind(this));
     this.customTextToAddTextArea.onValidate(this.validateCustomTextToAddTextAreaOnChange.bind(this));
   }
 
@@ -96,7 +93,7 @@ export class AddCustomTextToTypeDialogHtmlComponent extends BaseDialogHtmlCompon
     this.appState.textToTypeIndex = 0;
     if (this.appState.customTextsToType.length === 0) {
       this.appState.textToTypeCategory = TextToTypeCategory.QUOTES;
-      this.appState.textToTypeLanguage = TextToTypeLanguage.ENGLISH;
+      this.appState.textToTypeSubCategory = TextToTypeSubCategory.ENGLISH;
     }
     this.customTextsUpdated = true;
     this.updateInnerHTML();
@@ -108,56 +105,68 @@ export class AddCustomTextToTypeDialogHtmlComponent extends BaseDialogHtmlCompon
     }
   }
 
-  private validateCustomTextToAddTextArea() {
-    if (!this.customTextToAddTextArea.getValue()) {
-      const errorMessage = 'Empty values are not allowed';
-      this.customTextToAddTextArea.setErrorMessage(errorMessage);
-      throw new Error(errorMessage);
-    }
-  }
-
   private updateInnerHTML() {
     this.displayedCustomTextToAddTable.reset(this.getCustomTextToAddColumns(), this.getCustomTextToAddRows());
   }
 
   private handleAddIconClickEvent() {
-    try {
-      this.validateCustomTextToAddTextArea();
-      if (!this.appState.customTextsToType) this.appState.customTextsToType = [];
-      this.appState.customTextsToType.unshift({
-        text: this.customTextToAddTextArea.getValue(),
-        reference: '#',
-        author: 'Custom text',
-      });
-      this.customTextToAddTextArea.reset();
-      this.appState.textToTypeCategory = TextToTypeCategory.CUSTOM_TEXT;
-      this.appState.textToTypeIndex = 0;
-      this.customTextsUpdated = true;
-      this.updateInnerHTML();
-    } catch (error) {
-      console.error(error);
+    if (this.customTextToAddTextArea.isNotValid()) {
+      this.customTextToAddTextArea.dispatchChangeEvent();
+      return;
     }
+    if (!this.appState.customTextsToType) this.appState.customTextsToType = [];
+    this.appState.customTextsToType.unshift({
+      text: this.customTextToAddTextArea.getValue(),
+      author: '',
+    });
+    this.customTextToAddTextArea.reset();
+    this.appState.textToTypeCategory = TextToTypeCategory.CUSTOM_TEXT;
+    this.appState.textToTypeIndex = 0;
+    this.customTextsUpdated = true;
+    this.updateInnerHTML();
   }
 
-  private postShow(): void {
+  open(): void {
+    super.open();
+    this.customTextsUpdated = false;
     this.appState = this.appStateClient.getAppState();
     this.customTextToAddTextArea.focus();
     this.dispatchCustomEvent(START_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT);
   }
 
-  private postHide(): void {
-    super.hide();
+  close(): void {
+    super.close();
     if (this.customTextsUpdated) this.dispatchCustomEvent(CUSTOM_TEXTS_UPDATE_EVENT);
     this.dispatchCustomEvent(END_UPDATING_CUSTOM_TEXT_TO_TYPE_EVENT);
   }
 
   private handleSaveButtonClickEvent() {
+    if (this.customTextToAddTextArea.isEmpty() && this.customTextsUpdated) {
+      this.appStateClient.saveAppState(this.appState);
+      this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+      this.close();
+      return;
+    }
+    if (this.customTextToAddTextArea.isNotValid()) {
+      this.customTextToAddTextArea.dispatchChangeEvent();
+      return;
+    }
+    if (!this.appState.customTextsToType) this.appState.customTextsToType = [];
+    this.appState.customTextsToType.unshift({
+      text: this.customTextToAddTextArea.getValue(),
+      author: '',
+    });
+    this.customTextToAddTextArea.reset();
+    this.appState.textToTypeCategory = TextToTypeCategory.CUSTOM_TEXT;
+    this.appState.textToTypeIndex = 0;
+    this.updateInnerHTML();
     this.appStateClient.saveAppState(this.appState);
-    this.hide();
+    this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
+    this.close();
   }
 
   private handleCancelButtonClickEvent() {
-    this.hide();
+    this.close();
   }
 
   private getCustomTextToAddRows(): DisplayedCustomTextToAdd[] {
@@ -170,7 +179,7 @@ export class AddCustomTextToTypeDialogHtmlComponent extends BaseDialogHtmlCompon
   private getCustomTextToAddColumns(): TableColumn[] {
     return [
       {
-        label: 'Text',
+        label: 'Custom Text',
         fieldName: 'text',
       },
     ];

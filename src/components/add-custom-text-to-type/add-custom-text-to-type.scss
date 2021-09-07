@@ -1,0 +1,48 @@
+body.dark {
+  --text-to-add-textarea-label-color: var(--text-color-03);
+  --add-icon-color-on-hover: var(--primary-color);
+}
+
+body.light {
+  --text-to-add-textarea-label-color: var(--text-color-03);
+  --add-icon-color-on-hover: var(--primary-color);
+}
+
+.text-to-add-textarea-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+
+  & .label {
+    font-weight: bold;
+    color: var(--text-to-add-textarea-label-color);
+  }
+}
+
+.add-custom-text-to-type-buttons {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  & > * {
+    margin-left: 1.2rem;
+  }
+}
+
+.added-custom-texts-table {
+  overflow: auto;
+  margin-top: 3.5rem;
+}
+
+.add-custom-text-to-type-side-panel {
+  --side-panel-width: 55rem !important;
+}
+
+@media only screen and (max-width: 60rem) {
+  .add-custom-text-to-type-side-panel {
+    --side-panel-width: 80% !important;
+  }
+}

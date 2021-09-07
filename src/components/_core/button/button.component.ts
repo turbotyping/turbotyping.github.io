@@ -9,6 +9,7 @@ export enum ButtonStyle {
 export class ButtonHtmlComponentInput {
   label: string;
   style?: ButtonStyle;
+  type?: string;
 }
 
 export class ButtonHtmlComponent extends BaseHtmlComponent {
@@ -16,7 +17,7 @@ export class ButtonHtmlComponent extends BaseHtmlComponent {
   private buttonId: string;
   private callbacks: (() => void)[] = [];
 
-  constructor(private label: string, private style: ButtonStyle = ButtonStyle.PRIMARY) {
+  constructor(private label: string, private style: ButtonStyle = ButtonStyle.PRIMARY, private type: string = 'button') {
     super();
   }
 
@@ -28,16 +29,20 @@ export class ButtonHtmlComponent extends BaseHtmlComponent {
   toHtml() {
     return /* html */ `
       <span id="${this.containerId}" class="button-container">
-        <button id="${this.buttonId}" class="${this.style}">${this.label}</button>
+        <button id="${this.buttonId}" class="${this.style}" type="${this.type}">${this.label}</button>
       </span>
     `;
   }
 
   postInsertHtml(): void {
-    document.getElementById(this.buttonId).addEventListener('click', () => this.callbacks.forEach((callback) => callback()));
+    document.getElementById(this.buttonId).addEventListener('click', this.handleClickEvent.bind(this));
   }
 
   onClick(callback: () => void) {
     this.callbacks.push(callback);
+  }
+
+  private handleClickEvent() {
+    this.callbacks.forEach((callback) => callback());
   }
 }

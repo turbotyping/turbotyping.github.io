@@ -1,0 +1,50 @@
+.app-settings {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem;
+  & .app-setting {
+    padding-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    & span {
+      color: var(--body-color);
+    }
+
+    & .app-setting-label {
+      font-size: 1.4rem;
+    }
+
+    & .app-setting-input,
+    & .app-setting-select {
+      width: 100%;
+    }
+  }
+
+  & .app-settings-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    & > * {
+      margin-left: 1.2rem;
+    }
+  }
+}
+
+.app-settings-side-panel {
+  --side-panel-width: 55rem !important;
+}
+
+@media only screen and (max-width: 60rem) {
+  .app-settings-side-panel {
+    --side-panel-width: 80% !important;
+  }
+}

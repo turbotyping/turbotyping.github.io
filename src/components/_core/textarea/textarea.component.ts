@@ -47,6 +47,7 @@ export class TextAreaHtmlComponent extends BaseHtmlComponent {
     this.container = document.getElementById(this.containerId);
     this.errorMessage = document.getElementById(this.errorMessageId);
     this.textArea.addEventListener('change', this.onTextAreaChange.bind(this));
+    this.textArea.addEventListener('keyup', this.onTextAreaKeyUp.bind(this));
   }
 
   reset(value: string = ''): void {
@@ -78,6 +79,18 @@ export class TextAreaHtmlComponent extends BaseHtmlComponent {
     this.errorMessage.innerHTML = errorMessage;
   }
 
+  isNotValid(): boolean {
+    return this.container.classList.contains('error') || !this.getValue();
+  }
+
+  isEmpty() {
+    return !this.getValue();
+  }
+
+  dispatchChangeEvent(): void {
+    this.textArea.dispatchEvent(new Event('change'));
+  }
+
   private onTextAreaChange() {
     try {
       this.validators.forEach((validator) => validator(this.textArea.value));
@@ -88,5 +101,16 @@ export class TextAreaHtmlComponent extends BaseHtmlComponent {
       return;
     }
     this.callbacks.forEach((callback) => callback(this.textArea.value));
+  }
+
+  private onTextAreaKeyUp() {
+    try {
+      this.validators.forEach((validator) => validator(this.textArea.value));
+      this.container.classList.remove('error');
+    } catch (error) {
+      this.container.classList.add('error');
+      this.errorMessage.innerHTML = error.message;
+      return;
+    }
   }
 }
