@@ -2493,6 +2493,7 @@ main {
   position: fixed;
   top: calc(2rem + var(--navbar-height));
   width: 55rem;
+  max-width: 80%;
   right: -100%;
   padding: 4rem;
   background: var(--ads-blocker-message-container-background-color);
@@ -2505,7 +2506,7 @@ main {
     margin-right: 10rem; }
   .ads-blocker-message-container .ads-blocker-message-header {
     font-weight: bold;
-    font-size: 2.3rem;
+    font-size: 2.8rem;
     margin-bottom: 1.5rem;
     color: var(--ads-blocker-message-header-color); }
   .ads-blocker-message-container p {
