@@ -4,9 +4,8 @@
   left: 0;
   right: 0;
   padding: 4rem;
-  background-color: #242427;
+  background-color: var(--cookies-consentement-container-background-color);
   opacity: 0.85;
-  color: var(--cookies-consentement-container-color);
   transition: 1.5s;
   box-shadow: var(--box-shadow-02);
   display: flex;
@@ -26,16 +25,16 @@
     font-weight: bold;
     font-size: 1.6rem;
     margin-bottom: 1.5rem;
-    color: white;
+    color: var(--cookies-consentement-header-color);
   }
 
   & p {
     font-size: 1.4rem;
-    color: #999;
+    color: var(--cookies-consentement-body-color);
   }
   & a {
     font-size: 1.4rem;
-    color: #999;
+    color: var(--cookies-consentement-body-color);
     text-decoration: underline;
   }
 
@@ -46,15 +45,15 @@
     cursor: pointer;
     white-space: nowrap;
     padding: 1rem 4rem;
-    border: 2px solid #eee;
+    border: 2px solid var(--cookies-consentement-button-border-color);
     background-color: transparent;
-    color: #eee;
+    color: var(--cookies-consentement-button-color);
     box-shadow: 0 0 0 0 #ddd;
     transition: 0.2s;
 
     &:hover {
-      background-color: #eee;
-      color: #242427;
+      background-color: var(--cookies-consentement-button-background-color-on-hover);
+      color: var(--cookies-consentement-button-color-on-hover);
     }
   }
 }

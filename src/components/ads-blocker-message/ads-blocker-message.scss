@@ -1,17 +1,17 @@
 .ads-blocker-message-container {
+  z-index: 300000;
   position: fixed;
-  bottom: -100%;
-  left: 0;
-  right: 0;
+  top: calc(2rem + var(--navbar-height));
+  width: 55rem;
+  right: -100%;
   padding: 4rem;
-  background-color: #242427;
-  opacity: 0.85;
-  color: var(--ads-blocker-message-container-color);
+  background-color: var(--ads-blocker-message-container-background-color);
   transition: 1.5s;
   box-shadow: var(--box-shadow-02);
+  border-radius: 0.3rem;
 
   &.active {
-    bottom: 0;
+    right: 2rem;
   }
 
   & .ads-blocker-message-left {
@@ -19,39 +19,14 @@
   }
 
   & .ads-blocker-message-header {
-    text-transform: uppercase;
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 2.3rem;
     margin-bottom: 1.5rem;
-    color: white;
+    color: var(--ads-blocker-message-header-color);
   }
 
   & p {
-    font-size: 1.4rem;
-    color: #999;
-  }
-  & a {
-    font-size: 1.4rem;
-    color: #999;
-    text-decoration: underline;
-  }
-
-  & button {
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    font-weight: bold;
-    cursor: pointer;
-    white-space: nowrap;
-    padding: 1rem 4rem;
-    border: 2px solid #eee;
-    background-color: transparent;
-    color: #eee;
-    box-shadow: 0 0 0 0 #ddd;
-    transition: 0.2s;
-
-    &:hover {
-      background-color: #eee;
-      color: #242427;
-    }
+    font-size: 1.5rem;
+    color: var(--ads-blocker-message-body-color);
   }
 }

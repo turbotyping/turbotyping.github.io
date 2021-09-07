@@ -118,8 +118,16 @@ body.light {
   --button-icon-color: var(--body-color);
   --toggle-typing-button-background-color: var(--background-color-03);
   --scrollbar-color: rgba(0, 0, 0, 0.15);
-  --cookies-consentement-container-color: #fafafa;
-  --cookies-consentement-container-background-color: #006dfc; }
+  --ads-blocker-message-header-color: #fafafa;
+  --ads-blocker-message-body-color: #ddd;
+  --ads-blocker-message-container-background-color: #006dfc;
+  --cookies-consentement-container-background-color: #242427;
+  --cookies-consentement-header-color: white;
+  --cookies-consentement-body-color: #999;
+  --cookies-consentement-button-color: #eee;
+  --cookies-consentement-button-border-color: #eee;
+  --cookies-consentement-button-background-color-on-hover: #eee;
+  --cookies-consentement-button-color-on-hover: #242427; }
 
 body.dark {
   --primary-color: #078eed;
@@ -243,8 +251,16 @@ body.dark {
   --button-icon-color: var(--body-color);
   --toggle-typing-button-background-color: var(--background-color-03);
   --scrollbar-color: #727272;
-  --cookies-consentement-container-color: #fafafa;
-  --cookies-consentement-container-background-color: #006dfc; }
+  --ads-blocker-message-header-color: #fafafa;
+  --ads-blocker-message-body-color: #ddd;
+  --ads-blocker-message-container-background-color: #006dfc;
+  --cookies-consentement-container-background-color: #242427;
+  --cookies-consentement-header-color: white;
+  --cookies-consentement-body-color: #999;
+  --cookies-consentement-button-color: #eee;
+  --cookies-consentement-button-border-color: #eee;
+  --cookies-consentement-button-background-color-on-hover: #eee;
+  --cookies-consentement-button-color-on-hover: #242427; }
 
 *,
 *::after,
@@ -2424,9 +2440,8 @@ main {
   left: 0;
   right: 0;
   padding: 4rem;
-  background-color: #242427;
+  background-color: var(--cookies-consentement-container-background-color);
   opacity: 0.85;
-  color: var(--cookies-consentement-container-color);
   transition: 1.5s;
   box-shadow: var(--box-shadow-02);
   display: flex;
@@ -2441,13 +2456,13 @@ main {
     font-weight: bold;
     font-size: 1.6rem;
     margin-bottom: 1.5rem;
-    color: white; }
+    color: var(--cookies-consentement-header-color); }
   .cookies-consentement-container p {
     font-size: 1.4rem;
-    color: #999; }
+    color: var(--cookies-consentement-body-color); }
   .cookies-consentement-container a {
     font-size: 1.4rem;
-    color: #999;
+    color: var(--cookies-consentement-body-color);
     text-decoration: underline; }
   .cookies-consentement-container button {
     text-transform: uppercase;
@@ -2456,56 +2471,36 @@ main {
     cursor: pointer;
     white-space: nowrap;
     padding: 1rem 4rem;
-    border: 2px solid #eee;
+    border: 2px solid var(--cookies-consentement-button-border-color);
     background-color: transparent;
-    color: #eee;
+    color: var(--cookies-consentement-button-color);
     box-shadow: 0 0 0 0 #ddd;
     transition: 0.2s; }
     .cookies-consentement-container button:hover {
-      background-color: #eee;
-      color: #242427; }
+      background-color: var(--cookies-consentement-button-background-color-on-hover);
+      color: var(--cookies-consentement-button-color-on-hover); }
 
 .ads-blocker-message-container {
+  z-index: 300000;
   position: fixed;
-  bottom: -100%;
-  left: 0;
-  right: 0;
+  top: calc(2rem + var(--navbar-height));
+  width: 55rem;
+  right: -100%;
   padding: 4rem;
-  background-color: #242427;
-  opacity: 0.85;
-  color: var(--ads-blocker-message-container-color);
+  background-color: var(--ads-blocker-message-container-background-color);
   transition: 1.5s;
-  box-shadow: var(--box-shadow-02); }
+  box-shadow: var(--box-shadow-02);
+  border-radius: 0.3rem; }
   .ads-blocker-message-container.active {
-    bottom: 0; }
+    right: 2rem; }
   .ads-blocker-message-container .ads-blocker-message-left {
     margin-right: 10rem; }
   .ads-blocker-message-container .ads-blocker-message-header {
-    text-transform: uppercase;
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 2.3rem;
     margin-bottom: 1.5rem;
-    color: white; }
+    color: var(--ads-blocker-message-header-color); }
   .ads-blocker-message-container p {
-    font-size: 1.4rem;
-    color: #999; }
-  .ads-blocker-message-container a {
-    font-size: 1.4rem;
-    color: #999;
-    text-decoration: underline; }
-  .ads-blocker-message-container button {
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    font-weight: bold;
-    cursor: pointer;
-    white-space: nowrap;
-    padding: 1rem 4rem;
-    border: 2px solid #eee;
-    background-color: transparent;
-    color: #eee;
-    box-shadow: 0 0 0 0 #ddd;
-    transition: 0.2s; }
-    .ads-blocker-message-container button:hover {
-      background-color: #eee;
-      color: #242427; }
+    font-size: 1.5rem;
+    color: var(--ads-blocker-message-body-color); }
 

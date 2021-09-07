@@ -121,8 +121,17 @@ body.light {
   --button-icon-color: var(--body-color);
   --toggle-typing-button-background-color: var(--background-color-03);
   --scrollbar-color: rgba(0, 0, 0, 0.15);
-  --cookies-consentement-container-color: #fafafa;
-  --cookies-consentement-container-background-color: #006dfc;
+  --ads-blocker-message-header-color: #fafafa;
+  --ads-blocker-message-body-color: #ddd;
+  --ads-blocker-message-container-background-color: #006dfc;
+
+  --cookies-consentement-container-background-color: #242427;
+  --cookies-consentement-header-color: white;
+  --cookies-consentement-body-color: #999;
+  --cookies-consentement-button-color: #eee;
+  --cookies-consentement-button-border-color: #eee;
+  --cookies-consentement-button-background-color-on-hover: #eee;
+  --cookies-consentement-button-color-on-hover: #242427;
 }
 
 body.dark {
@@ -248,6 +257,14 @@ body.dark {
   --button-icon-color: var(--body-color);
   --toggle-typing-button-background-color: var(--background-color-03);
   --scrollbar-color: #727272;
-  --cookies-consentement-container-color: #fafafa;
-  --cookies-consentement-container-background-color: #006dfc;
+  --ads-blocker-message-header-color: #fafafa;
+  --ads-blocker-message-body-color: #ddd;
+  --ads-blocker-message-container-background-color: #006dfc;
+  --cookies-consentement-container-background-color: #242427;
+  --cookies-consentement-header-color: white;
+  --cookies-consentement-body-color: #999;
+  --cookies-consentement-button-color: #eee;
+  --cookies-consentement-button-border-color: #eee;
+  --cookies-consentement-button-background-color-on-hover: #eee;
+  --cookies-consentement-button-color-on-hover: #242427;
 }

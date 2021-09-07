@@ -22,11 +22,10 @@ export class AddBlockerMessageHtmlComponent extends BaseHtmlComponent {
     return /* html */ `
       <div id="${this.containerId}" class="ads-blocker-message-container">
         <p class="ads-blocker-message-header">
-          Please disable your adblocker to help keep this site running
+          Please disable your adblocker
         </p>
         <p class="ads-blocker-message-body">
-          We get it! Ads are annoying but they help keep this website up and running. <br/>
-          Please consider disabling your ad block software or whitelist our domain so only our ads are displayed.
+          We get it! Ads are annoying but they help keep this website up and running. Please consider disabling your ad block software or whitelist our domain so only our ads are displayed.
         </p>
       </div>
     `;
@@ -41,7 +40,7 @@ export class AddBlockerMessageHtmlComponent extends BaseHtmlComponent {
     fetch(new Request(googleAdUrl)).catch((_) => {
       setTimeout(() => {
         this.container.classList.add('active');
-      }, 5000);
+      }, 3000);
     });
   }
 }
