@@ -119,8 +119,12 @@ body.light {
   --toggle-typing-button-background-color: var(--background-color-03);
   --scrollbar-color: rgba(0, 0, 0, 0.15);
   --ads-blocker-message-header-color: #fafafa;
-  --ads-blocker-message-body-color: #ddd;
-  --ads-blocker-message-container-background-color: #006dfc;
+  --ads-blocker-message-body-color: rgb(255, 244, 244);
+  --ads-blocker-message-container-background-color: radial-gradient(
+    circle farthest-corner at 0.2% 0%,
+    rgba(238, 9, 121, 1) 0%,
+    rgba(255, 106, 0, 1) 100.2%
+  );
   --cookies-consentement-container-background-color: #242427;
   --cookies-consentement-header-color: white;
   --cookies-consentement-body-color: #999;
@@ -252,8 +256,12 @@ body.dark {
   --toggle-typing-button-background-color: var(--background-color-03);
   --scrollbar-color: #727272;
   --ads-blocker-message-header-color: #fafafa;
-  --ads-blocker-message-body-color: #ddd;
-  --ads-blocker-message-container-background-color: #006dfc;
+  --ads-blocker-message-body-color: rgb(255, 244, 244);
+  --ads-blocker-message-container-background-color: radial-gradient(
+    circle farthest-corner at 0.2% 0%,
+    rgba(238, 9, 121, 1) 0%,
+    rgba(255, 106, 0, 1) 100.2%
+  );
   --cookies-consentement-container-background-color: #242427;
   --cookies-consentement-header-color: white;
   --cookies-consentement-body-color: #999;
@@ -2487,10 +2495,10 @@ main {
   width: 55rem;
   right: -100%;
   padding: 4rem;
-  background-color: var(--ads-blocker-message-container-background-color);
+  background: var(--ads-blocker-message-container-background-color);
   transition: 1.5s;
   box-shadow: var(--box-shadow-02);
-  border-radius: 0.3rem; }
+  border-radius: 1rem; }
   .ads-blocker-message-container.active {
     right: 2rem; }
   .ads-blocker-message-container .ads-blocker-message-left {
