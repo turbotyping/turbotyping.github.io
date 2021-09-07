@@ -1734,7 +1734,7 @@ body.dark {
   .dialog .dialog-body {
     padding: 3rem 0;
     max-height: calc(100vh - 30rem);
-    overflow-y: scroll; }
+    overflow-y: auto; }
   .dialog .dialog-footer {
     border-top: 1px solid var(--border-color);
     padding-top: 2rem;
@@ -2498,7 +2498,7 @@ main {
   background: var(--ads-blocker-message-container-background-color);
   transition: 1.5s;
   box-shadow: var(--box-shadow-02);
-  border-radius: 1rem; }
+  border-radius: 0.3rem; }
   .ads-blocker-message-container.active {
     right: 2rem; }
   .ads-blocker-message-container .ads-blocker-message-left {

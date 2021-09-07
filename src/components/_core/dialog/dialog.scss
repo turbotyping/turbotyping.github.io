@@ -58,7 +58,7 @@
   & .dialog-body {
     padding: 3rem 0;
     max-height: calc(100vh - 30rem);
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   & .dialog-footer {
