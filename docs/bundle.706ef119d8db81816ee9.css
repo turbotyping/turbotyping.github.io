@@ -1447,7 +1447,7 @@ body.dark {
     --side-panel-width: 40rem;
     box-shadow: var(--box-shadow-02);
     padding: 2rem;
-    z-index: 300;
+    z-index: 30000;
     background-color: var(--side-panel-background-color);
     position: fixed;
     top: 0;
@@ -1853,7 +1853,7 @@ body.dark {
   width: 16rem;
   height: calc(100vh - var(--navbar-height));
   margin: 2rem;
-  transition: 1.5s;
+  transition: 1s;
   overflow: hidden; }
   @media screen and (max-width: 768px) {
     .advertise-container {
