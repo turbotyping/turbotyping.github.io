@@ -1775,7 +1775,8 @@ body.dark {
     width: 0;
     overflow: hidden;
     font-size: 1.35rem;
-    font-weight: bold; }
+    font-weight: bold;
+    color: var(--body-color); }
   .feedback-button:hover .feedback-label {
     width: 23rem;
     padding-left: 2rem; }
@@ -1853,7 +1854,7 @@ body.dark {
   width: 16rem;
   height: calc(100vh - var(--navbar-height));
   margin: 2rem;
-  transition: 1s;
+  transition: 0.7s;
   overflow: hidden; }
   @media screen and (max-width: 768px) {
     .advertise-container {
