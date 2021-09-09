@@ -1,6 +1,6 @@
 import IAdsService from './ads.service';
 
-const AMAZON_160x600_ADS = [
+const LEFT_ADS = [
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ez&f=ifr&linkID=0d863840eff95c99a2e9a732fcfe1a6a&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=amazonfashion&banner=0AG50GY6P3KKHK2XTM02&f=ifr&linkID=424a9feb9dfc3eec1fcbf438c0614b20&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=amazonkids&banner=1W78ARG91N5F0NREXA82&f=ifr&linkID=756ab7479b4839c7852554d1e68da0a1&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
@@ -42,6 +42,9 @@ const AMAZON_160x600_ADS = [
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=kindle&banner=0G723R5F718QXYA9D502&f=ifr&linkID=3eb2c10bbac1d278c7907a991e515371&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=kitchen&banner=168TK21Z6B8FXYDNXR82&f=ifr&linkID=9d90d72d26c33034fcf846e18f880582&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=kitchen&banner=1KAJ6YJ3T4CGT8VRM7G2&f=ifr&linkID=907c67fb2b39614f5139095a6ad05fe6&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
+];
+
+const RIGHT_ADS = [
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=kitchen&banner=00G1A8RX4QS4F2RSDVG2&f=ifr&linkID=f16a26cda539cfacb18b9a3ae8455f3b&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=kitchen&banner=13VJWSJK2GQBEMBABK82&f=ifr&linkID=67ff1ee59b74c02eb15faa936259b1b3&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=kitchen&banner=0A9SGKGNVKPDY7YT7102&f=ifr&linkID=094820927117540ad9152365660dec9f&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
@@ -78,7 +81,7 @@ const AMAZON_160x600_ADS = [
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=14&l=ur1&category=software&banner=1GYS8P1QQ8TF7V5XS8G2&f=ifr&linkID=737f87a6e879697850f8c9f5119c87ea&t=enjoytyping-20&tracking_id=enjoytyping-20" width="160" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
 ];
 
-const AMAZON_782x90_ADS = [
+const HORIZANTAL_ADS = [
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ez&f=ifr&linkID=8d211d6514fbf6c84e6cb5207c98187c&t=enjoytyping-20&tracking_id=enjoytyping-20" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amazonkids&banner=1M8YCKV46CTCXY6AKE02&f=ifr&linkID=9bd198b5597322e370117ea5bc653233&t=enjoytyping-20&tracking_id=enjoytyping-20" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
   '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amz_music&banner=159S8R1P9HH8N29W4P82&f=ifr&linkID=f4c94f0397d90968fc77f6a0636b0c46&t=enjoytyping-20&tracking_id=enjoytyping-20" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>',
@@ -172,11 +175,19 @@ const AMAZON_782x90_ADS = [
 ];
 
 export default class AmazonAdsService implements IAdsService {
-  get728x90Ads(count: number): string[] {
-    return this.getAds(AMAZON_782x90_ADS, count);
+  getLeftAd(): string {
+    return this.getAds(LEFT_ADS, 1)[0];
   }
-  get160x600Ads(count: number): string[] {
-    return this.getAds(AMAZON_160x600_ADS, count);
+  getRightAd(): string {
+    return this.getAds(RIGHT_ADS, 1)[0];
+  }
+
+  getHorizontalAd(): string {
+    return this.getAds(HORIZANTAL_ADS, 1)[0];
+  }
+
+  getHorizontalAds(count: number): string[] {
+    return this.getAds(HORIZANTAL_ADS, count);
   }
 
   private getAds(array: string[], count: number): string[] {

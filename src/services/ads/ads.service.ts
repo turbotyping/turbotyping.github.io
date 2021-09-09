@@ -1,4 +1,6 @@
 export default interface IAdsService {
-  get160x600Ads(count: number): string[];
-  get728x90Ads(count: number): string[];
+  getRightAd(): string;
+  getLeftAd(): string;
+  getHorizontalAd(): string;
+  getHorizontalAds(count: number): string[];
 }

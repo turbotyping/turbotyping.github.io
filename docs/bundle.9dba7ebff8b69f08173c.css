@@ -1919,6 +1919,9 @@ main {
   .progress-graph .progress-slider .progress-smoothness-slider {
     flex: 1; }
 
+.error-progress-graph {
+  margin-top: 5rem; }
+
 .typed-keys-progress {
   margin-bottom: 2.5rem; }
 
@@ -1952,14 +1955,6 @@ main {
     display: none !important; }
   .slider-container {
     width: 10rem !important; } }
-
-.typing-progress-advertise-container {
-  display: flex;
-  margin-bottom: 3rem; }
-  .typing-progress-advertise-container.ad1 {
-    margin-top: 5rem; }
-  .typing-progress-advertise-container iframe {
-    margin: 0 auto; }
 
 .typed-keys-container {
   display: grid;
@@ -2448,6 +2443,25 @@ main {
     font-weight: bold;
     white-space: nowrap;
     transform: rotate(-90deg); }
+
+.vertical-advertise-container {
+  width: 16rem;
+  height: calc(100vh - var(--navbar-height));
+  margin: 2rem;
+  transition: 1s;
+  overflow: hidden;
+  position: -webkit-sticky;
+  position: sticky;
+  top: calc(2rem + var(--navbar-height)); }
+  @media screen and (max-width: 768px) {
+    .vertical-advertise-container {
+      display: none; } }
+  .vertical-advertise-container iframe {
+    margin-bottom: 1rem; }
+  .vertical-advertise-container.hidden {
+    width: 1px;
+    opacity: 0;
+    margin: 0; }
 
 .cookies-consentement-container {
   position: fixed;

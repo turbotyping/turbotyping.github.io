@@ -60,6 +60,10 @@
   }
 }
 
+.error-progress-graph {
+  margin-top: 5rem;
+}
+
 .typed-keys-progress {
   margin-bottom: 2.5rem;
 }
@@ -103,18 +107,5 @@
 
   .slider-container {
     width: 10rem !important;
-  }
-}
-
-.typing-progress-advertise-container {
-  display: flex;
-  margin-bottom: 3rem;
-
-  &.ad1 {
-    margin-top: 5rem;
-  }
-
-  & iframe {
-    margin: 0 auto;
   }
 }

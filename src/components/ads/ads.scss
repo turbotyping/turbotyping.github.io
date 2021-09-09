@@ -1,0 +1,26 @@
+.vertical-advertise-container {
+  width: 16rem;
+  height: calc(100vh - var(--navbar-height));
+  margin: 2rem;
+  transition: 1s;
+  overflow: hidden;
+  position: sticky;
+  top: calc(2rem + var(--navbar-height));
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+
+  & iframe {
+    margin-bottom: 1rem;
+    // border-radius: 0.5rem;
+    // box-shadow: var(--box-shadow-02);
+    // border: 1px solid var(--border-color);
+  }
+
+  &.hidden {
+    width: 1px;
+    opacity: 0;
+    margin: 0;
+  }
+}

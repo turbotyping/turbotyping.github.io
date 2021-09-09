@@ -43,7 +43,7 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
     // prettier-ignore
     return /* html */ `
       <div id="${this.containerId}">
-        <p id="${this.notEnoughSamplesId}" class="not-enough-samples">Not enough samples to display progress</p> 
+        <p id="${this.notEnoughSamplesId}" class="not-enough-samples">No data available</p> 
         <div id="${this.canvasContainerId}" class="chartjs-graph-container"></div>
       </div>
     `;
