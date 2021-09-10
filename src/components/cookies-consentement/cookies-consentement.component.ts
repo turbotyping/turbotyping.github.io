@@ -21,14 +21,9 @@ export class CookiesConsentementHtmlComponent extends BaseHtmlComponent {
   toHtml() {
     return /* html */ `
       <div id="${this.containerId}" class="cookies-consentement-container">
-        <div class="cookies-consentement-left">
-          <p class="cookies-consentement-header">
-            This website uses cookies
-          </p>
-          <p class="cookies-consentement-msg">
-            This website uses cookies to improve user experience. By using our website you consent to all cookies
-            in accordance with our <a href="/cookies-policy.html" target="_blank">Cookies Policy</a>
-          </p>
+        <div class="cookies-consentement-msg">
+          <span class="iconify" data-icon="ant-design:info-circle-outlined"></span>
+          <p>We use cookies to improve your experience on our website and for advertising. <a href="/cookies-policy.html" target="_blank">Read more</a></p>
         </div>
         <button id="${this.buttonId}">Accept all</button> 
       </div>
@@ -42,6 +37,8 @@ export class CookiesConsentementHtmlComponent extends BaseHtmlComponent {
       const appState = this.appStateClient.getAppState();
       if (!appState.cookiesConsentementAlreadyShown) {
         this.container.classList.add('active');
+      } else {
+        this.container.classList.add('hide');
       }
     }, 2000);
     this.button.addEventListener('click', this.handleButtonClickEvent.bind(this));

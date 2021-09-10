@@ -129,13 +129,10 @@ body.light {
     rgba(255, 106, 0, 1) 100.2%
   );
 
-  --cookies-consentement-container-background-color: #242427;
-  --cookies-consentement-header-color: white;
-  --cookies-consentement-body-color: #999;
-  --cookies-consentement-button-color: #eee;
-  --cookies-consentement-button-border-color: #eee;
-  --cookies-consentement-button-background-color-on-hover: #eee;
-  --cookies-consentement-button-color-on-hover: #242427;
+  --cookies-consentement-container-background-color: #f2f2f2;
+  --cookies-consentement-text-color: #333;
+  --cookies-consentement-button-background-color: #e0dede;
+  --cookies-consentement-button-color: #000;
 }
 
 body.dark {
@@ -268,11 +265,8 @@ body.dark {
     rgba(238, 9, 121, 1) 0%,
     rgba(255, 106, 0, 1) 100.2%
   );
-  --cookies-consentement-container-background-color: #242427;
-  --cookies-consentement-header-color: white;
-  --cookies-consentement-body-color: #999;
+  --cookies-consentement-container-background-color: var(--background-color-02);
+  --cookies-consentement-text-color: #eee;
   --cookies-consentement-button-color: #eee;
-  --cookies-consentement-button-border-color: #eee;
-  --cookies-consentement-button-background-color-on-hover: #eee;
-  --cookies-consentement-button-color-on-hover: #242427;
+  --cookies-consentement-button-background-color: var(--background-color-04);
 }

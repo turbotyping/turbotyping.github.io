@@ -1,12 +1,12 @@
 .cookies-consentement-container {
+  z-index: 5000000;
   position: fixed;
   bottom: -100%;
   left: 0;
   right: 0;
-  padding: 4rem;
+  padding: 1.5rem 6rem;
   background-color: var(--cookies-consentement-container-background-color);
-  opacity: 0.85;
-  transition: 1.5s;
+  transition: bottom 1.5s ease-in-out;
   box-shadow: var(--box-shadow-02);
   display: flex;
   align-items: center;
@@ -16,44 +16,37 @@
     bottom: 0;
   }
 
-  & .cookies-consentement-left {
-    margin-right: 10rem;
+  & .cookies-consentement-msg {
+    color: var(--cookies-consentement-text-color);
+    display: flex;
+    align-items: center;
   }
 
-  & .cookies-consentement-header {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
-    color: var(--cookies-consentement-header-color);
+  & .iconify {
+    font-size: 2.7rem;
+    margin-right: 1.5rem;
   }
 
   & p {
-    font-size: 1.4rem;
-    color: var(--cookies-consentement-body-color);
+    font-size: 1.3rem;
   }
+
   & a {
-    font-size: 1.4rem;
-    color: var(--cookies-consentement-body-color);
+    font-size: 1.3rem;
     text-decoration: underline;
   }
 
   & button {
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 1.4rem;
     cursor: pointer;
     white-space: nowrap;
     padding: 1rem 4rem;
-    border: 2px solid var(--cookies-consentement-button-border-color);
-    background-color: transparent;
+    border: 2px solid transparent;
+    background-color: var(--cookies-consentement-button-background-color);
     color: var(--cookies-consentement-button-color);
-    box-shadow: 0 0 0 0 #ddd;
-    transition: 0.2s;
 
     &:hover {
-      background-color: var(--cookies-consentement-button-background-color-on-hover);
-      color: var(--cookies-consentement-button-color-on-hover);
+      box-shadow: var(--box-shadow-01);
     }
   }
 }
