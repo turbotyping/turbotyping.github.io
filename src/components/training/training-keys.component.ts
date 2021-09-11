@@ -63,7 +63,7 @@ export class TrainingKeysHtmlComponent extends BaseHtmlComponent {
     return this.trainingLessonAyString;
   }
 
-  private update() {
+  update() {
     const appSettings = this.appSettingsClient.getAppState();
     if (appSettings.trainingLesson === this.trainingLesson) {
       this.container.classList.add('selected');

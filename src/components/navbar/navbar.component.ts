@@ -158,7 +158,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     this.dispatchCustomEvent(APP_SETTINGS_CHANGE_EVENT);
   }
 
-  private update() {
+  update() {
     const appState = this.appStateClient.getAppState();
     this.textToTypeCategoriesSelect.reset({
       options: TEXT_TO_TYPE_CATEGORIES,

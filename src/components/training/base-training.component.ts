@@ -1,10 +1,9 @@
 import './training.scss';
 import { BaseHtmlComponent } from '../_core/base-component';
-import { IHtmlComponent } from '../_core/component.interface';
 import { TrainingKeysHtmlComponent } from './training-keys.component';
 
 export abstract class BaseTrainingHtmlComponent extends BaseHtmlComponent {
-  private components: IHtmlComponent[] = [];
+  private components: TrainingKeysHtmlComponent[] = [];
   private containerId: string;
   private container: HTMLElement;
   private arrowRightId: string;
@@ -55,7 +54,7 @@ export abstract class BaseTrainingHtmlComponent extends BaseHtmlComponent {
     this.update();
   }
 
-  private update() {
+  update() {
     this.arrowLeft.classList.remove('hide');
     if (this.container.scrollLeft == 0) {
       this.arrowLeft.classList.add('hide');

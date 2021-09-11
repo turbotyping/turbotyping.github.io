@@ -34,7 +34,7 @@ export class LabeledSwitchHtmlComponent extends BaseHtmlComponent {
     this.callbacks.push(callback);
   }
 
-  private update() {
+  update() {
     if (this.value) {
       this.container.classList.add('on');
     } else {
