@@ -20,7 +20,7 @@ export abstract class BaseAdsHtmlComponent extends BaseHtmlComponent {
   postInsertHtml(): void {
     this.shownAdContainer = document.getElementById(this.shownAdContainerId);
     this.hiddenAdContainer = document.getElementById(this.hiddenAdContainerId);
-    setInterval(this.changeAds.bind(this), 20000);
+    setInterval(this.changeAds.bind(this), 30000);
   }
 
   private changeAds() {
