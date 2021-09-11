@@ -16,7 +16,7 @@ export abstract class BaseHtmlComponent implements IHtmlComponent {
     container.innerHTML = this.toHtml();
   }
 
-  cleanup(): void {}
+  preDestroy(): void {}
 
   stopPropagation(event) {
     event.stopPropagation();

@@ -129,7 +129,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     document.body.addEventListener('keydown', this.handleKeyDownEvent);
   }
 
-  cleanup(): void {
+  preDestroy(): void {
     document.body.removeEventListener('keydown', this.handleKeyDownEvent);
   }
 

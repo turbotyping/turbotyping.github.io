@@ -39,11 +39,12 @@ export class TextToTypePageHtmlComponent extends BaseHtmlComponent {
   }
 
   update() {
-    this.components.forEach((c) => c.cleanup());
+    this.components.forEach((c) => c.preDestroy());
     this.components = this.getComponents();
     this.components.forEach((c) => c.preInsertHtml());
     this.container.innerHTML = this.getInnerHtml();
     this.components.forEach((c) => c.postInsertHtml());
+    (document.activeElement as HTMLElement).blur();
   }
 
   private getComponents(): IHtmlComponent[] {

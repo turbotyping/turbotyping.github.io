@@ -9,5 +9,5 @@ export interface IHtmlComponent {
 
   update(): void;
 
-  cleanup(): void;
+  preDestroy(): void;
 }
