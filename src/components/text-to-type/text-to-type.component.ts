@@ -28,21 +28,20 @@ import { TextToType } from './text-to-type.model';
 import { TrainingLessonStats } from '../training/training-lesson-stats.model';
 import { TrainingLesson } from '../training/training-lesson.enum';
 import { NumericInputHtmlComponent } from '../_core/numeric-input/numeric-input.component';
-import { LabeledSwitchHtmlComponent } from '../_core/switch/labled-switch.component';
 
 const INACTIVITY_TIMEOUT = 30000;
 const BACKSPACE_KEY = 'Backspace';
 const SPACE_KEY = ' ';
 const ENTER_KEY = 'Enter';
-const TEXT_TO_TYPE_DOM_ELEMENT_ID = 'TextToTypeId';
-const TEXT_TO_TYPE_CONTAINER_DOM_ELEMENT_ID = 'TextToTypeContainerId';
 const CHARS_To_TYPE: RegExp = /(^[A-Za-z0-9é"'\(-èëê_çàôùœâ\)=:/;.,?<>!~#{\[|@\]}+% ]$|Enter)/;
 const CHARS_To_TYPE_WITHOUT_PUNCTUATION: RegExp = /[^A-Za-z0-9àçéèëêôùœâ\n ]/g;
 
 export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   private toggleTypingButtonId: string;
   private toggleTypingButton: HTMLElement;
+  private textToTypeDomElementId: string;
   private textToTypeDomElement: HTMLElement;
+  private textToTypeContainerDomElementId: string;
   private textToTypeContainerDomElement: HTMLElement;
   private currentCharToTypeDomElement: HTMLElement;
   private blinkInterval: any;
@@ -62,9 +61,12 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     super();
     this.fontSizeInput = new NumericInputHtmlComponent(this.appStateClient.getFontSize());
     this.trainingSizeInput = new NumericInputHtmlComponent(this.appStateClient.getTrainingSize());
+    this.handleKeyDownEvent = this.handleKeyDownEvent.bind(this);
   }
 
   preInsertHtml(): void {
+    this.textToTypeDomElementId = this.generateId();
+    this.textToTypeContainerDomElementId = this.generateId();
     this.referenceId = this.generateId();
     this.toggleTypingButtonId = this.generateId();
     this.keyboardSound = new Audio('keyboard-press-sound-effect.mp3');
@@ -86,8 +88,8 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
       <div class="toggle-typing-button-container">
         <button id="${this.toggleTypingButtonId}" class="toggle-typing-button">Click to enable...</button>
       </div>
-      <div id="${TEXT_TO_TYPE_CONTAINER_DOM_ELEMENT_ID}" class="text-to-type-container">
-        <div id="${TEXT_TO_TYPE_DOM_ELEMENT_ID}" class="text-to-type">
+      <div id="${this.textToTypeContainerDomElementId}" class="text-to-type-container">
+        <div id="${this.textToTypeDomElementId}" class="text-to-type">
         </div>
       </div>
       <a class="view-typing-progress-link" href="#${PROGRESS_DIV_ID}">
@@ -99,8 +101,8 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
   postInsertHtml(): void {
     this.toggleTypingButton = document.getElementById(this.toggleTypingButtonId);
     this.reference = document.getElementById(this.referenceId);
-    this.textToTypeDomElement = document.getElementById(TEXT_TO_TYPE_DOM_ELEMENT_ID);
-    this.textToTypeContainerDomElement = document.getElementById(TEXT_TO_TYPE_CONTAINER_DOM_ELEMENT_ID);
+    this.textToTypeDomElement = document.getElementById(this.textToTypeDomElementId);
+    this.textToTypeContainerDomElement = document.getElementById(this.textToTypeContainerDomElementId);
 
     this.toggleTypingButton.classList.add('hide');
     this.fontSizeInput.postInsertHtml();
@@ -114,7 +116,6 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
 
     this.textToTypeDomElement.addEventListener('click', this.enable.bind(this));
     this.toggleTypingButton.addEventListener('click', this.enable.bind(this));
-    document.body.addEventListener('keydown', this.handleKeyDownEvent.bind(this));
     this.addCustomEventListener(APP_SETTINGS_CHANGE_EVENT, this.reset.bind(this));
     this.addCustomEventListener(START_UPDATING_APP_SETTINGS_EVENT, this.disable.bind(this));
     this.addCustomEventListener(END_UPDATING_APP_SETTINGS_EVENT, this.enable.bind(this));
@@ -125,6 +126,11 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
     this.addCustomEventListener(CHANGE_TEXT_TO_TYPE, this.reset.bind(this));
     this.addCustomEventListener(OPEN_SIDE_PANEL_EVENT, this.disable.bind(this));
     this.addCustomEventListener(CLOSE_SIDE_PANEL_EVENT, this.enable.bind(this));
+    document.body.addEventListener('keydown', this.handleKeyDownEvent);
+  }
+
+  cleanup(): void {
+    document.body.removeEventListener('keydown', this.handleKeyDownEvent);
   }
 
   private onFontSizeInputChange(newValue: number) {

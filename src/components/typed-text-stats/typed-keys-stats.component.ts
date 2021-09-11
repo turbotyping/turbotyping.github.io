@@ -1,7 +1,7 @@
 import './typed-text-stats.scss';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { IAppStateClient } from '../../state/app-state.client.interface';
-import { MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
+import { END_TYPING_EVENT, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
 
 export class TypedKeysStatsHtmlComponent extends BaseHtmlComponent {
   private typedKeysStatsId: string;
@@ -23,6 +23,11 @@ export class TypedKeysStatsHtmlComponent extends BaseHtmlComponent {
 
   postInsertHtml(): void {
     this.typedKeysStats = document.getElementById(this.typedKeysStatsId);
+    this.update();
+    this.addCustomEventListener(END_TYPING_EVENT, this.update.bind(this));
+  }
+
+  update() {
     let html = '';
     'abcdefghijklmnopqrstuvwxyz'.split('').forEach((c) => {
       const keyStats = this.appStateClient.getTypedKeysStatsMap();

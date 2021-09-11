@@ -8,4 +8,6 @@ export interface IHtmlComponent {
   postInsertHtml(): void;
 
   update(): void;
+
+  cleanup(): void;
 }
