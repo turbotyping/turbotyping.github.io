@@ -6,4 +6,6 @@ export interface IHtmlComponent {
   insertHtml(parentElement: HTMLElement, insertPosition: InsertPosition): void;
 
   postInsertHtml(): void;
+
+  update(): void;
 }

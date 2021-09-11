@@ -38,7 +38,7 @@ export class TextToTypePageHtmlComponent extends BaseHtmlComponent {
     this.addCustomEventListener(APP_SETTINGS_CHANGE_EVENT, this.update.bind(this));
   }
 
-  private update() {
+  update() {
     this.components = this.getComponents();
     this.components.forEach((c) => c.preInsertHtml());
     this.container.innerHTML = this.getInnerHtml();

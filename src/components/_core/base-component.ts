@@ -4,9 +4,16 @@ export abstract class BaseHtmlComponent implements IHtmlComponent {
   abstract preInsertHtml(): void;
   abstract toHtml(): string;
   abstract postInsertHtml(): void;
+  private _containerId: string;
 
   insertHtml(parentElement: HTMLElement, insertPosition: InsertPosition): void {
-    parentElement.insertAdjacentHTML(insertPosition, this.toHtml());
+    this._containerId = this.generateId();
+    parentElement.insertAdjacentHTML(insertPosition, `<div id="${this._containerId}">${this.toHtml()}</div>`);
+  }
+
+  update(): void {
+    const container = document.getElementById(this._containerId);
+    container.innerHTML = this.toHtml();
   }
 
   stopPropagation(event) {
