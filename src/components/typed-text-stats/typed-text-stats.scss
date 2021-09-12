@@ -95,7 +95,7 @@
     padding: 0.5rem 1rem;
     font-family: 'Roboto Mono';
     font-weight: bold;
-    cursor: pointer;
+    cursor: default;
 
     &.no-data-available-yet {
       color: var(--body-color);
