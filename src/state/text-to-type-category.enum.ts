@@ -2,11 +2,11 @@ import { SelectOption } from '../components/_core/select/select.component';
 
 export enum TextToTypeCategory {
   TRAINING = 'TRAINING',
+  RANDOM_TEXT = 'RANDOM_TEXT',
   QUOTES = 'QUOTES',
   POEMS = 'POEMS',
   STORIES = 'STORIES',
   CODE = 'CODE',
-  RANDOM_TEXT = 'RANDOM_TEXT',
   CUSTOM_TEXT = 'CUSTOM_TEXT',
 }
 
@@ -14,6 +14,10 @@ export const TEXT_TO_TYPE_CATEGORIES: SelectOption<TextToTypeCategory>[] = [
   {
     label: 'Training',
     value: TextToTypeCategory.TRAINING,
+  },
+  {
+    label: 'Random',
+    value: TextToTypeCategory.RANDOM_TEXT,
   },
   {
     label: 'Quotes',
@@ -28,12 +32,8 @@ export const TEXT_TO_TYPE_CATEGORIES: SelectOption<TextToTypeCategory>[] = [
     value: TextToTypeCategory.STORIES,
   },
   {
-    label: 'Code',
+    label: 'Source code',
     value: TextToTypeCategory.CODE,
-  },
-  {
-    label: 'Random Text',
-    value: TextToTypeCategory.RANDOM_TEXT,
   },
   {
     label: 'Custom Text',
