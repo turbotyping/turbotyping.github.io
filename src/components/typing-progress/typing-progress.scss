@@ -18,6 +18,19 @@
 
   & .chartjs-graph-container {
     height: 40rem;
+    position: relative;
+
+    &.empty:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      content: 'No data available yet';
+      font-size: 1.4rem;
+      font-weight: bold;
+      font-style: italic;
+      color: var(--body-color);
+    }
   }
 
   & .progress-header {

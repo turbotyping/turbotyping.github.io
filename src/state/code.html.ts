@@ -8,7 +8,6 @@ export default [
     text:
       '<!DOCTYPE html>\n' +
       '<html>\n' +
-      '\n' +
       '<body>\n' +
       '\n' +
       '  <p>Image to use:</p>\n' +
@@ -30,7 +29,6 @@ export default [
       '  </script>\n' +
       '\n' +
       '</body>\n' +
-      '\n' +
       '</html>',
     reference: 'http://w3schools.com/',
     author: 'w3schools.com',
@@ -39,7 +37,6 @@ export default [
     text:
       '<!DOCTYPE html>\n' +
       '<html>\n' +
-      '\n' +
       '<body>\n' +
       '\n' +
       '  <h2>HTML Forms</h2>\n' +
@@ -55,7 +52,6 @@ export default [
       '  <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>\n' +
       '\n' +
       '</body>\n' +
-      '\n' +
       '</html>',
     reference: 'http://w3schools.com/',
     author: 'w3schools.com',
@@ -64,7 +60,6 @@ export default [
     text:
       '<!DOCTYPE html>\n' +
       '<html>\n' +
-      '\n' +
       '<head>\n' +
       '  <base href="https://www.w3schools.com/" target="_blank">\n' +
       '</head>\n' +
@@ -81,7 +76,6 @@ export default [
       '    target="_blank" attribute. This is because the target attribute of the base element is set to "_blank".</p>\n' +
       '\n' +
       '</body>\n' +
-      '\n' +
       '</html>',
     reference: 'http://w3schools.com/',
     author: 'w3schools.com',
@@ -90,7 +84,6 @@ export default [
     text:
       '<!DOCTYPE html>\n' +
       '<html>\n' +
-      '\n' +
       '<body>\n' +
       '\n' +
       '  <h2>Unordered List with Square Bullets</h2>\n' +
@@ -102,7 +95,6 @@ export default [
       '  </ul>\n' +
       '\n' +
       '</body>\n' +
-      '\n' +
       '</html>',
     reference: 'http://w3schools.com/',
     author: 'w3schools.com',
@@ -111,7 +103,6 @@ export default [
     text:
       '<!DOCTYPE html>\n' +
       '<html>\n' +
-      '\n' +
       '<head>\n' +
       '  <style>\n' +
       '    table,\n' +
@@ -154,7 +145,6 @@ export default [
       '  </table>\n' +
       '\n' +
       '</body>\n' +
-      '\n' +
       '</html>',
     reference: 'http://w3schools.com/',
     author: 'w3schools.com',
@@ -163,7 +153,6 @@ export default [
     text:
       '<!DOCTYPE html>\n' +
       '<html>\n' +
-      '\n' +
       '<body>\n' +
       '\n' +
       '  <h2>Image as a Link</h2>\n' +
@@ -173,7 +162,6 @@ export default [
       '  <a href="default.asp"><img src="smiley.gif" alt="HTML tutorial" style="width:42px;height:42px;"></a>\n' +
       '\n' +
       '</body>\n' +
-      '\n' +
       '</html>',
     reference: 'http://w3schools.com/',
     author: 'w3schools.com',
@@ -182,7 +170,6 @@ export default [
     text:
       '<!DOCTYPE html>\n' +
       '<html>\n' +
-      '\n' +
       '<head>\n' +
       '  <style>\n' +
       '    body {\n' +
@@ -205,7 +192,6 @@ export default [
       '  <p>This is a paragraph.</p>\n' +
       '\n' +
       '</body>\n' +
-      '\n' +
       '</html>',
     reference: 'http://w3schools.com/',
     author: 'w3schools.com',
@@ -214,7 +200,6 @@ export default [
     text:
       '<!DOCTYPE html>\n' +
       '<html>\n' +
-      '\n' +
       '<head>\n' +
       '  <style>\n' +
       '    .city {\n' +
@@ -245,7 +230,6 @@ export default [
       '  </div>\n' +
       '\n' +
       '</body>\n' +
-      '\n' +
       '</html>\n',
     reference: 'http://w3schools.com/',
     author: 'w3schools.com',

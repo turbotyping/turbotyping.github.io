@@ -1,4 +1,4 @@
-import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, LIGHT_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
+import { CHANGE_THEME_EVENT, DARK_THEME_VALUE, MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH } from '../../constants/constant';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { IAppStateClient } from '../../state/app-state.client.interface';
 import { Color } from '../_core/color';
@@ -15,10 +15,8 @@ export class TypingProgressGraphHtmlComponentInput {
 }
 
 export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
-  private notEnoughSamplesId: string;
   private canvasContainerId: string;
   private canvasContainer: HTMLElement;
-  private notEnoughSamplesDomElement: HTMLElement;
   private gridLinesColor: string;
   private containerId: string;
   private input: TypingProgressGraphHtmlComponentInput;
@@ -35,7 +33,6 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
 
   preInsertHtml(): void {
     this.containerId = this.generateId();
-    this.notEnoughSamplesId = this.generateId();
     this.canvasContainerId = this.generateId();
   }
 
@@ -43,7 +40,6 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
     // prettier-ignore
     return /* html */ `
       <div id="${this.containerId}">
-        <p id="${this.notEnoughSamplesId}" class="not-enough-samples">No data available yet</p> 
         <div id="${this.canvasContainerId}" class="chartjs-graph-container"></div>
       </div>
     `;
@@ -51,7 +47,6 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
 
   postInsertHtml(): void {
     this.canvasContainer = document.getElementById(this.canvasContainerId);
-    this.notEnoughSamplesDomElement = document.getElementById(this.notEnoughSamplesId);
     this.setGridLinesColor();
     this.updateInnerHTML();
     this.addCustomEventListener(CHANGE_THEME_EVENT, this.handleChangeThemeEvent.bind(this));
@@ -76,55 +71,58 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
   }
 
   private updateInnerHTML() {
-    if (!this.input.graphData || this.input.graphData.length < MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH) {
-      this.canvasContainer.classList.add('hide');
-      this.notEnoughSamplesDomElement.classList.remove('hide');
-    } else {
-      this.notEnoughSamplesDomElement.classList.add('hide');
-      this.canvasContainer.classList.remove('hide');
-      const canvas = document.createElement('canvas');
-      this.canvasContainer.innerHTML = '';
-      this.canvasContainer.appendChild(canvas);
-      new Chart(canvas.getContext('2d'), {
-        data: {
-          labels: Array.from({ length: this.input.graphData.length }, (_, i) => i + 1),
-          datasets: this.getGraphDataset(),
+    this.updateContainerCssClass();
+    const canvas = document.createElement('canvas');
+    this.canvasContainer.innerHTML = '';
+    this.canvasContainer.appendChild(canvas);
+    new Chart(canvas.getContext('2d'), {
+      data: {
+        labels: Array.from({ length: this.getGraphData().length }, (_, i) => i + 1),
+        datasets: this.getGraphDataset(),
+      },
+      options: {
+        maintainAspectRatio: false,
+        legend: {
+          display: true,
         },
-        options: {
-          maintainAspectRatio: false,
-          legend: {
-            display: true,
+        elements: {
+          point: {
+            radius: 0,
           },
-          elements: {
-            point: {
-              radius: 0,
+        },
+        scales: {
+          yAxes: [
+            {
+              gridLines: {
+                color: `${this.gridLinesColor}`,
+              },
+              ticks: {
+                autoSkipPadding: 50,
+                beginAtZero: true,
+              },
             },
-          },
-          scales: {
-            yAxes: [
-              {
-                gridLines: {
-                  color: `${this.gridLinesColor}`,
-                },
-                ticks: {
-                  autoSkipPadding: 50,
-                  beginAtZero: true,
-                },
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: false,
               },
-            ],
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-                ticks: {
-                  autoSkipPadding: 300,
-                },
+              ticks: {
+                autoSkipPadding: 300,
               },
-            ],
-          },
+            },
+          ],
         },
-      });
+      },
+    });
+  }
+
+  private updateContainerCssClass() {
+    const graphData = this.getGraphData();
+    if (graphData.length == 0) {
+      this.canvasContainer.classList.add('empty');
+    } else {
+      this.canvasContainer.classList.remove('empty');
     }
   }
 
@@ -134,7 +132,7 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
         {
           label: 'Moyenne',
           type: 'line',
-          data: this.toMovingAverageArray(this.input.graphData),
+          data: this.toMovingAverageArray(this.getGraphData()),
           borderWidth: 5,
           borderColor: this.getAvgSpeedBorderColor(),
           backgroundColor: this.getAvgSpeedBackgroundColor(),
@@ -142,7 +140,7 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
         {
           label: 'Words per minute',
           type: 'bar',
-          data: this.input.graphData,
+          data: this.getGraphData(),
           backgroundColor: this.input.barColor.get(),
         },
       ];
@@ -151,7 +149,7 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
         {
           label: 'Errors per minute',
           type: 'bar',
-          data: this.input.graphData,
+          data: this.getGraphData(),
           backgroundColor: this.input.barColor.get(),
         },
       ];
@@ -174,5 +172,9 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
       result.push(avg);
     }
     return result;
+  }
+
+  private getGraphData(): number[] {
+    return this.input.graphData.length < MIN_STATS_TO_DISPLAY_PROGRESS_GRAPH ? [] : this.input.graphData;
   }
 }

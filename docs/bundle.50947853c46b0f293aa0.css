@@ -1881,7 +1881,18 @@ main {
   text-align: center; }
 
 .progress-graph .chartjs-graph-container {
-  height: 40rem; }
+  height: 40rem;
+  position: relative; }
+  .progress-graph .chartjs-graph-container.empty:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: 'No data available yet';
+    font-size: 1.4rem;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--body-color); }
 
 .progress-graph .progress-header {
   display: flex;
