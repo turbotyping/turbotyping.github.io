@@ -1312,8 +1312,6 @@ nav .right {
     display: flex;
     align-items: center;
     justify-content: space-between; }
-    .app-settings .app-setting:last-child {
-      padding-bottom: 0; }
     .app-settings .app-setting span {
       color: var(--body-color); }
     .app-settings .app-setting .app-setting-label {
