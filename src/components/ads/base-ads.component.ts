@@ -2,6 +2,7 @@ import './ads.scss';
 import { BaseHtmlComponent } from '../_core/base-component';
 import IAdsService from '../../services/ads/ads.service';
 import AmazonAdsService from '../../services/ads/amazon-ads.service';
+import { AdsUtils } from './AdsUtils';
 
 export abstract class BaseAdsHtmlComponent extends BaseHtmlComponent {
   protected shownAdContainerId: string;
@@ -18,9 +19,12 @@ export abstract class BaseAdsHtmlComponent extends BaseHtmlComponent {
   preInsertHtml(): void {}
 
   postInsertHtml(): void {
-    this.shownAdContainer = document.getElementById(this.shownAdContainerId);
-    this.hiddenAdContainer = document.getElementById(this.hiddenAdContainerId);
-    setInterval(this.changeAds.bind(this), 30000);
+    return;
+    AdsUtils.onNotBlocked(() => {
+      this.shownAdContainer = document.getElementById(this.shownAdContainerId);
+      this.hiddenAdContainer = document.getElementById(this.hiddenAdContainerId);
+      setInterval(this.changeAds.bind(this), 30000);
+    });
   }
 
   private changeAds() {

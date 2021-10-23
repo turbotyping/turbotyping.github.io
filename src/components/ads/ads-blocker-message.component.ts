@@ -2,6 +2,7 @@ import './ads-blocker-message.scss';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { IAppStateClient } from '../../state/app-state.client.interface';
 import { AppStateClient } from '../../state/app-state.client';
+import { AdsUtils } from './AdsUtils';
 
 export class AddBlockerMessageHtmlComponent extends BaseHtmlComponent {
   private containerId: string;
@@ -32,15 +33,18 @@ export class AddBlockerMessageHtmlComponent extends BaseHtmlComponent {
   }
 
   postInsertHtml(): void {
+    return;
     this.container = document.getElementById(this.containerId);
     if (!this.appStateClient.getAppState().cookiesConsentementAlreadyShown) {
       return;
     }
-    const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-    fetch(new Request(googleAdUrl)).catch((_) => {
+    AdsUtils.onBlocked(() =>
       setTimeout(() => {
         this.container.classList.add('active');
-      }, 3000);
-    });
+        setTimeout(() => {
+          this.container.classList.remove('active');
+        }, 10000);
+      }, 3000)
+    );
   }
 }
