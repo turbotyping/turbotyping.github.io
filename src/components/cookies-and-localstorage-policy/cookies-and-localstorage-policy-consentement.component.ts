@@ -23,7 +23,7 @@ export class CookiesConsentementHtmlComponent extends BaseHtmlComponent {
       <div id="${this.containerId}" class="cookies-consentement-container">
         <div class="cookies-consentement-msg">
           <span class="iconify" data-icon="ant-design:info-circle-outlined"></span>
-          <p>We use cookies to improve your experience on our website and for advertising. To find out more, read our <a href="/cookies-policy.html" target="_blank">Cookies and local storage policy</a></p>
+          <p>We use cookies to improve your experience on our website and for advertising. To find out more, read our <a href="/cookies-and-localstorage-policy.html" target="_blank">Cookies and LocalStorage policy</a></p>
         </div>
         <button id="${this.buttonId}">Accept all</button> 
       </div>

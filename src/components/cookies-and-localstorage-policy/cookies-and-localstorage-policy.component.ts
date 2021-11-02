@@ -9,15 +9,15 @@ export class CookiesPolicyHtmlComponent extends BaseHtmlComponent {
   toHtml() {
     return /* html */ `
     <div class="cookies-and-localstorage-policy-container">
-      <h1>Cookies and local storage policy</h1>
+      <h1>Cookies and Local Storage policy</h1>
 
-      <p>Cookies and local storage are part of the web technology and are not harmful, but it is important that you understand the implications to your privacy.</p>
+      <p>Cookies and Local Storage are part of the web technology and are not harmful, but it is important that you understand the implications to your privacy.</p>
       <p>This policy is part of our privacy policy and explains the following:</p>
       <ul>
         <li>What is a cookie?</li>
         <li>What Cookies we set?</li>
-        <li>What is a local storage?</li>
-        <li>What local storage we set?</li>
+        <li>What is a Local Storage?</li>
+        <li>What Local Storage we set?</li>
       </ul>
 
       <h2>What is a cookie?</h2>
@@ -26,7 +26,7 @@ export class CookiesPolicyHtmlComponent extends BaseHtmlComponent {
       <ul>
         <li>The address (domain) of the website that created the cookie.</li>
         <li>The duration of the cookie (may last just some minutes or for years).</li>
-        <li>What is a local storage?</li>
+        <li>What is a Local Storage?</li>
         <li>The content of the cookie.</li>
       </ul>
       <p>You can configure your web browser at any time to block the use of cookies by certain websites. You may delete previously stored cookies as well.</p>
@@ -38,17 +38,17 @@ export class CookiesPolicyHtmlComponent extends BaseHtmlComponent {
         <li>Behavioural advertising cookies. These cookies help to track your browsing behaviour in order to create a profile to determine relevant advertisements for you.</li>
       </ul>
 
-      <h2>What is local storage?</h2>
-      <p>A local storage is a file created by a website in your device. Cookies are just one type of local storage, but there are others. It is important that you know them so you can block them or delete the data stored by them:</p>
+      <h2>What is Local Storage?</h2>
+      <p>A Local Storage is a file created by a website in your device. Cookies are just one type of Local Storage, but there are others. It is important that you know them so you can block them or delete the data stored by them:</p>
       <ul>
-        <li>Browser local storage. Some websites use the browser's "sessionStorage" and "localStorage" to store data; "sessionStorage" is stored temporarily, but the “localStorage” is persistent. You may erase them by deleting your browser's history.</li>
-        <li>Flash local storage ("Flash Local Shared Objects"). Flash is a browser plug-in used to add Interactive and multimedia content into websites. Flash can store data in your device.</li>
-        <li>Silverlight local storage ("Isolated Objects"). Silverlight is a browser plug-in used to add Interactive and multimedia content into websites. Silverlight can store data in your device.</li>
+        <li>Browser Local Storage. Some websites use the browser's "sessionStorage" and "localStorage" to store data; "sessionStorage" is stored temporarily, but the “localStorage” is persistent. You may erase them by deleting your browser's history.</li>
+        <li>Flash Local Storage ("Flash Local Shared Objects"). Flash is a browser plug-in used to add Interactive and multimedia content into websites. Flash can store data in your device.</li>
+        <li>Silverlight Local Storage ("Isolated Objects"). Silverlight is a browser plug-in used to add Interactive and multimedia content into websites. Silverlight can store data in your device.</li>
       </ul>
 
-      <h2>What local storage we set?</h2>
+      <h2>What Local Storage we set?</h2>
       <p>
-        In order to provide you with a great experience on this site, we save your preferences and your typing speed/errors progress in the local storage
+        In order to provide you with a great experience on this site, we save your preferences and your typing speed/errors progress in the Local Storage
       </p>
 
     </div>

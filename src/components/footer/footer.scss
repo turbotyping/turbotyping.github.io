@@ -18,6 +18,21 @@ footer {
     margin-top: 3rem;
   }
 
+  & .useful-links {
+    margin-top: 3rem;
+
+    & ul {
+      font-size: 1.6rem;
+      list-style-type: square;
+      list-style-position: inside;
+      margin-left: 1.5rem;
+    }
+
+    & p {
+      font-weight: bold;
+    }
+  }
+
   @media screen and (max-width: 426px) {
     --footer-margin-top: 4rem;
     --footer-padding: 2rem 3rem;

@@ -44,12 +44,13 @@ nav .right {
   z-index: 999;
   position: relative;
   display: flex;
-  align-items: stretch;
+  align-items: center;
 
   & > select {
     width: 18rem;
   }
 
+  & > a,
   & > select,
   & > button {
     margin-left: 1rem;

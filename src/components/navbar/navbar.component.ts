@@ -23,6 +23,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
   private changeThemeIcon: ChangeThemeIconHtmlComponent;
   private textToTypeCategoriesSelect: SelectHtmlComponent<TextToTypeCategory>;
   private textToTypeSubCategorySelect: SelectHtmlComponent<TextToTypeSubCategory>;
+  private helpIcon: IconHtmlComponent;
 
   constructor(private appStateClient: IAppStateClient) {
     super();
@@ -41,6 +42,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
       selectedOptionValue: appState.textToTypeSubCategory,
     });
     this.enableSoundsIcon = new EnableSoundsIconHtmlComponent(AppStateClient.getInstance());
+    this.helpIcon = new IconHtmlComponent('icon-park-outline:help', 'How to use this website ?');
   }
 
   preInsertHtml() {
@@ -52,6 +54,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     this.textToTypeCategoriesSelect.preInsertHtml();
     this.textToTypeSubCategorySelect.preInsertHtml();
     this.enableSoundsIcon.preInsertHtml();
+    this.helpIcon.preInsertHtml();
   }
 
   toHtml() {
@@ -72,6 +75,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
           ${this.appSettingsSidePanel.toHtml()}
           ${this.addCustomTextToTypeSidePanel.toHtml()}
           ${this.changeThemeIcon.toHtml()}
+          <a href="/help.html">${this.helpIcon.toHtml()}</a>
         </div>
       </nav>
     `;
@@ -84,6 +88,7 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     this.addCustomTextToTypeSidePanel.postInsertHtml();
     this.textToTypeCategoriesSelect.postInsertHtml();
     this.textToTypeSubCategorySelect.postInsertHtml();
+    this.helpIcon.postInsertHtml();
 
     this.appSettingsIcon.onClick(this.handleAppSettingsIconClickEvent.bind(this));
     this.addCustomTextToTypeIcon.onClick(this.handleAAddCustomTextToTypeIconClickEvent.bind(this));
