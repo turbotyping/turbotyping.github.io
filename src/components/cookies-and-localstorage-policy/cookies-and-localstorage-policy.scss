@@ -1,0 +1,43 @@
+.cookies-and-localstorage-policy-container {
+  width: 60%;
+  margin: 0 auto;
+  padding-top: calc(var(--navbar-height) + 2rem);
+  padding-bottom: 5rem;
+
+  @media screen and (max-width: 1440px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 85%;
+  }
+
+  & h1 {
+    font-size: 4.5rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  & h2 {
+    margin-top: 3rem;
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+  }
+
+  & p {
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+
+  & ul {
+    font-size: 1.5rem;
+    padding-left: 4rem;
+    list-style-type: square;
+    margin-bottom: 1rem;
+  }
+
+  & li {
+    padding-left: 0.3rem;
+    text-align: justify;
+  }
+}

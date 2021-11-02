@@ -4,7 +4,7 @@ import { FooterHtmlComponent } from './components/footer/footer.component';
 import { NavbarHtmlComponent } from './components/navbar/navbar.component';
 import { IHtmlComponent } from './components/_core/component.interface';
 import { AppStateClient } from './state/app-state.client';
-import { CookiesPolicyHtmlComponent } from './components/cookies-policy/cookies-policy.component';
+import { CookiesPolicyHtmlComponent } from './components/cookies-and-localstorage-policy/cookies-and-localstorage-policy.component';
 
 const components: IHtmlComponent[] = [];
 components.push(new NavbarHtmlComponent(AppStateClient.getInstance()));

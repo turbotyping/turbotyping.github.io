@@ -1,0 +1,61 @@
+import './cookies-and-localstorage-policy.scss';
+import { BaseHtmlComponent } from '../_core/base-component';
+
+export class CookiesPolicyHtmlComponent extends BaseHtmlComponent {
+  preInsertHtml(): void {
+    // nothing to do
+  }
+
+  toHtml() {
+    return /* html */ `
+    <div class="cookies-and-localstorage-policy-container">
+      <h1>Cookies and local storage policy</h1>
+
+      <p>Cookies and local storage are part of the web technology and are not harmful, but it is important that you understand the implications to your privacy.</p>
+      <p>This policy is part of our privacy policy and explains the following:</p>
+      <ul>
+        <li>What is a cookie?</li>
+        <li>What Cookies we set?</li>
+        <li>What is a local storage?</li>
+        <li>What local storage we set?</li>
+      </ul>
+
+      <h2>What is a cookie?</h2>
+      <p>Cookies are small temporary files stored in your browsing device (computer, telephone, tablet, etc) when you visit a website. Cookies enable the website to store certain information in your device, for example to store user preferences or to recognize you if you visit the website later.</p>
+      <p>When a cookie is created in your device, the following information is stored:</p>
+      <ul>
+        <li>The address (domain) of the website that created the cookie.</li>
+        <li>The duration of the cookie (may last just some minutes or for years).</li>
+        <li>What is a local storage?</li>
+        <li>The content of the cookie.</li>
+      </ul>
+      <p>You can configure your web browser at any time to block the use of cookies by certain websites. You may delete previously stored cookies as well.</p>
+
+      <h2>What Cookies we set?</h2>
+      <ul>
+        <li>Analytic cookies. These cookies help us and third parties to record where visits are originated and how users interact with the website, in order to create analytics that help us to enhance the website structure and contents.</li>
+        <li>Advertising cookies. These cookies are used to manage the advertisements displayed, their content and frequency.</li>
+        <li>Behavioural advertising cookies. These cookies help to track your browsing behaviour in order to create a profile to determine relevant advertisements for you.</li>
+      </ul>
+
+      <h2>What is local storage?</h2>
+      <p>A local storage is a file created by a website in your device. Cookies are just one type of local storage, but there are others. It is important that you know them so you can block them or delete the data stored by them:</p>
+      <ul>
+        <li>Browser local storage. Some websites use the browser's "sessionStorage" and "localStorage" to store data; "sessionStorage" is stored temporarily, but the “localStorage” is persistent. You may erase them by deleting your browser's history.</li>
+        <li>Flash local storage ("Flash Local Shared Objects"). Flash is a browser plug-in used to add Interactive and multimedia content into websites. Flash can store data in your device.</li>
+        <li>Silverlight local storage ("Isolated Objects"). Silverlight is a browser plug-in used to add Interactive and multimedia content into websites. Silverlight can store data in your device.</li>
+      </ul>
+
+      <h2>What local storage we set?</h2>
+      <p>
+        In order to provide you with a great experience on this site, we save your preferences and your typing speed/errors progress in the local storage
+      </p>
+
+    </div>
+    `;
+  }
+
+  postInsertHtml(): void {
+    // nothing to do
+  }
+}

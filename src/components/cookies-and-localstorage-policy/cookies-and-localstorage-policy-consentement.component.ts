@@ -1,4 +1,4 @@
-import './cookies-consentement.scss';
+import './cookies-and-localstorage-policy-consentement.scss';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { IAppStateClient } from '../../state/app-state.client.interface';
 import { AppStateClient } from '../../state/app-state.client';
@@ -23,7 +23,7 @@ export class CookiesConsentementHtmlComponent extends BaseHtmlComponent {
       <div id="${this.containerId}" class="cookies-consentement-container">
         <div class="cookies-consentement-msg">
           <span class="iconify" data-icon="ant-design:info-circle-outlined"></span>
-          <p>We use cookies to improve your experience on our website and for advertising. <a href="/cookies-policy.html" target="_blank">Read more</a></p>
+          <p>We use cookies to improve your experience on our website and for advertising. To find out more, read our <a href="/cookies-policy.html" target="_blank">Cookies and local storage policy</a></p>
         </div>
         <button id="${this.buttonId}">Accept all</button> 
       </div>
