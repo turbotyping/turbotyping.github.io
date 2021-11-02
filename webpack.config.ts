@@ -5,15 +5,25 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: path.join(__dirname, 'src/index.ts'),
+  entry: {
+    index: path.join(__dirname, 'src/index.ts'),
+    'cookies-policy': path.join(__dirname, 'src/cookies-policy.ts'),
+  },
   output: {
     path: path.join(__dirname, 'docs'),
-    filename: 'bundle.[chunkhash].js',
+    filename: '[name].[chunkhash].js',
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      filename: 'index.html',
       template: 'src/index.html',
+      chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'cookies-policy.html',
+      template: 'src/cookies-policy.html',
+      chunks: ['cookies-policy'],
     }),
     new MiniCssExtractPlugin({
       filename: 'bundle.[chunkhash].css',
