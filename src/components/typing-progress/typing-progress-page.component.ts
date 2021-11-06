@@ -1,5 +1,5 @@
 import './typing-progress.scss';
-import { DELETE_PROGRESS_DATA_EVENT, PROGRESS_DIV_ID } from '../../constants/constant';
+import { DELETE_PROGRESS_DATA_EVENT } from '../../constants/constant';
 import { ErrorProgressTypedKeysHighlighter } from './error-progress-typed-keys-highlighter';
 import { TypingProgressHtmlComponent } from './typing-progress.component';
 import { BaseHtmlComponent } from '../_core/base-component';
@@ -8,7 +8,7 @@ import { IAppStateClient } from '../../state/app-state.client.interface';
 import { AppStateClient } from '../../state/app-state.client';
 import { TYPING_ERROR_GRAPH_BAR_COLOR, TYPING_SPEED_GRAPH_BAR_COLOR } from '../_core/color';
 
-export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
+export class TypingProgressPageHtmlComponent extends BaseHtmlComponent {
   private speedProgress: TypingProgressHtmlComponent;
   private errorProgress: TypingProgressHtmlComponent;
   private deleteProgressDataButton: HTMLElement;
@@ -48,7 +48,7 @@ export class TypingProgressSectionHtmlComponent extends BaseHtmlComponent {
 
   toHtml(): string {
     return /* html */ `
-      <div id="${PROGRESS_DIV_ID}" class="progress-container">
+      <div class="progress-page-container">
         <div id="${this.speedProgressContainerId}" class="progress-graph">${this.speedProgress.toHtml()}</div>
         <div id="${this.errorProgressContainerId}" class="progress-graph error-progress-graph">${this.errorProgress.toHtml()}</div>
         <div class="delete-progress-data-button-container">

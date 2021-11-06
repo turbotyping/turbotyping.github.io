@@ -15,6 +15,8 @@ import { IconHtmlComponent } from '../_core/icon/icon.component';
 
 export class NavbarHtmlComponent extends BaseHtmlComponent {
   private navbar: HTMLElement;
+  private leftArrow: HTMLElement;
+  private leftArrowId: string;
   private appSettingsIcon: IconHtmlComponent;
   private appSettingsSidePanel: AppSettingsSidePanelHtmlComponent;
   private enableSoundsIcon: EnableSoundsIconHtmlComponent;
@@ -23,7 +25,6 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
   private changeThemeIcon: ChangeThemeIconHtmlComponent;
   private textToTypeCategoriesSelect: SelectHtmlComponent<TextToTypeCategory>;
   private textToTypeSubCategorySelect: SelectHtmlComponent<TextToTypeSubCategory>;
-  private helpIcon: IconHtmlComponent;
 
   constructor(private appStateClient: IAppStateClient) {
     super();
@@ -42,10 +43,10 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
       selectedOptionValue: appState.textToTypeSubCategory,
     });
     this.enableSoundsIcon = new EnableSoundsIconHtmlComponent(AppStateClient.getInstance());
-    this.helpIcon = new IconHtmlComponent('icon-park-outline:help', 'How to use this website ?');
   }
 
   preInsertHtml() {
+    this.leftArrowId = this.generateId();
     this.appSettingsIcon.preInsertHtml();
     this.addCustomTextToTypeIcon.preInsertHtml();
     this.appSettingsSidePanel.preInsertHtml();
@@ -54,14 +55,16 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     this.textToTypeCategoriesSelect.preInsertHtml();
     this.textToTypeSubCategorySelect.preInsertHtml();
     this.enableSoundsIcon.preInsertHtml();
-    this.helpIcon.preInsertHtml();
   }
 
   toHtml() {
     return /* html */ `
       <nav>
         <div class='left'>
-          <a href='/'>
+          <a id="${this.leftArrowId}" class="left-arrow" class="hide" href='/'>
+            <span class="iconify" data-icon="line-md:arrow-small-left"></span>
+          </a>
+          <a class="logo" href='/'>
             <img src='/logo.png' alt='logo' />
             <span>Turbo Typing</span>
           </a>
@@ -75,20 +78,20 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
           ${this.appSettingsSidePanel.toHtml()}
           ${this.addCustomTextToTypeSidePanel.toHtml()}
           ${this.changeThemeIcon.toHtml()}
-          <a href="/help.html">${this.helpIcon.toHtml()}</a>
         </div>
       </nav>
     `;
   }
 
   postInsertHtml() {
+    this.leftArrow = document.getElementById(this.leftArrowId);
+    this.showLeftArrowOnChildPages();
     this.appSettingsIcon.postInsertHtml();
     this.addCustomTextToTypeIcon.postInsertHtml();
     this.appSettingsSidePanel.postInsertHtml();
     this.addCustomTextToTypeSidePanel.postInsertHtml();
     this.textToTypeCategoriesSelect.postInsertHtml();
     this.textToTypeSubCategorySelect.postInsertHtml();
-    this.helpIcon.postInsertHtml();
 
     this.appSettingsIcon.onClick(this.handleAppSettingsIconClickEvent.bind(this));
     this.addCustomTextToTypeIcon.onClick(this.handleAAddCustomTextToTypeIconClickEvent.bind(this));
@@ -100,6 +103,14 @@ export class NavbarHtmlComponent extends BaseHtmlComponent {
     this.enableSoundsIcon.postInsertHtml();
     this.addCustomEventListener(APP_SETTINGS_CHANGE_EVENT, this.update.bind(this));
     this.update();
+  }
+
+  private showLeftArrowOnChildPages() {
+    if (window.location.pathname !== '/') {
+      this.leftArrow.classList.remove('hide');
+    } else {
+      this.leftArrow.classList.add('hide');
+    }
   }
 
   private handleAppSettingsIconClickEvent() {

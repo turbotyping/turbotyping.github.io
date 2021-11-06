@@ -33,10 +33,25 @@ nav .left {
     transition: var(--transition);
     transition-property: color;
   }
-  &:hover span {
+  & .logo:hover span {
     color: var(--navbar-logo-text-color-on-hover);
     transition: var(--transition);
     transition-property: color;
+  }
+
+  & .left-arrow {
+    font-size: 3rem;
+    margin-right: 2.5rem;
+    transition: var(--transition);
+    transition-property: color, transform;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+
+    &:hover .iconify {
+      color: var(--primary-color);
+    }
   }
 }
 

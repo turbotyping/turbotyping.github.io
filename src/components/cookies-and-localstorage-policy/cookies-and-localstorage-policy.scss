@@ -1,7 +1,7 @@
 .cookies-and-localstorage-policy-container {
-  width: 60%;
+  width: var(--page-width);
   margin: 0 auto;
-  padding-top: calc(var(--navbar-height) + 2rem);
+  padding-top: var(--page-padding-top);
   padding-bottom: 5rem;
 
   @media screen and (max-width: 1440px) {
@@ -14,7 +14,6 @@
 
   & h1 {
     font-size: 4.5rem;
-    margin-top: 3rem;
     margin-bottom: 3rem;
   }
 

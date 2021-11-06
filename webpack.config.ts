@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     index: path.join(__dirname, 'src/index.ts'),
-    help: path.join(__dirname, 'src/help.ts'),
+    progress: path.join(__dirname, 'src/progress.ts'),
     'cookies-policy': path.join(__dirname, 'src/cookies-policy.ts'),
   },
   output: {
@@ -23,10 +23,10 @@ module.exports = {
       chunks: ['index'],
     }),
     new HtmlWebpackPlugin({
-      filename: 'help.html',
+      filename: 'progress.html',
       template: 'src/template.html',
-      title: 'Turbo Typing | Help',
-      chunks: ['help'],
+      title: 'Turbo Typing | Typing Progress',
+      chunks: ['progress'],
     }),
     new HtmlWebpackPlugin({
       filename: 'cookies-and-localstorage-policy.html',

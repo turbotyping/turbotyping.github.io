@@ -1,0 +1,30 @@
+.how-we-use-this-application-container {
+  & h1 {
+    font-size: 5rem;
+    font-weight: 200;
+    margin-bottom: 2rem;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 8rem;
+      height: 0.45rem;
+      background-color: var(--secondary-color);
+      bottom: 0.2rem;
+      left: 0;
+      border-radius: 100rem;
+    }
+  }
+
+  & p {
+    text-align: justify;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    margin-bottom: 1.3rem;
+  }
+
+  & a {
+    font-weight: bold;
+  }
+}

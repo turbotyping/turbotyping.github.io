@@ -83,7 +83,7 @@ export class TypingProgressGraphHtmlComponent extends BaseHtmlComponent {
       options: {
         maintainAspectRatio: false,
         legend: {
-          display: true,
+          display: false,
         },
         elements: {
           point: {

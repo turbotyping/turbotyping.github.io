@@ -48,7 +48,7 @@ export class CookiesPolicyHtmlComponent extends BaseHtmlComponent {
 
       <h2>What Local Storage we set?</h2>
       <p>
-        In order to provide you with a great experience on this site, we save your preferences and your typing speed/errors progress in the Local Storage
+        In order to provide you with a great experience on this site, we save your preferences and your typing speed/errors progress in your browser local storage
       </p>
 
     </div>

@@ -30,6 +30,8 @@ body {
   --border-radius: 0.3rem;
   --navbar-height: 6.5rem;
   --font-family: 'Poppins', sans-serif;
+  --page-padding-top: 11rem;
+  --page-width: 68%;
 
   @media screen and (max-width: 426px) {
     --font-size: 45%;

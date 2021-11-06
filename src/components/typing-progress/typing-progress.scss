@@ -1,8 +1,10 @@
-.progress-container {
-  padding-top: calc(4rem + var(--navbar-height));
+.progress-page-container {
+  padding-top: var(--page-padding-top);
   position: relative;
+  width: var(--page-width);
   max-width: 100rem;
   margin: 0 auto;
+  margin-bottom: 8rem;
 }
 .progress-graph {
   &:first-child {
@@ -36,13 +38,13 @@
   & .progress-header {
     display: flex;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3.5rem;
   }
 
   & .progress-name {
-    font-size: 2rem;
+    font-size: 3.4rem;
+    font-weight: 400;
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
   }
 
   & .progress-ctrl {
@@ -52,24 +54,8 @@
   }
 
   & .progress-by-key {
-    margin-left: 1rem;
-  }
-
-  & .progress-slider {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    float: right;
-
-    & .label {
-      margin-right: 1.5rem;
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-
-    & .progress-smoothness-slider {
-      flex: 1;
-    }
+    margin-left: 2rem;
+    margin-top: 0.7rem;
   }
 }
 
@@ -78,7 +64,7 @@
 }
 
 .typed-keys-progress {
-  margin-bottom: 2.5rem;
+  margin-bottom: 5rem;
 }
 
 .delete-progress-data-button-container {
