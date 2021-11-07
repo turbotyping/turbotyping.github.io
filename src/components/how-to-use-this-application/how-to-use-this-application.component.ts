@@ -28,7 +28,7 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
           will help you do in this website.
         </p>
 
-        <h1>What are the benefits of our website?</h1>
+        <h1>What you can find in our our website?</h1>
         <p>
           Many apps have been developed to help users improve their typing skills. The difference between 
           <b>Turbo Typing</b> and the other applications is that you can improve your typing skills while 
