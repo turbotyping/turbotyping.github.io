@@ -2243,18 +2243,17 @@ main {
   font-size: 5rem;
   font-weight: 200;
   margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   position: relative; }
   .how-we-use-this-application-container h1::before {
     content: '';
-    width: 1rem;
-    height: 6rem;
+    position: absolute;
+    bottom: 0.4rem;
+    left: 0;
+    width: 7rem;
+    height: 0.45rem;
     background-color: var(--secondary-color);
-    display: inline-block;
-    margin-right: 1rem;
-    margin-bottom: -1.4rem;
-    border-radius: 100rem;
-    display: none; }
+    border-radius: 100rem; }
 
 .how-we-use-this-application-container p {
   text-align: justify;

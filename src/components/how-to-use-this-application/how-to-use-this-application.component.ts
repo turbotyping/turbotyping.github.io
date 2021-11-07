@@ -38,13 +38,22 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
           you have progressed. Each typing test score will be saved and you can see graphs of your advancement.
         </p>
           
-        <h1>How to use keyboard?</h1>
+        <h1>How to use your keyboard?</h1>
         <p>
           You need to put your fingers on the <b>Home Row</b>, the one containing the <b>F</b> and <b>J</b> keys. 
-          There are small bumps on those keys and you should put your index fingers on the bumps. 
+          There are small bumps on these keys and you should put your index fingers on the bumps. 
           Each finger is responsible for its own set of keys, as shown in the image bellow:
         </p>
         <img id="${this.keyboardId}" style="margin: 2rem auto 0; display: flex; max-width: 100%" />
+
+        <h1>How to improve your typing speed?</h1>
+        <p>
+          Typing speed generally improves with practice. While practicing, it is important to ensure that there 
+          are no weak keys. Typing speed is typically determined by how slow these weak keys are typed rather 
+          than how fast the remaining keys are typed. That's why it is advisable to start by our <b>Training lessons</b>
+          to memorize keys position. By default, the <b>Qwerty keyboard</b> is selected and if you are using 
+          <b>Azerty keyboard</b>, you can change your preferences to obtain the adequate lessons.
+        </p>
 
       </div>
     `;
