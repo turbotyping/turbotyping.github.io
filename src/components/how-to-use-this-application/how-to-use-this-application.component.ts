@@ -56,7 +56,7 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
           <b>Azerty keyboard</b>, you can change your preferences to obtain the adequate lessons.
         </p>
 
-        <h1>What Is the average typing speed?</h1>
+        <h1>What is the average typing speed?</h1>
         <p>
           From wikipedia, the majority of people types between 35 and 40 words per minute (WPM) which is equivalent to 190 
           and 200 characters per minute (CPM). However, professional typists type a lot faster exceeding 75 WPM.
