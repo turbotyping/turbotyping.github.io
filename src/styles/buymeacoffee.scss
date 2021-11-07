@@ -1,0 +1,9 @@
+#bmc-wbtn {
+  width: 5.4rem !important;
+  height: 5.4rem !important;
+
+  & > img {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+}

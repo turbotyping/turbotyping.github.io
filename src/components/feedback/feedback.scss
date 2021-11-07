@@ -1,6 +1,6 @@
 .feedback-button {
   position: fixed;
-  bottom: 10rem;
+  bottom: 8.5rem;
   right: 1rem;
   border: 2px solid transparent;
   background-color: var(--feedback-icon-container-background-color);
@@ -16,7 +16,7 @@
   }
 
   & .iconify {
-    font-size: 6rem;
+    font-size: 5rem;
     padding: 1rem;
     border-radius: 100rem;
     border: 3px solid var(--feedback-icon-container-background-color);
