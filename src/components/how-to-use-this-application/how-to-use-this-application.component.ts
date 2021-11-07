@@ -24,13 +24,24 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
           Web application that will help you learn <b>Touch Typing</b> (also called <b>Blind Typing</b>)
           which is a style that let you type without using your eyesight to find the keys on the keyboard. 
           Every time you look at the keyboard or make a mistake, you slow down you typing speed. 
-          So it would be nice if you could type fast and accurate and this what we will help you do in this website.
+          So to be more productive, it would be nice if you could type fast and accurate and this what we 
+          will help you do in this website.
+        </p>
+
+        <h1>What are our benefits?</h1>
+        <p>
+          Many apps have been developed to help users improve their typing skills. The difference between 
+          <b>Turbo Typing</b> and the other applications is that you can improve your typing skills while 
+          writing beautiful <b>Quotes</b> and <b>Poems</b> and if you are a Software Engineer like me, you 
+          can write <b>Java</b> or <b>Python</b> source code. 
+          Another important feature of the site is the ability to view your typing speed and accuracy and how 
+          you have progressed. Each typing test score will be saved and you can see graphs of your advancement.
         </p>
           
         <h1>How to use keyboard?</h1>
         <p>
           You need to put your fingers on the <b>Home Row</b>, the one containing the <b>F</b> and <b>J</b> keys. 
-          There are small bumps on those keys and you should put your index fingers on those bumps. 
+          There are small bumps on those keys and you should put your index fingers on the bumps. 
           Each finger is responsible for its own set of keys, as shown in the image bellow:
         </p>
         <img id="${this.keyboardId}" style="margin: 2rem auto 0; display: flex; max-width: 100%" />
