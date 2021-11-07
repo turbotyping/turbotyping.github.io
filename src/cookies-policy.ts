@@ -5,10 +5,12 @@ import { NavbarHtmlComponent } from './components/navbar/navbar.component';
 import { IHtmlComponent } from './components/_core/component.interface';
 import { AppStateClient } from './state/app-state.client';
 import { CookiesPolicyHtmlComponent } from './components/cookies-and-localstorage-policy/cookies-and-localstorage-policy.component';
+import { FeedbackHtmlComponent } from './components/feedback/feedback.component';
 
 const components: IHtmlComponent[] = [];
 components.push(new NavbarHtmlComponent(AppStateClient.getInstance()));
 components.push(new CookiesPolicyHtmlComponent());
+components.push(new FeedbackHtmlComponent());
 components.push(new FooterHtmlComponent());
 
 components.forEach((component) => component.preInsertHtml());

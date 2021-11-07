@@ -100,6 +100,7 @@ body.light {
   --arrow-background-color: var(--background-color-01);
   --text-to-type-ctrl-label-color: var(--text-color-04);
   --feedback-icon-container-background-color: var(--background-color-04);
+  --buy-me-a-coffee-background-color: var(--background-color-04);
   --feedback-icon-background-color-on-hover: var(--background-color-01);
   --side-panel-background-background-color: #eeeeee44;
   --side-panel-background-color: var(--background-color-01);
@@ -236,6 +237,7 @@ body.dark {
   --arrow-background-color: var(--background-color-02);
   --text-to-type-ctrl-label-color: var(--text-color-04);
   --feedback-icon-container-background-color: var(--background-color-04);
+  --buy-me-a-coffee-background-color: var(--background-color-04);
   --feedback-icon-background-color-on-hover: var(--background-color-01);
   --side-panel-background-background-color: #3b3b3b44;
   --side-panel-background-color: var(--background-color-01);
@@ -1219,7 +1221,8 @@ p {
 
 #bmc-wbtn {
   width: 5.4rem !important;
-  height: 5.4rem !important; }
+  height: 5.4rem !important;
+  background-color: var(--buy-me-a-coffee-background-color) !important; }
   #bmc-wbtn > img {
     width: 3rem !important;
     height: 3rem !important; }
