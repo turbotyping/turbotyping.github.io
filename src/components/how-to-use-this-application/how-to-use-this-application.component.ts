@@ -35,7 +35,8 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
           writing beautiful <b>Quotes</b> and <b>Poems</b> and if you are a Software Engineer like me, you 
           can write <b>Java</b> or <b>Python</b> source code. 
           Another important feature of the site is the ability to view your typing speed and accuracy and how 
-          you have progressed. Each typing test score will be saved and you can see graphs of your advancement.
+          you have progressed. Each typing test score will be saved and you can see 
+          <a href="/progress.html" target="_blank">graphs of your advancement</a>.
         </p>
           
         <h1>How to use your keyboard?</h1>
@@ -53,6 +54,12 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
           than how fast the remaining keys are typed. That's why it is advisable to start by our <b>Training lessons</b>
           to memorize keys position. By default, the <b>Qwerty keyboard</b> is selected and if you are using 
           <b>Azerty keyboard</b>, you can change your preferences to obtain the adequate lessons.
+        </p>
+
+        <h1>What Is the average typing speed?</h1>
+        <p>
+          From wikipedia, the majority of people types between 35 and 40 words per minute (WPM) which is equivalent to 190 
+          and 200 characters per minute (CPM). However, professional typists type a lot faster exceeding 75 WPM.
         </p>
 
       </div>

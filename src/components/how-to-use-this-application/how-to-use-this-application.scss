@@ -1,15 +1,15 @@
 .how-we-use-this-application-container {
   & h1 {
-    font-size: 5rem;
-    font-weight: 200;
-    margin-top: 2rem;
+    font-size: 3.5rem;
+    font-weight: 400;
+    margin-top: 2.8rem;
     margin-bottom: 2rem;
     position: relative;
 
     &::before {
       content: '';
       position: absolute;
-      bottom: 0.4rem;
+      bottom: -0.2rem;
       left: 0;
       width: 7rem;
       height: 0.45rem;
