@@ -35,8 +35,8 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
           writing beautiful <b>Quotes</b> and <b>Poems</b> and if you are a Software Engineer like me, you 
           can write <b>Java</b> or <b>Python</b> source code. 
           Another important feature of the site is the ability to view your typing speed and accuracy and how 
-          you have progressed. Each typing test score will be saved and you can see 
-          <a href="/progress.html" target="_blank">graphs of your advancement</a>.
+          you have improved. Each typing test score will be saved and you can see 
+          <a href="/progress.html" target="_blank">graphs of your progress</a>.
         </p>
           
         <h1>How to use your keyboard?</h1>
