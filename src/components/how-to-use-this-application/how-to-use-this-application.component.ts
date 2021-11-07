@@ -51,17 +51,13 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
 
         <h1>How to improve your typing speed?</h1>
         <p>
+          The majority of people types between 35 and 40 words per minute (WPM) which is equivalent to 190 
+          and 200 characters per minute (CPM). However, professional typists type a lot faster exceeding 75 WPM.
           Typing speed generally improves with practice. While practicing, it is important to ensure that there 
           are no weak keys. Typing speed is typically determined by how slow these weak keys are typed rather 
           than how fast the remaining keys are typed. That's why it is advisable to start by our <b>Training lessons</b>
           to memorize keys position. By default, the <b>Qwerty keyboard</b> is selected and if you are using 
           <b>Azerty keyboard</b>, you can change your preferences to obtain the adequate lessons.
-        </p>
-
-        <h1>What is the average typing speed?</h1>
-        <p>
-          From wikipedia, the majority of people types between 35 and 40 words per minute (WPM) which is equivalent to 190 
-          and 200 characters per minute (CPM). However, professional typists type a lot faster exceeding 75 WPM.
         </p>
 
       </div>
