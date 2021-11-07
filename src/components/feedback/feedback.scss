@@ -1,13 +1,14 @@
 .feedback-button {
   position: fixed;
-  bottom: 2rem;
+  bottom: 10rem;
   right: 1rem;
   border: 2px solid transparent;
   background-color: var(--feedback-icon-container-background-color);
   border-radius: 100rem;
+  box-shadow: #00000066 0px 4px 8px;
   display: flex;
   align-items: center;
-  box-shadow: var(--box-shadow-02);
+  justify-content: center;
 
   & .feedback-label,
   & .iconify {
@@ -15,7 +16,7 @@
   }
 
   & .iconify {
-    font-size: 5rem;
+    font-size: 6rem;
     padding: 1rem;
     border-radius: 100rem;
     border: 3px solid var(--feedback-icon-container-background-color);
@@ -31,6 +32,7 @@
   }
 
   &:hover {
+    width: auto;
     & .feedback-label {
       width: 23rem;
       padding-left: 2rem;

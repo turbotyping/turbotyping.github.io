@@ -9,11 +9,13 @@ import { ESCAPE_KEY_CODE } from './constants/constant';
 import { MainWithAdsHtmlComponent } from './components/main/main-with-ads.component';
 import { CookiesConsentementHtmlComponent } from './components/cookies-and-localstorage-policy/cookies-and-localstorage-policy-consentement.component';
 import { AddBlockerMessageHtmlComponent } from './components/ads/ads-blocker-message.component';
+import { FeedbackHtmlComponent } from './components/feedback/feedback.component';
 
 const components: IHtmlComponent[] = [];
 components.push(new WelcomeMessageDialogHtmlComponent(AppStateClient.getInstance()));
 components.push(new NavbarHtmlComponent(AppStateClient.getInstance()));
 components.push(new MainWithAdsHtmlComponent());
+components.push(new FeedbackHtmlComponent());
 components.push(new FooterHtmlComponent());
 components.push(new CookiesConsentementHtmlComponent());
 components.push(new AddBlockerMessageHtmlComponent());
