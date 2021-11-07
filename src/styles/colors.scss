@@ -133,6 +133,8 @@ body.light {
   --cookies-consentement-text-color: #333;
   --cookies-consentement-button-background-color: #e0dede;
   --cookies-consentement-button-color: #000;
+  --how-to-use-this-application-header-color: #303030;
+  --how-to-use-this-application-body-color: #5c5c5c;
 }
 
 body.dark {
@@ -269,4 +271,6 @@ body.dark {
   --cookies-consentement-text-color: #eee;
   --cookies-consentement-button-color: #eee;
   --cookies-consentement-button-background-color: var(--background-color-04);
+  --how-to-use-this-application-header-color: #eaeaea;
+  --how-to-use-this-application-body-color: #b7b7b7;
 }

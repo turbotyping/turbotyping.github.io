@@ -128,7 +128,9 @@ body.light {
   --cookies-consentement-container-background-color: #f2f2f2;
   --cookies-consentement-text-color: #333;
   --cookies-consentement-button-background-color: #e0dede;
-  --cookies-consentement-button-color: #000; }
+  --cookies-consentement-button-color: #000;
+  --how-to-use-this-application-header-color: #303030;
+  --how-to-use-this-application-body-color: #5c5c5c; }
 
 body.dark {
   --primary-color: #078eed;
@@ -262,7 +264,9 @@ body.dark {
   --cookies-consentement-container-background-color: var(--background-color-02);
   --cookies-consentement-text-color: #eee;
   --cookies-consentement-button-color: #eee;
-  --cookies-consentement-button-background-color: var(--background-color-04); }
+  --cookies-consentement-button-background-color: var(--background-color-04);
+  --how-to-use-this-application-header-color: #eaeaea;
+  --how-to-use-this-application-body-color: #b7b7b7; }
 
 *,
 *::after,

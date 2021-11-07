@@ -18,7 +18,7 @@ export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
 
   toHtml() {
     return /* html */ `
-      <div class="how-we-use-this-application-container">
+      <div class="how-to-use-this-application-container">
         <h1>Who we are?</h1>
         <p>
           Web application that will help you learn <b>Touch Typing</b> (also called <b>Blind Typing</b>)

@@ -1,10 +1,11 @@
-.how-we-use-this-application-container {
+.how-to-use-this-application-container {
   & h1 {
     font-size: 3.5rem;
     font-weight: 400;
     margin-top: 2.8rem;
     margin-bottom: 2rem;
     position: relative;
+    color: var(--how-to-use-this-application-header-color);
 
     &::before {
       content: '';
@@ -23,7 +24,7 @@
     font-size: 1.5rem;
     line-height: 1.7;
     margin-bottom: 1.3rem;
-    color: var(--text-color-04);
+    color: var(--how-to-use-this-application-body-color);
   }
 
   & a {
