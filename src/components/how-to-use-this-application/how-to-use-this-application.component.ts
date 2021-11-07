@@ -1,10 +1,10 @@
-import './how-we-use-this-application.scss';
+import './how-to-use-this-application.scss';
 import { BaseHtmlComponent } from '../_core/base-component';
 import { CHANGE_THEME_EVENT, LIGHT_THEME_VALUE } from '../../constants/constant';
 import { IAppStateClient } from '../../state/app-state.client.interface';
 import { AppStateClient } from '../../state/app-state.client';
 
-export class HowWeUseThisApplicationHtmlComponent extends BaseHtmlComponent {
+export class HowToUseThisApplicationHtmlComponent extends BaseHtmlComponent {
   private keyboardId: string;
   private keyboard: HTMLImageElement;
 
@@ -29,11 +29,11 @@ export class HowWeUseThisApplicationHtmlComponent extends BaseHtmlComponent {
           
         <h1>How to use keyboard?</h1>
         <p>
-          You need to put your fingers on the <b>home row</b>, the one containing the <b>Caps Lock</b> keys. There are small bumps on the 
-          <b>F</b> and <b>J</b> keys and you should put your index fingers on the bumps. Each finger is responsible for its own 
-          set of keys, as explained in the following illustration:
+          You need to put your fingers on the <b>Home Row</b>, the one containing the <b>F</b> and <b>J</b> keys. 
+          There are small bumps on those keys and you should put your index fingers on those bumps. 
+          Each finger is responsible for its own set of keys, as shown in the image bellow:
         </p>
-        <img id="${this.keyboardId}" style="margin: 2rem auto 0; display: flex" />
+        <img id="${this.keyboardId}" style="margin: 2rem auto 0; display: flex; max-width: 100%" />
 
       </div>
     `;
