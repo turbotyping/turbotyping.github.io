@@ -1813,6 +1813,9 @@ main {
   flex: 1;
   min-width: 0;
   margin: 0 5rem; }
+  @media screen and (min-width: 1024px) {
+    main {
+      margin: 0 3rem; } }
 
 .typed-text-stats-container {
   margin: 3rem auto 0;

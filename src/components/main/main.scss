@@ -42,4 +42,8 @@ main {
   flex: 1;
   min-width: 0;
   margin: 0 5rem;
+
+  @media screen and (min-width: 1024px) {
+    margin: 0 3rem;
+  }
 }
