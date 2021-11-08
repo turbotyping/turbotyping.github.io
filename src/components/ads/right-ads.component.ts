@@ -3,7 +3,6 @@ import { BaseAdsHtmlComponent } from './base-ads.component';
 
 export class RightAdsHtmlComponent extends BaseAdsHtmlComponent {
   getAd(): string {
-    return '';
     return this.adsService.getRightAd();
   }
   toHtml(): string {
