@@ -19,6 +19,7 @@ export abstract class BaseAdsHtmlComponent extends BaseHtmlComponent {
   preInsertHtml(): void {}
 
   postInsertHtml(): void {
+    return;
     AdsUtils.onNotBlocked(() => {
       this.shownAdContainer = document.getElementById(this.shownAdContainerId);
       this.hiddenAdContainer = document.getElementById(this.hiddenAdContainerId);

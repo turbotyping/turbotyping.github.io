@@ -33,6 +33,7 @@ export class AddBlockerMessageHtmlComponent extends BaseHtmlComponent {
   }
 
   postInsertHtml(): void {
+    return;
     this.container = document.getElementById(this.containerId);
     if (!this.appStateClient.getAppState().cookiesConsentementAlreadyShown) {
       return;
