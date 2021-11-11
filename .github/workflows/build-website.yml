@@ -31,6 +31,9 @@ jobs:
       - name: Push
         run: |
 
+          echo -e "\\033[1;36mgit status\\033[0;02m"
+          git status
+
           echo -e "\\033[1;36mgit config user.name GitHub Actions Bot\\033[0;02m"
           git config user.name "GitHub Actions Bot"
 
