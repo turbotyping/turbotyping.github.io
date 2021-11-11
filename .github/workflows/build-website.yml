@@ -37,11 +37,14 @@ jobs:
           echo -e "\\033[1;36mgit config user.email <>\\033[0;02m"
           git config user.email "<>"
 
+          echo -e "\\033[1;36mgit remote set-url origin https://*****@github.com/turbotyping/turbotyping.github.io.git\\033[0;02m"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_ACTIONS }}@github.com/turbotyping/turbotyping.github.io.git
+
           echo -e "\\033[1;36mgit add .\\033[0;02m"
           git add .
 
           echo -e "\\033[1;36mgit commit\\033[0;02m"
           git commit -am "new github-page version"
 
-          echo -e "\\033[1;36mgit push\\033[0;02m"
+          echo -e "\\033[1;36mgit push origin master\\033[0;02m"
           git push origin master
