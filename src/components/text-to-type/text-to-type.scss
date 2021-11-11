@@ -1,7 +1,10 @@
 @import './atom-one-light.min.css';
-.text-to-type-page {
+
+.text-to-type-tool-container {
   position: relative;
   height: calc(100vh - var(--navbar-height));
+  width: 100%;
+  overflow-y: hidden;
   max-width: 105rem;
   margin: 0 auto;
   display: flex;
@@ -52,11 +55,6 @@
 }
 
 .text-to-type-container {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  overflow-y: auto;
-
   &::-webkit-scrollbar {
     background-color: var(--text-to-type-background-color);
   }
@@ -84,10 +82,10 @@
         background-color: var(--body-background-color);
       }
     }
-  }
 
-  & span {
-    font-family: 'Roboto Mono';
+    & span {
+      font-family: 'Roboto Mono';
+    }
   }
 
   & span.whitespace {

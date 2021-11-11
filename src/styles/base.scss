@@ -32,6 +32,7 @@ body {
   --font-family: 'Poppins', sans-serif;
   --page-padding-top: 11rem;
   --page-width: 68%;
+  --main-margin: 0 3rem;
 
   @media screen and (max-width: 426px) {
     --font-size: 45%;
@@ -106,7 +107,8 @@ p {
   color: var(--secondary-color);
 }
 
-.hide {
+.hide,
+.hidden {
   display: none !important;
 }
 

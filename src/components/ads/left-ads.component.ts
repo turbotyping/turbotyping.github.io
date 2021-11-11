@@ -3,7 +3,6 @@ import { BaseAdsHtmlComponent } from './base-ads.component';
 
 export class LeftAdsHtmlComponent extends BaseAdsHtmlComponent {
   getAd(): string {
-    return '';
     return this.adsService.getLeftAd();
   }
   toHtml(): string {
@@ -11,7 +10,7 @@ export class LeftAdsHtmlComponent extends BaseAdsHtmlComponent {
       <div id="${this.shownAdContainerId}" class="vertical-advertise-container">
         ${this.getAd()}
       </div>
-      <div id="${this.hiddenAdContainerId}" class="vertical-advertise-container hidden">
+      <div id="${this.hiddenAdContainerId}" class="vertical-advertise-container hidden-advertise">
       </div>
     `;
   }

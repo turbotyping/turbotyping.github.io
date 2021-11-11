@@ -18,7 +18,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/template.html',
+      template: 'src/index.html',
       title: 'Turbo Typing',
       chunks: ['index'],
     }),
