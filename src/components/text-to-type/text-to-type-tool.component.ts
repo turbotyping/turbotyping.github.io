@@ -13,7 +13,7 @@ import { TextToTypeSubCategory } from '../../state/text-to-type-sub-category.enu
 
 const CONTAINER_ID = 'TextToTypePageHtmlComponentId';
 
-export class TextToTypeSectionHtmlComponent extends BaseHtmlComponent {
+export class TextToTypeToolHtmlComponent extends BaseHtmlComponent {
   private components: IHtmlComponent[];
   private container: HTMLElement;
 
@@ -28,7 +28,7 @@ export class TextToTypeSectionHtmlComponent extends BaseHtmlComponent {
 
   toHtml(): string {
     return /* html */ `
-      <div id="${CONTAINER_ID}" class="text-to-type-page">${this.getInnerHtml()}</div>
+      <div id="${CONTAINER_ID}" class="text-to-type-tool-container">${this.getInnerHtml()}</div>
     `;
   }
 
@@ -39,10 +39,12 @@ export class TextToTypeSectionHtmlComponent extends BaseHtmlComponent {
   }
 
   update() {
+    this.components.forEach((c) => c.preDestroy());
     this.components = this.getComponents();
     this.components.forEach((c) => c.preInsertHtml());
     this.container.innerHTML = this.getInnerHtml();
     this.components.forEach((c) => c.postInsertHtml());
+    (document.activeElement as HTMLElement).blur();
   }
 
   private getComponents(): IHtmlComponent[] {

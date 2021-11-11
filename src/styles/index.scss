@@ -1,4 +1,21 @@
-.how-to-use-this-application-container {
+.main-with-ads-container {
+  padding-top: var(--navbar-height);
+  display: flex;
+  width: calc(100vw - 2rem); // TODO: why we need to remove 2rem!!
+}
+
+.ads-container {
+  display: flex;
+  width: 25rem;
+}
+
+.main-container {
+  width: 100%;
+}
+
+.description-container {
+  margin: var(--main-margin);
+  margin-bottom: 8rem;
   & h1 {
     font-size: 3.5rem;
     font-weight: 400;

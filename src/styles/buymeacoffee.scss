@@ -2,7 +2,7 @@
   width: 5.4rem !important;
   height: 5.4rem !important;
   background-color: var(--buy-me-a-coffee-background-color) !important;
-
+  z-index: 100000;
   & > img {
     width: 3rem !important;
     height: 3rem !important;

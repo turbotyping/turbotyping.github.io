@@ -8,7 +8,11 @@ export abstract class BaseHtmlComponent implements IHtmlComponent {
 
   insertHtml(parentElement: HTMLElement, insertPosition: InsertPosition): void {
     this._containerId = this.generateId();
-    parentElement.insertAdjacentHTML(insertPosition, `<div id="${this._containerId}">${this.toHtml()}</div>`);
+    if (this.addContainerDiv()) {
+      parentElement.insertAdjacentHTML(insertPosition, `<div id="${this._containerId}"}">${this.toHtml()}</div>`);
+    } else {
+      parentElement.insertAdjacentHTML(insertPosition, this.toHtml());
+    }
   }
 
   update(): void {
@@ -51,5 +55,9 @@ export abstract class BaseHtmlComponent implements IHtmlComponent {
 
   getComponentName(): string {
     return this.constructor['name'];
+  }
+
+  addContainerDiv(): boolean {
+    return true;
   }
 }
