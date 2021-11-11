@@ -44,4 +44,4 @@ jobs:
           git commit -am "new github-page version"
 
           echo -e "\\033[1;36mgit push\\033[0;02m"
-          git push
+          git push origin master
