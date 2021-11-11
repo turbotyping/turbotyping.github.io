@@ -1,0 +1,47 @@
+name: Build Website
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Check Node & NPM versions
+        run: |
+          echo -e "\\033[1;36mnode --version\\033[0;02m"
+          node --version
+
+          echo -e "\\033[1;36mnpm --version\\033[0;02m"
+          npm --version
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Push
+        run: |
+
+          echo -e "\\033[1;36mgit config user.name GitHub Actions Bot\\033[0;02m"
+          git config user.name "GitHub Actions Bot"
+
+          echo -e "\\033[1;36mgit config user.email <>\\033[0;02m"
+          git config user.email "<>"
+
+          echo -e "\\033[1;36mgit add .\\033[0;02m"
+          git add .
+
+          echo -e "\\033[1;36mgit commit\\033[0;02m"
+          git commit -am "new github-page version"
+
+          echo -e "\\033[1;36mgit push\\033[0;02m"
+          git push
