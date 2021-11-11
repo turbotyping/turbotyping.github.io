@@ -9,7 +9,7 @@ export class FooterHtmlComponent extends BaseHtmlComponent {
   toHtml() {
     return /* html */ `
       <footer>
-        <p>© 2020 turbotyping.github.io</p>
+        <p>© 2020 turbotyping.github.io  </p>
       </footer>
     `;
   }
