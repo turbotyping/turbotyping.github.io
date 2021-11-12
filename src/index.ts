@@ -12,7 +12,8 @@ import { FeedbackHtmlComponent } from './components/feedback/feedback.component'
 import { TextToTypeToolHtmlComponent } from './components/text-to-type/text-to-type-tool.component';
 import { LeftAdsHtmlComponent } from './components/ads/left-ads.component';
 import { RightAdsHtmlComponent } from './components/ads/right-ads.component';
-import { KeyboardUtils } from './utils/keyboard-utils';
+import { KeyboardEventsUtils } from './utils/keyboard-events-utils';
+import { WebsiteDescriptionUtils } from './utils/website-description-utils';
 
 const topComponents: IHtmlComponent[] = [];
 topComponents.push(new WelcomeMessageDialogHtmlComponent(AppStateClient.getInstance()));
@@ -45,5 +46,6 @@ bottomComponents.forEach((component) => component.preInsertHtml());
 bottomComponents.forEach((component) => component.insertHtml(document.getElementById('bottom'), 'beforeend'));
 bottomComponents.forEach((component) => component.postInsertHtml());
 
-KeyboardUtils.blurActiveElementOnEscapeKeydownEvent();
+KeyboardEventsUtils.blurActiveElementOnEscapeKeydownEvent();
+WebsiteDescriptionUtils.showHomeKeysPositionImage();
 document.getElementById('description').classList.remove('hidden');

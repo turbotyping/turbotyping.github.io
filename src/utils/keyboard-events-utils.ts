@@ -1,6 +1,6 @@
 import { ESCAPE_KEY_CODE } from '../constants/constant';
 
-export class KeyboardUtils {
+export class KeyboardEventsUtils {
   static blurActiveElementOnEscapeKeydownEvent() {
     document.addEventListener('keydown', (event) => {
       if (event.keyCode == ESCAPE_KEY_CODE) {
