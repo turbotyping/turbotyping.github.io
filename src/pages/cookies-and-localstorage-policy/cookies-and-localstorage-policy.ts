@@ -1,11 +1,11 @@
-import './styles/common.scss';
+import '../../styles/common.scss';
 import './cookies-and-localstorage-policy.scss';
 
-import { FooterHtmlComponent } from './components/footer/footer.component';
-import { NavbarHtmlComponent } from './components/navbar/navbar.component';
-import { IHtmlComponent } from './components/_core/component.interface';
-import { AppStateClient } from './state/app-state.client';
-import { FeedbackHtmlComponent } from './components/feedback/feedback.component';
+import { FooterHtmlComponent } from '../../components/footer/footer.component';
+import { NavbarHtmlComponent } from '../../components/navbar/navbar.component';
+import { IHtmlComponent } from '../../components/_core/component.interface';
+import { AppStateClient } from '../../state/app-state.client';
+import { FeedbackHtmlComponent } from '../../components/feedback/feedback.component';
 
 const topComponents: IHtmlComponent[] = [];
 topComponents.push(new NavbarHtmlComponent(AppStateClient.getInstance()));
