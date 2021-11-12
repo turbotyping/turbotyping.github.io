@@ -1,12 +1,12 @@
 import './styles/common.scss';
-import './styles/index.scss';
+import './index.scss';
 
 import { FooterHtmlComponent } from './components/footer/footer.component';
 import { NavbarHtmlComponent } from './components/navbar/navbar.component';
 import { IHtmlComponent } from './components/_core/component.interface';
 import { AppStateClient } from './state/app-state.client';
 import { WelcomeMessageDialogHtmlComponent } from './components/welcome-message-dialog/welcome-message-dialog.component';
-import { CookiesConsentementHtmlComponent } from './components/cookies-and-localstorage-policy/cookies-and-localstorage-policy-consentement.component';
+import { CookiesConsentementHtmlComponent } from './components/cookies-and-localstorage-policy-consentement/cookies-and-localstorage-policy-consentement.component';
 import { AddBlockerMessageHtmlComponent } from './components/ads/ads-blocker-message.component';
 import { FeedbackHtmlComponent } from './components/feedback/feedback.component';
 import { TextToTypeToolHtmlComponent } from './components/text-to-type/text-to-type-tool.component';

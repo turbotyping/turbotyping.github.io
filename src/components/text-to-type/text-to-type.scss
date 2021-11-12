@@ -55,6 +55,7 @@
 }
 
 .text-to-type-container {
+  overflow-y: auto;
   &::-webkit-scrollbar {
     background-color: var(--text-to-type-background-color);
   }

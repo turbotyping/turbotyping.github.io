@@ -91,7 +91,7 @@ export class TextToTypeHtmlComponent extends BaseHtmlComponent {
         <div id="${this.textToTypeDomElementId}" class="text-to-type">
         </div>
       </div>
-      <a class="view-typing-progress-link" href="/progress.html">
+      <a class="view-typing-progress-link" href="/typing-progress.html">
         View typing progress
       </a>
     `;

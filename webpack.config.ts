@@ -7,8 +7,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     index: path.join(__dirname, 'src/index.ts'),
-    progress: path.join(__dirname, 'src/progress.ts'),
-    'cookies-policy': path.join(__dirname, 'src/cookies-policy.ts'),
+    'typing-progress': path.join(__dirname, 'src/typing-progress.ts'),
+    'cookies-and-localstorage-policy': path.join(__dirname, 'src/cookies-and-localstorage-policy.ts'),
   },
   output: {
     path: path.join(__dirname, 'docs'),
@@ -23,16 +23,16 @@ module.exports = {
       chunks: ['index'],
     }),
     new HtmlWebpackPlugin({
-      filename: 'progress.html',
-      template: 'src/template.html',
+      filename: 'typing-progress.html',
+      template: 'src/typing-progress.html',
       title: 'Turbo Typing | Typing Progress',
-      chunks: ['progress'],
+      chunks: ['typing-progress'],
     }),
     new HtmlWebpackPlugin({
       filename: 'cookies-and-localstorage-policy.html',
-      template: 'src/template.html',
+      template: 'src/cookies-and-localstorage-policy.html',
       title: 'Turbo Typing | Cookies and Local Storage Policy',
-      chunks: ['cookies-policy'],
+      chunks: ['cookies-and-localstorage-policy'],
     }),
     new MiniCssExtractPlugin({
       filename: 'bundle.[chunkhash].css',
