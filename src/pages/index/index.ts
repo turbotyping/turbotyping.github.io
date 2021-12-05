@@ -30,15 +30,15 @@ textToTypeToolComponent.preInsertHtml();
 textToTypeToolComponent.insertHtml(document.getElementById('textToTypeTool'), 'beforeend');
 textToTypeToolComponent.postInsertHtml();
 
-// const leftAdsComponent = new LeftAdsHtmlComponent();
-// leftAdsComponent.preInsertHtml();
-// leftAdsComponent.insertHtml(document.getElementById('leftAds'), 'beforeend');
-// leftAdsComponent.postInsertHtml();
+const leftAdsComponent = new LeftAdsHtmlComponent();
+leftAdsComponent.preInsertHtml();
+leftAdsComponent.insertHtml(document.getElementById('leftAds'), 'beforeend');
+leftAdsComponent.postInsertHtml();
 
-// const rightAdsComponent = new RightAdsHtmlComponent();
-// rightAdsComponent.preInsertHtml();
-// rightAdsComponent.insertHtml(document.getElementById('rightAds'), 'beforeend');
-// rightAdsComponent.postInsertHtml();
+const rightAdsComponent = new RightAdsHtmlComponent();
+rightAdsComponent.preInsertHtml();
+rightAdsComponent.insertHtml(document.getElementById('rightAds'), 'beforeend');
+rightAdsComponent.postInsertHtml();
 
 const bottomComponents: IHtmlComponent[] = [];
 bottomComponents.push(new FooterHtmlComponent());

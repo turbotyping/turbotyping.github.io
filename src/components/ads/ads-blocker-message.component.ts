@@ -37,13 +37,6 @@ export class AddBlockerMessageHtmlComponent extends BaseHtmlComponent {
     if (!this.appStateClient.getAppState().cookiesConsentementAlreadyShown) {
       return;
     }
-    AdsUtils.onBlocked(() =>
-      setTimeout(() => {
-        this.container.classList.add('active');
-        setTimeout(() => {
-          this.container.classList.remove('active');
-        }, 10000);
-      }, 3000)
-    );
+    AdsUtils.onBlocked(() => setTimeout(() => this.container.classList.add('active'), 3000));
   }
 }

@@ -22,7 +22,7 @@ export abstract class BaseAdsHtmlComponent extends BaseHtmlComponent {
     AdsUtils.onNotBlocked(() => {
       this.shownAdContainer = document.getElementById(this.shownAdContainerId);
       this.hiddenAdContainer = document.getElementById(this.hiddenAdContainerId);
-      setInterval(this.changeAds.bind(this), 10000);
+      setInterval(this.changeAds.bind(this), 20000);
     });
   }
 
